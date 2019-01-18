@@ -1,10 +1,8 @@
-package com.madrat.abiturhelper.ui.standard
-
-import android.os.Bundle
+package com.madrat.abiturhelper.ui.setup_score
 
 import androidx.fragment.app.Fragment
 
-interface StandardVP {
+interface SetupScoreVP {
     interface View {
         fun setPresenter()
         fun setFragment(fragment: Fragment)

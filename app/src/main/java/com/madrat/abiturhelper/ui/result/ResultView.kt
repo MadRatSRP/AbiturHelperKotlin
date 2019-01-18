@@ -8,66 +8,44 @@ import android.view.ViewGroup
 import com.madrat.abiturhelper.R
 
 import androidx.fragment.app.Fragment
+import com.madrat.abiturhelper.ui.setup_score.SetupScore
 import com.netguru.kissme.Kissme
 import kotlinx.android.synthetic.main.fragment_result.*
 
 class ResultView : Fragment(), ResultVP.View {
 
-    /*@BindView(R.id.result)
-    internal var tv: TextView? = null*/
-
-    //private int maths, russian;
-    //private var unbinder: Unbinder? = null
     private var resultPresenter: ResultPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setUp()
+        setPresenter()
     }
 
-    override fun setUp() {
+    override fun setPresenter() {
         resultPresenter = ResultPresenter(this)
-        //tv!!.text = resultPresenter!!.addEgeScore()
-        //tv!!.text = setEgeScore()
-        val storage = Kissme(name = login)
-        val maths = storage.getInt("maths", 0)
-        val russian = storage.getInt("russian", 0)
-        result.text = (maths + russian).toString()
-
-        //return "Общая сумма баллов = " + (maths + russian).toString()
+        result.text = resultPresenter!!.addEgeScore()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_result, container, false)
-        //unbinder = ButterKnife.bind(this, view)
         return view
     }
 
-    /*override fun setEgeScore(): String {
-        val storage = Kissme(name = "jopa")
-        /*storage.putInt("sum",
-                storage.getInt("maths") + storage.getInt("russian"))*/
-        /*val sum = storage.putInt("sum",
-                storage.getInt("maths", 0) +
-                storage.getInt("russian", 1))*/
+    override fun setEgeScore(): String {
 
-        //return "Общая сумма баллов = " + sum.toString()
-
+        val storage = Kissme(name = SetupScore.returnLogin())
         val maths = storage.getInt("maths", 0)
         val russian = storage.getInt("russian", 0)
+        val physics = storage.getInt("physics", 0)
+        val computerScience = storage.getInt("computer_science", 0)
+        val socialScience = storage.getInt("social_science", 0)
 
-
-        return "Общая сумма баллов = " + (maths + russian).toString()
-    }*/
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        //unbinder!!.unbind()
+        return "Общая сумма баллов = " + (maths + russian + physics
+                                                + computerScience + socialScience).toString()
     }
 
     companion object {
-
         val instance = ResultView()
     }
 }

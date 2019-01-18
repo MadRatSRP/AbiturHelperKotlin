@@ -4,11 +4,11 @@ import android.os.Bundle
 
 interface ResultVP {
     interface View {
-        fun setUp()
-        //fun setEgeScore(): String
+        fun setPresenter()
+        fun setEgeScore(): String
     }
 
     interface Presenter {
-        //fun addEgeScore(): String
+        fun addEgeScore(): String
     }
 }

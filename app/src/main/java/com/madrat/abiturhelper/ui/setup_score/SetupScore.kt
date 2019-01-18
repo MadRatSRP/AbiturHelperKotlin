@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.ui.standard
+package com.madrat.abiturhelper.ui.setup_score
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.netguru.kissme.Kissme
-import kotlinx.android.synthetic.main.fragment_standard.*
+import kotlinx.android.synthetic.main.fragment_setup_score.*
 import com.madrat.abiturhelper.ui.result.ResultView
 
 
-class StandardView : Fragment(), StandardVP.View {
+class SetupScore : Fragment(), SetupScoreVP.View {
 
-    private var standardPresenter: StandardPresenter? = null
+    private var setupScorePresenter: SetupScorePresenter? = null
 
-    public static val login = "jopa"
-
-    private val storage = Kissme(name = login)
+    //public static val login = "jopa"
 
     private val math_passing = 27
     private val rus_passing = 36
@@ -33,14 +31,21 @@ class StandardView : Fragment(), StandardVP.View {
         setPresenter()
 
         set_result.setOnClickListener {
-            standardPresenter!!.checkMaths(math_passing, score_limit)
-            standardPresenter!!.checkRussian(rus_passing, score_limit)
-            standardPresenter!!.checkPhysics(phys_passing, score_limit)
-            standardPresenter!!.checkComputerScience(comp_passing, score_limit)
-            standardPresenter!!.checkSocialScience(soc_passing, score_limit)
+            setupScorePresenter!!.checkMaths(math_passing, score_limit)
+            setupScorePresenter!!.checkRussian(rus_passing, score_limit)
+            setupScorePresenter!!.checkPhysics(phys_passing, score_limit)
+            setupScorePresenter!!.checkComputerScience(comp_passing, score_limit)
+            setupScorePresenter!!.checkSocialScience(soc_passing, score_limit)
 
-            storage.putInt("maths", 10)
-            storage.putInt("russian", 20)
+            login_value = login.text.toString()
+
+            val storage = Kissme(name = login_value)
+
+            storage.putInt("maths", maths.text.toString().toInt())
+            storage.putInt("russian", russian.text.toString().toInt())
+            storage.putInt("physics", physics.text.toString().toInt())
+            storage.putInt("computer_science", computer_science.text.toString().toInt())
+            storage.putInt("social_science", social_science.text.toString().toInt())
 
             fragmentManager!!.beginTransaction()
                 .replace(com.madrat.abiturhelper.R.id.container, ResultView.instance).commit()
@@ -97,11 +102,11 @@ class StandardView : Fragment(), StandardVP.View {
         }*/
     }
 
-    override fun setPresenter() { standardPresenter = StandardPresenter(this) }
+    override fun setPresenter() { setupScorePresenter = SetupScorePresenter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_standard, container, false)
+        return inflater.inflate(R.layout.fragment_setup_score, container, false)
     }
 
     override fun setFragment(fragment: Fragment) {
@@ -168,5 +173,15 @@ class StandardView : Fragment(), StandardVP.View {
             social_science?.text.toString().toInt() > score_limit ->
                 social_science?.error = "Введённый балл больше %d".format(score_limit)
         }*/
+    }
+
+    companion object {
+
+        var login_value: String? = null
+        val instance = SetupScore()
+
+        fun returnLogin(): String? {
+            return login_value
+        }
     }
 }

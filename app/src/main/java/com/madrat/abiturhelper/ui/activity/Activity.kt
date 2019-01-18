@@ -3,7 +3,7 @@ package com.madrat.abiturhelper.ui.activity
 import android.os.Bundle
 
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.ui.standard.StandardView
+import com.madrat.abiturhelper.ui.setup_score.SetupScore
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -20,7 +20,7 @@ class Activity : AppCompatActivity(), ActivityVP.View {
 
     override fun setUp() {
         activityPresenter = ActivityPresenter(this)
-        activityPresenter!!.addFragment(StandardView())
+        activityPresenter!!.addFragment(SetupScore())
     }
 
     override fun setFragment(fragment: Fragment) {

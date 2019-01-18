@@ -1,11 +1,9 @@
-package com.madrat.abiturhelper.ui.standard
-
-import android.os.Bundle
+package com.madrat.abiturhelper.ui.setup_score
 
 import androidx.fragment.app.Fragment
 
-class StandardPresenter(private var sv: StandardVP.View) : StandardVP.Presenter {
-    private val TAG = "StandardPresenter"
+class SetupScorePresenter(private var sv: SetupScoreVP.View) : SetupScoreVP.Presenter {
+    private val TAG = "SetupScorePresenter"
 
     override fun addFragment(fragment: Fragment) { sv.setFragment(fragment) }
 
