@@ -1,0 +1,51 @@
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hinty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Введи свои баллы:" />
+
+        <EditText
+            android:id="@+id/maths"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Математика"
+            android:inputType="number" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/russian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Русский язык"
+                android:inputType="number"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/button_ege"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Добавить баллы"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ege_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:enabled="false"
+            android:layout_gravity="center"/>

@@ -1,0 +1,4 @@
+include ':app'
+
+//setting for Kissme
+enableFeaturePreview('GRADLE_METADATA')

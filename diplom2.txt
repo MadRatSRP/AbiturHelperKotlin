@@ -1,0 +1,73 @@
+           /*when {
+                maths?.text.isNullOrBlank() ->
+                    maths?.error = "Баллы за математику не введены"
+
+                maths?.text.toString().toInt() < math_passing ->
+                    maths?.error = "Балл по математике меньше проходного(%d)".format(math_passing)
+
+                maths?.text.toString().toInt() > score_limit ->
+                    maths?.error = "Введённый балл больше (%d)".format(score_limit)
+
+                russian?.text.isNullOrBlank() ->
+                    russian?.error = "Баллы за русский язык не введены"
+
+                russian?.text.toString().toInt() < rus_passing ->
+                    russian?.error = "Балл по русскому языку меньше проходного(%d)".format(rus_passing)
+
+                russian?.text.toString().toInt() > score_limit ->
+                    russian?.error = "Введённый балл больше (%d)".format(score_limit)
+            }*/
+
+            /*when(maths.text.toString().toInt()) {
+
+                !in math_passing..100 -> {
+                    maths?.error = "Балл по математике меньше проходного (27)"
+                }
+                /*-> {
+                    maths?.error = "Баллы за математику не введены"
+                }*/
+            }*/
+
+            //storage.putInt("maths", maths.text.toString().toInt())
+            //storage.putInt("russian", russian.text.toString().toInt())
+            //standardPresenter!!.addFragment(ResultView.instance)
+
+            /*storage.putInt("maths", 10)
+            storage.putInt("russian", 20)
+
+            fragmentManager!!.beginTransaction()
+                    .replace(R.id.container, ResultView.instance).commit()*/
+
+            /*val args = Bundle()
+
+            args.putInt("editTextMaths", Integer.parseInt(maths.text.toString()/*editTextMaths!!.text.toString()*/))
+            args.putInt("editTextRussian", Integer.parseInt(russian.text.toString()/*!!.text.toString()*/))
+            ResultView.instance.arguments = args*/
+            //standardPresenter!!.addFragment(ResultView.instance)
+
+            /*when(maths.text.toString().toInt()) {
+
+                !in math_passing..100 -> {
+                    maths?.error = "Балл по математике меньше проходного (27)"
+                }
+                /*-> {
+                    maths?.error = "Баллы за математику не введены"
+                }*/
+            }*/
+
+            //storage.putInt("maths", maths.text.toString().toInt())
+            //storage.putInt("russian", russian.text.toString().toInt())
+            //standardPresenter!!.addFragment(ResultView.instance)
+
+            /*storage.putInt("maths", 10)
+            storage.putInt("russian", 20)
+
+            fragmentManager!!.beginTransaction()
+                    .replace(R.id.container, ResultView.instance).commit()*/
+
+            /*val args = Bundle()
+
+            args.putInt("editTextMaths", Integer.parseInt(maths.text.toString()/*editTextMaths!!.text.toString()*/))
+            args.putInt("editTextRussian", Integer.parseInt(russian.text.toString()/*!!.text.toString()*/))
+            ResultView.instance.arguments = args*/
+            //standardPresenter!!.addFragment(ResultView.instance)
