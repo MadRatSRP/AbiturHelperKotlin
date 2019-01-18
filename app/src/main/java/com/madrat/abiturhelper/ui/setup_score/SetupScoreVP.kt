@@ -6,6 +6,8 @@ interface SetupScoreVP {
     interface View {
         fun setPresenter()
         fun setFragment(fragment: Fragment)
+        fun setFieldsListeners()
+        fun setFieldsValues()
 
         fun mathsIsValid(math_passing: Int, score_limit: Int)
         fun russianIsValid(rus_passing: Int, score_limit: Int)
@@ -16,6 +18,8 @@ interface SetupScoreVP {
 
     interface Presenter {
         fun addFragment(fragment: Fragment)
+        fun addFieldsListeners()
+        fun addFieldsValues()
 
         fun checkMaths(math_passing: Int, score_limit: Int)
         fun checkRussian(rus_passing: Int, score_limit: Int)
