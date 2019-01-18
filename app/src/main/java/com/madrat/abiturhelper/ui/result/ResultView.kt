@@ -4,14 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 
 import com.madrat.abiturhelper.R
 
 import androidx.fragment.app.Fragment
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.Unbinder
 import com.netguru.kissme.Kissme
 import kotlinx.android.synthetic.main.fragment_result.*
 
