@@ -1,9 +1,9 @@
-package com.madrat.abiturhelper.ui.setup_ege
+package com.madrat.abiturhelper.ui.setup_score
 
 import androidx.fragment.app.Fragment
 
-class SetupEgePresenter(private var ssv: SetupEgeVP.View) : SetupEgeVP.Presenter {
-    private val TAG = "SetupEgePresenter"
+class SetupScorePresenter(private var ssv: SetupScoreVP.View) : SetupScoreVP.Presenter {
+    private val TAG = "SetupScorePresenter"
 
     override fun addFragment(fragment: Fragment) { ssv.setFragment(fragment) }
 

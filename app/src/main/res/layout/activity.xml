@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.activity_app.AppActivity">
+    tools:context=".ui.activity.Activity">
     <FrameLayout
-        android:id="@+id/container"
+        android:id="@+id/activityFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </androidx.drawerlayout.widget.DrawerLayout>

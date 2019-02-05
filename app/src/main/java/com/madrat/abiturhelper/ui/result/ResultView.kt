@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.madrat.abiturhelper.R
 
 import androidx.fragment.app.Fragment
+import com.madrat.abiturhelper.ui.setup_score.SetupScore
 import com.netguru.kissme.Kissme
 import kotlinx.android.synthetic.main.fragment_result.*
 
@@ -22,7 +23,7 @@ class ResultView : Fragment(), ResultVP.View {
 
     override fun setPresenter() {
         resultPresenter = ResultPresenter(this)
-        result.text = resultPresenter?.addEgeScore()
+        result.text = resultPresenter!!.addEgeScore()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +34,7 @@ class ResultView : Fragment(), ResultVP.View {
 
     override fun setEgeScore(): String {
 
-        val storage = Kissme(name = "kappa")
+        val storage = Kissme(name = SetupScore.returnLogin())
         val maths = storage.getInt("maths", 0)
         val russian = storage.getInt("russian", 0)
         val physics = storage.getInt("physics", 0)
@@ -42,5 +43,9 @@ class ResultView : Fragment(), ResultVP.View {
 
         return "Общая сумма баллов = " + (maths + russian + physics
                                                 + computerScience + socialScience).toString()
+    }
+
+    companion object {
+        val instance = ResultView()
     }
 }
