@@ -1,10 +1,8 @@
-package com.madrat.abiturhelper.ui.ege
-
-import android.os.Bundle
+package com.madrat.abiturhelper.ui.activity_app
 
 import androidx.fragment.app.Fragment
 
-interface EgeVP {
+interface AppActivityVP {
     interface View {
         fun setUp()
         fun setFragment(fragment: Fragment)

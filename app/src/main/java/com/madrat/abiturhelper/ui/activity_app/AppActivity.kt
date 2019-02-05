@@ -1,26 +1,26 @@
-package com.madrat.abiturhelper.ui.activity
+package com.madrat.abiturhelper.ui.activity_app
 
 import android.os.Bundle
 
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.ui.setup_score.SetupScore
+import com.madrat.abiturhelper.ui.setup_ege.SetupEge
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
-class Activity : AppCompatActivity(), ActivityVP.View {
+class AppActivity : AppCompatActivity(), AppActivityVP.View {
 
-    private var activityPresenter: ActivityPresenter? = null
+    private var appActivityPresenter: AppActivityPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity)
+        setContentView(R.layout.activity_app)
         setUp()
     }
 
     override fun setUp() {
-        activityPresenter = ActivityPresenter(this)
-        activityPresenter!!.addFragment(SetupScore())
+        appActivityPresenter = AppActivityPresenter(this)
+        appActivityPresenter?.addFragment(SetupEge())
     }
 
     override fun setFragment(fragment: Fragment) {

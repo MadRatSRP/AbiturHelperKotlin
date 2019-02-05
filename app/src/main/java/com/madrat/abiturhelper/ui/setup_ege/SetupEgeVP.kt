@@ -1,8 +1,8 @@
-package com.madrat.abiturhelper.ui.setup_score
+package com.madrat.abiturhelper.ui.setup_ege
 
 import androidx.fragment.app.Fragment
 
-interface SetupScoreVP {
+interface SetupEgeVP {
     interface View {
         fun setPresenter()
         fun setFragment(fragment: Fragment)
