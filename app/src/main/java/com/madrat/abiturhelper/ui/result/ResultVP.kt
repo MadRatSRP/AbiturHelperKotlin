@@ -4,7 +4,8 @@ import android.os.Bundle
 
 interface ResultVP {
     interface View {
-        fun setPresenter()
+        fun setMVP()
+
         fun setEgeScore(): String
     }
 

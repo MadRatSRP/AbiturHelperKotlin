@@ -8,40 +8,39 @@ import android.view.ViewGroup
 import com.madrat.abiturhelper.R
 
 import androidx.fragment.app.Fragment
-import com.madrat.abiturhelper.ui.setup_score.SetupScore
-import com.netguru.kissme.Kissme
 import kotlinx.android.synthetic.main.fragment_result.*
 
 class ResultView : Fragment(), ResultVP.View {
+
+    companion object { val instance = ResultView() }
 
     private var resultPresenter: ResultPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setPresenter()
-    }
+        setMVP()
 
-    override fun setPresenter() {
-        resultPresenter = ResultPresenter(this)
-        result.text = resultPresenter!!.addEgeScore()
+        result.text = resultPresenter?.addEgeScore()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_result, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_result, container, false)
+    }
+
+    override fun setMVP() {
+        resultPresenter = ResultPresenter(this)
     }
 
     override fun setEgeScore(): String {
 
-        val storage = Kissme(name = SetupScore.returnLogin())
-        val maths = storage.getInt("maths", 0)
-        val russian = storage.getInt("russian", 0)
-        val physics = storage.getInt("physics", 0)
-        val computerScience = storage.getInt("computer_science", 0)
-        val socialScience = storage.getInt("social_science", 0)
+        val maths = arguments?.getString("maths")
+        val russian = arguments?.getString("russian")
+        val physics = arguments?.getString("physics")
+        val computerScience = arguments?.getString("computerScience")
+        val socialScience = arguments?.getString("socialScience")
 
-        return "Общая сумма баллов = " + (maths + russian + physics
-                                                + computerScience + socialScience).toString()
+        return "Общая сумма баллов = "+ (maths + russian + physics
+                                                + computerScience + socialScience)
     }
 }

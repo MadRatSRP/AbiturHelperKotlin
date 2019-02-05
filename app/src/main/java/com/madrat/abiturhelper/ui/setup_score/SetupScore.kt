@@ -34,7 +34,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
 
             setupScorePresenter.addFieldsValues()
 
-            basePresenter.addFragment(ResultView(),
+            basePresenter.addFragment(ResultView.instance,
                                       R.id.activityFragmentContainer)
         }
     }
@@ -49,27 +49,17 @@ class SetupScore : Fragment(), SetupScoreVP.View {
         basePresenter = BasePresenter(this.context!!, BaseFragment())
     }
 
-    override fun setFragment(fragment: Fragment) {
-        fragmentManager!!.beginTransaction()
-                .replace(R.id.activityFragmentContainer, fragment).commit()
-    }
     override fun setFieldsListeners() {
-        setupScorePresenter!!.checkMaths(passingMaths, scoreLimit)
-        setupScorePresenter!!.checkRussian(passingRussian, scoreLimit)
-        setupScorePresenter!!.checkPhysics(passingPhysics, scoreLimit)
-        setupScorePresenter!!.checkComputerScience(passingComputerScience, scoreLimit)
-        setupScorePresenter!!.checkSocialScience(passingSocialScience, scoreLimit)
+        setupScorePresenter.checkMaths(passingMaths, scoreLimit)
+        setupScorePresenter.checkRussian(passingRussian, scoreLimit)
+        setupScorePresenter.checkPhysics(passingPhysics, scoreLimit)
+        setupScorePresenter.checkComputerScience(passingComputerScience, scoreLimit)
+        setupScorePresenter.checkSocialScience(passingSocialScience, scoreLimit)
     }
+
     override fun setFieldsValues() {
-        login_value = login.text.toString()
-
-        val storage = Kissme(name = login_value)
-
-        storage.putInt("maths", maths.text.toString().toInt())
-        storage.putInt("russian", russian.text.toString().toInt())
-        storage.putInt("physics", physics.text.toString().toInt())
-        storage.putInt("computer_science", computer_science.text.toString().toInt())
-        storage.putInt("social_science", social_science.text.toString().toInt())
+        ResultView.instance.arguments = basePresenter.addEgeBundle(maths, russian, physics,
+                                                                   computer_science, social_science)
     }
 
     override fun mathsIsValid(math_passing: Int, score_limit: Int){
@@ -84,6 +74,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
                 maths?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
+
     override fun russianIsValid(rus_passing: Int, score_limit: Int){
         when {
             russian?.text.isNullOrBlank() ->
@@ -96,6 +87,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
                 russian?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
+
     override fun physicsIsValid(phys_passing: Int, score_limit: Int){
         when {
             physics?.text.isNullOrBlank() ->
@@ -108,6 +100,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
                 physics?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
+
     override fun computerScienceIsValid(comp_passing: Int, score_limit: Int){
         when {
             computer_science?.text.isNullOrBlank() ->
@@ -120,6 +113,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
                 computer_science?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
+
     override fun socialScienceIsValid(soc_passing: Int, score_limit: Int){
         when {
             social_science?.text.isNullOrBlank() ->
@@ -130,16 +124,6 @@ class SetupScore : Fragment(), SetupScoreVP.View {
 
             social_science?.text.toString().toInt() > score_limit ->
                 social_science?.error = "Введённый балл больше %d".format(score_limit)
-        }
-    }
-
-    companion object {
-
-        var login_value: String? = null
-        val instance = SetupScore()
-
-        fun returnLogin(): String? {
-            return login_value
         }
     }
 }

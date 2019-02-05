@@ -1,11 +1,6 @@
 package com.madrat.abiturhelper.ui.setup_score
 
-import androidx.fragment.app.Fragment
-
 class SetupScorePresenter(private var ssv: SetupScoreVP.View) : SetupScoreVP.Presenter {
-    private val TAG = "SetupScorePresenter"
-
-    override fun addFragment(fragment: Fragment) { ssv.setFragment(fragment) }
 
     override fun addFieldsListeners() {
         ssv.setFieldsListeners()

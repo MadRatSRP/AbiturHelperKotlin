@@ -30,24 +30,14 @@ dependencies {
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:28.0.0'
+
+    //Junit
     testImplementation 'junit:junit:4.12'
 
     //Espresso
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    //ButterKnife
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-    //Kissme
-    implementation "com.netguru.kissme:kissme-android:$kissme_version"
 }
 repositories {
     mavenCentral()
-
-    //Kissme
-    maven {  url 'https://dl.bintray.com/netguru/maven/' }
-    maven { url "https://jitpack.io" }
 }
