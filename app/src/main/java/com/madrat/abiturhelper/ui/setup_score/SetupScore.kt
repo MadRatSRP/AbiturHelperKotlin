@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.ui.base_fragment.BaseFragment
 import com.madrat.abiturhelper.ui.base_fragment.BasePresenter
-import com.netguru.kissme.Kissme
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import com.madrat.abiturhelper.ui.result.ResultView
 
