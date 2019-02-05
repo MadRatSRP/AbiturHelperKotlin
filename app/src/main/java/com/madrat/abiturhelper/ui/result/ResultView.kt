@@ -44,8 +44,4 @@ class ResultView : Fragment(), ResultVP.View {
         return "Общая сумма баллов = " + (maths + russian + physics
                                                 + computerScience + socialScience).toString()
     }
-
-    companion object {
-        val instance = ResultView()
-    }
 }

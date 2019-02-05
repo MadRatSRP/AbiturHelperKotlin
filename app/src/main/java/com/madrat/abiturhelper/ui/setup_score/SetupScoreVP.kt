@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 
 interface SetupScoreVP {
     interface View {
-        fun setPresenter()
+        fun setMVP()
         fun setFragment(fragment: Fragment)
         fun setFieldsListeners()
         fun setFieldsValues()

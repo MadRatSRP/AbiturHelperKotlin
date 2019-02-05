@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment
 class BasePresenter(context: Context,
                     private var bvi: BaseFragment) : BaseVP.Presenter {
 
-    var fragmentManager = (context as AppCompatActivity).supportFragmentManager!!
+    private var fragmentManager = (context as AppCompatActivity)
+                                                  .supportFragmentManager!!
 
     override fun addFragment(fragment: Fragment, id: Int) {
         bvi.setFragment(fragment, fragmentManager, id)

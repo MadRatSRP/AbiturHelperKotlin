@@ -9,16 +9,15 @@ import com.madrat.abiturhelper.ui.setup_score.SetupScore
 
 class Activity : AppCompatActivity(), ActivityVP.View {
 
-    private var activityPresenter: ActivityPresenter? = null
-
-    private var basePresenter: BasePresenter? = null
+    private lateinit var activityPresenter: ActivityPresenter
+    private lateinit var basePresenter: BasePresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity)
         setMVP()
 
-        basePresenter?.addFragment(SetupScore(), R.id.activityFragmentContainer)
+        basePresenter.addFragment(SetupScore(), R.id.activityFragmentContainer)
     }
 
     override fun setMVP() {
