@@ -1,22 +1,15 @@
 <resources>
     <string name="app_name">AbiturHelper</string>
-    <string name="score_hint">Введи свои баллы:</string>
-    <string name="set_result">Сохранить результат</string>
 
-    <string name="hint_login">Введите логин:</string>
-    <string name="hint_maths">Математика</string>
-    <string name="hint_russian">Русский язык</string>
-    <string name="hint_physics">Физика</string>
-    <string name="hint_computer_science">Информатика</string>
-    <string name="hint_social_science">Обществознание</string>
+    <string name="textScore">Баллы ЕГЭ</string>
+    <string name="textResult">Результат</string>
+    <string name="textEgeSum">Сумма баллов</string>
 
-    <string-array name="ege_entries">
-        <item>Английский язык</item>
-        <item>Про</item>
-    </string-array>
+    <string name="setResult">Сохранить результат</string>
 
-    <string-array name="ege_entry_values">
-        <item>english</item>
-        <item>pro</item>
-    </string-array>
+    <string name="textMaths">Математика</string>
+    <string name="textRussian">Русский язык</string>
+    <string name="textPhysics">Физика</string>
+    <string name="textComputerScience">Информатика</string>
+    <string name="textSocialScience">Обществознание</string>
 </resources>

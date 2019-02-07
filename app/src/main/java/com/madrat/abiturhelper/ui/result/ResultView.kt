@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 
 import com.madrat.abiturhelper.R
 
@@ -20,11 +21,12 @@ class ResultView : Fragment(), ResultVP.View {
         super.onActivityCreated(savedInstanceState)
         setMVP()
 
-        result.text = resultPresenter?.addEgeScore()
+        resultValue.text = resultPresenter?.addEgeScore()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textResult)
         return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
@@ -35,12 +37,14 @@ class ResultView : Fragment(), ResultVP.View {
     override fun setEgeScore(): String {
 
         val maths = arguments?.getString("maths")
+
+        mathsValue.text = maths
+
         val russian = arguments?.getString("russian")
         val physics = arguments?.getString("physics")
         val computerScience = arguments?.getString("computerScience")
         val socialScience = arguments?.getString("socialScience")
 
-        return "Общая сумма баллов = "+ (maths + russian + physics
-                                                + computerScience + socialScience)
+        return maths + russian + physics + computerScience + socialScience
     }
 }
