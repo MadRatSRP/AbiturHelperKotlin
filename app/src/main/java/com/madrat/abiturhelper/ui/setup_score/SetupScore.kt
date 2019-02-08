@@ -59,7 +59,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
     }
 
     override fun setFieldsValues() {
-        ResultView.instance.arguments = basePresenter.addEgeBundle(maths, russian, physics,
+        ResultView.instance.arguments = basePresenter.returnBundle(maths, russian, physics,
                                                                    computer_science, social_science)
     }
 

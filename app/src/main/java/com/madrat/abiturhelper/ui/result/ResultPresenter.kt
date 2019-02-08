@@ -1,6 +1,5 @@
 package com.madrat.abiturhelper.ui.result
 
-import android.content.Context
 import android.os.Bundle
 
 class ResultPresenter (private var rv: ResultVP.View, private val arguments: Bundle) : ResultVP.Presenter {

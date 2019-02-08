@@ -16,17 +16,19 @@ class BasePresenter(context: Context,
         bvi.setFragment(fragment, fragmentManager, id)
     }
 
-    override fun addEgeBundle(maths: EditText,
+    override fun returnBundle(maths: EditText,
                               russian: EditText,
                               physics: EditText?,
                               computerScience: EditText?,
                               socialScience: EditText?): Bundle {
 
-        return bvi.setEgeBundle(maths,
-                         russian,
-                         physics,
-                         computerScience,
-                         socialScience)
+        val bundle = Bundle()
+        bundle.putInt("maths", maths.text.toString().toInt())
+        bundle.putInt("russian", russian.text.toString().toInt())
+        physics?.text.toString().toIntOrNull()?.let { bundle.putInt("physics", it) }
+        computerScience?.text.toString().toIntOrNull()?.let { bundle.putInt("computerScience", it) }
+        socialScience?.text.toString().toIntOrNull()?.let { bundle.putInt("socialScience", it) }
+        return bundle
     }
 
     override fun removeFragment(fragment: Fragment) {
