@@ -1,7 +1,5 @@
 package com.madrat.abiturhelper.ui.setup_score
 
-import androidx.fragment.app.Fragment
-
 interface SetupScoreVP {
     interface View {
         fun setMVP()

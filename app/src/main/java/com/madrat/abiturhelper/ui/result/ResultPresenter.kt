@@ -1,19 +1,20 @@
 package com.madrat.abiturhelper.ui.result
 
-class ResultPresenter(private var rv: ResultVP.View) : ResultVP.Presenter {
+import android.content.Context
+import android.os.Bundle
 
-    lateinit var maths : String
+class ResultPresenter (private var rv: ResultVP.View, private val arguments: Bundle) : ResultVP.Presenter {
 
-    /*val maths = arguments?.getString("maths")
+    override fun returnString(key: String?):String? {
+        return arguments.getInt(key).toString()
+    }
 
-    maths_value.text = maths
-
-    val russian = arguments?.getString("russian")
-    val physics = arguments?.getString("physics")
-    val computerScience = arguments?.getString("computerScience")
-    val socialScience = arguments?.getString("socialScience")*/
-
-    override fun addEgeScore(): String {
-        return rv.setEgeScore()
+    override fun returnSum():String? {
+        val maths = arguments.getInt("maths")
+        val russian = arguments.getInt("russian")
+        val physics = arguments.getInt("physics")
+        val computerScience = arguments.getInt("computerScience")
+        val socialScience = arguments.getInt("socialScience")
+        return (maths + russian + physics + computerScience + socialScience).toString()
     }
 }

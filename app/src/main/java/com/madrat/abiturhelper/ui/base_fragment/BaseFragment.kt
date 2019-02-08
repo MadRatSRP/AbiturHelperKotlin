@@ -26,11 +26,11 @@ class BaseFragment : Fragment(), BaseVP.View {
                         socialScience: EditText?) : Bundle {
 
         val bundle = Bundle()
-        bundle.putString("maths", maths.text.toString())
-        bundle.putString("russian", russian.text.toString())
-        bundle.putString("physics", physics?.text.toString())
-        bundle.putString("computerScience", computerScience?.text.toString())
-        bundle.putString("socialScience", socialScience?.text.toString())
+        bundle.putInt("maths", maths.text.toString().toInt())
+        bundle.putInt("russian", russian.text.toString().toInt())
+        physics?.text.toString().toIntOrNull()?.let { bundle.putInt("physics", it) }
+        computerScience?.text.toString().toIntOrNull()?.let { bundle.putInt("computerScience", it) }
+        socialScience?.text.toString().toIntOrNull()?.let { bundle.putInt("socialScience", it) }
         return bundle
     }
 }

@@ -1,15 +1,17 @@
 package com.madrat.abiturhelper.ui.result
 
-import android.os.Bundle
+import android.widget.LinearLayout
+import android.widget.TextView
 
 interface ResultVP {
     interface View {
-        fun setMVP()
-
-        fun setEgeScore(): String
+        fun setupMVP()
+        fun checkField(linearLayout: LinearLayout, textViewValue: TextView, key: String)
+        fun setupFields()
     }
 
     interface Presenter {
-        fun addEgeScore(): String
+        fun returnSum():String?
+        fun returnString(key: String?):String?
     }
 }

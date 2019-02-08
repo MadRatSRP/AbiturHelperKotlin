@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 import com.madrat.abiturhelper.R
@@ -19,9 +21,8 @@ class ResultView : Fragment(), ResultVP.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setMVP()
-
-        resultValue.text = resultPresenter?.addEgeScore()
+        setupMVP()
+        setupFields()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -30,21 +31,25 @@ class ResultView : Fragment(), ResultVP.View {
         return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
-    override fun setMVP() {
-        resultPresenter = ResultPresenter(this)
+    override fun setupMVP() {
+        resultPresenter = ResultPresenter(this, arguments!!)
     }
 
-    override fun setEgeScore(): String {
+    override fun checkField(linearLayout: LinearLayout, textViewValue: TextView, key: String) {
+        textViewValue.text = resultPresenter?.returnString(key)
+        if (textViewValue.text.toString().toInt() == 0) {
+            linearLayout.visibility = View.GONE
+        }
+    }
 
-        val maths = arguments?.getString("maths")
+    override fun setupFields() {
+        mathsValue.text = resultPresenter?.returnString("maths")
+        russianValue.text = resultPresenter?.returnString("russian")
 
-        mathsValue.text = maths
+        checkField(physics, physicsValue, "physics")
+        checkField(computerScience, computerScienceValue, "computerScience")
+        checkField(socialScience, socialScienceValue, "socialScience")
 
-        val russian = arguments?.getString("russian")
-        val physics = arguments?.getString("physics")
-        val computerScience = arguments?.getString("computerScience")
-        val socialScience = arguments?.getString("socialScience")
-
-        return maths + russian + physics + computerScience + socialScience
+        resultValue.text = resultPresenter?.returnSum()
     }
 }
