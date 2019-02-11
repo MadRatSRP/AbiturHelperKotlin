@@ -15,8 +15,9 @@ interface BaseVP {
         fun addFragment(fragment: Fragment, id: Int)
         fun removeFragment(fragment: Fragment)
 
-        fun returnBundle(maths: EditText, russian: EditText, physics: EditText?,
-                         computerScience: EditText?, socialScience: EditText?): Bundle
+        fun putScoreValues(maths: EditText, russian: EditText, physics: EditText?,
+                           computerScience: EditText?, socialScience: EditText?):Bundle
+        fun putAdditionalValues(arguments: Bundle?, soc: EditText):Bundle
     }
 
     interface Repository

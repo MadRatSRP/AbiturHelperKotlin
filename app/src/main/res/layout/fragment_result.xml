@@ -157,7 +157,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/resultText"
-                android:text="@string/textEgeSum"
+                android:text="@string/textSum"
                 android:textSize="19dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -172,5 +172,9 @@
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/soc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/score"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

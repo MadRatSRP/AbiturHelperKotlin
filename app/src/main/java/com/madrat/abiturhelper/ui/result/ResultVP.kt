@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.ui.result
 
+import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.TextView
 
@@ -12,6 +13,6 @@ interface ResultVP {
 
     interface Presenter {
         fun returnSum():String?
-        fun returnString(key: String?):String?
+        fun returnString(scoreBundle: Bundle?, key: String?):String?
     }
 }

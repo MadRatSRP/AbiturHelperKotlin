@@ -11,6 +11,7 @@ import com.madrat.abiturhelper.ui.base_fragment.BaseFragment
 import com.madrat.abiturhelper.ui.base_fragment.BasePresenter
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import com.madrat.abiturhelper.ui.result.ResultView
+import com.madrat.abiturhelper.ui.setup_additional.SetupAdditional
 
 
 class SetupScore : Fragment(), SetupScoreVP.View {
@@ -27,14 +28,17 @@ class SetupScore : Fragment(), SetupScoreVP.View {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setMVP()
+        setupMVP()
 
-        set_result.setOnClickListener {
+        showAdditionalScore.setOnClickListener {
             setupScorePresenter.addFieldsListeners()
 
             setupScorePresenter.addFieldsValues()
 
-            basePresenter.addFragment(ResultView.instance,
+            /*basePresenter.addFragment(ResultView.instance,
+                                      R.id.activityFragmentContainer)*/
+
+            basePresenter.addFragment(SetupAdditional.instance,
                                       R.id.activityFragmentContainer)
         }
     }
@@ -45,7 +49,7 @@ class SetupScore : Fragment(), SetupScoreVP.View {
         return inflater.inflate(R.layout.fragment_setup_score, container, false)
     }
 
-    override fun setMVP() {
+    override fun setupMVP() {
         setupScorePresenter = SetupScorePresenter(this)
         basePresenter = BasePresenter(this.context!!, BaseFragment())
     }
@@ -59,8 +63,10 @@ class SetupScore : Fragment(), SetupScoreVP.View {
     }
 
     override fun setFieldsValues() {
-        ResultView.instance.arguments = basePresenter.returnBundle(maths, russian, physics,
-                                                                   computer_science, social_science)
+        SetupAdditional.instance.arguments = basePresenter.putScoreValues(maths, russian, physics,
+                computer_science, social_science)
+
+        //basePresenter.putScoreValues(maths, russian, physics, computer_science, social_science)
     }
 
     override fun mathsIsValid(math_passing: Int, score_limit: Int){

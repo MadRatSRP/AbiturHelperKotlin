@@ -2,7 +2,7 @@ package com.madrat.abiturhelper.ui.setup_score
 
 interface SetupScoreVP {
     interface View {
-        fun setMVP()
+        fun setupMVP()
         fun setFieldsListeners()
         fun setFieldsValues()
 

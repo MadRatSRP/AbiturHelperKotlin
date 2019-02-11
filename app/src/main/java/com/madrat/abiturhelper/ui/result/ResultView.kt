@@ -36,20 +36,32 @@ class ResultView : Fragment(), ResultVP.View {
     }
 
     override fun checkField(linearLayout: LinearLayout, textViewValue: TextView, key: String) {
-        textViewValue.text = resultPresenter?.returnString(key)
+        /*textViewValue.text = resultPresenter?.returnString(key, scoreBundle)
         if (textViewValue.text.toString().toInt() == 0) {
             linearLayout.visibility = View.GONE
-        }
+        }*/
     }
 
     override fun setupFields() {
-        mathsValue.text = resultPresenter?.returnString("maths")
-        russianValue.text = resultPresenter?.returnString("russian")
+        val scoreBundle = arguments?.getBundle("scoreBundle")
+        //mathsValue.text = scoreBundle?.getInt("maths").toString()
+        //russianValue.text = scoreBundle?.getInt("russian").toString()
+        mathsValue.text = resultPresenter?.returnString(scoreBundle,"maths")
+        russianValue.text = resultPresenter?.returnString(scoreBundle,"russian")
 
-        checkField(physics, physicsValue, "physics")
+
+        /*mathsValue.text = resultPresenter?.returnString("maths")
+        russianValue.text = resultPresenter?.returnString("russian")*/
+
+        /*checkField(physics, physicsValue, "physics")
         checkField(computerScience, computerScienceValue, "computerScience")
-        checkField(socialScience, socialScienceValue, "socialScience")
+        checkField(socialScience, socialScienceValue, "socialScience")*/
 
-        resultValue.text = resultPresenter?.returnSum()
+        val additionalBundle = arguments?.getBundle("additionalBundle")
+        soc.text = additionalBundle?.getInt("soc").toString()
+
+        //resultValue.text = resultPresenter?.returnSum()
+
+        //soc.text = resultPresenter?.returnString("soc")
     }
 }

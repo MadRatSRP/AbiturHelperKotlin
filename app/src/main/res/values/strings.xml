@@ -2,10 +2,12 @@
     <string name="app_name">AbiturHelper</string>
 
     <string name="textScore">Баллы ЕГЭ</string>
+    <string name="textAdditional">Дополнительные баллы</string>
     <string name="textResult">Результат</string>
-    <string name="textEgeSum">Сумма баллов</string>
+    <string name="textSum">Сумма баллов</string>
 
-    <string name="setResult">Сохранить результат</string>
+    <string name="showResult">Сохранить результат</string>
+    <string name="showAdditionalScore">Показать дополнительные баллы</string>
 
     <string name="textMaths">Математика</string>
     <string name="textRussian">Русский язык</string>
