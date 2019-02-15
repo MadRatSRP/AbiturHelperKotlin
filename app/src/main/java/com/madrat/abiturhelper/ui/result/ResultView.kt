@@ -44,24 +44,17 @@ class ResultView : Fragment(), ResultVP.View {
 
     override fun setupFields() {
         val scoreBundle = arguments?.getBundle("scoreBundle")
-        //mathsValue.text = scoreBundle?.getInt("maths").toString()
-        //russianValue.text = scoreBundle?.getInt("russian").toString()
+
         mathsValue.text = resultPresenter?.returnString(scoreBundle,"maths")
         russianValue.text = resultPresenter?.returnString(scoreBundle,"russian")
-
-
-        /*mathsValue.text = resultPresenter?.returnString("maths")
-        russianValue.text = resultPresenter?.returnString("russian")*/
 
         /*checkField(physics, physicsValue, "physics")
         checkField(computerScience, computerScienceValue, "computerScience")
         checkField(socialScience, socialScienceValue, "socialScience")*/
 
         val additionalBundle = arguments?.getBundle("additionalBundle")
-        soc.text = additionalBundle?.getInt("soc").toString()
+        soc.text = resultPresenter?.returnString(additionalBundle,"soc")
 
         //resultValue.text = resultPresenter?.returnSum()
-
-        //soc.text = resultPresenter?.returnString("soc")
     }
 }

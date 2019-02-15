@@ -4,10 +4,10 @@ import android.os.Bundle
 
 class ResultPresenter (private var rv: ResultVP.View, private val arguments: Bundle) : ResultVP.Presenter {
 
-    override fun returnString(scoreBundle: Bundle?, key: String?):String? {
+    override fun returnString(bundle: Bundle?, key: String?):String? {
         //return arguments.getInt(key).toString()
-        //mathsValue.text = scoreBundle?.getInt("maths").toString()
-        return scoreBundle?.getInt(key).toString()
+        //mathsValue.text = bundle?.getInt("maths").toString()
+        return bundle?.getInt(key).toString()
     }
 
     override fun returnSum():String? {
