@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:text="@string/textSetupScore"
+            android:text="@string/setUpScoreTitle"
             android:textSize="19dp"
             android:layout_gravity="center"
             android:layout_width="100dp"
@@ -163,7 +163,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:text="@string/textSetupAdditional"
+            android:text="@string/setUpAdditionalTitle"
             android:textSize="19dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content"

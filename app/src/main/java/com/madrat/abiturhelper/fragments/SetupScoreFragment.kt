@@ -51,7 +51,7 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textSetupScore)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setUpScoreTitle)
         return inflater.inflate(R.layout.fragment_setup_score, container, false)
     }
 

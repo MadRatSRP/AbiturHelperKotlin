@@ -35,7 +35,7 @@ class SetupAdditionalFragment : Fragment(), SetupAdditionalMVP.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textSetupAdditional)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setUpAdditionalTitle)
         return inflater.inflate(R.layout.fragment_setup_additional,
                                 container, false)
     }

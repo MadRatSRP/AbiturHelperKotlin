@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">AbiturHelper</string>
 
-    <string name="textSetupScore">Баллы ЕГЭ</string>
-    <string name="textSetupAdditional">Дополнительные баллы</string>
+    <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
+    <string name="countGraduationChancesTitle">Оценить шанс поступления</string>
+
+    <string name="setUpScoreTitle">Баллы ЕГЭ</string>
+    <string name="setUpAdditionalTitle">Дополнительные баллы</string>
     <string name="textResult">Результат</string>
     <string name="textSum">Сумма баллов</string>
+
+    countChancesOfGraduation.setOnClickListener {  }
 
     <string name="textProfile">Профиль</string>
 
