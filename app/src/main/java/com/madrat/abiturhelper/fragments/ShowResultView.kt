@@ -11,12 +11,10 @@ import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
-import com.madrat.abiturhelper.util.MyApplication
-import kotlinx.android.synthetic.main.fragment_result.*
 
-class ShowResultFragment : Fragment(), ShowResultMVP.View {
+class ShowResultView : Fragment(), ShowResultMVP.View {
 
-    companion object { val instance = ShowResultFragment() }
+    companion object { val instance = ShowResultView() }
 
     private var showResultPresenter: ShowResultPresenter? = null
 
@@ -33,7 +31,7 @@ class ShowResultFragment : Fragment(), ShowResultMVP.View {
     }
 
     override fun setupMVP() {
-        showResultPresenter = ShowResultPresenter(this, arguments!!)
+        //showResultPresenter = ShowResultPresenter(this, arguments!!)
     }
 
     override fun checkField(linearLayout: LinearLayout, textViewValue: TextView, key: String) {

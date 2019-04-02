@@ -12,9 +12,8 @@ import com.madrat.abiturhelper.R
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
 import com.madrat.abiturhelper.interfaces.fragments.SetupScoreMVP
-import com.madrat.abiturhelper.util.putScoreValues
 
-class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
+class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
     private lateinit var setupScorePresenter: SetupScorePresenter
 

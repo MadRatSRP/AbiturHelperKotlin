@@ -3,8 +3,10 @@ package com.madrat.abiturhelper.interfaces.fragments
 interface SetupAdditionalMVP  {
     interface View {
         fun setupMVP()
-        fun setFieldsValues()
+        //fun setFieldsValues()
     }
 
-    interface Presenter {}
+    interface Presenter {
+        fun saveUserData(essay: String, letter: String, gto: String)
+    }
 }

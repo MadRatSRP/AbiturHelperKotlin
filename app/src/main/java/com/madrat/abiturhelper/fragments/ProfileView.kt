@@ -11,7 +11,7 @@ import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.presenters.fragments.ProfilePresenter
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment: Fragment(), ProfileMVP.View {
+class ProfileView: Fragment(), ProfileMVP.View {
     var profilePresenter: ProfilePresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

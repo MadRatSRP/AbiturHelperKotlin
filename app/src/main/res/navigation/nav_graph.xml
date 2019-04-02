@@ -6,7 +6,7 @@
     app:startDestination="@id/setupScore">
     <fragment
         android:id="@+id/setupScore"
-        android:name="com.madrat.abiturhelper.fragments.SetupScoreFragment"
+        android:name="com.madrat.abiturhelper.fragments.SetupScoreView"
         android:label="fragment_setup_score"
         tools:layout="@layout/fragment_setup_score" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/setupAdditional"
-        android:name="com.madrat.abiturhelper.fragments.SetupAdditionalFragment"
+        android:name="com.madrat.abiturhelper.fragments.SetupAdditionalView"
         android:label="fragment_setup_additional"
         tools:layout="@layout/fragment_setup_additional" >
         <action
@@ -24,12 +24,12 @@
     </fragment>
     <fragment
         android:id="@+id/resultView"
-        android:name="com.madrat.abiturhelper.fragments.ShowResultFragment"
+        android:name="com.madrat.abiturhelper.fragments.ShowResultView"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.madrat.abiturhelper.fragments.ProfileFragment"
+        android:name="com.madrat.abiturhelper.fragments.ProfileView"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

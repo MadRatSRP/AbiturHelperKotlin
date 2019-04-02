@@ -10,11 +10,10 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.presenters.fragments.SetupAdditionalPresenter
 import com.madrat.abiturhelper.interfaces.fragments.SetupAdditionalMVP
-import com.madrat.abiturhelper.util.putAdditionalValues
 import kotlinx.android.synthetic.main.fragment_setup_additional.*
 
-class SetupAdditionalFragment : Fragment(), SetupAdditionalMVP.View {
-    companion object { val instance = SetupAdditionalFragment() }
+class SetupAdditionalView : Fragment(), SetupAdditionalMVP.View {
+    companion object { val instance = SetupAdditionalView() }
 
     private lateinit var setupAdditionalPresenter: SetupAdditionalPresenter
 
@@ -23,13 +22,10 @@ class SetupAdditionalFragment : Fragment(), SetupAdditionalMVP.View {
         setupMVP()
 
         showResult.setOnClickListener {view->
-            //setFieldsValues()
-
-            /*basePresenter.addFragment(ShowResultFragment.instance,
-                               R.id.activityFragmentContainer)*/
-
-            Navigation.findNavController(view).navigate(R.id.action_setupAdditional_to_resultView,
-                                                        putAdditionalValues(arguments, essayValue))
+            setupAdditionalPresenter.saveUserData(essayValue.text.toString(),
+                                                  letterValue.text.toString(),
+                                                  gtoValue.text.toString())
+            Navigation.findNavController(view).navigate(R.id.action_setupAdditional_to_resultView)
         }
     }
 
@@ -42,9 +38,5 @@ class SetupAdditionalFragment : Fragment(), SetupAdditionalMVP.View {
 
     override fun setupMVP() {
         setupAdditionalPresenter = SetupAdditionalPresenter(this)
-    }
-
-    override fun setFieldsValues() {
-        ShowResultFragment.instance.arguments = putAdditionalValues(arguments, essayValue)
     }
 }
