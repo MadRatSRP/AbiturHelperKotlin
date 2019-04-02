@@ -1,6 +1,6 @@
-package com.madrat.abiturhelper.ui.setup_score
+package com.madrat.abiturhelper.interfaces.fragments
 
-interface SetupScoreVP {
+interface SetupScoreMVP {
     interface View {
         fun setupMVP()
         fun setFieldsListeners()

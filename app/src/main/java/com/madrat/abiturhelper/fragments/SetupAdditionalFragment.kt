@@ -1,0 +1,50 @@
+package com.madrat.abiturhelper.fragments
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.presenters.fragments.SetupAdditionalPresenter
+import com.madrat.abiturhelper.interfaces.fragments.SetupAdditionalMVP
+import com.madrat.abiturhelper.util.putAdditionalValues
+import kotlinx.android.synthetic.main.fragment_setup_additional.*
+
+class SetupAdditionalFragment : Fragment(), SetupAdditionalMVP.View {
+    companion object { val instance = SetupAdditionalFragment() }
+
+    private lateinit var setupAdditionalPresenter: SetupAdditionalPresenter
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupMVP()
+
+        showResult.setOnClickListener {view->
+            //setFieldsValues()
+
+            /*basePresenter.addFragment(ShowResultFragment.instance,
+                               R.id.activityFragmentContainer)*/
+
+            Navigation.findNavController(view).navigate(R.id.action_setupAdditional_to_resultView,
+                                                        putAdditionalValues(arguments, essayValue))
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textSetupAdditional)
+        return inflater.inflate(R.layout.fragment_setup_additional,
+                                container, false)
+    }
+
+    override fun setupMVP() {
+        setupAdditionalPresenter = SetupAdditionalPresenter(this)
+    }
+
+    override fun setFieldsValues() {
+        ShowResultFragment.instance.arguments = putAdditionalValues(arguments, essayValue)
+    }
+}

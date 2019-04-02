@@ -1,8 +1,9 @@
-package com.madrat.abiturhelper.ui.result
+package com.madrat.abiturhelper.presenters.fragments
 
 import android.os.Bundle
+import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
 
-class ResultPresenter (private var rv: ResultVP.View, private val arguments: Bundle) : ResultVP.Presenter {
+class ShowResultPresenter (private var rv: ShowResultMVP.View, private val arguments: Bundle) : ShowResultMVP.Presenter {
 
     override fun returnString(bundle: Bundle?, key: String?):String? {
         //return arguments.getInt(key).toString()

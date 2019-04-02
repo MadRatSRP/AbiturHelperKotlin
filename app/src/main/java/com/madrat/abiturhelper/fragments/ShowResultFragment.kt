@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.ui.result
+package com.madrat.abiturhelper.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-
-import com.madrat.abiturhelper.R
-
 import androidx.fragment.app.Fragment
+import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
+import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
+import com.madrat.abiturhelper.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_result.*
 
-class ResultView : Fragment(), ResultVP.View {
+class ShowResultFragment : Fragment(), ShowResultMVP.View {
 
-    companion object { val instance = ResultView() }
+    companion object { val instance = ShowResultFragment() }
 
-    private var resultPresenter: ResultPresenter? = null
+    private var showResultPresenter: ShowResultPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -32,29 +33,29 @@ class ResultView : Fragment(), ResultVP.View {
     }
 
     override fun setupMVP() {
-        resultPresenter = ResultPresenter(this, arguments!!)
+        showResultPresenter = ShowResultPresenter(this, arguments!!)
     }
 
     override fun checkField(linearLayout: LinearLayout, textViewValue: TextView, key: String) {
-        /*textViewValue.text = resultPresenter?.returnString(key, scoreBundle)
+        /*textViewValue.text = showResultPresenter?.returnString(key, scoreBundle)
         if (textViewValue.text.toString().toInt() == 0) {
             linearLayout.visibility = View.GONE
         }*/
     }
 
     override fun setupFields() {
-        val scoreBundle = arguments?.getBundle("scoreBundle")
+        /*val scoreBundle = arguments?.getBundle("scoreBundle")
 
-        mathsValue.text = resultPresenter?.returnString(scoreBundle,"maths")
-        russianValue.text = resultPresenter?.returnString(scoreBundle,"russian")
+        mathsValue.text = showResultPresenter?.returnString(scoreBundle,"maths")
+        russianValue.text = showResultPresenter?.returnString(scoreBundle,"russian")*/
+
+        /*val additionalBundle = arguments?.getBundle("additionalBundle")
+        essayValue.text = showResultPresenter?.returnString(additionalBundle,"soc")*/
 
         /*checkField(physics, physicsValue, "physics")
         checkField(computerScience, computerScienceValue, "computerScience")
         checkField(socialScience, socialScienceValue, "socialScience")*/
 
-        val additionalBundle = arguments?.getBundle("additionalBundle")
-        soc.text = resultPresenter?.returnString(additionalBundle,"soc")
-
-        //resultValue.text = resultPresenter?.returnSum()
+        //resultValue.text = showResultPresenter?.returnSum()
     }
 }

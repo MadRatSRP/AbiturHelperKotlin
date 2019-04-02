@@ -3,10 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/activity">
-    <activity
-        android:id="@+id/activity"
-        android:name="com.madrat.abiturhelper.ui.activity.Activity"
-        android:label="activity"
-        tools:layout="@layout/activity" />
+    app:startDestination="@id/setupScore">
+    <fragment
+        android:id="@+id/setupScore"
+        android:name="com.madrat.abiturhelper.fragments.SetupScoreFragment"
+        android:label="fragment_setup_score"
+        tools:layout="@layout/fragment_setup_score" >
+        <action
+            android:id="@+id/action_setupScore_to_setupAdditional"
+            app:destination="@id/setupAdditional" />
+    </fragment>
+    <fragment
+        android:id="@+id/setupAdditional"
+        android:name="com.madrat.abiturhelper.fragments.SetupAdditionalFragment"
+        android:label="fragment_setup_additional"
+        tools:layout="@layout/fragment_setup_additional" >
+        <action
+            android:id="@+id/action_setupAdditional_to_resultView"
+            app:destination="@id/resultView" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultView"
+        android:name="com.madrat.abiturhelper.fragments.ShowResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.madrat.abiturhelper.fragments.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>
