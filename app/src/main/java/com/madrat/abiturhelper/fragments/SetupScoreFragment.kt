@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 //import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import kotlinx.android.synthetic.main.fragment_setup_score.*
@@ -29,23 +30,11 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
         setupMVP()
 
         toAdditionalScore.setOnClickListener { view->
-            //setupScorePresenter.addFieldsListeners()
-
-            //setupScorePresenter.addFieldsValues()
-
-            /*arguments = putScoreValues(mathsValue, russianValue, physicsValue,
-                                       computerScienceValue, socialScienceValue)*/
-
-            //Navigation.findNavController(view!!).navigate(R.id.action_setupScore_to_setupAdditional, arguments)
-
-            /*basePresenter.addFragment(SetupAdditionalFragment.instance,
-                                      R.id.activityFragmentContainer)*/
-
-            setupScorePresenter.addMaths(mathsValue)
-            setupScorePresenter.addRussian(russianValue)
-            setupScorePresenter.addPhysics(physicsValue)
-            setupScorePresenter.addComputerScience(computerScienceValue)
-            setupScorePresenter.addSocialScience(socialScienceValue)
+            setupScorePresenter.addFieldsListeners()
+            setupScorePresenter.saveUserData(mathsValue.text.toString(), russianValue.text.toString(),
+                                             physicsValue.text.toString(), computerScienceValue.text.toString(),
+                                             socialScienceValue.text.toString())
+            Navigation.findNavController(view).navigate(R.id.action_setupScore_to_setupAdditional)
         }
     }
 
@@ -67,14 +56,6 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
         setupScorePresenter.checkSocialScience(passingSocialScience, scoreLimit)
     }
 
-    override fun setFieldsValues() {
-        SetupAdditionalFragment.instance.arguments = putScoreValues(mathsValue, russianValue,
-                                                                    physicsValue, computerScienceValue,
-                                                                    socialScienceValue)
-
-        //basePresenter.putScoreValues(maths, russian, physics, computer_science, social_science)
-    }
-
     override fun mathsIsValid(math_passing: Int, score_limit: Int){
         when {
             mathsValue?.text.isNullOrBlank() ->
@@ -87,7 +68,6 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
                 mathsValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
-
     override fun russianIsValid(rus_passing: Int, score_limit: Int){
         when {
             russianValue?.text.isNullOrBlank() ->
@@ -100,7 +80,6 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
                 russianValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
-
     override fun physicsIsValid(phys_passing: Int, score_limit: Int){
         when {
             physicsValue?.text.isNullOrBlank() ->
@@ -113,7 +92,6 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
                 physicsValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
-
     override fun computerScienceIsValid(comp_passing: Int, score_limit: Int){
         when {
             computerScienceValue?.text.isNullOrBlank() ->
@@ -126,7 +104,6 @@ class SetupScoreFragment : Fragment(), SetupScoreMVP.View {
                 computerScienceValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
-
     override fun socialScienceIsValid(soc_passing: Int, score_limit: Int){
         when {
             socialScienceValue?.text.isNullOrBlank() ->

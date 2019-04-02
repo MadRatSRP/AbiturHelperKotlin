@@ -6,31 +6,19 @@ import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.returnInt
 
 class SetupScorePresenter(private var ssv: SetupScoreMVP.View) : SetupScoreMVP.Presenter {
-
     private val myApplication = MyApplication.instance
 
-    fun addMaths(mathsValue: EditText) {
-        myApplication.saveMaths(returnInt(mathsValue))
-    }
-    fun addRussian(russianValue: EditText) {
-        myApplication.saveRussian(returnInt(russianValue))
-    }
-    fun addPhysics(physicsValue: EditText) {
-        myApplication.savePhysics(returnInt(physicsValue))
-    }
-    fun addComputerScience(computerScienceValue: EditText) {
-        myApplication.saveComputerScience(returnInt(computerScienceValue))
-    }
-    fun addSocialScience(socialScienceValue: EditText) {
-        myApplication.saveSocialScience(returnInt(socialScienceValue))
+    override fun saveUserData(maths: String, russian: String, physics: String,
+                              computerScience: String, socialScience: String) {
+        myApplication.saveMaths(returnInt(maths))
+        myApplication.saveRussian(returnInt(russian))
+        myApplication.savePhysics(returnInt(physics))
+        myApplication.saveComputerScience(returnInt(computerScience))
+        myApplication.saveSocialScience(returnInt(socialScience))
     }
 
     override fun addFieldsListeners() {
         ssv.setFieldsListeners()
-    }
-
-    override fun addFieldsValues() {
-        ssv.setFieldsValues()
     }
 
     override fun checkMaths(math_passing: Int, score_limit: Int) {

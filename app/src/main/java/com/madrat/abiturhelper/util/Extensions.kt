@@ -47,9 +47,9 @@ fun Fragment.putAdditionalValues(arguments: Bundle?, soc: EditText): Bundle {
 fun Any.showLog(message: String){
     if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, message)
 }
-fun Any.returnInt(field: EditText): Int? {
-    return field.text.toString().toInt()
-}
+fun Any.returnInt(field: String): Int?
+        = field.toInt()
+
 fun Any.returnString(value: Int?): String? {
     return value.toString()
 }
