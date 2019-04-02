@@ -3,15 +3,12 @@
 
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
     <string name="countGraduationChancesTitle">Оценить шанс поступления</string>
+    <string name="profileTitle">Профиль</string>
 
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
     <string name="setUpAdditionalTitle">Дополнительные баллы</string>
     <string name="textResult">Результат</string>
     <string name="textSum">Сумма баллов</string>
-
-    countChancesOfGraduation.setOnClickListener {  }
-
-    <string name="textProfile">Профиль</string>
 
     <string name="showResult">Сохранить результат</string>
     <string name="showAdditionalScore">Показать дополнительные баллы</string>
@@ -25,7 +22,4 @@
     <string name="textEssay">Сочинение</string>
     <string name="textLetter">Грамота</string>
     <string name="textGTO">Готов к труду и обороне(ГТО)</string>
-    <string name="textSetupSpecialties">Подобрать специальности</string>
-    <string name="textCountChancesOfGraduation">Рассчитать вероятности поступления</string>
-    <string name="textStartScreen">Начальный экран</string>
 </resources>

@@ -22,7 +22,7 @@ class ProfileFragment: Fragment(), ProfileMVP.View {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textProfile)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileTitle)
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 

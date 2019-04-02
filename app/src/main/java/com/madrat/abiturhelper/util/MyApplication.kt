@@ -3,16 +3,17 @@ package com.madrat.abiturhelper.util
 import android.app.Application
 
 class MyApplication: Application() {
-
-    var maths: Int? = null
-    var russian: Int? = null
-    var physics: Int? = null
-    var computerScience: Int? = null
-    var socialScience: Int? = null
-
     companion object {
         val instance = MyApplication()
     }
+    private var maths: Int? = null
+    private var russian: Int? = null
+    private var physics: Int? = null
+    private var computerScience: Int? = null
+    private var socialScience: Int? = null
+    private var essay: Int? = null
+    private var letter: Int? = null
+    private var gto: Int? = null
 
     fun saveMaths(maths: Int?) {
         this.maths = maths
@@ -34,6 +35,18 @@ class MyApplication: Application() {
         this.socialScience = socialScience
         showLog("Новое значение social science: ${this.socialScience}")
     }
+    fun saveEssay(essay: Int?) {
+        this.essay = essay
+        showLog("Новое значение essay: ${this.essay}")
+    }
+    fun saveLetter(letter: Int?) {
+        this.letter = letter
+        showLog("Новое значение letter: ${this.letter}")
+    }
+    fun saveGTO(gto: Int?) {
+        this.gto = gto
+        showLog("Новое значение gto: ${this.gto}")
+    }
 
     fun returnMaths(): Int? {
         return maths
@@ -54,5 +67,17 @@ class MyApplication: Application() {
     fun returnSocialScience(): Int? {
         return socialScience
         showLog("Получен socialScience: ${this.socialScience}")
+    }
+    fun returnEssay(): Int? {
+        return essay
+        showLog("Получен essay: ${this.essay}")
+    }
+    fun returnLetter(): Int? {
+        return letter
+        showLog("Получен letter: ${this.letter}")
+    }
+    fun returnGTO(): Int? {
+        return gto
+        showLog("Получен gto: ${this.gto}")
     }
 }
