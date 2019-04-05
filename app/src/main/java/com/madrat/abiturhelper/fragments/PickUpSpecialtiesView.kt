@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.showLog
 import com.opencsv.CSVReader
 import org.apache.commons.csv.CSVFormat
@@ -18,12 +19,48 @@ import java.io.InputStreamReader
 
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
-    var fileReader: BufferedReader? = null
-    var csvReader: CSVReader? = null
+
+    var list = ArrayList<Specialty>()
+    var untiList = ArrayList<Specialty>()
+    var feuList = ArrayList<Specialty>()
+    var fitList = ArrayList<Specialty>()
+    var mtfList = ArrayList<Specialty>()
+    var unitList = ArrayList<Specialty>()
+    var feeList = ArrayList<Specialty>()
+    var oadList = ArrayList<Specialty>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         grabSpecialties()
+        divideList()
+    }
+
+    override fun divideList() {
+        for (i in 0 until list.size) {
+            when(list[i].faculty) {
+                "Учебно-научный технологический институт" ->
+                    untiList.add(list[i])
+                "Факультет экономики и управления" ->
+                    feuList.add(list[i])
+                "Факультет информационных технологий" ->
+                    fitList.add(list[i])
+                "Механико-технологический факультет" ->
+                    mtfList.add(list[i])
+                "Учебно-научный институт транспорта" ->
+                    unitList.add(list[i])
+                "Факультет энергетики и электроники" ->
+                    feeList.add(list[i])
+                "Отдел аспирантуры и докторантуры" ->
+                    oadList.add(list[i])
+            }
+        }
+        showLog(untiList.size.toString())
+        showLog(feuList.size.toString())
+        showLog(fitList.size.toString())
+        showLog(mtfList.size.toString())
+        showLog(unitList.size.toString())
+        showLog(feeList.size.toString())
+        showLog(oadList.size.toString())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +75,6 @@ class PickUpSpecialtiesView
         val file = context?.assets?.open("specialties.csv")
         val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
 
-
-
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
                .withFirstRecordAsHeader()
                .withDelimiter(';')
@@ -47,19 +82,27 @@ class PickUpSpecialtiesView
                .withTrim())
 
         for (csvRecord in csvParser) {
-        val shortName = csvRecord.get("СокращенноеНаименование")
-        val fullName = csvRecord.get("ПолноеНаименование")
-        val specialty = csvRecord.get("Специализация")
-        val profileTerm = csvRecord.get("ПрофильныйПредмет")
-        val educationForm = csvRecord.get("ФормаОбучения")
-        val educationLevel = csvRecord.get("УровеньПодготовки")
-        val graduationReason = csvRecord.get("ОснованиеПоступления")
-        val receptionFeatures = csvRecord.get("ОсобенностиПриема")
-        val faculty = csvRecord.get("Факультет")
-        val entriesAmount = csvRecord.get("КоличествоМест")
-        val enrolledAmount = csvRecord.get("Зачислено")
+            val shortName = csvRecord.get("СокращенноеНаименование")
+            val fullName = csvRecord.get("ПолноеНаименование")
+            val specialty = csvRecord.get("Специализация")
+            val profileTerm = csvRecord.get("ПрофильныйПредмет")
+            val educationForm = csvRecord.get("ФормаОбучения")
+            val educationLevel = csvRecord.get("УровеньПодготовки")
+            val graduationReason = csvRecord.get("ОснованиеПоступления")
+            val receptionFeatures = csvRecord.get("ОсобенностиПриема")
+            val faculty = csvRecord.get("Факультет")
+            val entriesAmount = csvRecord.get("КоличествоМест")
+            val enrolledAmount = csvRecord.get("Зачислено")
 
-        showLog("Record No - " + csvRecord.recordNumber
+            list.add(Specialty(shortName, fullName, specialty, profileTerm, educationForm,
+                    educationLevel, graduationReason, receptionFeatures, faculty,
+                    entriesAmount.toInt(), enrolledAmount.toInt()))
+        }
+        showLog(list[0].toString())
+        showLog(list.size.toString())
+
+
+        /*showLog("Record No - " + csvRecord.recordNumber
             + "\n---------------"
             + "\nShortName: $shortName"
             + "\nFullName: $fullName"
@@ -73,7 +116,7 @@ class PickUpSpecialtiesView
             + "\nEntriesAmount: $entriesAmount"
             + "\nEnrolledAmount: $enrolledAmount"
             + "\n---------------\n\n")
-        }
+        }*/
 
 
 
