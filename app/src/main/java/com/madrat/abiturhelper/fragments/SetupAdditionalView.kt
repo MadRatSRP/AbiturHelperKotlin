@@ -21,11 +21,11 @@ class SetupAdditionalView : Fragment(), SetupAdditionalMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        showResult.setOnClickListener {view->
-            setupAdditionalPresenter.saveUserData(essayValue.text.toString(),
+        showSpecialtiesScreen.setOnClickListener { view->
+            /*setupAdditionalPresenter.saveUserData(essayValue.text.toString(),
                                                   letterValue.text.toString(),
-                                                  gtoValue.text.toString())
-            Navigation.findNavController(view).navigate(R.id.action_setupAdditional_to_resultView)
+                                                  gtoValue.text.toString())*/
+            Navigation.findNavController(view).navigate(R.id.action_setupAdditional_to_pickUpSpecialtiesView)
         }
     }
 

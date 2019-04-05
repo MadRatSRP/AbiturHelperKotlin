@@ -29,10 +29,10 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         setupMVP()
 
         toAdditionalScore.setOnClickListener { view->
-            setupScorePresenter.addFieldsListeners()
+            /*setupScorePresenter.addFieldsListeners()
             setupScorePresenter.saveUserData(mathsValue.text.toString(), russianValue.text.toString(),
                                              physicsValue.text.toString(), computerScienceValue.text.toString(),
-                                             socialScienceValue.text.toString())
+                                             socialScienceValue.text.toString())*/
             Navigation.findNavController(view).navigate(R.id.action_setupScore_to_setupAdditional)
         }
     }

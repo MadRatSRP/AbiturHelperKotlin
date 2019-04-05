@@ -19,8 +19,8 @@
         android:label="fragment_setup_additional"
         tools:layout="@layout/fragment_setup_additional" >
         <action
-            android:id="@+id/action_setupAdditional_to_resultView"
-            app:destination="@id/resultView" />
+            android:id="@+id/action_setupAdditional_to_pickUpSpecialtiesView"
+            app:destination="@id/pickUpSpecialtiesView" />
     </fragment>
     <fragment
         android:id="@+id/resultView"
@@ -32,4 +32,12 @@
         android:name="com.madrat.abiturhelper.fragments.ProfileView"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/pickUpSpecialtiesView"
+        android:name="com.madrat.abiturhelper.fragments.PickUpSpecialtiesView"
+        android:label="PickUpSpecialtiesView" >
+        <action
+            android:id="@+id/action_pickUpSpecialtiesView_to_resultView"
+            app:destination="@id/resultView" />
+    </fragment>
 </navigation>

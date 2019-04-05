@@ -84,8 +84,8 @@
             android:layout_weight="1"/>
     </LinearLayout>
     <Button
-        android:id="@+id/showResult"
-        android:text="@string/showResult"
+        android:id="@+id/showSpecialtiesScreen"
+        android:text="@string/pickUpSpecialtiesTitle"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
