@@ -13,6 +13,7 @@ import com.opencsv.CSVReader
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 class PickUpSpecialtiesView
@@ -22,36 +23,33 @@ class PickUpSpecialtiesView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //grabSpecialties()
+        grabSpecialties()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
         var view =  inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
-
-        grabSpecialties()
-
         return view
     }
 
     override fun grabSpecialties() {
 
         val file = context?.assets?.open("specialties.csv")
+        val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
 
-        val bufferedReader = file?.bufferedReader()
+
 
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
-                //.parse(in, StandardCharsets.UTF_8)
                .withFirstRecordAsHeader()
                .withDelimiter(';')
                .withIgnoreHeaderCase()
                .withTrim())
 
         for (csvRecord in csvParser) {
-        val shortName = csvRecord.get("Kappa")
-        val fullName = csvRecord.get("Jojo")
-       /* val specialty = csvRecord.get("Специализация")
+        val shortName = csvRecord.get("СокращенноеНаименование")
+        val fullName = csvRecord.get("ПолноеНаименование")
+        val specialty = csvRecord.get("Специализация")
         val profileTerm = csvRecord.get("ПрофильныйПредмет")
         val educationForm = csvRecord.get("ФормаОбучения")
         val educationLevel = csvRecord.get("УровеньПодготовки")
@@ -59,13 +57,13 @@ class PickUpSpecialtiesView
         val receptionFeatures = csvRecord.get("ОсобенностиПриема")
         val faculty = csvRecord.get("Факультет")
         val entriesAmount = csvRecord.get("КоличествоМест")
-        val enrolledAmount = csvRecord.get("Зачислено")*/
+        val enrolledAmount = csvRecord.get("Зачислено")
 
         showLog("Record No - " + csvRecord.recordNumber
             + "\n---------------"
             + "\nShortName: $shortName"
             + "\nFullName: $fullName"
-            /*+ "\nSpecialty: $specialty"
+            + "\nSpecialty: $specialty"
             + "\nProfileTerm: $profileTerm"
             + "\nEducationForm: $educationForm"
             + "\nEducationLevel: $educationLevel"
@@ -73,7 +71,7 @@ class PickUpSpecialtiesView
             + "\nReceptionFeatures: $receptionFeatures"
             + "\nFaculty: $faculty"
             + "\nEntriesAmount: $entriesAmount"
-            + "\nEnrolledAmount: $enrolledAmount"*/
+            + "\nEnrolledAmount: $enrolledAmount"
             + "\n---------------\n\n")
         }
 
