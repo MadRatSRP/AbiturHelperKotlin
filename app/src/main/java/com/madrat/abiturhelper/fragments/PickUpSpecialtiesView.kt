@@ -18,37 +18,32 @@ import java.io.InputStreamReader
 
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
+    private var bachelourList = ArrayList<Student>()
+    private var masterList = ArrayList<Student>()
+    private var postGraduateList = ArrayList<Student>()
 
-    var specialtiesList = ArrayList<Specialty>()
-    var studentsList = ArrayList<Student>()
-
-    var untiList = ArrayList<Specialty>()
-    var feuList = ArrayList<Specialty>()
-    var fitList = ArrayList<Specialty>()
-    var mtfList = ArrayList<Specialty>()
-    var unitList = ArrayList<Specialty>()
-    var feeList = ArrayList<Specialty>()
-    var oadList = ArrayList<Specialty>()
+    private var untiList = ArrayList<Specialty>()
+    private var feuList = ArrayList<Specialty>()
+    private var fitList = ArrayList<Specialty>()
+    private var mtfList = ArrayList<Specialty>()
+    private var unitList = ArrayList<Specialty>()
+    private var feeList = ArrayList<Specialty>()
+    private var oadList = ArrayList<Specialty>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        grabSpecialties()
-        grabStudents()
-
-        divideSpecialtiesList()
+        divideSpecialtiesByFaculty(grabSpecialties("specialties.csv"))
+        divideStudentsListByAdmissions(grabStudents("abiturs.csv"))
     }
-
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
-        val view =  inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
     }
 
-    override fun grabSpecialties() {
-        val file = context?.assets?.open("specialties.csv")
+    override fun grabSpecialties(path: String): ArrayList<Specialty> {
+        val specialtiesList = ArrayList<Specialty>()
+        val file = context?.assets?.open(path)
         val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
 
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
@@ -74,10 +69,39 @@ class PickUpSpecialtiesView
                     educationLevel, graduationReason, receptionFeatures, faculty,
                     entriesAmount.toInt(), enrolledAmount.toInt()))
         }
-        showLog("Массив специальностей: ${specialtiesList.size}")
+        showLog("Всего специальностей: ${specialtiesList.size}")
+        return specialtiesList
     }
-    override fun grabStudents() {
-        val file = context?.assets?.open("abiturs.csv")
+    override fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>) {
+        for (i in 0 until list.size) {
+            when(list[i].faculty) {
+                "Учебно-научный технологический институт" ->
+                    untiList.add(list[i])
+                "Факультет экономики и управления" ->
+                    feuList.add(list[i])
+                "Факультет информационных технологий" ->
+                    fitList.add(list[i])
+                "Механико-технологический факультет" ->
+                    mtfList.add(list[i])
+                "Учебно-научный институт транспорта" ->
+                    unitList.add(list[i])
+                "Факультет энергетики и электроники" ->
+                    feeList.add(list[i])
+                "Отдел аспирантуры и докторантуры" ->
+                    oadList.add(list[i])
+            }
+        }
+        showLog("УНТИ: ${untiList.size}")
+        showLog("ФЭУ: ${feuList.size}")
+        showLog("ФИТ: ${fitList.size}")
+        showLog("МТФ: ${mtfList.size}")
+        showLog("УНИТ: ${unitList.size}")
+        showLog("ФЭЭ: ${feeList.size}")
+        showLog("ОАД: ${oadList.size}")
+    }
+    override fun grabStudents(path: String): ArrayList<Student> {
+        val studentsList = ArrayList<Student>()
+        val file = context?.assets?.open(path)
         val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
 
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
@@ -116,35 +140,22 @@ class PickUpSpecialtiesView
                     socialScience.toIntOrNull(), additionalScore.toIntOrNull(), isCertificateAvailable.toBoolean(),
                     isChargeAvailable.toBoolean(), priority.toIntOrNull()))
         }
-        showLog(studentsList[2574].toString())
-        showLog(studentsList.size.toString())
+        showLog("Подавших документы: ${studentsList.size}")
+        return studentsList
     }
-
-    override fun divideSpecialtiesList() {
-        for (i in 0 until specialtiesList.size) {
-            when(specialtiesList[i].faculty) {
-                "Учебно-научный технологический институт" ->
-                    untiList.add(specialtiesList[i])
-                "Факультет экономики и управления" ->
-                    feuList.add(specialtiesList[i])
-                "Факультет информационных технологий" ->
-                    fitList.add(specialtiesList[i])
-                "Механико-технологический факультет" ->
-                    mtfList.add(specialtiesList[i])
-                "Учебно-научный институт транспорта" ->
-                    unitList.add(specialtiesList[i])
-                "Факультет энергетики и электроники" ->
-                    feeList.add(specialtiesList[i])
-                "Отдел аспирантуры и докторантуры" ->
-                    oadList.add(specialtiesList[i])
+    override fun divideStudentsListByAdmissions(list: ArrayList<Student>) {
+        for (i in 0 until list.size) {
+            when (list[i].admissions) {
+                "бак" ->
+                    bachelourList.add(list[i])
+                "маг" ->
+                    masterList.add(list[i])
+                "асп" ->
+                    postGraduateList.add(list[i])
             }
         }
-        /*showLog(untiList.size.toString())
-        showLog(feuList.size.toString())
-        showLog(fitList.size.toString())
-        showLog(mtfList.size.toString())
-        showLog(unitList.size.toString())
-        showLog(feeList.size.toString())
-        showLog(oadList.size.toString())*/
+        showLog("Бакалавры: ${bachelourList.size}")
+        showLog("Магистры: ${masterList.size}")
+        showLog("Аспиранты: ${postGraduateList.size}")
     }
 }
