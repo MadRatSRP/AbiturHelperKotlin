@@ -22,6 +22,12 @@ class PickUpSpecialtiesView
     private var masterList = ArrayList<Student>()
     private var postGraduateList = ArrayList<Student>()
 
+    private var physicsStudents = ArrayList<Student>()
+    private var computerScienceStudents = ArrayList<Student>()
+    private var socialScienceStudents = ArrayList<Student>()
+    private var noOrNotEnoughDataStudents = ArrayList<Student>()
+    private var partAndAllDataStudents = ArrayList<Student>()
+
     private var untiList = ArrayList<Specialty>()
     private var feuList = ArrayList<Specialty>()
     private var fitList = ArrayList<Specialty>()
@@ -34,6 +40,7 @@ class PickUpSpecialtiesView
         super.onActivityCreated(savedInstanceState)
         divideSpecialtiesByFaculty(grabSpecialties("specialties.csv"))
         divideStudentsListByAdmissions(grabStudents("abiturs.csv"))
+        divideStudentsByScoreType()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -157,5 +164,43 @@ class PickUpSpecialtiesView
         showLog("Бакалавры: ${bachelourList.size}")
         showLog("Магистры: ${masterList.size}")
         showLog("Аспиранты: ${postGraduateList.size}")
+    }
+    override fun divideStudentsByScoreType() {
+        for (i in 0 until bachelourList.size) {
+            if (bachelourList[i].maths != null && bachelourList[i].russian != null
+                    && bachelourList[i].physics != null && bachelourList[i].computerScience == null
+                    && bachelourList[i].socialScience == null) {
+                physicsStudents.add(bachelourList[i])
+            }
+            else if (bachelourList[i].maths != null && bachelourList[i].russian != null
+                    && bachelourList[i].physics == null && bachelourList[i].computerScience != null
+                    && bachelourList[i].socialScience == null) {
+                computerScienceStudents.add(bachelourList[i])
+            }
+            else if (bachelourList[i].maths != null && bachelourList[i].russian != null
+                    && bachelourList[i].physics == null && bachelourList[i].computerScience == null
+                    && bachelourList[i].socialScience != null) {
+                socialScienceStudents.add(bachelourList[i])
+            }
+            else if ((bachelourList[i].maths == null && bachelourList[i].russian == null
+                    && bachelourList[i].physics == null && bachelourList[i].computerScience == null
+                    && bachelourList[i].socialScience == null) || (bachelourList[i].maths != null
+                    && bachelourList[i].russian != null && bachelourList[i].physics == null
+                    && bachelourList[i].computerScience == null && bachelourList[i].socialScience == null)) {
+                noOrNotEnoughDataStudents.add(bachelourList[i])
+            }
+            else partAndAllDataStudents.add(bachelourList[i])
+        }
+
+        showLog("Студентов с физикой: ${physicsStudents.size}")
+        showLog("Студентов с информатикой: ${computerScienceStudents.size}")
+        showLog("Студентов с обществознанием: ${socialScienceStudents.size}")
+        showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")
+        showLog("Студентов, указавших баллы по всем или двум специальностям: ${partAndAllDataStudents.size}")
+
+        for (i in 0 until 10) {
+            showLog(partAndAllDataStudents[i].toString())
+        }
+
     }
 }

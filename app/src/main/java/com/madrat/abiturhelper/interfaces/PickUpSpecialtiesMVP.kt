@@ -9,6 +9,7 @@ interface PickUpSpecialtiesMVP {
         fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>)
         fun grabStudents(path: String): ArrayList<Student>
         fun divideStudentsListByAdmissions(list: ArrayList<Student>)
+        fun divideStudentsByScoreType()
     }
 
 }
