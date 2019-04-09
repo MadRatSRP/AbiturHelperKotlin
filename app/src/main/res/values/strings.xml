@@ -22,4 +22,7 @@
     <string name="textEssay">Сочинение</string>
     <string name="textLetter">Грамота</string>
     <string name="textGTO">Готов к труду и обороне(ГТО)</string>
+
+    <string name="facultyEntriesTotalText">Всего мест</string>
+    <string name="facultyEntriesFreeText">Свободно мест</string>
 </resources>

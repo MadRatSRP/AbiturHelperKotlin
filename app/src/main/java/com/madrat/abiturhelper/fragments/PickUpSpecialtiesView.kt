@@ -7,10 +7,15 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.adapter.FacultyAdapter
 import com.madrat.abiturhelper.interfaces.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
+import kotlinx.android.synthetic.main.fragment_pick_up_specialties.*
+import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
@@ -18,6 +23,8 @@ import java.io.InputStreamReader
 
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
+    private var adapter: FacultyAdapter? = null
+
     private var bachelourList = ArrayList<Student>()
     private var masterList = ArrayList<Student>()
     private var postGraduateList = ArrayList<Student>()
@@ -36,7 +43,7 @@ class PickUpSpecialtiesView
     private var feeList = ArrayList<Specialty>()
     private var oadList = ArrayList<Specialty>()
 
-    private var facultyList: Map<String, Int> = Map<String, Int>
+    private var facultyList = ArrayList<Faculty>()
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,13 +58,25 @@ class PickUpSpecialtiesView
         calculateAvailableFacultyPlaces("ФЭЭ", feeList)
         calculateAvailableFacultyPlaces("ОАД", oadList)
 
+        for (i in 0 until facultyList.size) {
+            showLog(facultyList[i].toString())
+        }
+
         divideStudentsListByAdmissions(grabStudents("abiturs.csv"))
         divideStudentsByScoreType()
+
+        pickUpSpecialtiesRecyclerView.linearManager()
+        showFaculties(facultyList)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
-        return inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
+        var view = inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
+
+        adapter = FacultyAdapter()
+        view.pickUpSpecialtiesRecyclerView.adapter = adapter
+
+        return view
     }
 
     override fun grabSpecialties(path: String): ArrayList<Specialty> {
@@ -210,12 +229,17 @@ class PickUpSpecialtiesView
         showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")
         showLog("Студентов, указавших баллы по всем или двум специальностям: ${partAndAllDataStudents.size}")
     }
-
-    fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>) {
-        var amount: Int = 0
+    override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>) {
+        var total: Int = 0
+        var free: Int = 0
         for (i in 0 until list.size) {
-            amount += list[i].availableEntries
+            total += list[i].entriesAmount
+            free += list[i].availableEntries
         }
-        facultyList.
+        facultyList.add(Faculty(name, total, free))
+    }
+    override fun showFaculties(faculties: List<Faculty>) {
+        adapter?.updateFacultiesList(faculties)
+        pickUpSpecialtiesRecyclerView.adapter = adapter
     }
 }

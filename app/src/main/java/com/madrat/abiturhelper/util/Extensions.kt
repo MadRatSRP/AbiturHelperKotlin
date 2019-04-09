@@ -2,9 +2,14 @@ package com.madrat.abiturhelper.util
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.BuildConfig
 
 fun Fragment.setFragment(fragment: Fragment, fragmentManager: FragmentManager, id: Int) {
@@ -26,4 +31,12 @@ fun Any.returnInt(field: String): Int?
 
 fun Any.returnString(value: Int?): String? {
     return value.toString()
+}
+
+//ViewGroup
+fun ViewGroup.inflate(layoutRes: Int): View {
+    return LayoutInflater.from(context).inflate(layoutRes, this, false)
+}
+fun RecyclerView.linearManager() {
+    this.layoutManager = LinearLayoutManager(context)
 }
