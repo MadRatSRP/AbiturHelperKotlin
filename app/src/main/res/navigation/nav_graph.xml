@@ -39,5 +39,12 @@
         <action
             android:id="@+id/action_pickUpSpecialtiesView_to_resultView"
             app:destination="@id/resultView" />
+        <action
+            android:id="@+id/action_pickUpSpecialtiesView_to_showSpecialtiesView"
+            app:destination="@id/showSpecialtiesView" />
     </fragment>
+    <fragment
+        android:id="@+id/showSpecialtiesView"
+        android:name="com.madrat.abiturhelper.fragments.ShowSpecialtiesView"
+        android:label="ShowSpecialtiesView" />
 </navigation>

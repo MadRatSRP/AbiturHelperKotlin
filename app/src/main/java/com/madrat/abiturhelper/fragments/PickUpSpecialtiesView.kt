@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultyAdapter
 import com.madrat.abiturhelper.interfaces.PickUpSpecialtiesMVP
@@ -71,9 +72,9 @@ class PickUpSpecialtiesView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
-        var view = inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
+        val view = inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
 
-        adapter = FacultyAdapter()
+        adapter = FacultyAdapter{faculty: Faculty, position: Int -> onItemClicked(faculty, position)}
         view.pickUpSpecialtiesRecyclerView.adapter = adapter
 
         return view
@@ -230,16 +231,56 @@ class PickUpSpecialtiesView
         showLog("Студентов, указавших баллы по всем или двум специальностям: ${partAndAllDataStudents.size}")
     }
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>) {
-        var total: Int = 0
-        var free: Int = 0
+        var total = 0
+        var free = 0
         for (i in 0 until list.size) {
-            total += list[i].entriesAmount
-            free += list[i].availableEntries
+            total += list[i].entriesTotal
+            free += list[i].entriesFree
         }
         facultyList.add(Faculty(name, total, free))
     }
     override fun showFaculties(faculties: List<Faculty>) {
         adapter?.updateFacultiesList(faculties)
         pickUpSpecialtiesRecyclerView.adapter = adapter
+    }
+    override fun onItemClicked(faculty: Faculty, position: Int) {
+        showLog("Выбран: ${faculty.name}")
+        val bundle = Bundle()
+        when (position) {
+            0 -> {
+                bundle.putSerializable("array", untiList)
+                toSpecialties(bundle)
+            }
+            1 -> {
+                bundle.putSerializable("array", feuList)
+                toSpecialties(bundle)
+            }
+            2 -> {
+                bundle.putSerializable("array", fitList)
+                toSpecialties(bundle)
+            }
+            3 -> {
+                bundle.putSerializable("array", mtfList)
+                toSpecialties(bundle)
+            }
+            4 -> {
+                bundle.putSerializable("array", unitList)
+                toSpecialties(bundle)
+            }
+            5 -> {
+                bundle.putSerializable("array", feeList)
+                toSpecialties(bundle)
+            }
+            6 -> {
+                bundle.putSerializable("array", oadList)
+                toSpecialties(bundle)
+            }
+        }
+    }
+    override fun toSpecialties(bundle: Bundle) {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_pickUpSpecialtiesView_to_showSpecialtiesView, bundle)
+        }
     }
 }

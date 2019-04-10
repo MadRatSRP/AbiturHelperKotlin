@@ -3,9 +3,7 @@ package com.madrat.abiturhelper.util
 import android.app.Application
 
 class MyApplication: Application() {
-    companion object {
-        val instance = MyApplication()
-    }
+    companion object { val instance = MyApplication() }
     private var maths: Int? = null
     private var russian: Int? = null
     private var physics: Int? = null

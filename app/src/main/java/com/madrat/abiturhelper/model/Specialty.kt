@@ -1,5 +1,7 @@
 package com.madrat.abiturhelper.model
 
+import java.io.Serializable
+
 data class Specialty(
         val shortName: String,
         val fullName: String,
@@ -10,7 +12,7 @@ data class Specialty(
         val graduationReason: String,
         val receptionFeatures: String,
         val faculty: String,
-        val entriesAmount: Int,
+        val entriesTotal: Int,
         val enrolledAmount: Int,
-        val availableEntries: Int = entriesAmount - enrolledAmount
-)
+        val entriesFree: Int = entriesTotal - enrolledAmount
+) : Serializable

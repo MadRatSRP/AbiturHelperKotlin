@@ -5,6 +5,9 @@ androidExtensions {
     experimental = true
 }
 
+//safe-args
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 28
     defaultConfig {

@@ -9,7 +9,7 @@ import com.madrat.abiturhelper.util.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_faculties.*
 
-class FacultyAdapter
+class FacultyAdapter(private val clickListener: (Faculty, Int) -> Unit)
     : RecyclerView.Adapter<FacultyAdapter.FacultyHolder>(){
     private var faculties = ArrayList<Faculty>()
 
@@ -23,14 +23,16 @@ class FacultyAdapter
             = FacultyHolder(parent.inflate(R.layout.list_faculties))
 
     override fun onBindViewHolder(holder: FacultyAdapter.FacultyHolder, position: Int)
-            = holder.bind(faculties[position])
+            = holder.bind(faculties[position], clickListener)
 
     override fun getItemCount(): Int
             = faculties.size
 
     inner class FacultyHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(faculty: Faculty) {
+        fun bind(faculty: Faculty, clickListener: (Faculty, Int) -> Unit) {
+            containerView.setOnClickListener { clickListener(faculty, position) }
+
             facultyName.text = faculty.name
             entriesTotalValue.text = faculty.entriesTotalAmount.toString()
             entriesFreeValue.text = faculty.entriesFreeAmount.toString()

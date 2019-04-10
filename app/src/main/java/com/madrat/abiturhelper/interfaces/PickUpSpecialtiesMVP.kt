@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.interfaces
 
+import android.os.Bundle
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
@@ -13,6 +14,8 @@ interface PickUpSpecialtiesMVP {
         fun divideStudentsByScoreType()
         fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>)
         fun showFaculties(faculties: List<Faculty>)
+        fun toSpecialties(bundle: Bundle)
+        fun onItemClicked(faculty: Faculty, position: Int)
     }
 
 }
