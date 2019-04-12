@@ -26,9 +26,7 @@ class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
     private var adapter: FacultyAdapter? = null
 
-    private var bachelourList = ArrayList<Student>()
-    private var masterList = ArrayList<Student>()
-    private var postGraduateList = ArrayList<Student>()
+    private var bachelours = ArrayList<Student>()
 
     private var physicsStudents = ArrayList<Student>()
     private var computerScienceStudents = ArrayList<Student>()
@@ -42,29 +40,21 @@ class PickUpSpecialtiesView
     private var mtfList = ArrayList<Specialty>()
     private var unitList = ArrayList<Specialty>()
     private var feeList = ArrayList<Specialty>()
-    private var oadList = ArrayList<Specialty>()
 
     private var facultyList = ArrayList<Faculty>()
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        divideSpecialtiesByFaculty(grabSpecialties("specialties.csv"))
 
-        calculateAvailableFacultyPlaces("УНТИ", untiList)
-        calculateAvailableFacultyPlaces("ФЭУ", feuList)
-        calculateAvailableFacultyPlaces("ФИТ", fitList)
-        calculateAvailableFacultyPlaces("МТФ", mtfList)
-        calculateAvailableFacultyPlaces("УНИТ", unitList)
-        calculateAvailableFacultyPlaces("ФЭЭ", feeList)
-        calculateAvailableFacultyPlaces("ОАД", oadList)
+        /*Первый шаг - разбить список специальностей по факультетам,
+          выделить из списка студентов тех, кто собирается поступать на бакалавриат*/
+        generateBacheloursAndSpecialtiesLists()
 
-        for (i in 0 until facultyList.size) {
-            showLog(facultyList[i].toString())
-        }
+        for (i in 0 until facultyList.size) { showLog(facultyList[i].toString()) }
 
-        divideStudentsListByAdmissions(grabStudents("abiturs.csv"))
-        divideStudentsByScoreType()
+        /*Второй шаг - разбить список поступающих по типу баллов
+          и высчитать свободные баллы для факультетов*/
+        generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
         pickUpSpecialtiesRecyclerView.linearManager()
         showFaculties(facultyList)
@@ -79,7 +69,25 @@ class PickUpSpecialtiesView
 
         return view
     }
+    /*Первый этап*/
+    override fun generateBacheloursAndSpecialtiesLists() {
+        val divideSpecialties = Thread {
+            val specialties = grabSpecialties("specialties.csv")
+            divideSpecialtiesByFaculty(specialties)
+        }
+        val divideStudents = Thread {
+            val students = grabStudents("abiturs.csv")
+            divideStudentsByAdmissions(students)
+        }
 
+        divideSpecialties.start()
+        divideStudents.start()
+
+        divideSpecialties.join()
+        divideStudents.join()
+
+        println("Первый этап завершён")
+    }
     override fun grabSpecialties(path: String): ArrayList<Specialty> {
         val specialtiesList = ArrayList<Specialty>()
         val file = context?.assets?.open(path)
@@ -126,8 +134,6 @@ class PickUpSpecialtiesView
                     unitList.add(list[i])
                 "Факультет энергетики и электроники" ->
                     feeList.add(list[i])
-                "Отдел аспирантуры и докторантуры" ->
-                    oadList.add(list[i])
             }
         }
         showLog("УНТИ: ${untiList.size}")
@@ -136,7 +142,6 @@ class PickUpSpecialtiesView
         showLog("МТФ: ${mtfList.size}")
         showLog("УНИТ: ${unitList.size}")
         showLog("ФЭЭ: ${feeList.size}")
-        showLog("ОАД: ${oadList.size}")
     }
     override fun grabStudents(path: String): ArrayList<Student> {
         val studentsList = ArrayList<Student>()
@@ -182,53 +187,133 @@ class PickUpSpecialtiesView
         showLog("Подавших документы: ${studentsList.size}")
         return studentsList
     }
-    override fun divideStudentsListByAdmissions(list: ArrayList<Student>) {
+    override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
         for (i in 0 until list.size) {
             when (list[i].admissions) {
                 "бак" ->
-                    bachelourList.add(list[i])
-                "маг" ->
-                    masterList.add(list[i])
-                "асп" ->
-                    postGraduateList.add(list[i])
+                    bachelours.add(list[i])
             }
         }
-        showLog("Бакалавры: ${bachelourList.size}")
-        showLog("Магистры: ${masterList.size}")
-        showLog("Аспиранты: ${postGraduateList.size}")
+        showLog("Бакалавры: ${bachelours.size}")
     }
-    override fun divideStudentsByScoreType() {
-        for (i in 0 until bachelourList.size) {
-            if (bachelourList[i].maths != null && bachelourList[i].russian != null) {
 
-                //физика
-                if (bachelourList[i].physics != null && bachelourList[i].computerScience == null
-                        && bachelourList[i].socialScience == null) {
-                    physicsStudents.add(bachelourList[i])
-                }
-                //информатика
-                else if (bachelourList[i].physics == null && bachelourList[i].computerScience != null
-                        && bachelourList[i].socialScience == null) {
-                    computerScienceStudents.add(bachelourList[i])
-                }
-                //обществознание
-                else if (bachelourList[i].physics == null && bachelourList[i].computerScience == null
-                        && bachelourList[i].socialScience != null) {
-                    socialScienceStudents.add(bachelourList[i])
-                }
-                //по двум или трём предметам
-                else partAndAllDataStudents.add(bachelourList[i])
-            }
-
-            else noOrNotEnoughDataStudents.add(bachelourList[i])
-
+    /*Второй этап*/
+    override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
+        val generateStudentsWithPhysicsList = Thread {
+            withdrawPhysicsStudents()
         }
+        val generateStudentsWithComputerScienceList = Thread {
+            withdrawComputerScienceStudents()
+        }
+        val generateStudentsWithSocialScienceList = Thread {
+            withdrawSocialScienceStudents()
+        }
+        val generateStudentsWithPartAndFullDataList = Thread {
+            withdrawStudentsWithPartAndFullData()
+        }
+        val generateStudentsWithoutDataList = Thread {
+            withdrawStudentsWithoutData()
+        }
+        val calculateUntiPlaces = Thread {
+            calculateAvailableFacultyPlaces("УНТИ", untiList)
+        }
+        val calculateFeuPlaces = Thread {
+            calculateAvailableFacultyPlaces("ФЭУ", feuList)
+        }
+        val calculateFitPlaces = Thread {
+            calculateAvailableFacultyPlaces("ФИТ", fitList)
+        }
+        val calculateMtfPlaces = Thread {
+            calculateAvailableFacultyPlaces("МТФ", mtfList)
+        }
+        val calculateUnitPlaces = Thread {
+            calculateAvailableFacultyPlaces("УНИТ", unitList)
+        }
+        val calculateFeePlaces = Thread {
+            calculateAvailableFacultyPlaces("ФЭЭ", feeList)
+        }
+        generateStudentsWithPhysicsList.start()
+        generateStudentsWithComputerScienceList.start()
+        generateStudentsWithSocialScienceList.start()
+        generateStudentsWithPartAndFullDataList.start()
+        generateStudentsWithoutDataList.start()
 
+        calculateUntiPlaces.start()
+        calculateFeuPlaces.start()
+        calculateFitPlaces.start()
+        calculateMtfPlaces.start()
+        calculateUnitPlaces.start()
+        calculateFeePlaces.start()
+
+        generateStudentsWithPhysicsList.join()
+        generateStudentsWithComputerScienceList.join()
+        generateStudentsWithSocialScienceList.join()
+        generateStudentsWithPartAndFullDataList.join()
+        generateStudentsWithoutDataList.join()
+
+        calculateUntiPlaces.join()
+        calculateFeuPlaces.join()
+        calculateFitPlaces.join()
+        calculateMtfPlaces.join()
+        calculateUnitPlaces.join()
+        calculateFeePlaces.join()
+
+        println("Второй этап завершён")
+    }
+    override fun withdrawPhysicsStudents() {
+        for (i in 0 until bachelours.size) {
+            if (bachelours[i].maths != null && bachelours[i].russian != null) {
+                if (bachelours[i].physics != null && bachelours[i].computerScience == null
+                        && bachelours[i].socialScience == null) {
+                    physicsStudents.add(bachelours[i])
+                }
+            }
+        }
         showLog("Студентов с физикой: ${physicsStudents.size}")
+    }
+    override fun withdrawComputerScienceStudents() {
+        for (i in 0 until bachelours.size) {
+            if (bachelours[i].maths != null && bachelours[i].russian != null) {
+                if (bachelours[i].physics == null && bachelours[i].computerScience != null
+                        && bachelours[i].socialScience == null) {
+                    computerScienceStudents.add(bachelours[i])
+                }
+            }
+        }
         showLog("Студентов с информатикой: ${computerScienceStudents.size}")
+    }
+    override fun withdrawSocialScienceStudents() {
+        for (i in 0 until bachelours.size) {
+            if (bachelours[i].maths != null && bachelours[i].russian != null) {
+                if (bachelours[i].physics == null && bachelours[i].computerScience == null
+                        && bachelours[i].socialScience != null) {
+                    socialScienceStudents.add(bachelours[i])
+                }
+            }
+        }
         showLog("Студентов с обществознанием: ${socialScienceStudents.size}")
-        showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")
+    }
+    override fun withdrawStudentsWithPartAndFullData() {
+        for (i in 0 until bachelours.size) {
+            if (bachelours[i].maths != null && bachelours[i].russian != null) {
+                if (!(bachelours[i].physics != null && bachelours[i].computerScience == null
+                    && bachelours[i].socialScience == null) && !(bachelours[i].physics == null &&
+                    bachelours[i].computerScience != null && bachelours[i].socialScience == null) &&
+                    !(bachelours[i].physics == null && bachelours[i].computerScience == null
+                    && bachelours[i].socialScience != null)) {
+                    partAndAllDataStudents.add(bachelours[i])
+                }
+            }
+        }
         showLog("Студентов, указавших баллы по всем или двум специальностям: ${partAndAllDataStudents.size}")
+    }
+    override fun withdrawStudentsWithoutData() {
+        for (i in 0 until bachelours.size) {
+            if (!(bachelours[i].maths != null && bachelours[i].russian != null)) {
+                noOrNotEnoughDataStudents.add(bachelours[i])
+            }
+        }
+        showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")
     }
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>) {
         var total = 0
@@ -239,6 +324,7 @@ class PickUpSpecialtiesView
         }
         facultyList.add(Faculty(name, total, free))
     }
+    
     override fun showFaculties(faculties: List<Faculty>) {
         adapter?.updateFacultiesList(faculties)
         pickUpSpecialtiesRecyclerView.adapter = adapter
@@ -248,31 +334,33 @@ class PickUpSpecialtiesView
         val bundle = Bundle()
         when (position) {
             0 -> {
+                bundle.putString("title", "УНТИ")
                 bundle.putSerializable("array", untiList)
                 toSpecialties(bundle)
             }
             1 -> {
+                bundle.putString("title", "ФЭУ")
                 bundle.putSerializable("array", feuList)
                 toSpecialties(bundle)
             }
             2 -> {
+                bundle.putString("title", "ФИТ")
                 bundle.putSerializable("array", fitList)
                 toSpecialties(bundle)
             }
             3 -> {
+                bundle.putString("title", "МТФ")
                 bundle.putSerializable("array", mtfList)
                 toSpecialties(bundle)
             }
             4 -> {
+                bundle.putString("title", "УНИТ")
                 bundle.putSerializable("array", unitList)
                 toSpecialties(bundle)
             }
             5 -> {
+                bundle.putString("title", "ФЭЭ")
                 bundle.putSerializable("array", feeList)
-                toSpecialties(bundle)
-            }
-            6 -> {
-                bundle.putSerializable("array", oadList)
                 toSpecialties(bundle)
             }
         }

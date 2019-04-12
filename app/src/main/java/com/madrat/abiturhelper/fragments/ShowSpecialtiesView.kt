@@ -25,7 +25,9 @@ class ShowSpecialtiesView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.title = "Kek"
+        val title = arguments?.getString("title")
+
+        (activity as AppCompatActivity).supportActionBar?.title = title
         val view = inflater.inflate(R.layout.fragment_specialties, container, false)
 
         //val bundle = Bundle()
