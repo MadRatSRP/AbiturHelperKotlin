@@ -193,11 +193,10 @@ class PickUpSpecialtiesView
     }
     override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
         for (i in 0 until list.size) {
-            when (list[i].admissions) {
-                "бак" ->
-                    bachelours.add(list[i])
-            }
+            if (list[i].admissions == "бак")
+                bachelours.add(list[i])
         }
+
         showLog("Бакалавры: ${bachelours.size}")
     }
 
