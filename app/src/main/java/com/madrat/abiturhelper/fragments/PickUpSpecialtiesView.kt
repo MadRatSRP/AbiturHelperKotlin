@@ -78,8 +78,10 @@ class PickUpSpecialtiesView
     override fun generateBacheloursAndSpecialtiesLists() {
         val divideSpecialties = Thread {
             val specialties = grabSpecialties("specialties.csv")
+
             val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
-            bachelorsAndSpecialists?.let { divideSpecialtiesByFaculty(it) }
+            //bachelorsAndSpecialists?.let { divideSpecialtiesByFaculty(it) }
+            divideSpecialtiesByFaculty(bachelorsAndSpecialists)
         }
         val divideStudents = Thread {
             val students = grabStudents("abiturs.csv")
@@ -144,19 +146,18 @@ class PickUpSpecialtiesView
         showLog("Всего специальностей: ${specialtiesList.size}")
         return specialtiesList
     }
-    override fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>? {
-        val bachelorsAndSpecialists: ArrayList<Specialty>? = null
+    override fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty> {
+        val bachelorsAndSpecialists = ArrayList<Specialty>()
 
         for (i in 0 until list.size) {
             when (list[i].educationLevel) {
                 "Академический бакалавр" ->
-                    bachelorsAndSpecialists?.add(list[i])
+                    bachelorsAndSpecialists.add(list[i])
                 "Специалист" ->
-                    bachelorsAndSpecialists?.add(list[i])
+                    bachelorsAndSpecialists.add(list[i])
             }
         }
-        showLog("Специальностей, ведущих набор на бакалавриат и специалитет: " +
-                "${bachelorsAndSpecialists?.size}")
+        showLog("Специальностей, ведущих набор на бакалавриат и специалитет: ${bachelorsAndSpecialists.size}")
         return bachelorsAndSpecialists
     }
     override fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>) {
