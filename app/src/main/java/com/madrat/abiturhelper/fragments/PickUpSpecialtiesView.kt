@@ -78,7 +78,8 @@ class PickUpSpecialtiesView
     override fun generateBacheloursAndSpecialtiesLists() {
         val divideSpecialties = Thread {
             val specialties = grabSpecialties("specialties.csv")
-            divideSpecialtiesByFaculty(specialties)
+            val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
+            bachelorsAndSpecialists?.let { divideSpecialtiesByFaculty(it) }
         }
         val divideStudents = Thread {
             val students = grabStudents("abiturs.csv")
@@ -90,6 +91,25 @@ class PickUpSpecialtiesView
 
         divideSpecialties.join()
         divideStudents.join()
+
+        /*val divideSpecialties = GlobalScope.async {
+            val specialties = grabSpecialties("specialties.csv")
+            divideSpecialtiesByFaculty(specialties)
+        }
+        val divideStudents = GlobalScope.async {
+            val students = grabStudents("abiturs.csv")
+            divideStudentsByAdmissions(students)
+        }
+
+        GlobalScope.launch {
+            activity?.runOnUiThread {
+                val specialties = grabSpecialties("specialties.csv")
+                val students = grabStudents("abiturs.csv")
+            }
+
+            divideSpecialties.await()
+            divideStudents.await()
+        }*/
 
         println("Первый этап завершён")
     }
@@ -123,6 +143,21 @@ class PickUpSpecialtiesView
         }
         showLog("Всего специальностей: ${specialtiesList.size}")
         return specialtiesList
+    }
+    override fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>? {
+        val bachelorsAndSpecialists: ArrayList<Specialty>? = null
+
+        for (i in 0 until list.size) {
+            when (list[i].educationLevel) {
+                "Академический бакалавр" ->
+                    bachelorsAndSpecialists?.add(list[i])
+                "Специалист" ->
+                    bachelorsAndSpecialists?.add(list[i])
+            }
+        }
+        showLog("Специальностей, ведущих набор на бакалавриат и специалитет: " +
+                "${bachelorsAndSpecialists?.size}")
+        return bachelorsAndSpecialists
     }
     override fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>) {
         for (i in 0 until list.size) {

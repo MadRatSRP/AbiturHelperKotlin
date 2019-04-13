@@ -23,6 +23,7 @@ interface PickUpSpecialtiesMVP {
         fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>)
         fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>)
         fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>)
+        fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
     }
 
 }
