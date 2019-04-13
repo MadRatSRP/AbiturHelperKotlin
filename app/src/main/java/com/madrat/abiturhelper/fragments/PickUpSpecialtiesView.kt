@@ -17,10 +17,15 @@ import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.*
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
+
 
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
@@ -52,12 +57,11 @@ class PickUpSpecialtiesView
 
         for (i in 0 until facultyList.size) { showLog(facultyList[i].toString()) }
 
+        pickUpSpecialtiesRecyclerView.linearManager()
+
         /*Второй шаг - разбить список поступающих по типу баллов
           и высчитать свободные баллы для факультетов*/
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
-
-        pickUpSpecialtiesRecyclerView.linearManager()
-        showFaculties(facultyList)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -199,64 +203,58 @@ class PickUpSpecialtiesView
 
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
-        val generateStudentsWithPhysicsList = Thread {
+        val generateStudentsWithPhysicsList = GlobalScope.async(start = CoroutineStart.LAZY) {
             withdrawPhysicsStudents()
         }
-        val generateStudentsWithComputerScienceList = Thread {
+        val generateStudentsWithComputerScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
             withdrawComputerScienceStudents()
         }
-        val generateStudentsWithSocialScienceList = Thread {
+        val generateStudentsWithSocialScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
             withdrawSocialScienceStudents()
         }
-        val generateStudentsWithPartAndFullDataList = Thread {
+        val generateStudentsWithPartAndFullDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
             withdrawStudentsWithPartAndFullData()
         }
-        val generateStudentsWithoutDataList = Thread {
+        val generateStudentsWithoutDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
             withdrawStudentsWithoutData()
         }
-        val calculateUntiPlaces = Thread {
+        val calculateUntiPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("УНТИ", untiList)
         }
-        val calculateFeuPlaces = Thread {
+        val calculateFeuPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("ФЭУ", feuList)
         }
-        val calculateFitPlaces = Thread {
+        val calculateFitPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("ФИТ", fitList)
         }
-        val calculateMtfPlaces = Thread {
+        val calculateMtfPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("МТФ", mtfList)
         }
-        val calculateUnitPlaces = Thread {
+        val calculateUnitPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("УНИТ", unitList)
         }
-        val calculateFeePlaces = Thread {
+        val calculateFeePlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("ФЭЭ", feeList)
         }
-        generateStudentsWithPhysicsList.start()
-        generateStudentsWithComputerScienceList.start()
-        generateStudentsWithSocialScienceList.start()
-        generateStudentsWithPartAndFullDataList.start()
-        generateStudentsWithoutDataList.start()
 
-        calculateUntiPlaces.start()
-        calculateFeuPlaces.start()
-        calculateFitPlaces.start()
-        calculateMtfPlaces.start()
-        calculateUnitPlaces.start()
-        calculateFeePlaces.start()
+        GlobalScope.launch {
+            generateStudentsWithPhysicsList.await()
+            generateStudentsWithComputerScienceList.await()
+            generateStudentsWithSocialScienceList.await()
+            generateStudentsWithPartAndFullDataList.await()
+            generateStudentsWithoutDataList.await()
 
-        generateStudentsWithPhysicsList.join()
-        generateStudentsWithComputerScienceList.join()
-        generateStudentsWithSocialScienceList.join()
-        generateStudentsWithPartAndFullDataList.join()
-        generateStudentsWithoutDataList.join()
+            calculateUntiPlaces.await()
+            calculateFeuPlaces.await()
+            calculateFitPlaces.await()
+            calculateMtfPlaces.await()
+            calculateUnitPlaces.await()
+            calculateFeePlaces.await()
 
-        calculateUntiPlaces.join()
-        calculateFeuPlaces.join()
-        calculateFitPlaces.join()
-        calculateMtfPlaces.join()
-        calculateUnitPlaces.join()
-        calculateFeePlaces.join()
+            activity?.runOnUiThread {
+                showFaculties(facultyList)
+            }
+        }
 
         println("Второй этап завершён")
     }

@@ -63,7 +63,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation "com.squareup.retrofit2:converter-gson:2.5.0"
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
+    //Kotlin Coroutines
+    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-android', version: '1.1.1'
+
 }
 repositories {
+    jcenter()
     mavenCentral()
 }
