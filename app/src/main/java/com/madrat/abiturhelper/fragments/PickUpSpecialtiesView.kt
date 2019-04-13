@@ -13,6 +13,7 @@ import com.madrat.abiturhelper.interfaces.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.*
@@ -31,7 +32,7 @@ class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
     private var adapter: FacultyAdapter? = null
 
-    private var bachelours = ArrayList<Student>()
+    private val myApplication = MyApplication.instance
 
     private var physicsStudents = ArrayList<Student>()
     private var computerScienceStudents = ArrayList<Student>()
@@ -192,30 +193,36 @@ class PickUpSpecialtiesView
         return studentsList
     }
     override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
+        val bachelors = ArrayList<Student>()
+
         for (i in 0 until list.size) {
             if (list[i].admissions == "бак")
-                bachelours.add(list[i])
+                bachelors.add(list[i])
         }
 
-        showLog("Бакалавры: ${bachelours.size}")
+        showLog("Бакалавры: ${bachelors.size}")
+
+        myApplication.saveBachelors(bachelors)
     }
 
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
+        val bachelors = myApplication.returnBachelors()
+
         val generateStudentsWithPhysicsList = GlobalScope.async(start = CoroutineStart.LAZY) {
-            withdrawPhysicsStudents()
+            bachelors?.let { withdrawPhysicsStudents(it) }
         }
         val generateStudentsWithComputerScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
-            withdrawComputerScienceStudents()
+            bachelors?.let { withdrawComputerScienceStudents(it) }
         }
         val generateStudentsWithSocialScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
-            withdrawSocialScienceStudents()
+            bachelors?.let { withdrawSocialScienceStudents(it) }
         }
         val generateStudentsWithPartAndFullDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
-            withdrawStudentsWithPartAndFullData()
+            bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
         }
         val generateStudentsWithoutDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
-            withdrawStudentsWithoutData()
+            bachelors?.let { withdrawStudentsWithoutData(it) }
         }
         val calculateUntiPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("УНТИ", untiList)
@@ -257,57 +264,57 @@ class PickUpSpecialtiesView
 
         println("Второй этап завершён")
     }
-    override fun withdrawPhysicsStudents() {
-        for (i in 0 until bachelours.size) {
-            if (bachelours[i].maths != null && bachelours[i].russian != null) {
-                if (bachelours[i].physics != null && bachelours[i].computerScience == null
-                        && bachelours[i].socialScience == null) {
-                    physicsStudents.add(bachelours[i])
+    override fun withdrawPhysicsStudents(bachelors: ArrayList<Student>) {
+        for (i in 0 until bachelors.size) {
+            if (bachelors[i].maths != null && bachelors[i].russian != null) {
+                if (bachelors[i].physics != null && bachelors[i].computerScience == null
+                        && bachelors[i].socialScience == null) {
+                    physicsStudents.add(bachelors[i])
                 }
             }
         }
         showLog("Студентов с физикой: ${physicsStudents.size}")
     }
-    override fun withdrawComputerScienceStudents() {
-        for (i in 0 until bachelours.size) {
-            if (bachelours[i].maths != null && bachelours[i].russian != null) {
-                if (bachelours[i].physics == null && bachelours[i].computerScience != null
-                        && bachelours[i].socialScience == null) {
-                    computerScienceStudents.add(bachelours[i])
+    override fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>) {
+        for (i in 0 until bachelors.size) {
+            if (bachelors[i].maths != null && bachelors[i].russian != null) {
+                if (bachelors[i].physics == null && bachelors[i].computerScience != null
+                        && bachelors[i].socialScience == null) {
+                    computerScienceStudents.add(bachelors[i])
                 }
             }
         }
         showLog("Студентов с информатикой: ${computerScienceStudents.size}")
     }
-    override fun withdrawSocialScienceStudents() {
-        for (i in 0 until bachelours.size) {
-            if (bachelours[i].maths != null && bachelours[i].russian != null) {
-                if (bachelours[i].physics == null && bachelours[i].computerScience == null
-                        && bachelours[i].socialScience != null) {
-                    socialScienceStudents.add(bachelours[i])
+    override fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>) {
+        for (i in 0 until bachelors.size) {
+            if (bachelors[i].maths != null && bachelors[i].russian != null) {
+                if (bachelors[i].physics == null && bachelors[i].computerScience == null
+                        && bachelors[i].socialScience != null) {
+                    socialScienceStudents.add(bachelors[i])
                 }
             }
         }
         showLog("Студентов с обществознанием: ${socialScienceStudents.size}")
     }
-    override fun withdrawStudentsWithPartAndFullData() {
-        for (i in 0 until bachelours.size) {
-            if (bachelours[i].maths != null && bachelours[i].russian != null) {
-                if (!(bachelours[i].physics != null && bachelours[i].computerScience == null
-                    && bachelours[i].socialScience == null) && !(bachelours[i].physics == null &&
-                    bachelours[i].computerScience != null && bachelours[i].socialScience == null) &&
-                    !(bachelours[i].physics == null && bachelours[i].computerScience == null
-                    && bachelours[i].socialScience != null)) {
-                    partAndAllDataStudents.add(bachelours[i])
+    override fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>) {
+        for (i in 0 until bachelors.size) {
+            if (bachelors[i].maths != null && bachelors[i].russian != null) {
+                if (!(bachelors[i].physics != null && bachelors[i].computerScience == null
+                    && bachelors[i].socialScience == null) && !(bachelors[i].physics == null &&
+                    bachelors[i].computerScience != null && bachelors[i].socialScience == null) &&
+                    !(bachelors[i].physics == null && bachelors[i].computerScience == null
+                    && bachelors[i].socialScience != null)) {
+                    partAndAllDataStudents.add(bachelors[i])
                 }
             }
         }
         showLog("Студентов, указавших баллы по всем или двум специальностям: ${partAndAllDataStudents.size}")
     }
-    override fun withdrawStudentsWithoutData() {
-        for (i in 0 until bachelours.size) {
-            if (!(bachelours[i].maths != null && bachelours[i].russian != null)) {
-                noOrNotEnoughDataStudents.add(bachelours[i])
+    override fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>) {
+        for (i in 0 until bachelors.size) {
+            if (!(bachelors[i].maths != null && bachelors[i].russian != null)) {
+                noOrNotEnoughDataStudents.add(bachelors[i])
             }
         }
         showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")

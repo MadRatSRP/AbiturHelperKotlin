@@ -17,11 +17,12 @@ interface PickUpSpecialtiesMVP {
         fun onItemClicked(faculty: Faculty, position: Int)
         fun generateBacheloursAndSpecialtiesLists()
         fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
-        fun withdrawPhysicsStudents()
-        fun withdrawComputerScienceStudents()
-        fun withdrawSocialScienceStudents()
-        fun withdrawStudentsWithoutData()
-        fun withdrawStudentsWithPartAndFullData()
+
+        fun withdrawPhysicsStudents(bachelors: ArrayList<Student>)
+        fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>)
+        fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>)
+        fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>)
+        fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>)
     }
 
 }

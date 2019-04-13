@@ -1,6 +1,7 @@
 package com.madrat.abiturhelper.util
 
 import android.app.Application
+import com.madrat.abiturhelper.model.Student
 
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }
@@ -12,6 +13,8 @@ class MyApplication: Application() {
     private var essay: Int? = null
     private var letter: Int? = null
     private var gto: Int? = null
+
+    private var bachelors: ArrayList<Student>? = null
 
     fun saveMaths(maths: Int?) {
         this.maths = maths
@@ -45,37 +48,45 @@ class MyApplication: Application() {
         this.gto = gto
         showLog("Новое значение gto: ${this.gto}")
     }
+    fun saveBachelors(bachelors: ArrayList<Student>?) {
+        this.bachelors = bachelors
+        showLog("Новое значение bachelors, его size: ${this.bachelors?.size}")
+    }
 
     fun returnMaths(): Int? {
-        return maths
         showLog("Получен maths: ${this.maths}")
+        return maths
     }
     fun returnRussian(): Int? {
-        return russian
         showLog("Получен russian: ${this.russian}")
+        return russian
     }
     fun returnPhysics(): Int? {
-        return physics
         showLog("Получен physics: ${this.physics}")
+        return physics
     }
     fun returnComputerScience(): Int? {
-        return computerScience
         showLog("Получен computerScience: ${this.computerScience}")
+        return computerScience
     }
     fun returnSocialScience(): Int? {
-        return socialScience
         showLog("Получен socialScience: ${this.socialScience}")
+        return socialScience
     }
     fun returnEssay(): Int? {
-        return essay
         showLog("Получен essay: ${this.essay}")
+        return essay
     }
     fun returnLetter(): Int? {
-        return letter
         showLog("Получен letter: ${this.letter}")
+        return letter
     }
     fun returnGTO(): Int? {
-        return gto
         showLog("Получен gto: ${this.gto}")
+        return gto
+    }
+    fun returnBachelors(): ArrayList<Student>? {
+        showLog("Получен bachelors, его size: ${this.bachelors?.size}")
+        return bachelors
     }
 }
