@@ -3,7 +3,9 @@
 
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
     <string name="countGraduationChancesTitle">Оценить шанс поступления</string>
+
     <string name="profileTitle">Профиль</string>
+    <string name="profileAdditionalScore">Сумма дополнительных баллов</string>
 
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
 
@@ -21,10 +23,6 @@
     <string name="textPhysics">Физика</string>
     <string name="textComputerScience">Информатика</string>
     <string name="textSocialScience">Обществознание</string>
-
-    <string name="textEssay">Сочинение</string>
-    <string name="textLetter">Грамота</string>
-    <string name="textGTO">Готов к труду и обороне(ГТО)</string>
 
     <string name="facultyEntriesTotalText">Всего мест</string>
     <string name="facultyEntriesFreeText">Свободно мест</string>

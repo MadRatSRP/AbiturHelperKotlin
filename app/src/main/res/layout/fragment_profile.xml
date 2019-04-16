@@ -177,7 +177,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/essayText"
-                android:text="@string/textEssay"
+                android:text="@string/profileAdditionalScore"
                 android:textSize="19dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
