@@ -1,6 +1,6 @@
 package com.madrat.abiturhelper.interfaces.fragments
 
-interface SetupAdditionalMVP  {
+interface AdditionalScoreMVP  {
     interface View {
         fun setupMVP()
         //fun setFieldsValues()

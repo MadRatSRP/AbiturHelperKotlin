@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SpecialtyAdapter
-import com.madrat.abiturhelper.interfaces.ShowSpecialtiesMVP
+import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_specialties.*

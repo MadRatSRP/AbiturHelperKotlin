@@ -14,8 +14,8 @@
     </fragment>
     <fragment
         android:id="@+id/setupAdditional"
-        android:name="com.madrat.abiturhelper.fragments.SetupAdditionalView"
-        tools:layout="@layout/fragment_setup_additional" >
+        android:name="com.madrat.abiturhelper.fragments.AdditionalScoreView"
+        tools:layout="@layout/fragment_score_additional" >
         <action
             android:id="@+id/action_setupAdditional_to_pickUpSpecialtiesView"
             app:destination="@id/pickUpSpecialtiesView" />

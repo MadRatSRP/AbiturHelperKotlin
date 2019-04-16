@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.interfaces
+package com.madrat.abiturhelper.interfaces.fragments
 
 import android.os.Bundle
 import com.madrat.abiturhelper.model.Faculty

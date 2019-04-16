@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultyAdapter
-import com.madrat.abiturhelper.interfaces.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student

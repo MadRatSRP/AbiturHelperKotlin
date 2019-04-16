@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.interfaces
+package com.madrat.abiturhelper.interfaces.fragments
 
 import com.madrat.abiturhelper.model.Specialty
 
