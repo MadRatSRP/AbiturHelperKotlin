@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -25,9 +26,19 @@ class AdditionalScoreView : Fragment(), AdditionalScoreMVP.View {
         setupMVP()
 
         showSpecialtiesScreen.setOnClickListener { view->
-            /*additionalScorePresenter.saveUserData(essayValue.text.toString(),
-                                                  letterValue.text.toString(),
-                                                  gtoValue.text.toString())*/
+
+            var additionalScore = 0
+            additionalScoreSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                    additionalScore = parent?.getItemAtPosition(position).toString().toInt()
+                }
+
+            }
+
+            additionalScorePresenter.saveAdditionalScore(additionalScore)
             Navigation.findNavController(view).navigate(R.id.action_setupAdditional_to_pickUpSpecialtiesView)
         }
     }

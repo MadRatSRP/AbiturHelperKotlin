@@ -6,12 +6,10 @@ import com.madrat.abiturhelper.util.returnInt
 
 class AdditionalScorePresenter(private var sav: AdditionalScoreMVP.View)
     : AdditionalScoreMVP.Presenter {
-    private val myApplication = MyApplication.instance
 
-    override fun saveUserData(essay: String, letter: String, gto: String) {
-        /*myApplication.saveEssay(returnInt(essay))
-        myApplication.saveLetter(returnInt(letter))
-        myApplication.saveGTO(returnInt(gto))*/
+    override fun saveAdditionalScore(additionalScore: Int) {
+        val myApplication = MyApplication.instance
+
+        myApplication.saveAdditionalScore(additionalScore)
     }
-
 }

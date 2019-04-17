@@ -1,20 +1,18 @@
 package com.madrat.abiturhelper.presenters.fragments
 
-import android.widget.EditText
 import com.madrat.abiturhelper.interfaces.fragments.SetupScoreMVP
+import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.returnInt
 
 class SetupScorePresenter(private var ssv: SetupScoreMVP.View) : SetupScoreMVP.Presenter {
-    private val myApplication = MyApplication.instance
 
     override fun saveUserData(maths: String, russian: String, physics: String,
                               computerScience: String, socialScience: String) {
-        myApplication.saveMaths(returnInt(maths))
-        myApplication.saveRussian(returnInt(russian))
-        myApplication.savePhysics(returnInt(physics))
-        myApplication.saveComputerScience(returnInt(computerScience))
-        myApplication.saveSocialScience(returnInt(socialScience))
+        val myApplication = MyApplication.instance
+
+        myApplication.saveScore(Score(returnInt(maths), returnInt(russian), physics.toIntOrNull(),
+                computerScience.toIntOrNull(), socialScience.toIntOrNull()))
     }
 
     override fun addFieldsListeners() {

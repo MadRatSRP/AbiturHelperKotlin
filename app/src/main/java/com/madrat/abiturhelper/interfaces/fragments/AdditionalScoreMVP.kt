@@ -7,6 +7,6 @@ interface AdditionalScoreMVP  {
     }
 
     interface Presenter {
-        fun saveUserData(essay: String, letter: String, gto: String)
+        fun saveAdditionalScore(additionalScore: Int)
     }
 }

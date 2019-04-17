@@ -8,31 +8,15 @@ class MyApplication: Application() {
     companion object { val instance = MyApplication() }
     private var scores: Score? = null
     private var bachelors: ArrayList<Student>? = null
-    /*private var maths: Int? = null
-    private var russian: Int? = null
-    private var physics: Int? = null
-    private var computerScience: Int? = null
-    private var socialScience: Int? = null*/
+    private var additionalScore: Int? = 0
 
-    fun saveMaths(maths: Int) {
-        this.scores?.maths = maths
-        showLog("Новое значение maths: ${this.scores?.maths}")
+    fun saveScore(scores: Score) {
+        this.scores = scores
+        showLog("Новое значение основных баллов: ${this.scores}")
     }
-    fun saveRussian(russian: Int) {
-        this.scores?.russian = russian
-        showLog("Новое значение russian: ${this.scores?.russian}")
-    }
-    fun savePhysics(physics: Int) {
-        this.scores?.physics = physics
-        showLog("Новое значение physics: ${this.scores?.physics}")
-    }
-    fun saveComputerScience(computerScience: Int) {
-        this.scores?.computerScience = computerScience
-        showLog("Новое значение computer science: ${this.scores?.computerScience}")
-    }
-    fun saveSocialScience(socialScience: Int) {
-        this.scores?.socialScience = socialScience
-        showLog("Новое значение social science: ${this.scores?.socialScience}")
+    fun saveAdditionalScore(additionalScore: Int) {
+        this.additionalScore = additionalScore
+        showLog("Новое значение дополнительных баллов: ${this.additionalScore}")
     }
     fun saveBachelors(bachelors: ArrayList<Student>?) {
         this.bachelors = bachelors
