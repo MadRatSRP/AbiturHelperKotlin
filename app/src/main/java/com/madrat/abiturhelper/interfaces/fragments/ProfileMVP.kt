@@ -7,10 +7,10 @@ interface ProfileMVP {
     }
 
     interface Presenter {
-        fun setupMaths(): String?
+        /*fun setupMaths(): String?
         fun setupRussian(): String?
         fun setupPhysics(): String?
         fun setupComputerScience(): String?
-        fun setupSocialScience(): String?
+        fun setupSocialScience(): String?*/
     }
 }

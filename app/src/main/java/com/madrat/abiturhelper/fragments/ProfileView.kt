@@ -31,10 +31,10 @@ class ProfileView: Fragment(), ProfileMVP.View {
     }
 
     override fun setupFields() {
-        mathsValue.text = profilePresenter?.setupMaths()
+        /*mathsValue.text = profilePresenter?.setupMaths()
         russianValue.text = profilePresenter?.setupRussian()
         physicsValue.text = profilePresenter?.setupPhysics()
         computerScienceValue.text = profilePresenter?.setupComputerScience()
-        socialScienceValue.text = profilePresenter?.setupSocialScience()
+        socialScienceValue.text = profilePresenter?.setupSocialScience()*/
     }
 }

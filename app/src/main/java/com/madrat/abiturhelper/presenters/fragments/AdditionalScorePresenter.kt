@@ -9,9 +9,9 @@ class AdditionalScorePresenter(private var sav: AdditionalScoreMVP.View)
     private val myApplication = MyApplication.instance
 
     override fun saveUserData(essay: String, letter: String, gto: String) {
-        myApplication.saveEssay(returnInt(essay))
+        /*myApplication.saveEssay(returnInt(essay))
         myApplication.saveLetter(returnInt(letter))
-        myApplication.saveGTO(returnInt(gto))
+        myApplication.saveGTO(returnInt(gto))*/
     }
 
 }

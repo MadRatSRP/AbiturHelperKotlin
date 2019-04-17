@@ -26,7 +26,7 @@ fun Fragment.removeFragment(fragment: Fragment, fragmentManager: FragmentManager
 fun Any.showLog(message: String){
     if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, message)
 }
-fun Any.returnInt(field: String): Int?
+fun Any.returnInt(field: String): Int
         = field.toInt()
 
 fun Any.returnString(value: Int?): String? {
