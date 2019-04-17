@@ -1,11 +1,11 @@
 package com.madrat.abiturhelper.presenters.fragments
 
-import com.madrat.abiturhelper.interfaces.fragments.SetupScoreMVP
+import com.madrat.abiturhelper.interfaces.fragments.OriginalScoreMVP
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.returnInt
 
-class SetupScorePresenter(private var ssv: SetupScoreMVP.View) : SetupScoreMVP.Presenter {
+class OriginalScorePresenter(private var ssv: OriginalScoreMVP.View) : OriginalScoreMVP.Presenter {
 
     override fun saveUserData(maths: String, russian: String, physics: String,
                               computerScience: String, socialScience: String) {

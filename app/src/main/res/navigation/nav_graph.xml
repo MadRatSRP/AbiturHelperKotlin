@@ -6,7 +6,7 @@
     app:startDestination="@id/setupScore">
     <fragment
         android:id="@+id/setupScore"
-        android:name="com.madrat.abiturhelper.fragments.SetupScoreView"
+        android:name="com.madrat.abiturhelper.fragments.OriginalScoreView"
         tools:layout="@layout/fragment_setup_score">
         <action
             android:id="@+id/action_setupScore_to_setupAdditional"

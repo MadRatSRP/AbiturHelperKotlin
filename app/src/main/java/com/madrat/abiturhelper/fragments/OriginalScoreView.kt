@@ -10,12 +10,12 @@ import androidx.navigation.Navigation
 //import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import kotlinx.android.synthetic.main.fragment_setup_score.*
-import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
-import com.madrat.abiturhelper.interfaces.fragments.SetupScoreMVP
+import com.madrat.abiturhelper.presenters.fragments.OriginalScorePresenter
+import com.madrat.abiturhelper.interfaces.fragments.OriginalScoreMVP
 
-class SetupScoreView : Fragment(), SetupScoreMVP.View {
+class OriginalScoreView : Fragment(), OriginalScoreMVP.View {
 
-    private lateinit var setupScorePresenter: SetupScorePresenter
+    private lateinit var originalScorePresenter: OriginalScorePresenter
 
     private val passingMaths = 27
     private val passingRussian = 36
@@ -29,8 +29,8 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         setupMVP()
 
         toAdditionalScore.setOnClickListener { view->
-            //setupScorePresenter.addFieldsListeners()
-            setupScorePresenter.saveUserData(mathsValue.text.toString(), russianValue.text.toString(),
+            //originalScorePresenter.addFieldsListeners()
+            originalScorePresenter.saveUserData(mathsValue.text.toString(), russianValue.text.toString(),
                                              physicsValue.text.toString(), computerScienceValue.text.toString(),
                                              socialScienceValue.text.toString())
             Navigation.findNavController(view).navigate(R.id.action_setupScore_to_setupAdditional)
@@ -44,15 +44,15 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     }
 
     override fun setupMVP() {
-        setupScorePresenter = SetupScorePresenter(this)
+        originalScorePresenter = OriginalScorePresenter(this)
     }
 
     override fun setFieldsListeners() {
-        setupScorePresenter.checkMaths(passingMaths, scoreLimit)
-        setupScorePresenter.checkRussian(passingRussian, scoreLimit)
-        setupScorePresenter.checkPhysics(passingPhysics, scoreLimit)
-        setupScorePresenter.checkComputerScience(passingComputerScience, scoreLimit)
-        setupScorePresenter.checkSocialScience(passingSocialScience, scoreLimit)
+        originalScorePresenter.checkMaths(passingMaths, scoreLimit)
+        originalScorePresenter.checkRussian(passingRussian, scoreLimit)
+        originalScorePresenter.checkPhysics(passingPhysics, scoreLimit)
+        originalScorePresenter.checkComputerScience(passingComputerScience, scoreLimit)
+        originalScorePresenter.checkSocialScience(passingSocialScience, scoreLimit)
     }
 
     override fun mathsIsValid(math_passing: Int, score_limit: Int){

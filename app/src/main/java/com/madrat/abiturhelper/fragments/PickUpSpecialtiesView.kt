@@ -63,6 +63,8 @@ class PickUpSpecialtiesView
         /*Второй шаг - разбить список поступающих по типу баллов
           и высчитать свободные баллы для факультетов*/
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+
+        separateStudentsBySpecialties()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -364,7 +366,37 @@ class PickUpSpecialtiesView
         }
         facultyList.add(Faculty(name, total, free))
     }
-    
+
+    /*Третий этап*/
+    fun separateStudentsBySpecialties() {
+        val function = GlobalScope.async {
+            checkforATP(physicsStudents)
+            checkforATP(computerScienceStudents)
+            checkforATP(socialScienceStudents)
+            checkforATP(partAndAllDataStudents)
+        }
+
+        GlobalScope.launch {
+            function.await()
+        }
+    }
+    fun checkforATP(list: ArrayList<Student>) {
+        val atp = ArrayList<Student>()
+
+        for (i in 0 until list.size) {
+            if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
+                    || list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtyFirst == "АТП_очн_бюдж"
+                    || list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtyFirst == "АТП_очн_плат"
+                    || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
+                    || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
+                    || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
+                    || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое") ) {
+                atp.add(list[i])
+            }
+        }
+        showLog("Размер АТП: ${atp.size}")
+    }
+
     override fun showFaculties(faculties: List<Faculty>) {
         adapter?.updateFacultiesList(faculties)
         pickUpSpecialtiesRecyclerView.adapter = adapter
