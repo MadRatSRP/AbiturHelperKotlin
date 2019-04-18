@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.model.Faculty
-import com.madrat.abiturhelper.util.EmployeeDiffCallback
 import com.madrat.abiturhelper.util.inflate
 import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.extensions.LayoutContainer

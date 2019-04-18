@@ -36,7 +36,7 @@ class PickUpSpecialtiesView
     private var noOrNotEnoughDataStudents = ArrayList<Student>()
     private var partAndAllDataStudents = ArrayList<Student>()
 
-    private var facultyList: ArrayList<Faculty>? = null
+    private var facultyList = ArrayList<Faculty>()
     private val atp = ArrayList<Student>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -53,6 +53,8 @@ class PickUpSpecialtiesView
         /*Второй шаг - разбить список поступающих по типу баллов
           и высчитать свободные баллы для факультетов*/
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+
+        facultyList?.let { showFaculties(it) }
 
         //separateStudentsBySpecialties()
     }
@@ -277,7 +279,7 @@ class PickUpSpecialtiesView
         }*/
 
 
-        facultyList?.let { showFaculties(it) }
+        //facultyList?.let { showFaculties(it) }
 
         /*val calculateAndShowFaculties = Thread {
             calculateFacultyPlaces.start()
