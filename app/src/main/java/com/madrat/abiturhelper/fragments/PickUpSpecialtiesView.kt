@@ -10,10 +10,7 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultyAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
-import com.madrat.abiturhelper.model.Faculties
-import com.madrat.abiturhelper.model.Faculty
-import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -54,7 +51,7 @@ class PickUpSpecialtiesView
           и высчитать свободные баллы для факультетов*/
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
-        facultyList?.let { showFaculties(it) }
+        showFaculties(facultyList)
 
         /*Третий шаг - */
         separateStudentsBySpecialties()
@@ -239,32 +236,16 @@ class PickUpSpecialtiesView
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         val bachelors = myApplication.returnBachelors()
-        //val facultyList = ArrayList<Faculty>()
 
-        /*val generateStudentsLists = Thread {
-            bachelors?.let { withdrawPhysicsStudents(it) }
-            bachelors?.let { withdrawComputerScienceStudents(it) }
-            bachelors?.let { withdrawSocialScienceStudents(it) }
-            bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
-            bachelors?.let { withdrawStudentsWithoutData(it) }
-        }*/
+        val scoreTypes = ScoreTypes(
+                bachelors?.let { withdrawPhysicsStudents(it) },
+                bachelors?.let { withdrawComputerScienceStudents(it) },
+                bachelors?.let { withdrawSocialScienceStudents(it) },
+                bachelors?.let { withdrawStudentsWithPartAndFullData(it) },
+                bachelors?.let { withdrawStudentsWithoutData(it) }
+        )
 
-        bachelors?.let { withdrawPhysicsStudents(it) }
-        bachelors?.let { withdrawComputerScienceStudents(it) }
-        bachelors?.let { withdrawSocialScienceStudents(it) }
-        bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
-        bachelors?.let { withdrawStudentsWithoutData(it) }
-
-        /*val calculateFacultyPlaces = Thread {
-            val faculties = myApplication.returnFaculties()
-
-            calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
-            calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
-            calculateAvailableFacultyPlaces("ФИТ", faculties?.fitList)
-            calculateAvailableFacultyPlaces("МТФ", faculties?.mtfList)
-            calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
-            calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
-        }*/
+        myApplication.saveScoreTypes(scoreTypes)
 
         val faculties = myApplication.returnFaculties()
 
@@ -275,60 +256,11 @@ class PickUpSpecialtiesView
         calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
         calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
 
-        /*val showFaculty = Thread {
-            facultyList?.let { showFaculties(it) }
-        }*/
-
-
-        //facultyList?.let { showFaculties(it) }
-
-        /*val calculateAndShowFaculties = Thread {
-            calculateFacultyPlaces.start()
-            calculateFacultyPlaces.join()
-
-            showFaculty.start()
-            showFaculty.join()
-        }*/
-
-        /*val separateLists = Thread {
-            generateStudentsLists.start()
-            //generateStudentsLists.join()
-
-            calculateFacultyPlaces.start()
-            //calculateFacultyPlaces.join()
-        }*/
-
-        /*val showFacultiesList = Thread {
-            activity?.runOnUiThread {
-                showFaculties(facultyList)
-            }
-
-            //showFaculties(facultyList)
-        }*/
-
-        /*separateLists.start()
-        separateLists.join()
-
-        showFacultiesList.start()
-        showFacultiesList.join()*/
-
-
-
-        //generateStudentsLists.start()
-        //generateStudentsLists.join()
-
-        //calculateFacultyPlaces.start()
-        //calculateFacultyPlaces.join()
-
-
-
-        //generateStudentsLists.start()
-
-        //calculateAndShowFaculties.start()
-
         println("Второй этап завершён")
     }
-    override fun withdrawPhysicsStudents(bachelors: ArrayList<Student>) {
+    override fun withdrawPhysicsStudents(bachelors: ArrayList<Student>): ArrayList<Student> {
+        val physicsStudents = ArrayList<Student>()
+
         for (i in 0 until bachelors.size) {
             if (bachelors[i].maths != null && bachelors[i].russian != null) {
                 if (bachelors[i].physics != null && bachelors[i].computerScience == null
@@ -337,9 +269,11 @@ class PickUpSpecialtiesView
                 }
             }
         }
-        showLog("Студентов с физикой: ${physicsStudents.size}")
+        return physicsStudents
     }
-    override fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>) {
+    override fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student> {
+        val computerScienceStudents = ArrayList<Student>()
+
         for (i in 0 until bachelors.size) {
             if (bachelors[i].maths != null && bachelors[i].russian != null) {
                 if (bachelors[i].physics == null && bachelors[i].computerScience != null
@@ -348,9 +282,11 @@ class PickUpSpecialtiesView
                 }
             }
         }
-        showLog("Студентов с информатикой: ${computerScienceStudents.size}")
+        return computerScienceStudents
     }
-    override fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>) {
+    override fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student> {
+        val socialScienceStudents = ArrayList<Student>()
+
         for (i in 0 until bachelors.size) {
             if (bachelors[i].maths != null && bachelors[i].russian != null) {
                 if (bachelors[i].physics == null && bachelors[i].computerScience == null
@@ -359,9 +295,11 @@ class PickUpSpecialtiesView
                 }
             }
         }
-        showLog("Студентов с обществознанием: ${socialScienceStudents.size}")
+        return socialScienceStudents
     }
-    override fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>) {
+    override fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student> {
+        val partAndAllDataStudents = ArrayList<Student>()
+
         for (i in 0 until bachelors.size) {
             if (bachelors[i].maths != null && bachelors[i].russian != null) {
                 if (!(bachelors[i].physics != null && bachelors[i].computerScience == null
@@ -373,15 +311,17 @@ class PickUpSpecialtiesView
                 }
             }
         }
-        showLog("Студентов, указавших баллы по всем или двум специальностям: ${partAndAllDataStudents.size}")
+        return partAndAllDataStudents
     }
-    override fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>) {
+    override fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>): ArrayList<Student> {
+        val noOrNotEnoughDataStudents = ArrayList<Student>()
+
         for (i in 0 until bachelors.size) {
             if (!(bachelors[i].maths != null && bachelors[i].russian != null)) {
                 noOrNotEnoughDataStudents.add(bachelors[i])
             }
         }
-        showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")
+        return noOrNotEnoughDataStudents
     }
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?) {
         //val faculties = ArrayList<Faculty>()
@@ -406,19 +346,12 @@ class PickUpSpecialtiesView
 
     /*Третий этап*/
     fun separateStudentsBySpecialties() {
-        /*val checkForAtp = Thread {
-            checkforATP(physicsStudents)
-            checkforATP(computerScienceStudents)
-            checkforATP(socialScienceStudents)
-            checkforATP(partAndAllDataStudents)
-        }*/
+        val scoreTypes = myApplication.returnScoreTypes()
 
-        //checkForAtp.start()
-        //checkForAtp.join()
-        checkforATP(physicsStudents)
-        checkforATP(computerScienceStudents)
-        checkforATP(socialScienceStudents)
-        checkforATP(partAndAllDataStudents)
+        scoreTypes?.physicsStudents?.let { checkforATP(it) }
+        scoreTypes?.computerScienceStudents?.let { checkforATP(it) }
+        scoreTypes?.socialScienceStudents?.let { checkforATP(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkforATP(it) }
         showLog("Размер АТП: ${atp.size}")
         println("Третий этап завершён")
     }
