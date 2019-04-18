@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultyAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
@@ -23,7 +24,6 @@ import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
     private var adapter: FacultyAdapter? = null
@@ -36,14 +36,7 @@ class PickUpSpecialtiesView
     private var noOrNotEnoughDataStudents = ArrayList<Student>()
     private var partAndAllDataStudents = ArrayList<Student>()
 
-    private var untiList = ArrayList<Specialty>()
-    private var feuList = ArrayList<Specialty>()
-    private var fitList = ArrayList<Specialty>()
-    private var mtfList = ArrayList<Specialty>()
-    private var unitList = ArrayList<Specialty>()
-    private var feeList = ArrayList<Specialty>()
-
-    private var facultyList = ArrayList<Faculty>()
+    private var facultyList: ArrayList<Faculty>? = null
     private val atp = ArrayList<Student>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -75,7 +68,7 @@ class PickUpSpecialtiesView
     }
     /*Первый этап*/
     override fun generateBacheloursAndSpecialtiesLists() {
-        val divideSpecialties = Thread {
+        /*val divideSpecialties = Thread {
             val specialties = grabSpecialties("specialties.csv")
 
             val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
@@ -85,12 +78,22 @@ class PickUpSpecialtiesView
         val divideStudents = Thread {
             val students = grabStudents("abiturs.csv")
             divideStudentsByAdmissions(students)
-        }
+        }*/
 
-        divideSpecialties.start()
+        val specialties = grabSpecialties("specialties.csv")
+
+        val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
+
+        divideSpecialtiesByFaculty(bachelorsAndSpecialists)
+
+        val students = grabStudents("abiturs.csv")
+        divideStudentsByAdmissions(students)
+
+
+        //divideSpecialties.start()
         //divideSpecialties.join()
 
-        divideStudents.start()
+        //divideStudents.start()
         //divideStudents.join()
 
         showLog("Первый этап завершён")
@@ -141,6 +144,13 @@ class PickUpSpecialtiesView
         return bachelorsAndSpecialists
     }
     override fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>) {
+        val untiList = ArrayList<Specialty>()
+        val feuList = ArrayList<Specialty>()
+        val fitList = ArrayList<Specialty>()
+        val mtfList = ArrayList<Specialty>()
+        val unitList = ArrayList<Specialty>()
+        val feeList = ArrayList<Specialty>()
+
         for (i in 0 until list.size) {
             when(list[i].faculty) {
                 "Учебно-научный технологический институт" ->
@@ -163,6 +173,8 @@ class PickUpSpecialtiesView
         showLog("МТФ: ${mtfList.size}")
         showLog("УНИТ: ${unitList.size}")
         showLog("ФЭЭ: ${feeList.size}")
+
+        myApplication.saveFaculties(Faculties(untiList, feuList, fitList, mtfList, unitList, feeList))
     }
     override fun grabStudents(path: String): ArrayList<Student> {
         val studentsList = ArrayList<Student>()
@@ -224,22 +236,56 @@ class PickUpSpecialtiesView
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         val bachelors = myApplication.returnBachelors()
+        //val facultyList = ArrayList<Faculty>()
 
-        val generateStudentsLists = Thread {
+        /*val generateStudentsLists = Thread {
             bachelors?.let { withdrawPhysicsStudents(it) }
             bachelors?.let { withdrawComputerScienceStudents(it) }
             bachelors?.let { withdrawSocialScienceStudents(it) }
             bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
             bachelors?.let { withdrawStudentsWithoutData(it) }
-        }
-        val calculateFacultyPlaces = Thread {
-            calculateAvailableFacultyPlaces("УНТИ", untiList)
-            calculateAvailableFacultyPlaces("ФЭУ", feuList)
-            calculateAvailableFacultyPlaces("ФИТ", fitList)
-            calculateAvailableFacultyPlaces("МТФ", mtfList)
-            calculateAvailableFacultyPlaces("УНИТ", unitList)
-            calculateAvailableFacultyPlaces("ФЭЭ", feeList)
-        }
+        }*/
+
+        bachelors?.let { withdrawPhysicsStudents(it) }
+        bachelors?.let { withdrawComputerScienceStudents(it) }
+        bachelors?.let { withdrawSocialScienceStudents(it) }
+        bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
+        bachelors?.let { withdrawStudentsWithoutData(it) }
+
+        /*val calculateFacultyPlaces = Thread {
+            val faculties = myApplication.returnFaculties()
+
+            calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
+            calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
+            calculateAvailableFacultyPlaces("ФИТ", faculties?.fitList)
+            calculateAvailableFacultyPlaces("МТФ", faculties?.mtfList)
+            calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
+            calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
+        }*/
+
+        val faculties = myApplication.returnFaculties()
+
+        calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
+        calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
+        calculateAvailableFacultyPlaces("ФИТ", faculties?.fitList)
+        calculateAvailableFacultyPlaces("МТФ", faculties?.mtfList)
+        calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
+        calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
+
+        /*val showFaculty = Thread {
+            facultyList?.let { showFaculties(it) }
+        }*/
+
+
+        facultyList?.let { showFaculties(it) }
+
+        /*val calculateAndShowFaculties = Thread {
+            calculateFacultyPlaces.start()
+            calculateFacultyPlaces.join()
+
+            showFaculty.start()
+            showFaculty.join()
+        }*/
 
         /*val separateLists = Thread {
             generateStudentsLists.start()
@@ -263,14 +309,19 @@ class PickUpSpecialtiesView
         showFacultiesList.start()
         showFacultiesList.join()*/
 
-        generateStudentsLists.start()
+
+
+        //generateStudentsLists.start()
         //generateStudentsLists.join()
 
-        calculateFacultyPlaces.start()
+        //calculateFacultyPlaces.start()
         //calculateFacultyPlaces.join()
 
-        showFaculties(facultyList)
 
+
+        //generateStudentsLists.start()
+
+        //calculateAndShowFaculties.start()
 
         println("Второй этап завершён")
     }
@@ -329,14 +380,25 @@ class PickUpSpecialtiesView
         }
         showLog("Студентов, которые не указали данные или данных недостаточно: ${noOrNotEnoughDataStudents.size}")
     }
-    override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>) {
+    override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?) {
+        //val faculties = ArrayList<Faculty>()
+
+        showLog(list.toString())
+
         var total = 0
         var free = 0
-        for (i in 0 until list.size) {
-            total += list[i].entriesTotal
-            free += list[i].entriesFree
+
+        list?.let {
+            for (i in 0 until it.size) {
+                total += it[i].entriesTotal
+                free += it[i].entriesFree
+            }
         }
-        facultyList.add(Faculty(name, total, free))
+
+        showLog(Faculty(name, total, free).toString())
+        facultyList?.let { it.add(Faculty(name, total, free)) }
+
+        //return faculties
     }
 
     /*Третий этап*/
@@ -372,42 +434,44 @@ class PickUpSpecialtiesView
         }
     }
 
-    override fun showFaculties(faculties: List<Faculty>) {
+    override fun showFaculties(faculties: ArrayList<Faculty>) {
         adapter?.updateFacultiesList(faculties)
         pickUpSpecialtiesRecyclerView.adapter = adapter
     }
     override fun onItemClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
         val bundle = Bundle()
+        val faculties = myApplication.returnFaculties()
+
         when (position) {
             0 -> {
                 bundle.putString("title", "УНТИ")
-                bundle.putSerializable("array", untiList)
+                bundle.putSerializable("array", faculties?.untiList)
                 toSpecialties(bundle)
             }
             1 -> {
                 bundle.putString("title", "ФЭУ")
-                bundle.putSerializable("array", feuList)
+                bundle.putSerializable("array", faculties?.feuList)
                 toSpecialties(bundle)
             }
             2 -> {
                 bundle.putString("title", "ФИТ")
-                bundle.putSerializable("array", fitList)
+                bundle.putSerializable("array", faculties?.fitList)
                 toSpecialties(bundle)
             }
             3 -> {
                 bundle.putString("title", "МТФ")
-                bundle.putSerializable("array", mtfList)
+                bundle.putSerializable("array", faculties?.mtfList)
                 toSpecialties(bundle)
             }
             4 -> {
                 bundle.putString("title", "УНИТ")
-                bundle.putSerializable("array", unitList)
+                bundle.putSerializable("array", faculties?.unitList)
                 toSpecialties(bundle)
             }
             5 -> {
                 bundle.putString("title", "ФЭЭ")
-                bundle.putSerializable("array", feeList)
+                bundle.putSerializable("array", faculties?.feeList)
                 toSpecialties(bundle)
             }
         }

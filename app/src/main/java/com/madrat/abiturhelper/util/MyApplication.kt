@@ -1,6 +1,7 @@
 package com.madrat.abiturhelper.util
 
 import android.app.Application
+import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.Student
 
@@ -9,6 +10,8 @@ class MyApplication: Application() {
     private var scores: Score? = null
     private var bachelors: ArrayList<Student>? = null
     private var additionalScore: Int? = 0
+
+    private var faculties: Faculties? = null
 
     fun saveScore(scores: Score) {
         this.scores = scores
@@ -50,5 +53,15 @@ class MyApplication: Application() {
     fun returnBachelors(): ArrayList<Student>? {
         showLog("Получен bachelors, его size: ${this.bachelors?.size}")
         return bachelors
+    }
+
+    fun saveFaculties(faculties: Faculties) {
+        this.faculties = faculties
+        showLog("Новое значение Faculties: ${this.faculties}")
+    }
+
+    fun returnFaculties(): Faculties? {
+        showLog("Получен Faculties: ${this.faculties}")
+        return faculties
     }
 }
