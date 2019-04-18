@@ -27,12 +27,6 @@ class PickUpSpecialtiesView
 
     private val myApplication = MyApplication.instance
 
-    private var physicsStudents = ArrayList<Student>()
-    private var computerScienceStudents = ArrayList<Student>()
-    private var socialScienceStudents = ArrayList<Student>()
-    private var noOrNotEnoughDataStudents = ArrayList<Student>()
-    private var partAndAllDataStudents = ArrayList<Student>()
-
     private var facultyList = ArrayList<Faculty>()
     private val atp = ArrayList<Student>()
 
@@ -41,7 +35,7 @@ class PickUpSpecialtiesView
 
         /*Первый шаг - разбить список специальностей по факультетам,
           выделить из списка студентов тех, кто собирается поступать на бакалавриат*/
-        generateBacheloursAndSpecialtiesLists()
+        generateBachelorsAndSpecialtiesLists()
 
         //for (i in 0 until facultyList.size) { showLog(facultyList[i].toString()) }
 
@@ -66,8 +60,9 @@ class PickUpSpecialtiesView
 
         return view
     }
+
     /*Первый этап*/
-    override fun generateBacheloursAndSpecialtiesLists() {
+    override fun generateBachelorsAndSpecialtiesLists() {
         /*val divideSpecialties = Thread {
             val specialties = grabSpecialties("specialties.csv")
 
@@ -81,12 +76,14 @@ class PickUpSpecialtiesView
         }*/
 
         val specialties = grabSpecialties("specialties.csv")
+        val students = grabStudents("abiturs.csv")
+
 
         val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
 
         divideSpecialtiesByFaculty(bachelorsAndSpecialists)
 
-        val students = grabStudents("abiturs.csv")
+
         divideStudentsByAdmissions(students)
 
 
@@ -128,6 +125,50 @@ class PickUpSpecialtiesView
         }
         showLog("Всего специальностей: ${specialtiesList.size}")
         return specialtiesList
+    }
+    override fun grabStudents(path: String): ArrayList<Student> {
+        val studentsList = ArrayList<Student>()
+        val file = context?.assets?.open(path)
+        val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
+
+        val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
+                .withFirstRecordAsHeader()
+                .withDelimiter(';')
+                .withIgnoreHeaderCase()
+                .withTrim())
+
+        for (csvRecord in csvParser) {
+            val studentId: String = csvRecord.get("id")
+            val lastName: String = csvRecord.get("Фамилия")
+            val firstName: String = csvRecord.get("Имя")
+            val patronymic: String = csvRecord.get("Отчество") //?
+            val documentsDate: String = csvRecord.get("Дата получения документов")
+            val getWay: String = csvRecord.get("Способ получения")
+            val status: String = csvRecord.get("Статус")
+            val cancelReason: String = csvRecord.get("Причина отклонения")  //?
+            val admissions: String = csvRecord.get("Приемная кампания")
+            val category: String = csvRecord.get("Категория")
+            val specialtyFirst: String = csvRecord.get("Направление1")
+            val specialtySecond: String = csvRecord.get("Направление2")
+            val specialtyThird: String = csvRecord.get("Направление3")
+            val russian: String = csvRecord.get("Русский язык")
+            val maths: String = csvRecord.get("Математика")
+            val physics: String = csvRecord.get("Физика")
+            val computerScience: String = csvRecord.get("Информатика")
+            val socialScience: String = csvRecord.get("Обществознание")
+            val additionalScore: String = csvRecord.get("Индивидуальные достижения")
+            val isCertificateAvailable: String = csvRecord.get("Наличие подлинника аттестата")
+            val isChargeAvailable: String = csvRecord.get("Наличие заявления о приеме на Направление1")
+            val priority: String = csvRecord.get("Приоритет")
+
+            studentsList.add(Student(studentId, lastName, firstName, patronymic, documentsDate, getWay,
+                    status, cancelReason, admissions, category, specialtyFirst, specialtySecond, specialtyThird,
+                    russian.toIntOrNull(), maths.toIntOrNull(), physics.toIntOrNull(), computerScience.toIntOrNull(),
+                    socialScience.toIntOrNull(), additionalScore.toIntOrNull(), isCertificateAvailable.toBoolean(),
+                    isChargeAvailable.toBoolean(), priority.toIntOrNull()))
+        }
+        showLog("Подавших документы: ${studentsList.size}")
+        return studentsList
     }
     override fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty> {
         val bachelorsAndSpecialists = ArrayList<Specialty>()
@@ -175,50 +216,6 @@ class PickUpSpecialtiesView
         showLog("ФЭЭ: ${feeList.size}")
 
         myApplication.saveFaculties(Faculties(untiList, feuList, fitList, mtfList, unitList, feeList))
-    }
-    override fun grabStudents(path: String): ArrayList<Student> {
-        val studentsList = ArrayList<Student>()
-        val file = context?.assets?.open(path)
-        val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
-
-        val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
-                .withFirstRecordAsHeader()
-                .withDelimiter(';')
-                .withIgnoreHeaderCase()
-                .withTrim())
-
-        for (csvRecord in csvParser) {
-            val studentId: String = csvRecord.get("id")
-            val lastName: String = csvRecord.get("Фамилия")
-            val firstName: String = csvRecord.get("Имя")
-            val patronymic: String = csvRecord.get("Отчество") //?
-            val documentsDate: String = csvRecord.get("Дата получения документов")
-            val getWay: String = csvRecord.get("Способ получения")
-            val status: String = csvRecord.get("Статус")
-            val cancelReason: String = csvRecord.get("Причина отклонения")  //?
-            val admissions: String = csvRecord.get("Приемная кампания")
-            val category: String = csvRecord.get("Категория")
-            val specialtyFirst: String = csvRecord.get("Направление1")
-            val specialtySecond: String = csvRecord.get("Направление2")
-            val specialtyThird: String = csvRecord.get("Направление3")
-            val russian: String = csvRecord.get("Русский язык")
-            val maths: String = csvRecord.get("Математика")
-            val physics: String = csvRecord.get("Физика")
-            val computerScience: String = csvRecord.get("Информатика")
-            val socialScience: String = csvRecord.get("Обществознание")
-            val additionalScore: String = csvRecord.get("Индивидуальные достижения")
-            val isCertificateAvailable: String = csvRecord.get("Наличие подлинника аттестата")
-            val isChargeAvailable: String = csvRecord.get("Наличие заявления о приеме на Направление1")
-            val priority: String = csvRecord.get("Приоритет")
-
-            studentsList.add(Student(studentId, lastName, firstName, patronymic, documentsDate, getWay,
-                    status, cancelReason, admissions, category, specialtyFirst, specialtySecond, specialtyThird,
-                    russian.toIntOrNull(), maths.toIntOrNull(), physics.toIntOrNull(), computerScience.toIntOrNull(),
-                    socialScience.toIntOrNull(), additionalScore.toIntOrNull(), isCertificateAvailable.toBoolean(),
-                    isChargeAvailable.toBoolean(), priority.toIntOrNull()))
-        }
-        showLog("Подавших документы: ${studentsList.size}")
-        return studentsList
     }
     override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
         val bachelors = ArrayList<Student>()

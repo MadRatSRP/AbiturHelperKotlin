@@ -7,23 +7,27 @@ import com.madrat.abiturhelper.model.Student
 
 interface PickUpSpecialtiesMVP {
     interface View {
+        //Первый этап
+        fun generateBachelorsAndSpecialtiesLists()
         fun grabSpecialties(path: String): ArrayList<Specialty>
-        fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>)
         fun grabStudents(path: String): ArrayList<Student>
+        fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
+        fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>)
         fun divideStudentsByAdmissions(list: ArrayList<Student>)
+
+        //Второй этап
+        fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+        fun withdrawPhysicsStudents(bachelors: ArrayList<Student>): ArrayList<Student>
+        fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
+        fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
+        fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student>
+        fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>): ArrayList<Student>
+
+        //Третий этап
         fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
         fun showFaculties(faculties: ArrayList<Faculty>)
         fun toSpecialties(bundle: Bundle)
         fun onItemClicked(faculty: Faculty, position: Int)
-        fun generateBacheloursAndSpecialtiesLists()
-        fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
-
-        fun withdrawPhysicsStudents(bachelors: ArrayList<Student>): ArrayList<Student>
-        fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
-        fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
-        fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>): ArrayList<Student>
-        fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student>
-        fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
     }
 
 }
