@@ -1,0 +1,60 @@
+       val bachelors = myApplication.returnBachelors()
+
+        /*val generateStudentsLists = Thread {
+
+        }*/
+
+        val generateStudentsWithPhysicsList = GlobalScope.async(start = CoroutineStart.LAZY) {
+            bachelors?.let { withdrawPhysicsStudents(it) }
+        }
+        val generateStudentsWithComputerScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
+            bachelors?.let { withdrawComputerScienceStudents(it) }
+        }
+        val generateStudentsWithSocialScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
+            bachelors?.let { withdrawSocialScienceStudents(it) }
+        }
+        val generateStudentsWithPartAndFullDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
+            bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
+        }
+        val generateStudentsWithoutDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
+            bachelors?.let { withdrawStudentsWithoutData(it) }
+        }
+        val calculateUntiPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+            calculateAvailableFacultyPlaces("УНТИ", untiList)
+        }
+        val calculateFeuPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+            calculateAvailableFacultyPlaces("ФЭУ", feuList)
+        }
+        val calculateFitPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+            calculateAvailableFacultyPlaces("ФИТ", fitList)
+        }
+        val calculateMtfPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+            calculateAvailableFacultyPlaces("МТФ", mtfList)
+        }
+        val calculateUnitPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+            calculateAvailableFacultyPlaces("УНИТ", unitList)
+        }
+        val calculateFeePlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+            calculateAvailableFacultyPlaces("ФЭЭ", feeList)
+        }
+
+        GlobalScope.launch {
+            generateStudentsWithPhysicsList.await()
+            generateStudentsWithComputerScienceList.await()
+            generateStudentsWithSocialScienceList.await()
+            generateStudentsWithPartAndFullDataList.await()
+            generateStudentsWithoutDataList.await()
+
+            calculateUntiPlaces.await()
+            calculateFeuPlaces.await()
+            calculateFitPlaces.await()
+            calculateMtfPlaces.await()
+            calculateUnitPlaces.await()
+            calculateFeePlaces.await()
+
+            activity?.runOnUiThread {
+                showFaculties(facultyList)
+            }
+        }
+
+        println("Второй этап завершён")

@@ -96,25 +96,6 @@ class PickUpSpecialtiesView
         divideSpecialties.join()
         divideStudents.join()
 
-        /*val divideSpecialties = GlobalScope.async {
-            val specialties = grabSpecialties("specialties.csv")
-            divideSpecialtiesByFaculty(specialties)
-        }
-        val divideStudents = GlobalScope.async {
-            val students = grabStudents("abiturs.csv")
-            divideStudentsByAdmissions(students)
-        }
-
-        GlobalScope.launch {
-            activity?.runOnUiThread {
-                val specialties = grabSpecialties("specialties.csv")
-                val students = grabStudents("abiturs.csv")
-            }
-
-            divideSpecialties.await()
-            divideStudents.await()
-        }*/
-
         println("Первый этап завершён")
     }
     override fun grabSpecialties(path: String): ArrayList<Specialty> {
@@ -247,58 +228,29 @@ class PickUpSpecialtiesView
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         val bachelors = myApplication.returnBachelors()
 
-        val generateStudentsWithPhysicsList = GlobalScope.async(start = CoroutineStart.LAZY) {
+        val generateStudentsLists = Thread {
             bachelors?.let { withdrawPhysicsStudents(it) }
-        }
-        val generateStudentsWithComputerScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
             bachelors?.let { withdrawComputerScienceStudents(it) }
-        }
-        val generateStudentsWithSocialScienceList = GlobalScope.async(start = CoroutineStart.LAZY) {
             bachelors?.let { withdrawSocialScienceStudents(it) }
-        }
-        val generateStudentsWithPartAndFullDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
             bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
-        }
-        val generateStudentsWithoutDataList = GlobalScope.async(start = CoroutineStart.LAZY) {
             bachelors?.let { withdrawStudentsWithoutData(it) }
         }
-        val calculateUntiPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
+        val calculateFacultyPlaces = Thread {
             calculateAvailableFacultyPlaces("УНТИ", untiList)
-        }
-        val calculateFeuPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("ФЭУ", feuList)
-        }
-        val calculateFitPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("ФИТ", fitList)
-        }
-        val calculateMtfPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("МТФ", mtfList)
-        }
-        val calculateUnitPlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("УНИТ", unitList)
-        }
-        val calculateFeePlaces = GlobalScope.async(start = CoroutineStart.LAZY) {
             calculateAvailableFacultyPlaces("ФЭЭ", feeList)
         }
 
-        GlobalScope.launch {
-            generateStudentsWithPhysicsList.await()
-            generateStudentsWithComputerScienceList.await()
-            generateStudentsWithSocialScienceList.await()
-            generateStudentsWithPartAndFullDataList.await()
-            generateStudentsWithoutDataList.await()
+        generateStudentsLists.start()
+        calculateFacultyPlaces.start()
 
-            calculateUntiPlaces.await()
-            calculateFeuPlaces.await()
-            calculateFitPlaces.await()
-            calculateMtfPlaces.await()
-            calculateUnitPlaces.await()
-            calculateFeePlaces.await()
+        generateStudentsLists.join()
+        calculateFacultyPlaces.join()
 
-            activity?.runOnUiThread {
-                showFaculties(facultyList)
-            }
-        }
+        showFaculties(facultyList)
 
         println("Второй этап завершён")
     }
@@ -371,9 +323,9 @@ class PickUpSpecialtiesView
     fun separateStudentsBySpecialties() {
         val function = GlobalScope.async {
             checkforATP(physicsStudents)
-            checkforATP(computerScienceStudents)
-            checkforATP(socialScienceStudents)
-            checkforATP(partAndAllDataStudents)
+            //checkforATP(computerScienceStudents)
+           /* checkforATP(socialScienceStudents)
+            checkforATP(partAndAllDataStudents)*/
         }
 
         GlobalScope.launch {
@@ -390,10 +342,18 @@ class PickUpSpecialtiesView
                     || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
                     || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
                     || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
-                    || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое") ) {
+                    || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое")
+                    || (list[i].specialtyThird == "АТП_заочн_бюдж" || list[i].specialtyThird == "АТП_заочн_льгот"
+                    || list[i].specialtyThird == "АТП_заочн_плат" || list[i].specialtyThird == "АТП_очн_бюдж"
+                    || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
+                    || list[i].specialtyThird == "АТП_очн_целевое")) {
                 atp.add(list[i])
+                /*showLog("Размер АТП: ${atp.size}")
+                showLog("Размер АТП: ${atp.size}")
+                showLog("Размер АТП: ${atp.size}")*/
             }
         }
+
         showLog("Размер АТП: ${atp.size}")
     }
 
