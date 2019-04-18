@@ -18,10 +18,6 @@ import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.*
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
@@ -48,6 +44,7 @@ class PickUpSpecialtiesView
     private var feeList = ArrayList<Specialty>()
 
     private var facultyList = ArrayList<Faculty>()
+    private val atp = ArrayList<Student>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -56,7 +53,7 @@ class PickUpSpecialtiesView
           выделить из списка студентов тех, кто собирается поступать на бакалавриат*/
         generateBacheloursAndSpecialtiesLists()
 
-        for (i in 0 until facultyList.size) { showLog(facultyList[i].toString()) }
+        //for (i in 0 until facultyList.size) { showLog(facultyList[i].toString()) }
 
         pickUpSpecialtiesRecyclerView.linearManager()
 
@@ -64,7 +61,7 @@ class PickUpSpecialtiesView
           и высчитать свободные баллы для факультетов*/
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
-        separateStudentsBySpecialties()
+        //separateStudentsBySpecialties()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -91,12 +88,12 @@ class PickUpSpecialtiesView
         }
 
         divideSpecialties.start()
+        //divideSpecialties.join()
+
         divideStudents.start()
+        //divideStudents.join()
 
-        divideSpecialties.join()
-        divideStudents.join()
-
-        println("Первый этап завершён")
+        showLog("Первый этап завершён")
     }
     override fun grabSpecialties(path: String): ArrayList<Specialty> {
         val specialtiesList = ArrayList<Specialty>()
@@ -244,13 +241,36 @@ class PickUpSpecialtiesView
             calculateAvailableFacultyPlaces("ФЭЭ", feeList)
         }
 
-        generateStudentsLists.start()
-        calculateFacultyPlaces.start()
+        /*val separateLists = Thread {
+            generateStudentsLists.start()
+            //generateStudentsLists.join()
 
-        generateStudentsLists.join()
-        calculateFacultyPlaces.join()
+            calculateFacultyPlaces.start()
+            //calculateFacultyPlaces.join()
+        }*/
+
+        /*val showFacultiesList = Thread {
+            activity?.runOnUiThread {
+                showFaculties(facultyList)
+            }
+
+            //showFaculties(facultyList)
+        }*/
+
+        /*separateLists.start()
+        separateLists.join()
+
+        showFacultiesList.start()
+        showFacultiesList.join()*/
+
+        generateStudentsLists.start()
+        //generateStudentsLists.join()
+
+        calculateFacultyPlaces.start()
+        //calculateFacultyPlaces.join()
 
         showFaculties(facultyList)
+
 
         println("Второй этап завершён")
     }
@@ -321,19 +341,19 @@ class PickUpSpecialtiesView
 
     /*Третий этап*/
     fun separateStudentsBySpecialties() {
-        val function = GlobalScope.async {
+        val checkForAtp = Thread {
             checkforATP(physicsStudents)
-            //checkforATP(computerScienceStudents)
-           /* checkforATP(socialScienceStudents)
-            checkforATP(partAndAllDataStudents)*/
+            checkforATP(computerScienceStudents)
+            checkforATP(socialScienceStudents)
+            checkforATP(partAndAllDataStudents)
         }
 
-        GlobalScope.launch {
-            function.await()
-        }
+        checkForAtp.start()
+        checkForAtp.join()
+        showLog("Размер АТП: ${atp.size}")
+        println("Третий этап завершён")
     }
     fun checkforATP(list: ArrayList<Student>) {
-        val atp = ArrayList<Student>()
 
         for (i in 0 until list.size) {
             if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
@@ -348,13 +368,8 @@ class PickUpSpecialtiesView
                     || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
                     || list[i].specialtyThird == "АТП_очн_целевое")) {
                 atp.add(list[i])
-                /*showLog("Размер АТП: ${atp.size}")
-                showLog("Размер АТП: ${atp.size}")
-                showLog("Размер АТП: ${atp.size}")*/
             }
         }
-
-        showLog("Размер АТП: ${atp.size}")
     }
 
     override fun showFaculties(faculties: List<Faculty>) {
