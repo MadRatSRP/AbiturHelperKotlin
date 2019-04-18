@@ -25,40 +25,21 @@ class MyApplication: Application() {
         this.bachelors = bachelors
         showLog("Новое значение bachelors, его size: ${this.bachelors?.size}")
     }
+    fun saveFaculties(faculties: Faculties) {
+        this.faculties = faculties
+        showLog("Новое значение Faculties: ${this.faculties}")
+    }
 
     fun returnScore(): Score? {
         showLog("Получена модель Score: ${this.scores}")
         return scores
     }
-    /*fun returnMaths(): Int? {
-        showLog("Получен maths: ${this.maths}")
-        return maths
-    }
-    fun returnRussian(): Int? {
-        showLog("Получен russian: ${this.russian}")
-        return russian
-    }
-    fun returnPhysics(): Int? {
-        showLog("Получен physics: ${this.physics}")
-        return physics
-    }
-    fun returnComputerScience(): Int? {
-        showLog("Получен computerScience: ${this.computerScience}")
-        return computerScience
-    }
-    fun returnSocialScience(): Int? {
-        showLog("Получен socialScience: ${this.socialScience}")
-        return socialScience
-    }*/
     fun returnBachelors(): ArrayList<Student>? {
         showLog("Получен bachelors, его size: ${this.bachelors?.size}")
         return bachelors
     }
 
-    fun saveFaculties(faculties: Faculties) {
-        this.faculties = faculties
-        showLog("Новое значение Faculties: ${this.faculties}")
-    }
+
 
     fun returnFaculties(): Faculties? {
         showLog("Получен Faculties: ${this.faculties}")

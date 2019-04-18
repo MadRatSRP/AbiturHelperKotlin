@@ -56,7 +56,8 @@ class PickUpSpecialtiesView
 
         facultyList?.let { showFaculties(it) }
 
-        //separateStudentsBySpecialties()
+        /*Третий шаг - */
+        separateStudentsBySpecialties()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -405,15 +406,19 @@ class PickUpSpecialtiesView
 
     /*Третий этап*/
     fun separateStudentsBySpecialties() {
-        val checkForAtp = Thread {
+        /*val checkForAtp = Thread {
             checkforATP(physicsStudents)
             checkforATP(computerScienceStudents)
             checkforATP(socialScienceStudents)
             checkforATP(partAndAllDataStudents)
-        }
+        }*/
 
-        checkForAtp.start()
-        checkForAtp.join()
+        //checkForAtp.start()
+        //checkForAtp.join()
+        checkforATP(physicsStudents)
+        checkforATP(computerScienceStudents)
+        checkforATP(socialScienceStudents)
+        checkforATP(partAndAllDataStudents)
         showLog("Размер АТП: ${atp.size}")
         println("Третий этап завершён")
     }
