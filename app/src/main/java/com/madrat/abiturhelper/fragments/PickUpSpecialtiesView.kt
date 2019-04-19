@@ -318,6 +318,7 @@ class PickUpSpecialtiesView
         val kto = ArrayList<Student>()
         val mash = ArrayList<Student>()
         val mitm = ArrayList<Student>()
+        val mht = ArrayList<Student>()
 
         fun checkForATP(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -379,6 +380,17 @@ class PickUpSpecialtiesView
                 }
             }
         }
+        fun checkForMHT(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "МХТ_очн_бюдж" || list[i].specialtyFirst == "МХТ_очн_льгот"
+                        || list[i].specialtyFirst == "МХТ_очн_плат") || (list[i].specialtySecond == "МХТ_очн_бюдж"
+                        || list[i].specialtySecond == "МХТ_очн_льгот" || list[i].specialtySecond == "МХТ_очн_плат")
+                        || (list[i].specialtyThird == "МХТ_очн_бюдж" || list[i].specialtyThird == "МХТ_очн_льгот"
+                        || list[i].specialtyThird == "МХТ_очн_плат")) {
+                    mht.add(list[i])
+                }
+            }
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -400,10 +412,16 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForMiTM(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForMiTM(it) }
 
+        scoreTypes?.physicsStudents?.let { checkForMHT(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForMHT(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForMHT(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForMHT(it) }
+
         showLog("Размер АТП: ${atp.size}")
         showLog("Размер КТО: ${kto.size}")
         showLog("Размер МАШ: ${mash.size}")
         showLog("Размер МиТМ: ${mitm.size}")
+        showLog("Размер МХТ: ${mht.size}")
     }
 
 
