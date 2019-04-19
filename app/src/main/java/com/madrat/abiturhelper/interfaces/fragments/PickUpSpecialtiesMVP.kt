@@ -22,12 +22,14 @@ interface PickUpSpecialtiesMVP {
         fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>): ArrayList<Student>
+        fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
 
         //Третий этап
-        fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
+        fun separateStudentsBySpecialties()
+        fun checkForUnti()
+
         fun showFaculties(faculties: ArrayList<Faculty>)
         fun toSpecialties(bundle: Bundle)
         fun onItemClicked(faculty: Faculty, position: Int)
     }
-
 }

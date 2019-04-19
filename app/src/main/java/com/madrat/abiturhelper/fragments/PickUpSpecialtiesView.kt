@@ -28,7 +28,6 @@ class PickUpSpecialtiesView
     private val myApplication = MyApplication.instance
 
     private var facultyList = ArrayList<Faculty>()
-    private val atp = ArrayList<Student>()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -309,34 +308,40 @@ class PickUpSpecialtiesView
     }
 
     /*Третий этап*/
-    fun separateStudentsBySpecialties() {
-        val scoreTypes = myApplication.returnScoreTypes()
-
-        scoreTypes?.physicsStudents?.let { checkforATP(it) }
-        scoreTypes?.computerScienceStudents?.let { checkforATP(it) }
-        scoreTypes?.socialScienceStudents?.let { checkforATP(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkforATP(it) }
-        showLog("Размер АТП: ${atp.size}")
+    override fun separateStudentsBySpecialties() {
+        checkForUnti()
         println("Третий этап завершён")
     }
-    fun checkforATP(list: ArrayList<Student>) {
+    override fun checkForUnti() {
+        val atp = ArrayList<Student>()
 
-        for (i in 0 until list.size) {
-            if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
-                    || list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtyFirst == "АТП_очн_бюдж"
-                    || list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtyFirst == "АТП_очн_плат"
-                    || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
-                    || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
-                    || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
-                    || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое")
-                    || (list[i].specialtyThird == "АТП_заочн_бюдж" || list[i].specialtyThird == "АТП_заочн_льгот"
-                    || list[i].specialtyThird == "АТП_заочн_плат" || list[i].specialtyThird == "АТП_очн_бюдж"
-                    || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
-                    || list[i].specialtyThird == "АТП_очн_целевое")) {
-                atp.add(list[i])
+        fun checkForATP(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
+                                || list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtyFirst == "АТП_очн_бюдж"
+                                || list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtyFirst == "АТП_очн_плат"
+                                || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
+                                || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
+                                || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
+                                || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое")
+                        || (list[i].specialtyThird == "АТП_заочн_бюдж" || list[i].specialtyThird == "АТП_заочн_льгот"
+                                || list[i].specialtyThird == "АТП_заочн_плат" || list[i].specialtyThird == "АТП_очн_бюдж"
+                                || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
+                                || list[i].specialtyThird == "АТП_очн_целевое")) {
+                    atp.add(list[i])
+                }
             }
         }
+
+        val scoreTypes = myApplication.returnScoreTypes()
+
+        scoreTypes?.physicsStudents?.let { checkForATP(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForATP(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForATP(it) }
+        showLog("Размер АТП: ${atp.size}")
     }
+
 
     override fun showFaculties(faculties: ArrayList<Faculty>) {
         adapter?.updateFacultiesList(faculties)
