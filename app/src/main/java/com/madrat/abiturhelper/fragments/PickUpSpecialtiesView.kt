@@ -216,6 +216,8 @@ class PickUpSpecialtiesView
 
         val faculties = myApplication.returnFaculties()
 
+        facultyList.clear()
+
         calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
         calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
         calculateAvailableFacultyPlaces("ФИТ", faculties?.fitList)
@@ -302,9 +304,7 @@ class PickUpSpecialtiesView
         }
 
         showLog("Для $name - мест всего $total, мест свободно $free")
-        facultyList?.let { it.add(Faculty(name, total, free)) }
-
-        //return faculties
+        facultyList.add(Faculty(name, total, free))
     }
 
     /*Третий этап*/
@@ -314,7 +314,6 @@ class PickUpSpecialtiesView
     }
     override fun checkForUnti() {
         val scoreTypes = myApplication.returnScoreTypes()
-        //comment
         val atp = ArrayList<Student>()
         val kto = ArrayList<Student>()
         val mash = ArrayList<Student>()

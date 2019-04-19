@@ -14,13 +14,6 @@ class FacultyAdapter(private val clickListener: (Faculty, Int) -> Unit)
     private var faculties = ArrayList<Faculty>()
 
     fun updateFacultiesList(new_faculties: ArrayList<Faculty>) {
-        /*val diffCallback = EmployeeDiffCallback(faculties, new_faculties)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-
-        faculties.clear()
-        faculties.addAll(new_faculties)
-        diffResult.dispatchUpdatesTo(this)*/
-
         faculties.clear()
         faculties.addAll(new_faculties)
         this.notifyDataSetChanged()
