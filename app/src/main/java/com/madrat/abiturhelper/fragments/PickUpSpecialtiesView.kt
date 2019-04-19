@@ -313,33 +313,98 @@ class PickUpSpecialtiesView
         println("Третий этап завершён")
     }
     override fun checkForUnti() {
+        val scoreTypes = myApplication.returnScoreTypes()
+
         val atp = ArrayList<Student>()
+        val kto = ArrayList<Student>()
+        val mash = ArrayList<Student>()
+        val mitm = ArrayList<Student>()
 
         fun checkForATP(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
                 if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
-                                || list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtyFirst == "АТП_очн_бюдж"
-                                || list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtyFirst == "АТП_очн_плат"
-                                || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
-                                || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
-                                || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
-                                || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое")
+                        || list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtyFirst == "АТП_очн_бюдж"
+                        || list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtyFirst == "АТП_очн_плат"
+                        || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
+                        || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
+                        || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
+                        || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое")
                         || (list[i].specialtyThird == "АТП_заочн_бюдж" || list[i].specialtyThird == "АТП_заочн_льгот"
-                                || list[i].specialtyThird == "АТП_заочн_плат" || list[i].specialtyThird == "АТП_очн_бюдж"
-                                || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
-                                || list[i].specialtyThird == "АТП_очн_целевое")) {
+                        || list[i].specialtyThird == "АТП_заочн_плат" || list[i].specialtyThird == "АТП_очн_бюдж"
+                        || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
+                        || list[i].specialtyThird == "АТП_очн_целевое")) {
                     atp.add(list[i])
                 }
             }
         }
-
-        val scoreTypes = myApplication.returnScoreTypes()
+        fun checkForKTO(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtyFirst == "КТО(АТиКМ)_очн_льгот"
+                        || list[i].specialtyFirst == "КТО(АТиКМ)_очн_плат" || list[i].specialtyFirst == "КТО(ТМ)_очн_бюдж"
+                        || list[i].specialtyFirst == "КТО(ТМ)_очн_льгот" || list[i].specialtyFirst == "КТО(ТМ)_очн_плат"
+                        || list[i].specialtyFirst == "КТО(ТМ)_очн_целевое" || list[i].specialtyFirst == "КТО_веч_бюдж"
+                        || list[i].specialtyFirst == "КТО_веч_льгот" || list[i].specialtyFirst == "КТО_веч_плат")
+                        || (list[i].specialtySecond == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtySecond == "КТО(АТиКМ)_очн_льгот"
+                        || list[i].specialtySecond == "КТО(АТиКМ)_очн_плат" || list[i].specialtySecond == "КТО(ТМ)_очн_бюдж"
+                        || list[i].specialtySecond == "КТО(ТМ)_очн_льгот" || list[i].specialtySecond == "КТО(ТМ)_очн_плат"
+                        || list[i].specialtySecond == "КТО(ТМ)_очн_целевое" || list[i].specialtySecond == "КТО_веч_бюдж"
+                        || list[i].specialtySecond == "КТО_веч_льгот" || list[i].specialtySecond == "КТО_веч_плат")
+                        || (list[i].specialtyThird == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtyThird == "КТО(АТиКМ)_очн_льгот"
+                        || list[i].specialtyThird == "КТО(АТиКМ)_очн_плат" || list[i].specialtyThird == "КТО(ТМ)_очн_бюдж"
+                        || list[i].specialtyThird == "КТО(ТМ)_очн_льгот" || list[i].specialtyThird == "КТО(ТМ)_очн_плат"
+                        || list[i].specialtyThird == "КТО(ТМ)_очн_целевое" || list[i].specialtyThird == "КТО_веч_бюдж"
+                        || list[i].specialtyThird == "КТО_веч_льгот" || list[i].specialtyThird == "КТО_веч_плат")) {
+                    kto.add(list[i])
+                }
+            }
+        }
+        fun checkForMASH(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "МАШ(ТМ)_заочн_бюдж" || list[i].specialtyFirst == "МАШ(ТМ)_заочн_льгот"
+                        || list[i].specialtyFirst == "МАШ(ТМ)_заочн_плат") || (list[i].specialtySecond == "МАШ(ТМ)_заочн_бюдж"
+                        || list[i].specialtySecond == "МАШ(ТМ)_заочн_льгот" || list[i].specialtySecond == "МАШ(ТМ)_заочн_плат")
+                        || (list[i].specialtyThird == "МАШ(ТМ)_заочн_бюдж" || list[i].specialtyThird == "МАШ(ТМ)_заочн_льгот"
+                        || list[i].specialtyThird == "МАШ(ТМ)_заочн_плат")) {
+                    mash.add(list[i])
+                }
+            }
+        }
+        fun checkForMiTM(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "МиТМ_очн_бюдж" || list[i].specialtyFirst == "МиТМ_очн_льгот"
+                        || list[i].specialtyFirst == "МиТМ_очн_плат") || (list[i].specialtySecond == "МиТМ_очн_бюдж"
+                        || list[i].specialtySecond == "МиТМ_очн_льгот" || list[i].specialtySecond == "МиТМ_очн_плат")
+                        || (list[i].specialtyThird == "МиТМ_очн_бюдж" || list[i].specialtyThird == "МиТМ_очн_льгот"
+                        || list[i].specialtyThird == "МиТМ_очн_плат")) {
+                    mitm.add(list[i])
+                }
+            }
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
         scoreTypes?.socialScienceStudents?.let { checkForATP(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForATP(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForKTO(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForKTO(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForKTO(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForKTO(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForMASH(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForMASH(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForMASH(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForMASH(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForMiTM(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForMiTM(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForMiTM(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForMiTM(it) }
+
         showLog("Размер АТП: ${atp.size}")
+        showLog("Размер КТО: ${kto.size}")
+        showLog("Размер МАШ: ${mash.size}")
+        showLog("Размер МиТМ: ${mitm.size}")
     }
 
 
