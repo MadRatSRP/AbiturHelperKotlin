@@ -314,7 +314,7 @@ class PickUpSpecialtiesView
     }
     override fun checkForUnti() {
         val scoreTypes = myApplication.returnScoreTypes()
-        /jj//
+        //comment
         val atp = ArrayList<Student>()
         val kto = ArrayList<Student>()
         val mash = ArrayList<Student>()
