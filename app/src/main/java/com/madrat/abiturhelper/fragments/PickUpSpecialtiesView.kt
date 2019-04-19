@@ -33,13 +33,11 @@ class PickUpSpecialtiesView
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        pickUpSpecialtiesRecyclerView.linearManager()
+
         /*Первый шаг - разбить список специальностей по факультетам,
           выделить из списка студентов тех, кто собирается поступать на бакалавриат*/
         generateBachelorsAndSpecialtiesLists()
-
-        //for (i in 0 until facultyList.size) { showLog(facultyList[i].toString()) }
-
-        pickUpSpecialtiesRecyclerView.linearManager()
 
         /*Второй шаг - разбить список поступающих по типу баллов
           и высчитать свободные баллы для факультетов*/
@@ -63,18 +61,6 @@ class PickUpSpecialtiesView
 
     /*Первый этап*/
     override fun generateBachelorsAndSpecialtiesLists() {
-        /*val divideSpecialties = Thread {
-            val specialties = grabSpecialties("specialties.csv")
-
-            val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
-            //bachelorsAndSpecialists?.let { divideSpecialtiesByFaculty(it) }
-            divideSpecialtiesByFaculty(bachelorsAndSpecialists)
-        }
-        val divideStudents = Thread {
-            val students = grabStudents("abiturs.csv")
-            divideStudentsByAdmissions(students)
-        }*/
-
         val specialties = grabSpecialties("specialties.csv")
         val students = grabStudents("abiturs.csv")
 
@@ -85,14 +71,6 @@ class PickUpSpecialtiesView
 
 
         divideStudentsByAdmissions(students)
-
-
-        //divideSpecialties.start()
-        //divideSpecialties.join()
-
-        //divideStudents.start()
-        //divideStudents.join()
-
         showLog("Первый этап завершён")
     }
     override fun grabSpecialties(path: String): ArrayList<Specialty> {
@@ -208,13 +186,6 @@ class PickUpSpecialtiesView
                     feeList.add(list[i])
             }
         }
-        showLog("УНТИ: ${untiList.size}")
-        showLog("ФЭУ: ${feuList.size}")
-        showLog("ФИТ: ${fitList.size}")
-        showLog("МТФ: ${mtfList.size}")
-        showLog("УНИТ: ${unitList.size}")
-        showLog("ФЭЭ: ${feeList.size}")
-
         myApplication.saveFaculties(Faculties(untiList, feuList, fitList, mtfList, unitList, feeList))
     }
     override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
@@ -321,10 +292,6 @@ class PickUpSpecialtiesView
         return noOrNotEnoughDataStudents
     }
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?) {
-        //val faculties = ArrayList<Faculty>()
-
-        showLog(list.toString())
-
         var total = 0
         var free = 0
 
@@ -335,7 +302,7 @@ class PickUpSpecialtiesView
             }
         }
 
-        showLog(Faculty(name, total, free).toString())
+        showLog("Для $name - мест всего $total, мест свободно $free")
         facultyList?.let { it.add(Faculty(name, total, free)) }
 
         //return faculties

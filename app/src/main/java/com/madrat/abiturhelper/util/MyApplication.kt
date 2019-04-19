@@ -9,46 +9,56 @@ import com.madrat.abiturhelper.model.Student
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }
     private var scores: Score? = null
-    private var bachelors: ArrayList<Student>? = null
     private var additionalScore: Int? = 0
-
+    private var bachelors: ArrayList<Student>? = null
+    private var scoreTypes: ScoreTypes? = null
     private var faculties: Faculties? = null
 
-    private var scoreTypes: ScoreTypes? = null
-
+    //Score
     fun saveScore(scores: Score) {
         this.scores = scores
-        showLog("Новое значение основных баллов: ${this.scores}")
-    }
-    fun saveAdditionalScore(additionalScore: Int) {
-        this.additionalScore = additionalScore
-        showLog("Новое значение дополнительных баллов: ${this.additionalScore}")
-    }
-    fun saveBachelors(bachelors: ArrayList<Student>?) {
-        this.bachelors = bachelors
-        showLog("Новое значение bachelors, его size: ${this.bachelors?.size}")
-    }
-    fun saveFaculties(faculties: Faculties) {
-        this.faculties = faculties
-        showLog("Новое значение Faculties: ${this.faculties}")
-    }
+        this.scores?.let {
+            val maths = it.maths
+            val russian = it.russian
+            val physics = it.physics
+            val computerScience = it.computerScience
+            val socialScience = it.socialScience
 
+            showLog("Сохранён Score: математика - $maths, русский язык - $russian,\n физика - $physics," +
+                    "информатика - $computerScience, обществознание - $socialScience")
+        }
+    }
     fun returnScore(): Score? {
-        showLog("Получена модель Score: ${this.scores}")
+        this.scores?.let {
+            val maths = it.maths
+            val russian = it.russian
+            val physics = it.physics
+            val computerScience = it.computerScience
+            val socialScience = it.socialScience
+
+            showLog("Возвращён Score: математика - $maths, русский язык - $russian,\n физика - $physics," +
+                    "информатика - $computerScience, обществознание - $socialScience")
+        }
         return scores
     }
+    //AdditionalScore
+    fun saveAdditionalScore(additionalScore: Int) {
+        this.additionalScore = additionalScore
+        showLog("Сохранены дополнительные баллы: ${this.additionalScore}")
+    }
+    fun returnAdditionalScore(): Int? {
+        showLog("Возвращёны дополнительные баллы: ${this.additionalScore}")
+        return additionalScore
+    }
+    //Bachelors
+    fun saveBachelors(bachelors: ArrayList<Student>?) {
+        this.bachelors = bachelors
+        showLog("Сохранён bachelors, его размер: ${this.bachelors?.size}")
+    }
     fun returnBachelors(): ArrayList<Student>? {
-        showLog("Получен bachelors, его size: ${this.bachelors?.size}")
+        showLog("Возвращён bachelors, его размер: ${this.bachelors?.size}")
         return bachelors
     }
-
-
-
-    fun returnFaculties(): Faculties? {
-        showLog("Получен Faculties: ${this.faculties}")
-        return faculties
-    }
-
     //ScoreTypes
     fun saveScoreTypes(scoreTypes: ScoreTypes) {
         this.scoreTypes = scoreTypes
@@ -77,5 +87,34 @@ class MyApplication: Application() {
                     "недостаточно данных - $noOrNotEnoughData")
         }
         return scoreTypes
+    }
+    //Faculties
+    fun saveFaculties(faculties: Faculties) {
+        this.faculties = faculties
+        this.faculties?.let {
+            val unti = it.untiList.size
+            val feu = it.feuList.size
+            val fit = it.fitList.size
+            val mtf = it.mtfList.size
+            val unit = it.unitList.size
+            val fee = it.feeList.size
+
+            showLog("Сохранён Faculties: УНТИ - $unti, ФЭУ - $feu, ФИТ - $fit,\n МТФ - $mtf, " +
+                    "УНИТ - $unit, ФЭЭ - $fee")
+        }
+    }
+    fun returnFaculties(): Faculties? {
+        this.faculties?.let {
+            val unti = it.untiList.size
+            val feu = it.feuList.size
+            val fit = it.fitList.size
+            val mtf = it.mtfList.size
+            val unit = it.unitList.size
+            val fee = it.feeList.size
+
+            showLog("Возвращён Faculties: УНТИ - $unti, ФЭУ - $feu, ФИТ - $fit,\n МТФ - $mtf, " +
+                    "УНИТ - $unit, ФЭЭ - $fee")
+        }
+        return faculties
     }
 }
