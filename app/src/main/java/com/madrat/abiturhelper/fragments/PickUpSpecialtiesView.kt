@@ -492,8 +492,10 @@ class PickUpSpecialtiesView
 
 
     override fun showFaculties(faculties: ArrayList<Faculty>) {
-        adapter?.updateFacultiesList(faculties)
-        pickUpSpecialtiesRecyclerView.adapter = adapter
+        pickUpSpecialtiesRecyclerView.post {
+            adapter?.updateFacultiesList(faculties)
+            pickUpSpecialtiesRecyclerView.adapter = adapter
+        }
     }
     override fun onItemClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
