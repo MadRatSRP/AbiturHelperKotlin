@@ -496,6 +496,11 @@ class PickUpSpecialtiesView
             adapter?.updateFacultiesList(faculties)
             pickUpSpecialtiesRecyclerView.adapter = adapter
         }
+
+        /*activity?.runOnUiThread {
+            adapter?.updateFacultiesList(faculties)
+            pickUpSpecialtiesRecyclerView.adapter = adapter
+        }*/
     }
     override fun onItemClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
