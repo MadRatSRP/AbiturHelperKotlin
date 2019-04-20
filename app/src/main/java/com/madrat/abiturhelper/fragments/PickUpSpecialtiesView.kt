@@ -319,6 +319,9 @@ class PickUpSpecialtiesView
         val mash = ArrayList<Student>()
         val mitm = ArrayList<Student>()
         val mht = ArrayList<Student>()
+        val ptmk = ArrayList<Student>()
+        val tmo = ArrayList<Student>()
+        val uts = ArrayList<Student>()
 
         fun checkForATP(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -391,6 +394,18 @@ class PickUpSpecialtiesView
                 }
             }
         }
+        fun checkForPTMK(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ПТМК_заочн_плат" || list[i].specialtyFirst == "ПТМК_очн_бюдж"
+                        || list[i].specialtyFirst == "ПТМК_очн_льгот" || list[i].specialtyFirst == "ПТМК_очн_плат")
+                        || (list[i].specialtySecond == "ПТМК_заочн_плат" || list[i].specialtySecond == "ПТМК_очн_бюдж"
+                        || list[i].specialtySecond == "ПТМК_очн_льгот" || list[i].specialtySecond == "ПТМК_очн_плат")
+                        || (list[i].specialtyThird == "ПТМК_заочн_плат" || list[i].specialtyThird == "ПТМК_очн_бюдж"
+                        || list[i].specialtyThird == "ПТМК_очн_льгот" || list[i].specialtyThird == "ПТМК_очн_плат")) {
+                    ptmk.add(list[i])
+                }
+            }
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -417,11 +432,17 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForMHT(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForMHT(it) }
 
+        scoreTypes?.physicsStudents?.let { checkForPTMK(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForPTMK(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForPTMK(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForPTMK(it) }
+
         showLog("Размер АТП: ${atp.size}")
         showLog("Размер КТО: ${kto.size}")
         showLog("Размер МАШ: ${mash.size}")
         showLog("Размер МиТМ: ${mitm.size}")
         showLog("Размер МХТ: ${mht.size}")
+        showLog("Размер ПТМК: ${ptmk.size}")
     }
 
 
