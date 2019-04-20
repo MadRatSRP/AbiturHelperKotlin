@@ -406,6 +406,23 @@ class PickUpSpecialtiesView
                 }
             }
         }
+        fun checkFotTMO(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_бюдж" || list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_льгот"
+                        || list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_плат" || list[i].specialtyFirst == "ТМО_очн_бюдж"
+                        || list[i].specialtyFirst == "ТМО_очн_льгот" || list[i].specialtyFirst == "ТМО_очн_плат"
+                        || list[i].specialtyFirst == "ТМО_очн_целевое") || (list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_бюдж"
+                        || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_льгот" || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_плат"
+                        || list[i].specialtySecond == "ТМО_очн_бюдж" || list[i].specialtySecond == "ТМО_очн_льгот"
+                        || list[i].specialtySecond == "ТМО_очн_плат" || list[i].specialtySecond == "ТМО_очн_целевое")
+                        || (list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_бюдж" || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_льгот"
+                        || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_плат" || list[i].specialtyThird == "ТМО_очн_бюдж"
+                        || list[i].specialtyThird == "ТМО_очн_льгот" || list[i].specialtyThird == "ТМО_очн_плат"
+                        || list[i].specialtyThird == "ТМО_очн_целевое")) {
+                    tmo.add(list[i])
+                }
+            }
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -437,12 +454,18 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForPTMK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForPTMK(it) }
 
+        scoreTypes?.physicsStudents?.let { checkFotTMO(it) }
+        scoreTypes?.computerScienceStudents?.let { checkFotTMO(it) }
+        scoreTypes?.socialScienceStudents?.let { checkFotTMO(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkFotTMO(it) }
+
         showLog("Размер АТП: ${atp.size}")
         showLog("Размер КТО: ${kto.size}")
         showLog("Размер МАШ: ${mash.size}")
         showLog("Размер МиТМ: ${mitm.size}")
         showLog("Размер МХТ: ${mht.size}")
         showLog("Размер ПТМК: ${ptmk.size}")
+        showLog("Размер ТМО: ${tmo.size}")
     }
 
 
