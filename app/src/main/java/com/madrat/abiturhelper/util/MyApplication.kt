@@ -5,6 +5,7 @@ import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.ScoreTypes
 import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.model.faculties.Unti
 
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }
@@ -13,6 +14,8 @@ class MyApplication: Application() {
     private var bachelors: ArrayList<Student>? = null
     private var scoreTypes: ScoreTypes? = null
     private var faculties: Faculties? = null
+
+    private var unti: Unti? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -116,5 +119,10 @@ class MyApplication: Application() {
                     "УНИТ - $unit, ФЭЭ - $fee")
         }
         return faculties
+    }
+    //УНТИ
+    fun saveUnti(unti: Unti) {
+        this.unti = unti
+        showLog("УНТИ сохранён")
     }
 }

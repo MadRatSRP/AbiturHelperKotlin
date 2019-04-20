@@ -11,6 +11,7 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultyAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
+import com.madrat.abiturhelper.model.faculties.Unti
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -484,6 +485,9 @@ class PickUpSpecialtiesView
         showLog("Размер ПТМК: ${ptmk.size}")
         showLog("Размер ТМО: ${tmo.size}")
         showLog("Размер УТС: ${uts.size}")
+
+        val unti = Unti(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
+        myApplication.saveUnti(unti)
     }
 
 
