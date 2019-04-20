@@ -423,6 +423,18 @@ class PickUpSpecialtiesView
                 }
             }
         }
+        fun checkForUTS(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "УТС_очн_бюдж" || list[i].specialtyFirst == "УТС_очн_льгот"
+                        || list[i].specialtyFirst == "УТС_очн_плат" || list[i].specialtyFirst == "УТС_очн_целевое")
+                        || (list[i].specialtySecond == "УТС_очн_бюдж" || list[i].specialtySecond == "УТС_очн_льгот"
+                        || list[i].specialtySecond == "УТС_очн_плат" || list[i].specialtySecond == "УТС_очн_целевое")
+                        || (list[i].specialtyThird == "УТС_очн_бюдж" || list[i].specialtyThird == "УТС_очн_льгот"
+                        || list[i].specialtyThird == "УТС_очн_плат" || list[i].specialtyThird == "УТС_очн_целевое")) {
+                    uts.add(list[i])
+                }
+            }
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -459,6 +471,11 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkFotTMO(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkFotTMO(it) }
 
+        scoreTypes?.physicsStudents?.let { checkForUTS(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForUTS(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForUTS(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForUTS(it) }
+
         showLog("Размер АТП: ${atp.size}")
         showLog("Размер КТО: ${kto.size}")
         showLog("Размер МАШ: ${mash.size}")
@@ -466,6 +483,7 @@ class PickUpSpecialtiesView
         showLog("Размер МХТ: ${mht.size}")
         showLog("Размер ПТМК: ${ptmk.size}")
         showLog("Размер ТМО: ${tmo.size}")
+        showLog("Размер УТС: ${uts.size}")
     }
 
 
