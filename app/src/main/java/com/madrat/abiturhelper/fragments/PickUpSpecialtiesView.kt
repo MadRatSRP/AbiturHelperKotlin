@@ -14,6 +14,7 @@ import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.Unti
 import com.madrat.abiturhelper.model.unti.ATP
 import com.madrat.abiturhelper.model.unti.KTO
+import com.madrat.abiturhelper.model.unti.MASH
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -529,6 +530,26 @@ class PickUpSpecialtiesView
             return KTO(atkmOchnBudg, atkmOchnLgot, atkmOchnPlat, tmOchnBudg, tmOchnLgot,
                     tmOchnPlat, tmOchnCelevoe, vechBudg, vechLgot, vechPlat)
         }
+        fun separateMASH(list: ArrayList<Student>): MASH {
+            val tmZaochnBudg = ArrayList<Student>()
+            val tmZaochnLgot = ArrayList<Student>()
+            val tmZaochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "МАШ(ТМ)_заочн_бюдж" || list[i].specialtySecond == "МАШ(ТМ)_заочн_бюдж"
+                        || list[i].specialtyThird == "МАШ(ТМ)_заочн_бюдж")
+                    tmZaochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(ТМ)_заочн_льгот" || list[i].specialtySecond == "МАШ(ТМ)_заочн_льгот"
+                        || list[i].specialtyThird == "МАШ(ТМ)_заочн_льгот")
+                    tmZaochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(ТМ)_заочн_плат" || list[i].specialtySecond == "МАШ(ТМ)_заочн_плат"
+                        || list[i].specialtyThird == "МАШ(ТМ)_заочн_плат")
+                    tmZaochnPlat.add(list[i])
+            }
+            showLog("МАШ с размером ${list.size} был разбит на ТМ_ЗаочноеБюджет - ${tmZaochnBudg.size}, " +
+                    "ТМ_ЗаочноеЛьготное - ${tmZaochnLgot.size}, ТМ_ЗаочноеПлатное - ${tmZaochnPlat.size}")
+            return MASH(tmZaochnBudg, tmZaochnLgot, tmZaochnPlat)
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -572,8 +593,8 @@ class PickUpSpecialtiesView
 
         val atpSeparated = separateATP(atp)
         val ktoSeparated = separateKTO(kto)
+        val mashSeparated = separateMASH(mash)
 
-        showLog("Размер МАШ: ${mash.size}")
         showLog("Размер МиТМ: ${mitm.size}")
         showLog("Размер МХТ: ${mht.size}")
         showLog("Размер ПТМК: ${ptmk.size}")
