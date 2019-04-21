@@ -613,6 +613,68 @@ class PickUpSpecialtiesView
                     "ОчноеПлатное - ${ochnPlat.size}")
             return PTMK(zaochnBudg, ochnBudg, ochnLgot, ochnPlat)
         }
+        fun separateTMO(list: ArrayList<Student>): TMO {
+            val oipmZaochnBudg = ArrayList<Student>()
+            val oipmZaochnLgot = ArrayList<Student>()
+            val oipmZaochnPlat = ArrayList<Student>()
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+            val ochnCelevoe = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_бюдж" || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_бюдж"
+                        || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_бюдж")
+                    oipmZaochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_льгот" || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_льгот"
+                        || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_льгот")
+                    oipmZaochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_плат" || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_плат"
+                        || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_плат")
+                    oipmZaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "ТМО_очн_бюдж" || list[i].specialtySecond == "ТМО_очн_бюдж"
+                        || list[i].specialtyThird == "ТМО_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ТМО_очн_льгот" || list[i].specialtySecond == "ТМО_очн_льгот"
+                        || list[i].specialtyThird == "ТМО_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "ТМО_очн_плат" || list[i].specialtySecond == "ТМО_очн_плат"
+                        || list[i].specialtyThird == "ТМО_очн_плат")
+                    ochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "ТМО_очн_целевое" || list[i].specialtySecond == "ТМО_очн_целевое"
+                        || list[i].specialtyThird == "ТМО_очн_целевое")
+                    ochnCelevoe.add(list[i])
+            }
+            showLog("ТМО с размером ${list.size} был разбит на ОИиПМ_ЗаочноеБюджет - ${oipmZaochnBudg.size}, " +
+                    "ОИиПМ_ЗаочноеЛьготное - ${oipmZaochnLgot.size}, ОИиПМ_ЗаочноеПлатное - ${oipmZaochnPlat.size}, " +
+                    "\nОчноеБюджет - ${ochnBudg.size}, ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}, " +
+                    "ОчноеЦелевое - ${ochnCelevoe.size}")
+            return TMO(oipmZaochnBudg, oipmZaochnLgot, oipmZaochnPlat, ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+        }
+        fun separateUTS(list: ArrayList<Student>): UTS {
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+            val ochnCelevoe = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "УТС_очн_бюдж" || list[i].specialtySecond == "УТС_очн_бюдж"
+                        || list[i].specialtyThird == "УТС_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "УТС_очн_льгот" || list[i].specialtySecond == "УТС_очн_льгот"
+                        || list[i].specialtyThird == "УТС_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "УТС_очн_плат" || list[i].specialtySecond == "УТС_очн_плат"
+                        || list[i].specialtyThird == "УТС_очн_плат")
+                    ochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "УТС_очн_целевое" || list[i].specialtySecond == "УТС_очн_целевое"
+                        || list[i].specialtyThird == "УТС_очн_целевое")
+                    ochnCelevoe.add(list[i])
+            }
+            showLog("УТС с размером ${list.size} был разбит на ОчноеБюджет - ${ochnBudg.size}, " +
+                    "ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}, ОчноеЦелевое - ${ochnCelevoe.size}")
+            return UTS(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -660,9 +722,8 @@ class PickUpSpecialtiesView
         val mitmSeparated = separateMiTM(mitm)
         val mhtSeparated = separateMHT(mht)
         val ptmkSeparated = separatePTMK(ptmk)
-
-        showLog("Размер ТМО: ${tmo.size}")
-        showLog("Размер УТС: ${uts.size}")
+        val tmoSeparated = separateTMO(tmo)
+        val utsSeparated = separateUTS(uts)
 
         val unti = Unti(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
         myApplication.saveUnti(unti)
