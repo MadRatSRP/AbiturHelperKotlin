@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.model.unti
+package com.madrat.abiturhelper.model.faculties.unti
 
 import com.madrat.abiturhelper.model.Student
 

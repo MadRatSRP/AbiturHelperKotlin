@@ -12,9 +12,7 @@ import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.Unti
-import com.madrat.abiturhelper.model.unti.ATP
-import com.madrat.abiturhelper.model.unti.KTO
-import com.madrat.abiturhelper.model.unti.MASH
+import com.madrat.abiturhelper.model.faculties.unti.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -550,6 +548,71 @@ class PickUpSpecialtiesView
                     "ТМ_ЗаочноеЛьготное - ${tmZaochnLgot.size}, ТМ_ЗаочноеПлатное - ${tmZaochnPlat.size}")
             return MASH(tmZaochnBudg, tmZaochnLgot, tmZaochnPlat)
         }
+        fun separateMiTM(list: ArrayList<Student>): MiTM {
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "МиТМ_очн_бюдж" || list[i].specialtySecond == "МиТМ_очн_бюдж"
+                        || list[i].specialtyThird == "МиТМ_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МиТМ_очн_льгот" || list[i].specialtySecond == "МиТМ_очн_льгот"
+                        || list[i].specialtyThird == "МиТМ_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МиТМ_очн_плат" || list[i].specialtySecond == "МиТМ_очн_плат"
+                        || list[i].specialtyThird == "МиТМ_очн_плат")
+                    ochnPlat.add(list[i])
+            }
+            showLog("МиТМ с размером ${list.size} был разбит на ОчноеБюджет - ${ochnBudg.size}, " +
+                    "ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}")
+            return MiTM(ochnBudg, ochnLgot, ochnPlat)
+        }
+        fun separateMHT(list: ArrayList<Student>): MHT {
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "МХТ_очн_бюдж" || list[i].specialtySecond == "МХТ_очн_бюдж"
+                        || list[i].specialtyThird == "МХТ_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МХТ_очн_льгот" || list[i].specialtySecond == "МХТ_очн_льгот"
+                        || list[i].specialtyThird == "МХТ_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МХТ_очн_плат" || list[i].specialtySecond == "МХТ_очн_плат"
+                        || list[i].specialtyThird == "МХТ_очн_плат")
+                    ochnPlat.add(list[i])
+            }
+            showLog("МХТ с размером ${list.size} был разбит на ОчноеБюджет - ${ochnBudg.size}, " +
+                    "ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}")
+            return MHT(ochnBudg, ochnLgot, ochnPlat)
+        }
+        fun separatePTMK(list: ArrayList<Student>): PTMK {
+            val zaochnBudg = ArrayList<Student>()
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "ПТМК_заочн_плат" || list[i].specialtySecond == "ПТМК_заочн_плат"
+                        || list[i].specialtyThird == "ПТМК_заочн_плат")
+                    zaochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ПТМК_очн_бюдж" || list[i].specialtySecond == "ПТМК_очн_бюдж"
+                        || list[i].specialtyThird == "ПТМК_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ПТМК_очн_льгот" || list[i].specialtySecond == "ПТМК_очн_льгот"
+                        || list[i].specialtyThird == "ПТМК_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "ПТМК_очн_плат" || list[i].specialtySecond == "ПТМК_очн_плат"
+                        || list[i].specialtyThird == "ПТМК_очн_плат")
+                    ochnPlat.add(list[i])
+            }
+            showLog("ПТМК с размером ${list.size} был разбит на ЗаочноеБюджет - ${zaochnBudg.size}, " +
+                    "ОчноеБюджет - ${ochnBudg.size}, ОчноеЛьготное - ${ochnLgot.size}, " +
+                    "ОчноеПлатное - ${ochnPlat.size}")
+            return PTMK(zaochnBudg, ochnBudg, ochnLgot, ochnPlat)
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -594,10 +657,10 @@ class PickUpSpecialtiesView
         val atpSeparated = separateATP(atp)
         val ktoSeparated = separateKTO(kto)
         val mashSeparated = separateMASH(mash)
+        val mitmSeparated = separateMiTM(mitm)
+        val mhtSeparated = separateMHT(mht)
+        val ptmkSeparated = separatePTMK(ptmk)
 
-        showLog("Размер МиТМ: ${mitm.size}")
-        showLog("Размер МХТ: ${mht.size}")
-        showLog("Размер ПТМК: ${ptmk.size}")
         showLog("Размер ТМО: ${tmo.size}")
         showLog("Размер УТС: ${uts.size}")
 
