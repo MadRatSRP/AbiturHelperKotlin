@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.adapter.SpecialtyAdapter
+import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.linearManager
@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_specialties.view.*
 class ShowSpecialtiesView
     : Fragment(), ShowSpecialtiesMVP.View {
     companion object { val instance = ShowSpecialtiesView() }
-    private var adapter: SpecialtyAdapter? = null
+    private var adapter: SpecialtiesAdapter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -35,7 +35,7 @@ class ShowSpecialtiesView
         val list = arguments?.getSerializable("array") as? ArrayList<Specialty> ?: return null
         //val array = bundle.getSerializable("array")
 
-        adapter = SpecialtyAdapter()
+        adapter = SpecialtiesAdapter()
         view.specialtiesRecyclerView.adapter = adapter
 
         view.specialtiesRecyclerView.linearManager()

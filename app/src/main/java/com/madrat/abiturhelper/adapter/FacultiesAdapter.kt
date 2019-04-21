@@ -9,8 +9,8 @@ import com.madrat.abiturhelper.util.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_faculties.*
 
-class FacultyAdapter(private val clickListener: (Faculty, Int) -> Unit)
-    : RecyclerView.Adapter<FacultyAdapter.FacultyHolder>(){
+class FacultiesAdapter(private val clickListener: (Faculty, Int) -> Unit)
+    : RecyclerView.Adapter<FacultiesAdapter.FacultiesHolder>(){
     private var faculties = ArrayList<Faculty>()
 
     fun updateFacultiesList(new_faculties: ArrayList<Faculty>) {
@@ -19,16 +19,16 @@ class FacultyAdapter(private val clickListener: (Faculty, Int) -> Unit)
         this.notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacultyHolder
-            = FacultyHolder(parent.inflate(R.layout.list_faculties))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacultiesHolder
+            = FacultiesHolder(parent.inflate(R.layout.list_faculties))
 
-    override fun onBindViewHolder(holder: FacultyHolder, position: Int)
+    override fun onBindViewHolder(holder: FacultiesHolder, position: Int)
             = holder.bind(position, faculties[position], clickListener)
 
     override fun getItemCount(): Int
             = faculties.size
 
-    inner class FacultyHolder internal constructor(override val containerView: View)
+    inner class FacultiesHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(position: Int, faculty: Faculty, clickListener: (Faculty, Int) -> Unit) {
             containerView.setOnClickListener { clickListener(faculty, position) }

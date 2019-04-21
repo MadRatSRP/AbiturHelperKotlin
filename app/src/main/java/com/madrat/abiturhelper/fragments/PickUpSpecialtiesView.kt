@@ -8,10 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.adapter.FacultyAdapter
+import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.Unti
+import com.madrat.abiturhelper.model.unti.ATP
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -24,7 +25,7 @@ import java.io.InputStreamReader
 
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
-    private var adapter: FacultyAdapter? = null
+    private var adapter: FacultiesAdapter? = null
 
     private val myApplication = MyApplication.instance
 
@@ -53,7 +54,7 @@ class PickUpSpecialtiesView
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
         val view = inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
 
-        adapter = FacultyAdapter{faculty: Faculty, position: Int -> onItemClicked(faculty, position)}
+        adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onItemClicked(faculty, position)}
         view.pickUpSpecialtiesRecyclerView.adapter = adapter
 
         return view
@@ -437,6 +438,44 @@ class PickUpSpecialtiesView
             }
         }
 
+        fun separateATP(list: ArrayList<Student>): ATP {
+            val zaochnBudg = ArrayList<Student>()
+            val zaochnLgot = ArrayList<Student>()
+            val zaochnPlat = ArrayList<Student>()
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+            val ochnCelevoe = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtySecond == "АТП_заочн_бюдж"
+                        || list[i].specialtyThird == "АТП_заочн_бюдж")
+                    zaochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_льгот"
+                        || list[i].specialtyThird == "АТП_заочн_льгот")
+                    zaochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtySecond == "АТП_заочн_плат"
+                        || list[i].specialtyThird == "АТП_заочн_плат")
+                    zaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_бюдж"
+                        || list[i].specialtyThird == "АТП_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtySecond == "АТП_очн_льгот"
+                        || list[i].specialtyThird == "АТП_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_плат"
+                        || list[i].specialtyThird == "АТП_очн_плат")
+                    ochnPlat.add(list[i])
+                else if(list[i].specialtyFirst == "АТП_очн_целевое" || list[i].specialtySecond == "АТП_очн_целевое"
+                        || list[i].specialtyThird == "АТП_очн_целевое")
+                    ochnCelevoe.add(list[i])
+            }
+            showLog("АТП с размером ${list.size} был разбит на ЗаочноеБюджет - ${zaochnBudg.size}, ЗаочноеЛьгот - ${zaochnLgot.size}, " +
+                    "ЗаочноеПлат - ${zaochnPlat.size},\nОчноеБюджет - ${ochnBudg.size}, ОчноеЛьгот -  ${ochnLgot.size}, " +
+                    "ОчноеПлат - ${ochnPlat.size}, ОчноеЦелевое -  ${ochnCelevoe.size}")
+            return ATP(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+        }
+
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
         scoreTypes?.socialScienceStudents?.let { checkForATP(it) }
@@ -477,7 +516,8 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForUTS(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForUTS(it) }
 
-        showLog("Размер АТП: ${atp.size}")
+        val atpSeparated = separateATP(atp)
+
         showLog("Размер КТО: ${kto.size}")
         showLog("Размер МАШ: ${mash.size}")
         showLog("Размер МиТМ: ${mitm.size}")
