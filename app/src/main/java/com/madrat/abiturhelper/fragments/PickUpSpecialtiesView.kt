@@ -13,6 +13,7 @@ import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.Unti
 import com.madrat.abiturhelper.model.unti.ATP
+import com.madrat.abiturhelper.model.unti.KTO
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -475,6 +476,59 @@ class PickUpSpecialtiesView
                     "ОчноеПлат - ${ochnPlat.size}, ОчноеЦелевое -  ${ochnCelevoe.size}")
             return ATP(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
         }
+        fun separateKTO(list: ArrayList<Student>): KTO {
+            val atkmOchnBudg = ArrayList<Student>()
+            val atkmOchnLgot = ArrayList<Student>()
+            val atkmOchnPlat = ArrayList<Student>()
+            val tmOchnBudg = ArrayList<Student>()
+            val tmOchnLgot = ArrayList<Student>()
+            val tmOchnPlat = ArrayList<Student>()
+            val tmOchnCelevoe = ArrayList<Student>()
+            val vechBudg = ArrayList<Student>()
+            val vechLgot = ArrayList<Student>()
+            val vechPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtySecond == "КТО(АТиКМ)_очн_бюдж"
+                        || list[i].specialtyThird == "КТО(АТиКМ)_очн_бюдж")
+                    atkmOchnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "КТО(АТиКМ)_очн_льгот" || list[i].specialtySecond == "КТО(АТиКМ)_очн_льгот"
+                        || list[i].specialtyThird == "КТО(АТиКМ)_очн_льгот")
+                    atkmOchnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "КТО(АТиКМ)_очн_плат" || list[i].specialtySecond == "КТО(АТиКМ)_очн_плат"
+                        || list[i].specialtyThird == "КТО(АТиКМ)_очн_плат")
+                    atkmOchnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "КТО(ТМ)_очн_бюдж" || list[i].specialtySecond == "КТО(ТМ)_очн_бюдж"
+                        || list[i].specialtyThird == "КТО(ТМ)_очн_бюдж")
+                    tmOchnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "КТО(ТМ)_очн_льгот" || list[i].specialtySecond == "КТО(ТМ)_очн_льгот"
+                        || list[i].specialtyThird == "КТО(ТМ)_очн_льгот")
+                    tmOchnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "КТО(ТМ)_очн_плат" || list[i].specialtySecond == "КТО(ТМ)_очн_плат"
+                        || list[i].specialtyThird == "КТО(ТМ)_очн_плат")
+                    tmOchnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "КТО(ТМ)_очн_целевое" || list[i].specialtySecond == "КТО(ТМ)_очн_целевое"
+                        || list[i].specialtyThird == "КТО(ТМ)_очн_целевое")
+                    tmOchnCelevoe.add(list[i])
+                else if (list[i].specialtyFirst == "КТО_веч_бюдж" || list[i].specialtySecond == "КТО_веч_бюдж"
+                        || list[i].specialtyThird == "КТО_веч_бюдж")
+                    vechBudg.add(list[i])
+                else if (list[i].specialtyFirst == "КТО_веч_льгот" || list[i].specialtySecond == "КТО_веч_льгот"
+                        || list[i].specialtyThird == "КТО_веч_льгот")
+                    vechLgot.add(list[i])
+                else if (list[i].specialtyFirst == "КТО_веч_плат" || list[i].specialtySecond == "КТО_веч_плат"
+                        || list[i].specialtyThird == "КТО_веч_плат")
+                    vechPlat.add(list[i])
+            }
+            showLog("КТО с размером ${list.size} был разбит на АТиКМ_ОчноеБюджет - ${atkmOchnBudg.size}, " +
+                    "АТиКМ_ОчноеЛьготное - ${atkmOchnLgot.size}, АТиКМ_ОчноеПлатное - ${atkmOchnPlat.size}," +
+                    "\nТМ_ОчноеБюджет - ${tmOchnBudg.size}, ТМ_ОчноеЛьготное -  ${tmOchnLgot.size}, " +
+                    "ТМ_ОчноеПлатное - ${tmOchnPlat.size}, ТМ_ОчноеЦелевое -  ${tmOchnCelevoe.size}, " +
+                    "ВечернееБюджет - ${vechBudg.size}, ВечернееЛьготное - ${vechLgot.size}, " +
+                    "ВечернееПлатное - ${vechPlat.size}")
+            return KTO(atkmOchnBudg, atkmOchnLgot, atkmOchnPlat, tmOchnBudg, tmOchnLgot,
+                    tmOchnPlat, tmOchnCelevoe, vechBudg, vechLgot, vechPlat)
+        }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
         scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
@@ -517,8 +571,8 @@ class PickUpSpecialtiesView
         scoreTypes?.partAndAllDataStudents?.let { checkForUTS(it) }
 
         val atpSeparated = separateATP(atp)
+        val ktoSeparated = separateKTO(kto)
 
-        showLog("Размер КТО: ${kto.size}")
         showLog("Размер МАШ: ${mash.size}")
         showLog("Размер МиТМ: ${mitm.size}")
         showLog("Размер МХТ: ${mht.size}")
