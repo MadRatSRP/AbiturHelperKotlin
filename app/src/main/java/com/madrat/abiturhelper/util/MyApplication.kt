@@ -125,4 +125,7 @@ class MyApplication: Application() {
         this.unti = unti
         showLog("УНТИ сохранён")
     }
+    fun returnUnti(): Unti? {
+        return unti
+    }
 }

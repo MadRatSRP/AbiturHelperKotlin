@@ -42,5 +42,14 @@
     <fragment
         android:id="@+id/showSpecialtiesView"
         android:name="com.madrat.abiturhelper.fragments.ShowSpecialtiesView"
-        tools:layout="@layout/fragment_specialties" />
+        tools:layout="@layout/fragment_specialties" >
+        <action
+            android:id="@+id/action_showSpecialtiesView_to_showBachelors"
+            app:destination="@id/showBachelors" />
+    </fragment>
+    <fragment
+        android:id="@+id/showBachelors"
+        android:name="com.madrat.abiturhelper.fragments.ShowBachelors"
+        android:label="fragment_show_bachelors"
+        tools:layout="@layout/fragment_show_bachelors" />
 </navigation>

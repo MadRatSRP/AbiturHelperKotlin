@@ -30,6 +30,6 @@ interface PickUpSpecialtiesMVP {
 
         fun showFaculties(faculties: ArrayList<Faculty>)
         fun toSpecialties(bundle: Bundle)
-        fun onItemClicked(faculty: Faculty, position: Int)
+        fun onFacultyClicked(faculty: Faculty, position: Int)
     }
 }

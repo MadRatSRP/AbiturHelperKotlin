@@ -54,7 +54,7 @@ class PickUpSpecialtiesView
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
         val view = inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
 
-        adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onItemClicked(faculty, position)}
+        adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onFacultyClicked(faculty, position)}
         view.pickUpSpecialtiesRecyclerView.adapter = adapter
 
         return view
@@ -725,7 +725,8 @@ class PickUpSpecialtiesView
         val tmoSeparated = separateTMO(tmo)
         val utsSeparated = separateUTS(uts)
 
-        val unti = Unti(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
+        val unti = Unti(atpSeparated, ktoSeparated, mashSeparated, mitmSeparated, mhtSeparated,
+                ptmkSeparated, tmoSeparated, utsSeparated)
         myApplication.saveUnti(unti)
     }
 
@@ -741,7 +742,7 @@ class PickUpSpecialtiesView
             pickUpSpecialtiesRecyclerView.adapter = adapter
         }*/
     }
-    override fun onItemClicked(faculty: Faculty, position: Int) {
+    override fun onFacultyClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
         val bundle = Bundle()
         val faculties = myApplication.returnFaculties()
@@ -779,6 +780,7 @@ class PickUpSpecialtiesView
             }
         }
     }
+
     override fun toSpecialties(bundle: Bundle) {
         view?.let {
             Navigation.findNavController(it)

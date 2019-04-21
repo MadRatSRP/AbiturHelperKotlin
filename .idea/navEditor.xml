@@ -100,6 +100,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="showBachelors">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="986" />
+                            <option name="y" value="319" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="showSpecialtiesView">
                     <value>
                       <LayoutPositions>
@@ -108,6 +120,15 @@
                             <option name="x" value="645" />
                             <option name="y" value="314" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_showSpecialtiesView_to_showBachelors">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
