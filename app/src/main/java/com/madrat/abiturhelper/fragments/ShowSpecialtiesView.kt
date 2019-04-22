@@ -11,9 +11,11 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
+import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
+import com.madrat.abiturhelper.util.stringAndSerializable
 import kotlinx.android.synthetic.main.fragment_specialties.*
 import kotlinx.android.synthetic.main.fragment_specialties.view.*
 
@@ -59,15 +61,29 @@ class ShowSpecialtiesView
         val bundle = Bundle()
         val unti = myApplication.returnUnti()
 
+        fun moveToSpecialty(list: ArrayList<Student>) {
+            bundle.stringAndSerializable(specialty, list)
+            toSpecialty(bundle)
+        }
+
         unti?.let {
             when (position) {
                 0 -> {
+                    //moveToSpecialty(it.specialtiesATP.zaochnBudg)
                     bundle.putString("title", specialty.shortName)
                     bundle.putSerializable("array", it.specialtiesATP.zaochnBudg)
                     toSpecialty(bundle)
                 }
+
+
             }
         }
+
+
+
+        /*unti?.let {
+
+        }*/
     }
 
     override fun toSpecialty(bundle: Bundle) {
