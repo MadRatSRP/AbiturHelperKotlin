@@ -68,22 +68,28 @@ class ShowSpecialtiesView
 
         unti?.let {
             when (position) {
-                0 -> {
-                    //moveToSpecialty(it.specialtiesATP.zaochnBudg)
-                    bundle.putString("title", specialty.shortName)
-                    bundle.putSerializable("array", it.specialtiesATP.zaochnBudg)
-                    toSpecialty(bundle)
-                }
+                //АТП
+                0 -> moveToSpecialty(it.specialtiesATP.zaochnBudg)
+                1 -> moveToSpecialty(it.specialtiesATP.zaochnLgot)
+                2 -> moveToSpecialty(it.specialtiesATP.zaochnPlat)
+                3 -> moveToSpecialty(it.specialtiesATP.ochnBudg)
+                4 -> moveToSpecialty(it.specialtiesATP.ochnLgot)
+                5 -> moveToSpecialty(it.specialtiesATP.ochnPlat)
+                6 -> moveToSpecialty(it.specialtiesATP.ochnCelevoe)
 
-
+                //КТО
+                7 -> moveToSpecialty(it.specialtiesKTO.atkmOchnBudg)
+                8 -> moveToSpecialty(it.specialtiesKTO.atkmOchnLgot)
+                9 -> moveToSpecialty(it.specialtiesKTO.atkmOchnPlat)
+                10 -> moveToSpecialty(it.specialtiesKTO.tmOchnBudg)
+                11 -> moveToSpecialty(it.specialtiesKTO.tmOchnLgot)
+                12 -> moveToSpecialty(it.specialtiesKTO.tmOchnPlat)
+                13 -> moveToSpecialty(it.specialtiesKTO.tmOchnCelevoe)
+                14 -> moveToSpecialty(it.specialtiesKTO.vechBudg)
+                15 -> moveToSpecialty(it.specialtiesKTO.vechLgot)
+                16 -> moveToSpecialty(it.specialtiesKTO.vechPlat)
             }
         }
-
-
-
-        /*unti?.let {
-
-        }*/
     }
 
     override fun toSpecialty(bundle: Bundle) {

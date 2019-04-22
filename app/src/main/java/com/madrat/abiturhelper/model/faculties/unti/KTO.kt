@@ -3,14 +3,14 @@ package com.madrat.abiturhelper.model.faculties.unti
 import com.madrat.abiturhelper.model.Student
 
 data class KTO(
-        val atkmOchnBudg: List<Student>,
-        val atkmOchnLgot: List<Student>,
-        val atkmOchnPlat: List<Student>,
-        val tmOchnBudg: List<Student>,
-        val tmOchnLgot: List<Student>,
-        val tmOchnPlat: List<Student>,
-        val tmOchnCelevoe: List<Student>,
-        val vechBudg: List<Student>,
-        val vechLgot: List<Student>,
-        val vechPlat: List<Student>
+        val atkmOchnBudg: ArrayList<Student>,
+        val atkmOchnLgot: ArrayList<Student>,
+        val atkmOchnPlat: ArrayList<Student>,
+        val tmOchnBudg: ArrayList<Student>,
+        val tmOchnLgot: ArrayList<Student>,
+        val tmOchnPlat: ArrayList<Student>,
+        val tmOchnCelevoe: ArrayList<Student>,
+        val vechBudg: ArrayList<Student>,
+        val vechLgot: ArrayList<Student>,
+        val vechPlat: ArrayList<Student>
 )
