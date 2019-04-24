@@ -22,6 +22,7 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
         setupFields()
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
