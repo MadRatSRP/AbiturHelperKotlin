@@ -208,11 +208,13 @@ class PickUpSpecialtiesView
         val bachelors = myApplication.returnBachelors()
 
         val scoreTypes = ScoreTypes(
+                bachelors?.let { withdrawStudentsWithoutData(it) },
+
                 bachelors?.let { withdrawPhysicsStudents(it) },
                 bachelors?.let { withdrawComputerScienceStudents(it) },
                 bachelors?.let { withdrawSocialScienceStudents(it) },
-                bachelors?.let { withdrawStudentsWithPartAndFullData(it) },
-                bachelors?.let { withdrawStudentsWithoutData(it) }
+                bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
+
         )
 
         myApplication.saveScoreTypes(scoreTypes)
@@ -234,12 +236,16 @@ class PickUpSpecialtiesView
         val physicsStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if (bachelors[i].maths != null && bachelors[i].russian != null) {
+            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (bachelors[i].physics != null
+                            && bachelors[i].computerScience == null && bachelors[i].socialScience == null)) {
+                physicsStudents.add(bachelors[i])
+            }
+            /*if (bachelors[i].maths != null && bachelors[i].russian != null) {
                 if (bachelors[i].physics != null && bachelors[i].computerScience == null
                         && bachelors[i].socialScience == null) {
-                    physicsStudents.add(bachelors[i])
+
                 }
-            }
+            }*/
         }
         return physicsStudents
     }
@@ -247,11 +253,13 @@ class PickUpSpecialtiesView
         val computerScienceStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if (bachelors[i].maths != null && bachelors[i].russian != null) {
-                if (bachelors[i].physics == null && bachelors[i].computerScience != null
+            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (bachelors[i].physics == null
+                            && bachelors[i].computerScience != null && bachelors[i].socialScience == null)) {
+                computerScienceStudents.add(bachelors[i])
+                /*if (bachelors[i].physics == null && bachelors[i].computerScience != null
                         && bachelors[i].socialScience == null) {
                     computerScienceStudents.add(bachelors[i])
-                }
+                }*/
             }
         }
         return computerScienceStudents
@@ -260,11 +268,13 @@ class PickUpSpecialtiesView
         val socialScienceStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if (bachelors[i].maths != null && bachelors[i].russian != null) {
-                if (bachelors[i].physics == null && bachelors[i].computerScience == null
+            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (bachelors[i].physics == null
+                            && bachelors[i].computerScience == null && bachelors[i].socialScience != null)) {
+                socialScienceStudents.add(bachelors[i])
+                /*if (bachelors[i].physics == null && bachelors[i].computerScience == null
                         && bachelors[i].socialScience != null) {
                     socialScienceStudents.add(bachelors[i])
-                }
+                }*/
             }
         }
         return socialScienceStudents
@@ -273,14 +283,19 @@ class PickUpSpecialtiesView
         val partAndAllDataStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if (bachelors[i].maths != null && bachelors[i].russian != null) {
-                if (!(bachelors[i].physics != null && bachelors[i].computerScience == null
+            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (!(bachelors[i].physics != null
+                            && bachelors[i].computerScience == null && bachelors[i].socialScience == null)
+                            && !(bachelors[i].physics == null && bachelors[i].computerScience != null
+                            && bachelors[i].socialScience == null) && !(bachelors[i].physics == null
+                            && bachelors[i].computerScience == null && bachelors[i].socialScience != null))) {
+                partAndAllDataStudents.add(bachelors[i])
+                /*if (!(bachelors[i].physics != null && bachelors[i].computerScience == null
                     && bachelors[i].socialScience == null) && !(bachelors[i].physics == null &&
                     bachelors[i].computerScience != null && bachelors[i].socialScience == null) &&
                     !(bachelors[i].physics == null && bachelors[i].computerScience == null
                     && bachelors[i].socialScience != null)) {
                     partAndAllDataStudents.add(bachelors[i])
-                }
+                }*/
             }
         }
         return partAndAllDataStudents
@@ -291,6 +306,7 @@ class PickUpSpecialtiesView
         for (i in 0 until bachelors.size) {
             if (!(bachelors[i].maths != null && bachelors[i].russian != null)) {
                 noOrNotEnoughDataStudents.add(bachelors[i])
+                //bachelors.removeAt(i)
             }
         }
         return noOrNotEnoughDataStudents

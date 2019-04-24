@@ -69,7 +69,12 @@ class ShowSpecialtiesView
         unti?.let {
             when (position) {
                 //АТП
-                0 -> moveToSpecialty(it.specialtiesATP.zaochnBudg)
+                0 -> {
+                    moveToSpecialty(it.specialtiesATP.zaochnBudg)
+                    for (i in 0 until 10) {
+                        showLog(it.specialtiesATP.zaochnBudg[i].toString())
+                    }
+                }
                 1 -> moveToSpecialty(it.specialtiesATP.zaochnLgot)
                 2 -> moveToSpecialty(it.specialtiesATP.zaochnPlat)
                 3 -> moveToSpecialty(it.specialtiesATP.ochnBudg)
