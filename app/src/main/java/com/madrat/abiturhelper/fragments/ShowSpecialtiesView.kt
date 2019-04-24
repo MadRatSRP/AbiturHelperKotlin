@@ -36,10 +36,10 @@ class ShowSpecialtiesView
         (activity as AppCompatActivity).supportActionBar?.title = title
         val view = inflater.inflate(R.layout.fragment_specialties, container, false)
 
-        //val bundle = Bundle()
         @Suppress("UNCHECKED_CAST")
         val list = arguments?.getSerializable("array") as? ArrayList<Specialty> ?: return null
-        //val array = bundle.getSerializable("array")
+
+        //val list = arguments?.getSerializable("array") is ArrayList<*>
 
         adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onSpecialtyClicked(specialty, position)}
         view.specialtiesRecyclerView.adapter = adapter
@@ -51,7 +51,7 @@ class ShowSpecialtiesView
         return view
     }
 
-    override fun showSpecialties(specialties: List<Specialty>) {
+    override fun showSpecialties(specialties: ArrayList<Specialty>) {
         adapter?.updateSpecialtiesList(specialties)
         specialtiesRecyclerView?.adapter = adapter
     }
@@ -105,7 +105,12 @@ class ShowSpecialtiesView
                 28 -> moveToSpecialty(it.specialtiesPTMK.ochnLgot)
                 29 -> moveToSpecialty(it.specialtiesPTMK.ochnPlat)
                 //ТМО
-                30 -> moveToSpecialty(it.specialtiesTMO.oipmZaochnBudg)
+                30 -> {
+                    moveToSpecialty(it.specialtiesTMO.oipmZaochnBudg)
+                    for (i in 0 until it.specialtiesTMO.oipmZaochnBudg.size) {
+                        showLog(it.specialtiesTMO.oipmZaochnBudg[i].toString())
+                    }
+                }
                 31 -> moveToSpecialty(it.specialtiesTMO.oipmZaochnLgot)
                 32 -> moveToSpecialty(it.specialtiesTMO.oipmZaochnPlat)
                 33 -> moveToSpecialty(it.specialtiesTMO.ochnBudg)

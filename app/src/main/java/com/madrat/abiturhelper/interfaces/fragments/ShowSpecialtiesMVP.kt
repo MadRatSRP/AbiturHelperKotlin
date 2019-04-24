@@ -5,7 +5,7 @@ import com.madrat.abiturhelper.model.Specialty
 
 interface ShowSpecialtiesMVP {
     interface View {
-        fun showSpecialties(specialties: List<Specialty>)
+        fun showSpecialties(specialties: ArrayList<Specialty>)
         fun toSpecialty(bundle: Bundle)
     }
 

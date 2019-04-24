@@ -48,3 +48,7 @@ fun Bundle.stringAndSerializable(specialty: Specialty, list: ArrayList<Student>)
     this.putString("title", specialty.shortName)
     this.putSerializable("array", list)
 }
+fun Bundle.stringAndSerializable(title: String, list: ArrayList<Specialty>) {
+    this.putString("title", title)
+    this.putSerializable("array", list)
+}

@@ -29,10 +29,8 @@ class ShowBachelors: Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = title
         val view = inflater.inflate(R.layout.fragment_show_bachelors, container, false)
 
-        //val bundle = Bundle()
         @Suppress("UNCHECKED_CAST")
         val list = arguments?.getSerializable("array") as? ArrayList<Student> ?: return null
-        //val array = bundle.getSerializable("array")
 
         adapter = BachelorsAdapter()
         //adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onSpecialtyClicked(specialty, position)}

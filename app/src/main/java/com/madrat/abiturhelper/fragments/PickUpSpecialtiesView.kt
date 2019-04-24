@@ -16,6 +16,7 @@ import com.madrat.abiturhelper.model.faculties.unti.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
+import com.madrat.abiturhelper.util.stringAndSerializable
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.*
 import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
 import org.apache.commons.csv.CSVFormat
@@ -747,36 +748,24 @@ class PickUpSpecialtiesView
         val bundle = Bundle()
         val faculties = myApplication.returnFaculties()
 
-        when (position) {
-            0 -> {
-                bundle.putString("title", "УНТИ")
-                bundle.putSerializable("array", faculties?.untiList)
-                toSpecialties(bundle)
-            }
-            1 -> {
-                bundle.putString("title", "ФЭУ")
-                bundle.putSerializable("array", faculties?.feuList)
-                toSpecialties(bundle)
-            }
-            2 -> {
-                bundle.putString("title", "ФИТ")
-                bundle.putSerializable("array", faculties?.fitList)
-                toSpecialties(bundle)
-            }
-            3 -> {
-                bundle.putString("title", "МТФ")
-                bundle.putSerializable("array", faculties?.mtfList)
-                toSpecialties(bundle)
-            }
-            4 -> {
-                bundle.putString("title", "УНИТ")
-                bundle.putSerializable("array", faculties?.unitList)
-                toSpecialties(bundle)
-            }
-            5 -> {
-                bundle.putString("title", "ФЭЭ")
-                bundle.putSerializable("array", faculties?.feeList)
-                toSpecialties(bundle)
+        fun moveToSpecialties(title: String, list: ArrayList<Specialty>) {
+            bundle.stringAndSerializable(title, list)
+            toSpecialties(bundle)
+        }
+        faculties?.let {
+            when (position) {
+                //УНТИ
+                0 -> moveToSpecialties("УНТИ", it.untiList)
+                //ФЭУ
+                1 -> moveToSpecialties("ФЭУ", it.feuList)
+                //ФИТ
+                2 -> moveToSpecialties("ФИТ", it.fitList)
+                //МТФ
+                3 -> moveToSpecialties("МТФ", it.mtfList)
+                //УНИТ
+                4 -> moveToSpecialties("УНИТ", it.unitList)
+                //ФЭЭ
+                5 -> moveToSpecialties("ФЭЭ", it.feeList)
             }
         }
     }
