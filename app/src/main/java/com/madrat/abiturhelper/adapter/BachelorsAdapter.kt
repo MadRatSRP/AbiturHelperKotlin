@@ -34,7 +34,8 @@ class BachelorsAdapter
             /*facultyName.text = faculty.name
             entriesTotalValue.text = faculty.entriesTotalAmount.toString()
             entriesFreeValue.text = faculty.entriesFreeAmount.toString()*/
-            bachelorNameValue.text = student.firstName
+            bachelorFirstName.text = student.firstName
+            bachelorLastName.text = student.lastName
             bachelorMathsValue.text = student.maths.toString()
         }
     }

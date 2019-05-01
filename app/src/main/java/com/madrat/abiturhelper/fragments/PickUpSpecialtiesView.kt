@@ -208,7 +208,7 @@ class PickUpSpecialtiesView
         val bachelors = myApplication.returnBachelors()
         showLog("Бакалавры: " + bachelors?.size.toString())
 
-        /*val new_bachelors = ArrayList<Student>()
+        val new_bachelors = ArrayList<Student>()
 
 
         bachelors?.let {
@@ -219,16 +219,15 @@ class PickUpSpecialtiesView
                 }
             }
             showLog(new_bachelors.size.toString())
-        }*/
+        }
 
 
         val scoreTypes = ScoreTypes(
-                /*new_*/bachelors?.let { withdrawStudentsWithoutData(it) },
-                /*new_*/bachelors?.let { withdrawPhysicsStudents(it) },
-                /*new_*/bachelors?.let { withdrawComputerScienceStudents(it) },
-                /*new_*/bachelors?.let { withdrawSocialScienceStudents(it) },
-                /*new_*/bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
-
+            withdrawPhysicsStudents(new_bachelors),
+            withdrawComputerScienceStudents(new_bachelors),
+            withdrawSocialScienceStudents(new_bachelors),
+            withdrawStudentsWithoutData(new_bachelors),
+            withdrawStudentsWithPartAndFullData(new_bachelors)
         )
 
         myApplication.saveScoreTypes(scoreTypes)
@@ -250,16 +249,10 @@ class PickUpSpecialtiesView
         val physicsStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (bachelors[i].physics != null
-                            && bachelors[i].computerScience == null && bachelors[i].socialScience == null)) {
+            if (bachelors[i].physics != null && bachelors[i].computerScience == null
+                            && bachelors[i].socialScience == null) {
                 physicsStudents.add(bachelors[i])
             }
-            /*if (bachelors[i].maths != null && bachelors[i].russian != null) {
-                if (bachelors[i].physics != null && bachelors[i].computerScience == null
-                        && bachelors[i].socialScience == null) {
-
-                }
-            }*/
         }
         return physicsStudents
     }
@@ -267,13 +260,9 @@ class PickUpSpecialtiesView
         val computerScienceStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (bachelors[i].physics == null
-                            && bachelors[i].computerScience != null && bachelors[i].socialScience == null)) {
+            if (bachelors[i].physics == null && bachelors[i].computerScience != null
+                            && bachelors[i].socialScience == null) {
                 computerScienceStudents.add(bachelors[i])
-                /*if (bachelors[i].physics == null && bachelors[i].computerScience != null
-                        && bachelors[i].socialScience == null) {
-                    computerScienceStudents.add(bachelors[i])
-                }*/
             }
         }
         return computerScienceStudents
@@ -282,13 +271,9 @@ class PickUpSpecialtiesView
         val socialScienceStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (bachelors[i].physics == null
-                            && bachelors[i].computerScience == null && bachelors[i].socialScience != null)) {
+            if (bachelors[i].physics == null && bachelors[i].computerScience == null
+                    && bachelors[i].socialScience != null) {
                 socialScienceStudents.add(bachelors[i])
-                /*if (bachelors[i].physics == null && bachelors[i].computerScience == null
-                        && bachelors[i].socialScience != null) {
-                    socialScienceStudents.add(bachelors[i])
-                }*/
             }
         }
         return socialScienceStudents
@@ -297,19 +282,11 @@ class PickUpSpecialtiesView
         val partAndAllDataStudents = ArrayList<Student>()
 
         for (i in 0 until bachelors.size) {
-            if ((bachelors[i].maths != null && bachelors[i].russian != null) && (!(bachelors[i].physics != null
-                            && bachelors[i].computerScience == null && bachelors[i].socialScience == null)
-                            && !(bachelors[i].physics == null && bachelors[i].computerScience != null
-                            && bachelors[i].socialScience == null) && !(bachelors[i].physics == null
-                            && bachelors[i].computerScience == null && bachelors[i].socialScience != null))) {
+            if (!(bachelors[i].physics != null && bachelors[i].computerScience == null && bachelors[i].socialScience == null)
+                    && !(bachelors[i].physics == null && bachelors[i].computerScience != null
+                    && bachelors[i].socialScience == null) && !(bachelors[i].physics == null
+                    && bachelors[i].computerScience == null && bachelors[i].socialScience != null)) {
                 partAndAllDataStudents.add(bachelors[i])
-                /*if (!(bachelors[i].physics != null && bachelors[i].computerScience == null
-                    && bachelors[i].socialScience == null) && !(bachelors[i].physics == null &&
-                    bachelors[i].computerScience != null && bachelors[i].socialScience == null) &&
-                    !(bachelors[i].physics == null && bachelors[i].computerScience == null
-                    && bachelors[i].socialScience != null)) {
-                    partAndAllDataStudents.add(bachelors[i])
-                }*/
             }
         }
         return partAndAllDataStudents
@@ -320,7 +297,6 @@ class PickUpSpecialtiesView
         for (i in 0 until bachelors.size) {
             if (!(bachelors[i].maths != null && bachelors[i].russian != null)) {
                 noOrNotEnoughDataStudents.add(bachelors[i])
-                //bachelors.removeAt(i)
             }
         }
         return noOrNotEnoughDataStudents
@@ -778,24 +754,25 @@ class PickUpSpecialtiesView
         val bundle = Bundle()
         val faculties = myApplication.returnFaculties()
 
-        fun moveToSpecialties(title: String, list: ArrayList<Specialty>) {
+        fun moveToSpecialties(position: Int, title: String, list: ArrayList<Specialty>) {
             bundle.stringAndSerializable(title, list)
+            bundle.putInt("pos", position)
             toSpecialties(bundle)
         }
         faculties?.let {
             when (position) {
                 //УНТИ
-                0 -> moveToSpecialties("УНТИ", it.untiList)
+                0 -> moveToSpecialties(position,"УНТИ", it.untiList)
                 //ФЭУ
-                1 -> moveToSpecialties("ФЭУ", it.feuList)
+                1 -> moveToSpecialties(position,"ФЭУ", it.feuList)
                 //ФИТ
-                2 -> moveToSpecialties("ФИТ", it.fitList)
+                2 -> moveToSpecialties(position,"ФИТ", it.fitList)
                 //МТФ
-                3 -> moveToSpecialties("МТФ", it.mtfList)
+                3 -> moveToSpecialties(position,"МТФ", it.mtfList)
                 //УНИТ
-                4 -> moveToSpecialties("УНИТ", it.unitList)
+                4 -> moveToSpecialties(position,"УНИТ", it.unitList)
                 //ФЭЭ
-                5 -> moveToSpecialties("ФЭЭ", it.feeList)
+                5 -> moveToSpecialties(position,"ФЭЭ", it.feeList)
             }
         }
     }

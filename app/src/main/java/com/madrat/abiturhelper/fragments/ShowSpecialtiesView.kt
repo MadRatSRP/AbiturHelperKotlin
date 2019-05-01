@@ -38,10 +38,23 @@ class ShowSpecialtiesView
 
         @Suppress("UNCHECKED_CAST")
         val list = arguments?.getSerializable("array") as? ArrayList<Specialty> ?: return null
+        val pos = arguments?.getInt("pos")
+        //showLog(pos.toString())
 
-        //val list = arguments?.getSerializable("array") is ArrayList<*>
-
-        adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onSpecialtyClicked(specialty, position)}
+        when (pos) {
+            //УНТИ
+            0 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
+            //ФЭУ
+            1 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFEUSpecialtyClicked(specialty, position)}
+            //ФИТ
+            2 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFITSpecialtyClicked(specialty, position)}
+            //МТФ
+            3 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onMTFSpecialtyClicked(specialty, position)}
+            //УНИТ
+            4 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNITSpecialtyClicked(specialty, position)}
+            //ФЭЭ
+            5 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFEESpecialtyClicked(specialty, position)}
+        }
         view.specialtiesRecyclerView.adapter = adapter
 
         view.specialtiesRecyclerView.linearManager()
@@ -51,12 +64,16 @@ class ShowSpecialtiesView
         return view
     }
 
+    fun initializeAdapter(): SpecialtiesAdapter {
+        return SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
+    }
+
     override fun showSpecialties(specialties: ArrayList<Specialty>) {
         adapter?.updateSpecialtiesList(specialties)
         specialtiesRecyclerView?.adapter = adapter
     }
 
-    fun onSpecialtyClicked(specialty: Specialty, position: Int) {
+    fun onUNTISpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
         val unti = myApplication.returnUnti()
@@ -130,6 +147,13 @@ class ShowSpecialtiesView
             }
         }
     }
+    fun onFEUSpecialtyClicked(specialty: Specialty, position: Int) {
+
+    }
+    fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {}
+    fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {}
+    fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {}
+    fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {}
 
     override fun toSpecialty(bundle: Bundle) {
         view?.let {

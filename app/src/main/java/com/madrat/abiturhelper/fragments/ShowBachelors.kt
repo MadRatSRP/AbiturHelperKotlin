@@ -33,7 +33,7 @@ class ShowBachelors: Fragment() {
         val list = arguments?.getSerializable("array") as? ArrayList<Student> ?: return null
 
         adapter = BachelorsAdapter()
-        //adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onSpecialtyClicked(specialty, position)}
+        //adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
         view.bachelorsRecyclerView.adapter = adapter
 
         view.bachelorsRecyclerView.linearManager()
