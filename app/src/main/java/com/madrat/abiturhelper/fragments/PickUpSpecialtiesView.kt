@@ -206,14 +206,28 @@ class PickUpSpecialtiesView
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         val bachelors = myApplication.returnBachelors()
+        showLog("Бакалавры: " + bachelors?.size.toString())
+
+        /*val new_bachelors = ArrayList<Student>()
+
+
+        bachelors?.let {
+            for (i in 0 until it.size) {
+                if ((it[i].maths != null && it[i].maths != 0)
+                        && (it[i].russian != null && it[i].russian != 0))  {
+                    new_bachelors.add(it[i])
+                }
+            }
+            showLog(new_bachelors.size.toString())
+        }*/
+
 
         val scoreTypes = ScoreTypes(
-                bachelors?.let { withdrawStudentsWithoutData(it) },
-
-                bachelors?.let { withdrawPhysicsStudents(it) },
-                bachelors?.let { withdrawComputerScienceStudents(it) },
-                bachelors?.let { withdrawSocialScienceStudents(it) },
-                bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
+                /*new_*/bachelors?.let { withdrawStudentsWithoutData(it) },
+                /*new_*/bachelors?.let { withdrawPhysicsStudents(it) },
+                /*new_*/bachelors?.let { withdrawComputerScienceStudents(it) },
+                /*new_*/bachelors?.let { withdrawSocialScienceStudents(it) },
+                /*new_*/bachelors?.let { withdrawStudentsWithPartAndFullData(it) }
 
         )
 
