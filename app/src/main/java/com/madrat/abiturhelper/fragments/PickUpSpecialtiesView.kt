@@ -354,6 +354,7 @@ class PickUpSpecialtiesView
     /*Третий этап*/
     override fun separateStudentsBySpecialties() {
         checkForUnti()
+        checkForFEU()
         println("Третий этап завершён")
     }
     override fun checkForUnti() {
@@ -770,6 +771,47 @@ class PickUpSpecialtiesView
         val unti = Unti(atpSeparated, ktoSeparated, mashSeparated, mitmSeparated, mhtSeparated,
                 ptmkSeparated, tmoSeparated, utsSeparated)
         myApplication.saveUnti(unti)
+    }
+    fun checkForFEU() {
+        val scoreTypes = myApplication.returnScoreTypes()
+        val bi = ArrayList<Student>()
+        val pi = ArrayList<Student>()
+        val sc = ArrayList<Student>()
+        val td = ArrayList<Student>()
+        val eb = ArrayList<Student>()
+        val ek = ArrayList<Student>()
+
+        fun checkForBI(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "БИ_заочн_плат" || list[i].specialtyFirst == "БИ_очн_плат")
+                        || (list[i].specialtySecond == "БИ_заочн_плат" || list[i].specialtySecond == "БИ_очн_плат")
+                        || (list[i].specialtyThird == "БИ_заочн_плат" || list[i].specialtyThird == "БИ_очн_плат")) {
+                    bi.add(list[i])
+                }
+            }
+        }
+        fun checkForPI(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ПИ(КИС)_очн_бюдж" || list[i].specialtyFirst == "ПИ(КИС)_очн_льгот"
+                        || list[i].specialtyFirst == "ПИ(КИС)_очн_плат" || list[i].specialtyFirst == "ПИ(ЦЭ)_очн_бюдж"
+                        || list[i].specialtyFirst == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtyFirst == "ПИ(ЦЭ)_очн_плат")
+                        || (list[i].specialtySecond == "ПИ(КИС)_очн_бюдж" || list[i].specialtySecond == "ПИ(КИС)_очн_льгот"
+                        || list[i].specialtySecond == "ПИ(КИС)_очн_плат" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_бюдж"
+                        || list[i].specialtySecond == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_плат")
+                        || (list[i].specialtyThird == "ПИ(КИС)_очн_бюдж" || list[i].specialtyThird == "ПИ(КИС)_очн_льгот"
+                        || list[i].specialtyThird == "ПИ(КИС)_очн_плат" || list[i].specialtyThird == "ПИ(ЦЭ)_очн_бюдж"
+                        || list[i].specialtyThird == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtyThird == "ПИ(ЦЭ)_очн_плат")) {
+                    pi.add(list[i])
+                }
+            }
+        }
+
+        scoreTypes?.physicsStudents?.let { checkForBI(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForBI(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForBI(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForBI(it) }
+
+        showLog(bi.size.toString())
     }
 
 
