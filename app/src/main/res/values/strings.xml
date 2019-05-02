@@ -26,6 +26,7 @@
 
     <string name="facultyEntriesTotalText">Всего мест</string>
     <string name="facultyEntriesFreeText">Свободно мест</string>
+    <string name="facultyAmountOfStatementsText">Подано заявлений</string>
 
     <string name="bachelorFirstName">Имя</string>
     <string name="bachelorLastName">Фамилия</string>

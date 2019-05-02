@@ -39,7 +39,6 @@ class ShowSpecialtiesView
         @Suppress("UNCHECKED_CAST")
         val list = arguments?.getSerializable("array") as? ArrayList<Specialty> ?: return null
         val pos = arguments?.getInt("pos")
-        //showLog(pos.toString())
 
         when (pos) {
             //УНТИ

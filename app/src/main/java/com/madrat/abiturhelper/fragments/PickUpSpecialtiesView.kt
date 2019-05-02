@@ -22,7 +22,9 @@ import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
+import java.io.BufferedWriter
 import java.io.InputStreamReader
+import java.io.OutputStreamWriter
 
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
@@ -209,17 +211,50 @@ class PickUpSpecialtiesView
         showLog("Бакалавры: " + bachelors?.size.toString())
 
         val new_bachelors = ArrayList<Student>()
+        val bad_bachelors = ArrayList<Student>()
 
+        /*bachelors?.let {
+            for (i in 0 until it.size) {
+                if (it[i].physics == null && it[i].computerScience == null
+                        && it[i].socialScience == null) {
+                    bad_bachelors.add(it[i])
+                }
+            }
+            showLog(bad_bachelors.size.toString())
+        }*/
 
         bachelors?.let {
             for (i in 0 until it.size) {
                 if ((it[i].maths != null && it[i].maths != 0)
-                        && (it[i].russian != null && it[i].russian != 0))  {
-                    new_bachelors.add(it[i])
+                        && (it[i].russian != null && it[i].russian != 0)) {
+                    if (it[i].physics != null || it[i].computerScience != null
+                            || it[i].socialScience != null) {
+                        new_bachelors.add(it[i])
+                    }
+                    else bad_bachelors.add(it[i])
                 }
             }
             showLog(new_bachelors.size.toString())
         }
+
+        /*for (i in 0 until bad_bachelors.size) {
+            showLog(bad_bachelors[i].toString())
+        }*/
+
+        //val file = context?.assets?.open("test.csv")
+        //val bufferedWriter = BufferedWriter(OutputStreamWriter(file, "Windows-1251"))
+
+        /*bachelors?.let {
+            for (i in 0 until it.size) {
+                if (((it[i].maths != null && it[i].maths != 0)
+                        && (it[i].russian != null && it[i].russian != 0))
+                        || ((it[i].maths != null && it[i].maths != 0)
+                        || (it[i].russian != null && it[i].russian != 0))) {
+                    new_bachelors.add(it[i])
+                }
+            }
+            showLog(new_bachelors.size.toString())
+        }*/
 
 
         val scoreTypes = ScoreTypes(
