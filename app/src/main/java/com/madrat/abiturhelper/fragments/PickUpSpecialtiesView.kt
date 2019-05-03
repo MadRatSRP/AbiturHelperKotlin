@@ -355,6 +355,9 @@ class PickUpSpecialtiesView
     override fun separateStudentsBySpecialties() {
         checkForUnti()
         checkForFEU()
+        checkForFIT()
+        checkForMTF()
+        checkForUNIT()
         println("Третий этап завершён")
     }
     override fun checkForUnti() {
@@ -772,7 +775,7 @@ class PickUpSpecialtiesView
                 ptmkSeparated, tmoSeparated, utsSeparated)
         myApplication.saveUnti(unti)
     }
-    fun checkForFEU() {
+    private fun checkForFEU() {
         val scoreTypes = myApplication.returnScoreTypes()
         val bi = ArrayList<Student>()
         val pi = ArrayList<Student>()
@@ -780,6 +783,7 @@ class PickUpSpecialtiesView
         val td = ArrayList<Student>()
         val eb = ArrayList<Student>()
         val ek = ArrayList<Student>()
+        var check = ArrayList<Student>()
 
         fun checkForBI(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -805,13 +809,481 @@ class PickUpSpecialtiesView
                 }
             }
         }
+        fun checkForSC(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "СЦ_заочн_плат" || list[i].specialtyFirst == "СЦ_очн_плат")
+                        || (list[i].specialtySecond == "СЦ_заочн_плат" || list[i].specialtySecond == "СЦ_очн_плат")
+                        || (list[i].specialtyThird == "СЦ_заочн_плат" || list[i].specialtyThird == "СЦ_очн_плат")) {
+                    sc.add(list[i])
+                }
+            }
+        }
+        fun checkForTD(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ТД_заочн_плат" || list[i].specialtyFirst == "ТД_очн_плат")
+                        || (list[i].specialtySecond == "ТД_заочн_плат" || list[i].specialtySecond == "ТД_очн_плат")
+                        || (list[i].specialtyThird == "ТД_заочн_плат" || list[i].specialtyThird == "ТД_очн_плат")) {
+                    td.add(list[i])
+                }
+            }
+        }
+        fun checkForEB(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ЭБ_заоч_плат" || list[i].specialtyFirst == "ЭБ_очн_плат")
+                        || (list[i].specialtySecond == "ЭБ_заоч_плат" || list[i].specialtySecond == "ЭБ_очн_плат")
+                        || (list[i].specialtyThird == "ЭБ_заоч_плат" || list[i].specialtyThird == "ЭБ_очн_плат")) {
+                    eb.add(list[i])
+                }
+            }
+        }
+        fun checkForEK(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ЭК(БУА)_заоч_плат" || list[i].specialtyFirst == "ЭК(БУА)_очн_плат"
+                        || list[i].specialtyFirst == "ЭК(ЛОГ)_очн_плат" || list[i].specialtyFirst == "ЭК(ОЦ)_очн_плат"
+                        || list[i].specialtyFirst == "ЭК(Ф)_заоч_плат" || list[i].specialtyFirst == "ЭК(Ф)_очн_плат"
+                        || list[i].specialtyFirst == "ЭК(ЭПО)_очн_плат") || (list[i].specialtySecond == "ЭК(БУА)_заоч_плат"
+                        || list[i].specialtySecond == "ЭК(БУА)_очн_плат" || list[i].specialtySecond == "ЭК(ЛОГ)_очн_плат"
+                        || list[i].specialtySecond == "ЭК(ОЦ)_очн_плат" || list[i].specialtySecond == "ЭК(Ф)_заоч_плат"
+                        || list[i].specialtySecond == "ЭК(Ф)_очн_плат" || list[i].specialtySecond == "ЭК(ЭПО)_очн_плат")
+                        || (list[i].specialtyThird == "ЭК(БУА)_заоч_плат" || list[i].specialtyThird == "ЭК(БУА)_очн_плат"
+                        || list[i].specialtyThird == "ЭК(ЛОГ)_очн_плат" || list[i].specialtyThird == "ЭК(ОЦ)_очн_плат"
+                        || list[i].specialtyThird == "ЭК(Ф)_заоч_плат" || list[i].specialtyThird == "ЭК(Ф)_очн_плат"
+                        || list[i].specialtyThird == "ЭК(ЭПО)_очн_плат")) {
+                    ek.add(list[i])
+                }
+            }
+        }
+
+        /*fun check(list: ArrayList<Student>) {
+            val filteredMap = list.filter { it.specialtyFirst == "ПИ(КИС)_очн_бюдж" /*|| it.specialtyFirst == "ПИ(КИС)_очн_льгот"*/ }
+            check = filteredMap as ArrayList<Student>
+            showLog("CHECK = " + check.size.toString())
+        }*/
 
         scoreTypes?.physicsStudents?.let { checkForBI(it) }
         scoreTypes?.computerScienceStudents?.let { checkForBI(it) }
         scoreTypes?.socialScienceStudents?.let { checkForBI(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForBI(it) }
 
+        scoreTypes?.physicsStudents?.let { checkForPI(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForPI(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForPI(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForPI(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForSC(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForSC(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForSC(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForSC(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForTD(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForTD(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForTD(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForTD(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForEB(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForEB(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForEB(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForEB(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForEK(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForEK(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForEK(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForEK(it) }
+
+        /*scoreTypes?.physicsStudents?.let { check(it) }
+        scoreTypes?.computerScienceStudents?.let { check(it) }
+        scoreTypes?.socialScienceStudents?.let { check(it) }
+        scoreTypes?.partAndAllDataStudents?.let { check(it) }*/
+
         showLog(bi.size.toString())
+        showLog(pi.size.toString())
+        showLog(sc.size.toString())
+        showLog(td.size.toString())
+        showLog(eb.size.toString())
+        showLog(ek.size.toString())
+    }
+    private fun checkForFIT() {
+        val scoreTypes = myApplication.returnScoreTypes()
+        val iasb = ArrayList<Student>()
+        val ib = ArrayList<Student>()
+        val ibas = ArrayList<Student>()
+        val ivt = ArrayList<Student>()
+        val inn = ArrayList<Student>()
+        val ist = ArrayList<Student>()
+        val moa = ArrayList<Student>()
+        val pri = ArrayList<Student>()
+        val pro = ArrayList<Student>()
+
+        fun checkForIASB(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ИАСБ_очн_бюдж" || list[i].specialtyFirst == "ИАСБ_очн_льгот"
+                        || list[i].specialtyFirst == "ИАСБ_очн_плат") || (list[i].specialtySecond == "ИАСБ_очн_бюдж"
+                        || list[i].specialtySecond == "ИАСБ_очн_льгот" || list[i].specialtySecond == "ИАСБ_очн_плат")
+                        || (list[i].specialtyThird == "ИАСБ_очн_бюдж" || list[i].specialtyThird == "ИАСБ_очн_льгот"
+                        || list[i].specialtyThird == "ИАСБ_очн_плат")) {
+                    iasb.add(list[i])
+                }
+            }
+        }
+        fun checkForIB(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ИБ_веч_платн" || list[i].specialtyFirst == "ИБ_очн_бюдж"
+                        || list[i].specialtyFirst == "ИБ_очн_льгот" || list[i].specialtyFirst == "ИБ_очн_плат")
+                        || (list[i].specialtySecond == "ИБ_веч_платн" || list[i].specialtySecond == "ИБ_очн_бюдж"
+                        || list[i].specialtySecond == "ИБ_очн_льгот" || list[i].specialtySecond == "ИБ_очн_плат")
+                        || (list[i].specialtyThird == "ИБ_веч_платн" || list[i].specialtyThird == "ИБ_очн_бюдж"
+                        || list[i].specialtyThird == "ИБ_очн_льгот" || list[i].specialtyThird == "ИБ_очн_плат")) {
+                    ib.add(list[i])
+                }
+            }
+        }
+        fun checkForIBAS(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ИБАС_очн_бюдж" || list[i].specialtyFirst == "ИБАС_очн_льгот"
+                        || list[i].specialtyFirst == "ИБАС_очн_плат") || (list[i].specialtySecond == "ИБАС_очн_бюдж"
+                        || list[i].specialtySecond == "ИБАС_очн_льгот" || list[i].specialtySecond == "ИБАС_очн_плат")
+                        || (list[i].specialtyThird == "ИБАС_очн_бюдж" || list[i].specialtyThird == "ИБАС_очн_льгот"
+                        || list[i].specialtyThird == "ИБАС_очн_плат")) {
+                    ibas.add(list[i])
+                }
+            }
+        }
+        fun checkForIVT(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ИиВТ(ПО)_заочн_плат" || list[i].specialtyFirst == "ИиВТ(ПО)_очн_бюдж"
+                        || list[i].specialtyFirst == "ИиВТ(ПО)_очн_льгот" || list[i].specialtyFirst == "ИиВТ(ПО)_очн_плат"
+                        || list[i].specialtyFirst == "ИиВТ(ПО)_очн_целевое" || list[i].specialtyFirst == "ИиВТ(САПР)_очн_бюдж"
+                        || list[i].specialtyFirst == "ИиВТ(САПР)_очн_льгот" || list[i].specialtyFirst == "ИиВТ(САПР)_очн_плат")
+                        || (list[i].specialtySecond == "ИиВТ(ПО)_заочн_плат" || list[i].specialtySecond == "ИиВТ(ПО)_очн_бюдж"
+                        || list[i].specialtySecond == "ИиВТ(ПО)_очн_льгот" || list[i].specialtySecond == "ИиВТ(ПО)_очн_плат"
+                        || list[i].specialtySecond == "ИиВТ(ПО)_очн_целевое" || list[i].specialtySecond == "ИиВТ(САПР)_очн_бюдж"
+                        || list[i].specialtySecond == "ИиВТ(САПР)_очн_льгот" || list[i].specialtySecond == "ИиВТ(САПР)_очн_плат")
+                        || (list[i].specialtyThird == "ИиВТ(ПО)_заочн_плат" || list[i].specialtyThird == "ИиВТ(ПО)_очн_бюдж"
+                        || list[i].specialtyThird == "ИиВТ(ПО)_очн_льгот" || list[i].specialtyThird == "ИиВТ(ПО)_очн_плат"
+                        || list[i].specialtyThird == "ИиВТ(ПО)_очн_целевое" || list[i].specialtyThird == "ИиВТ(САПР)_очн_бюдж"
+                        || list[i].specialtyThird == "ИиВТ(САПР)_очн_льгот" || list[i].specialtyThird == "ИиВТ(САПР)_очн_плат")) {
+                    ivt.add(list[i])
+                }
+            }
+        }
+        fun checkForINN(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ИНН_заочн_плат" || list[i].specialtyFirst == "ИНН_очн_бюдж"
+                        || list[i].specialtyFirst == "ИНН_очн_льгот" || list[i].specialtyFirst == "ИНН_очн_плат")
+                        || (list[i].specialtySecond == "ИНН_заочн_плат" || list[i].specialtySecond == "ИНН_очн_бюдж"
+                        || list[i].specialtySecond == "ИНН_очн_льгот" || list[i].specialtySecond == "ИНН_очн_плат")
+                        || (list[i].specialtyThird == "ИНН_заочн_плат" || list[i].specialtyThird == "ИНН_очн_бюдж"
+                        || list[i].specialtyThird == "ИНН_очн_льгот" || list[i].specialtyThird == "ИНН_очн_плат")) {
+                    inn.add(list[i])
+                }
+            }
+        }
+        fun checkForIST(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ИСТ(ИСиТД)_очн_бюдж" || list[i].specialtyFirst == "ИСТ(ИСиТД)_очн_льгот"
+                        || list[i].specialtyFirst == "ИСТ(ИСиТД)_очн_плат" || list[i].specialtyFirst == "ИСТ(ИТиПК)_очн_бюдж"
+                        || list[i].specialtyFirst == "ИСТ(ИТиПК)_очн_льгот" || list[i].specialtyFirst == "ИСТ(ИТиПК)_очн_плат"
+                        || list[i].specialtyFirst == "ИСТ_заочн_плат") || (list[i].specialtySecond == "ИСТ(ИСиТД)_очн_бюдж"
+                        || list[i].specialtySecond == "ИСТ(ИСиТД)_очн_льгот" || list[i].specialtySecond == "ИСТ(ИСиТД)_очн_плат"
+                        || list[i].specialtySecond == "ИСТ(ИТиПК)_очн_бюдж" || list[i].specialtySecond == "ИСТ(ИТиПК)_очн_льгот"
+                        || list[i].specialtySecond == "ИСТ(ИТиПК)_очн_плат" || list[i].specialtySecond == "ИСТ_заочн_плат")
+                        || (list[i].specialtyThird == "ИСТ(ИСиТД)_очн_бюдж" || list[i].specialtyThird == "ИСТ(ИСиТД)_очн_льгот"
+                        || list[i].specialtyThird == "ИСТ(ИСиТД)_очн_плат" || list[i].specialtyThird == "ИСТ(ИТиПК)_очн_бюдж"
+                        || list[i].specialtyThird == "ИСТ(ИТиПК)_очн_льгот" || list[i].specialtyThird == "ИСТ(ИТиПК)_очн_плат"
+                        || list[i].specialtyThird == "ИСТ_заочн_плат")) {
+                    ist.add(list[i])
+                }
+            }
+        }
+        fun checkForMOA(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "МОА_очн_бюдж" || list[i].specialtyFirst == "МОА_очн_льгот"
+                        || list[i].specialtyFirst == "МОА_очн_плат" || list[i].specialtyFirst == "МОА_очн_целевое")
+                        || (list[i].specialtySecond == "МОА_очн_бюдж" || list[i].specialtySecond == "МОА_очн_льгот"
+                        || list[i].specialtySecond == "МОА_очн_плат" || list[i].specialtySecond == "МОА_очн_целевое")
+                        || (list[i].specialtyThird == "МОА_очн_бюдж" || list[i].specialtyThird == "МОА_очн_льгот"
+                        || list[i].specialtyThird == "МОА_очн_плат" || list[i].specialtyThird == "МОА_очн_целевое")) {
+                    moa.add(list[i])
+                }
+            }
+        }
+        fun checkForPRI(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ПРИ_очн_бюдж" || list[i].specialtyFirst == "ПРИ_очн_льгот"
+                        || list[i].specialtyFirst == "ПРИ_очн_плат" || list[i].specialtyFirst == "ПРИ_очн_целевое")
+                        || (list[i].specialtySecond == "ПРИ_очн_бюдж" || list[i].specialtySecond == "ПРИ_очн_льгот"
+                        || list[i].specialtySecond == "ПРИ_очн_плат" || list[i].specialtySecond == "ПРИ_очн_целевое")
+                        || (list[i].specialtyThird == "ПРИ_очн_бюдж" || list[i].specialtyThird == "ПРИ_очн_льгот"
+                        || list[i].specialtyThird == "ПРИ_очн_плат" || list[i].specialtyThird == "ПРИ_очн_целевое")) {
+                    pri.add(list[i])
+                }
+            }
+        }
+        fun checkForPRO(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ПРО(ГД)_очн_бюдж" || list[i].specialtyFirst == "ПРО(ГД)_очн_льгот"
+                        || list[i].specialtyFirst == "ПРО(ГД)_очн_плат" || list[i].specialtyFirst == "ПРО(ИВТ)_заочн_плат"
+                        || list[i].specialtyFirst == "ПРО(ЭК)_заочн_плат") || (list[i].specialtySecond == "ПРО(ГД)_очн_бюдж"
+                        || list[i].specialtySecond == "ПРО(ГД)_очн_льгот" || list[i].specialtySecond == "ПРО(ГД)_очн_плат"
+                        || list[i].specialtySecond == "ПРО(ИВТ)_заочн_плат" || list[i].specialtySecond == "ПРО(ЭК)_заочн_плат")
+                        || (list[i].specialtyThird == "ПРО(ГД)_очн_бюдж" || list[i].specialtyThird == "ПРО(ГД)_очн_льгот"
+                        || list[i].specialtyThird == "ПРО(ГД)_очн_плат" || list[i].specialtyThird == "ПРО(ИВТ)_заочн_плат"
+                        || list[i].specialtyThird == "ПРО(ЭК)_заочн_плат")) {
+                    pro.add(list[i])
+                }
+            }
+        }
+
+        scoreTypes?.physicsStudents?.let { checkForIASB(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForIASB(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForIASB(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForIASB(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForIB(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForIB(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForIB(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForIB(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForIBAS(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForIBAS(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForIBAS(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForIBAS(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForIVT(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForIVT(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForIVT(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForIVT(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForINN(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForINN(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForINN(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForINN(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForIST(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForIST(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForIST(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForIST(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForMOA(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForMOA(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForMOA(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForMOA(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForPRI(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForPRI(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForPRI(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForPRI(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForPRO(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForPRO(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForPRO(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForPRO(it) }
+    }
+    private fun checkForMTF() {
+        val scoreTypes = myApplication.returnScoreTypes()
+        val mash = ArrayList<Student>()
+        val sim = ArrayList<Student>()
+        val tb = ArrayList<Student>()
+        val uk = ArrayList<Student>()
+
+        fun checkForMASH(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "МАШ(Л)_заочн_бюдж" || list[i].specialtyFirst == "МАШ(Л)_заочн_льгот"
+                        || list[i].specialtyFirst == "МАШ(Л)_заочн_плат" || list[i].specialtyFirst == "МАШ(Л)_очн_бюдж"
+                        || list[i].specialtyFirst == "МАШ(Л)_очн_льгот" || list[i].specialtyFirst == "МАШ(Л)_очн_плат"
+                        || list[i].specialtyFirst == "МАШ(С)_заочн_бюдж" || list[i].specialtyFirst == "МАШ(С)_заочн_льгот"
+                        || list[i].specialtyFirst == "МАШ(С)_заочн_плат" || list[i].specialtyFirst == "МАШ(С)_очн_бюдж"
+                        || list[i].specialtyFirst == "МАШ(С)_очн_льгот" || list[i].specialtyFirst == "МАШ(С)_очн_плат"
+                        || list[i].specialtyFirst == "МАШ(С)_очн_целевое") || (list[i].specialtySecond == "МАШ(Л)_заочн_бюдж"
+                        || list[i].specialtySecond == "МАШ(Л)_заочн_льгот" || list[i].specialtySecond == "МАШ(Л)_заочн_плат"
+                        || list[i].specialtySecond == "МАШ(Л)_очн_бюдж" || list[i].specialtySecond == "МАШ(Л)_очн_льгот"
+                        || list[i].specialtySecond == "МАШ(Л)_очн_плат" || list[i].specialtySecond == "МАШ(С)_заочн_бюдж"
+                        || list[i].specialtySecond == "МАШ(С)_заочн_льгот" || list[i].specialtySecond == "МАШ(С)_заочн_плат"
+                        || list[i].specialtySecond == "МАШ(С)_очн_бюдж" || list[i].specialtySecond == "МАШ(С)_очн_льгот"
+                        || list[i].specialtySecond == "МАШ(С)_очн_плат" || list[i].specialtySecond == "МАШ(С)_очн_целевое")
+                        || (list[i].specialtyThird == "МАШ(Л)_заочн_бюдж" || list[i].specialtyThird == "МАШ(Л)_заочн_льгот"
+                        || list[i].specialtyThird == "МАШ(Л)_заочн_плат" || list[i].specialtyThird == "МАШ(Л)_очн_бюдж"
+                        || list[i].specialtyThird == "МАШ(Л)_очн_льгот" || list[i].specialtyThird == "МАШ(Л)_очн_плат"
+                        || list[i].specialtyThird == "МАШ(С)_заочн_бюдж" || list[i].specialtyThird == "МАШ(С)_заочн_льгот"
+                        || list[i].specialtyThird == "МАШ(С)_заочн_плат" || list[i].specialtyThird == "МАШ(С)_очн_бюдж"
+                        || list[i].specialtyThird == "МАШ(С)_очн_льгот" || list[i].specialtyThird == "МАШ(С)_очн_плат"
+                        || list[i].specialtyThird == "МАШ(С)_очн_целевое")) {
+                    mash.add(list[i])
+                }
+            }
+        }
+        fun checkForSIM(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "СиМ_заочн_плат" || list[i].specialtyFirst == "СиМ_очн_бюдж"
+                        || list[i].specialtyFirst == "СиМ_очн_льгот" || list[i].specialtyFirst == "СиМ_очн_плат")
+                        || (list[i].specialtySecond == "СиМ_заочн_плат" || list[i].specialtySecond == "СиМ_очн_бюдж"
+                        || list[i].specialtySecond == "СиМ_очн_льгот" || list[i].specialtySecond == "СиМ_очн_плат")
+                        || (list[i].specialtyThird == "СиМ_заочн_плат" || list[i].specialtyThird == "СиМ_очн_бюдж"
+                        || list[i].specialtyThird == "СиМ_очн_льгот" || list[i].specialtyThird == "СиМ_очн_плат")) {
+                    sim.add(list[i])
+                }
+            }
+        }
+        fun checkForTB(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ТБ(БТПиП)_заочн_плат" || list[i].specialtyFirst == "ТБ(БТПиП)_очн_бюдж"
+                        || list[i].specialtyFirst == "ТБ(БТПиП)_очн_льгот" || list[i].specialtyFirst == "ТБ(БТПиП)_очн_плат")
+                        || (list[i].specialtySecond == "ТБ(БТПиП)_заочн_плат" || list[i].specialtySecond == "ТБ(БТПиП)_очн_бюдж"
+                        || list[i].specialtySecond == "ТБ(БТПиП)_очн_льгот" || list[i].specialtySecond == "ТБ(БТПиП)_очн_плат")
+                        || (list[i].specialtyThird == "ТБ(БТПиП)_заочн_плат" || list[i].specialtyThird == "ТБ(БТПиП)_очн_бюдж"
+                        || list[i].specialtyThird == "ТБ(БТПиП)_очн_льгот" || list[i].specialtyThird == "ТБ(БТПиП)_очн_плат")) {
+                    tb.add(list[i])
+                }
+            }
+        }
+        fun checkForUK(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "УК_заочн_плат" || list[i].specialtySecond == "УК_заочн_плат"
+                        || list[i].specialtyThird == "УК_заочн_плат") {
+                    uk.add(list[i])
+                }
+            }
+        }
+
+        scoreTypes?.physicsStudents?.let { checkForMASH(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForMASH(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForMASH(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForMASH(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForSIM(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForSIM(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForSIM(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForSIM(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForTB(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForTB(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForTB(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForTB(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForUK(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForUK(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForUK(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForUK(it) }
+    }
+    private fun checkForUNIT() {
+        val scoreTypes = myApplication.returnScoreTypes()
+        val nttk = ArrayList<Student>()
+        val ntts = ArrayList<Student>()
+        val pm = ArrayList<Student>()
+        val psjd = ArrayList<Student>()
+        val ttp = ArrayList<Student>()
+        val ettk = ArrayList<Student>()
+
+        fun checkForNTTK(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "НТТК_заочн_бюдж" || list[i].specialtyFirst == "НТТК_заочн_льгот"
+                        || list[i].specialtyFirst == "НТТК_заочн_плат") || (list[i].specialtySecond == "НТТК_заочн_бюдж"
+                        || list[i].specialtySecond == "НТТК_заочн_льгот" || list[i].specialtySecond == "НТТК_заочн_плат")
+                        || (list[i].specialtyThird == "НТТК_заочн_бюдж" || list[i].specialtyThird == "НТТК_заочн_льгот"
+                        || list[i].specialtyThird == "НТТК_заочн_плат")) {
+                    nttk.add(list[i])
+                }
+            }
+        }
+        fun checkForNTTS(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "НТТС_очн_бюдж" || list[i].specialtyFirst == "НТТС_очн_льгот"
+                        || list[i].specialtyFirst == "НТТС_очн_плат") || (list[i].specialtySecond == "НТТС_очн_бюдж"
+                        || list[i].specialtySecond == "НТТС_очн_льгот" || list[i].specialtySecond == "НТТС_очн_плат")
+                        || (list[i].specialtyThird == "НТТС_очн_бюдж" || list[i].specialtyThird == "НТТС_очн_льгот"
+                        || list[i].specialtyThird == "НТТС_очн_плат")) {
+                    ntts.add(list[i])
+                }
+            }
+        }
+        fun checkForPM(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ПМ(БМ)_очн_бюдж" || list[i].specialtyFirst == "ПМ(БМ)_очн_льгот"
+                        || list[i].specialtyFirst == "ПМ(БМ)_очн_плат" || list[i].specialtyFirst == "ПМ(ДПМ)_очн_бюдж"
+                        || list[i].specialtyFirst == "ПМ(ДПМ)_очн_льгот" || list[i].specialtyFirst == "ПМ(ДПМ)_очн_плат")
+                        || (list[i].specialtySecond == "ПМ(БМ)_очн_бюдж" || list[i].specialtySecond == "ПМ(БМ)_очн_льгот"
+                        || list[i].specialtySecond == "ПМ(БМ)_очн_плат" || list[i].specialtySecond == "ПМ(ДПМ)_очн_бюдж"
+                        || list[i].specialtySecond == "ПМ(ДПМ)_очн_льгот" || list[i].specialtySecond == "ПМ(ДПМ)_очн_плат")
+                        || (list[i].specialtyThird == "ПМ(БМ)_очн_бюдж" || list[i].specialtyThird == "ПМ(БМ)_очн_льгот"
+                        || list[i].specialtyThird == "ПМ(БМ)_очн_плат" || list[i].specialtyThird == "ПМ(ДПМ)_очн_бюдж"
+                        || list[i].specialtyThird == "ПМ(ДПМ)_очн_льгот" || list[i].specialtyThird == "ПМ(ДПМ)_очн_плат")) {
+                    pm.add(list[i])
+                }
+            }
+        }
+        fun checkForPSJD(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ПСЖД(В)_очн_плат" || list[i].specialtyFirst == "ПСЖД(Л)_очн_плат"
+                        || list[i].specialtyFirst == "ПСЖД_заочн_плат") || (list[i].specialtySecond == "ПСЖД(В)_очн_плат"
+                        || list[i].specialtySecond == "ПСЖД(Л)_очн_плат" || list[i].specialtySecond == "ПСЖД_заочн_плат")
+                        || (list[i].specialtyThird == "ПСЖД(В)_очн_плат" || list[i].specialtyThird == "ПСЖД(Л)_очн_плат"
+                        || list[i].specialtyThird == "ПСЖД_заочн_плат")) {
+                    psjd.add(list[i])
+                }
+            }
+        }
+        fun checkForTTP(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ТТП_заочн_бюдж" || list[i].specialtyFirst == "ТТП_заочн_льгот"
+                        || list[i].specialtyFirst == "ТТП_заочн_плат" || list[i].specialtyFirst == "ТТП_очн_бюдж"
+                        || list[i].specialtyFirst == "ТТП_очн_льгот" || list[i].specialtyFirst == "ТТП_очн_плат")
+                        || (list[i].specialtySecond == "ТТП_заочн_бюдж" || list[i].specialtySecond == "ТТП_заочн_льгот"
+                        || list[i].specialtySecond == "ТТП_заочн_плат" || list[i].specialtySecond == "ТТП_очн_бюдж"
+                        || list[i].specialtySecond == "ТТП_очн_льгот" || list[i].specialtySecond == "ТТП_очн_плат")
+                        || (list[i].specialtyThird == "ТТП_заочн_бюдж" || list[i].specialtyThird == "ТТП_заочн_льгот"
+                        || list[i].specialtyThird == "ТТП_заочн_плат" || list[i].specialtyThird == "ТТП_очн_бюдж"
+                        || list[i].specialtyThird == "ТТП_очн_льгот" || list[i].specialtyThird == "ТТП_очн_плат")) {
+                    ttp.add(list[i])
+                }
+            }
+        }
+        fun checkForETTK(list: ArrayList<Student>) {
+            for (i in 0 until list.size) {
+                if ((list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_бюдж" || list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_льгот"
+                        || list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_плат" || list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_целевое"
+                        || list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_бюдж" || list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_льгот"
+                        || list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_плат") || (list[i].specialtySecond == "ЭТТК(АиАХ)_очн_бюдж"
+                        || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_льгот" || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_плат"
+                        || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_целевое" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_бюдж"
+                        || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_льгот" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_плат")
+                        || (list[i].specialtyThird == "ЭТТК(АиАХ)_очн_бюдж" || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_льгот"
+                        || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_плат" || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_целевое"
+                        || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_бюдж" || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_льгот"
+                        || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_плат")) {
+                    ettk.add(list[i])
+                }
+            }
+        }
+
+        scoreTypes?.physicsStudents?.let { checkForNTTK(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForNTTK(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForNTTK(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForNTTK(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForNTTS(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForNTTS(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForNTTS(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForNTTS(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForPM(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForPM(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForPM(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForPM(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForPSJD(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForPSJD(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForPSJD(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForPSJD(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForTTP(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForTTP(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForTTP(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForTTP(it) }
+
+        scoreTypes?.physicsStudents?.let { checkForETTK(it) }
+        scoreTypes?.computerScienceStudents?.let { checkForETTK(it) }
+        scoreTypes?.socialScienceStudents?.let { checkForETTK(it) }
+        scoreTypes?.partAndAllDataStudents?.let { checkForETTK(it) }
     }
 
 
