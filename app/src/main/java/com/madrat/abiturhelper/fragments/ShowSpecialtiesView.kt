@@ -72,7 +72,7 @@ class ShowSpecialtiesView
         specialtiesRecyclerView?.adapter = adapter
     }
 
-    fun onUNTISpecialtyClicked(specialty: Specialty, position: Int) {
+    private fun onUNTISpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
         val unti = myApplication.returnUnti()
@@ -146,8 +146,47 @@ class ShowSpecialtiesView
             }
         }
     }
-    fun onFEUSpecialtyClicked(specialty: Specialty, position: Int) {
+    private fun onFEUSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val bundle = Bundle()
+        val feu = myApplication.returnFeu()
 
+        fun moveToSpecialty(list: ArrayList<Student>) {
+            bundle.stringAndSerializable(specialty, list)
+            toSpecialty(bundle)
+        }
+
+        feu?.let {
+            when (position) {
+                // БИ
+                0 -> moveToSpecialty(it.bi.zaochnPlat)
+                1 -> moveToSpecialty(it.bi.ochnPlat)
+                // ПИ
+                2 -> moveToSpecialty(it.pi.kisOchnBudg)
+                3 -> moveToSpecialty(it.pi.kisOchnLgot)
+                4 -> moveToSpecialty(it.pi.kisOchnPlat)
+                5 -> moveToSpecialty(it.pi.ceOchnBudg)
+                6 -> moveToSpecialty(it.pi.ceOchnLgot)
+                7 -> moveToSpecialty(it.pi.ceOchnPlat)
+                // СЦ
+                8 -> moveToSpecialty(it.sc.zaochnPlat)
+                9 -> moveToSpecialty(it.sc.ochnPlat)
+                // ТД
+                10 -> moveToSpecialty(it.td.zaochnPlat)
+                11 -> moveToSpecialty(it.td.ochnPlat)
+                // ЕБ
+                12 -> moveToSpecialty(it.eb.zaochnPlat)
+                13 -> moveToSpecialty(it.eb.ochnPlat)
+                // ЕК
+                14 -> moveToSpecialty(it.ek.buaZaochnPlat)
+                15 -> moveToSpecialty(it.ek.buaOchnPlat)
+                16 -> moveToSpecialty(it.ek.logOchnPlat)
+                17 -> moveToSpecialty(it.ek.ocOchnPlat)
+                18 -> moveToSpecialty(it.ek.fZaochnPlat)
+                19 -> moveToSpecialty(it.ek.fOchnPlat)
+                20 -> moveToSpecialty(it.ek.epoOchnPlat)
+            }
+        }
     }
     fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {}
     fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {}

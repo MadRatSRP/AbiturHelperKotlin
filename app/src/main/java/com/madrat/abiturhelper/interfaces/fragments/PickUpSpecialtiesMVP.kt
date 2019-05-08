@@ -27,6 +27,11 @@ interface PickUpSpecialtiesMVP {
         //Третий этап
         fun separateStudentsBySpecialties()
         fun checkForUnti()
+        fun checkForFEU()
+        fun checkForFIT()
+        fun checkForMTF()
+        fun checkForUNIT()
+        fun checkForFEE()
 
         fun showFaculties(faculties: ArrayList<Faculty>)
         fun toSpecialties(bundle: Bundle)

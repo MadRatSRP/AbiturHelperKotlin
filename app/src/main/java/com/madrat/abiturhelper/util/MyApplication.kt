@@ -5,6 +5,7 @@ import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.ScoreTypes
 import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.model.faculties.Feu
 import com.madrat.abiturhelper.model.faculties.Unti
 
 class MyApplication: Application() {
@@ -16,6 +17,7 @@ class MyApplication: Application() {
     private var faculties: Faculties? = null
 
     private var unti: Unti? = null
+    private var feu: Feu? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -127,5 +129,15 @@ class MyApplication: Application() {
     }
     fun returnUnti(): Unti? {
         return unti
+    }
+
+    //ФЭУ
+    fun saveFeu(feu: Feu) {
+        this.feu = feu
+        showLog("ФЭУ сохранён")
+    }
+
+    fun returnFeu(): Feu? {
+        return feu
     }
 }
