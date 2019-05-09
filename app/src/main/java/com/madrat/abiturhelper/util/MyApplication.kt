@@ -6,6 +6,8 @@ import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.ScoreTypes
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.model.faculties.Feu
+import com.madrat.abiturhelper.model.faculties.Fit
+import com.madrat.abiturhelper.model.faculties.MTF
 import com.madrat.abiturhelper.model.faculties.Unti
 
 class MyApplication: Application() {
@@ -18,6 +20,8 @@ class MyApplication: Application() {
 
     private var unti: Unti? = null
     private var feu: Feu? = null
+    private var fit: Fit? = null
+    private var mtf: MTF? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -122,22 +126,31 @@ class MyApplication: Application() {
         }
         return faculties
     }
-    //УНТИ
+    // УНТИ
     fun saveUnti(unti: Unti) {
         this.unti = unti
         showLog("УНТИ сохранён")
     }
-    fun returnUnti(): Unti? {
-        return unti
-    }
+    fun returnUnti(): Unti? = unti
 
-    //ФЭУ
+    // ФЭУ
     fun saveFeu(feu: Feu) {
         this.feu = feu
         showLog("ФЭУ сохранён")
     }
+    fun returnFeu(): Feu? = feu
 
-    fun returnFeu(): Feu? {
-        return feu
+    // ФИТ
+    fun saveFIT(fit: Fit) {
+        this.fit = fit
+        showLog("ФИТ сохранён")
     }
+    fun returnFIT(): Fit? = fit
+
+    // МТФ
+    fun saveMTF(mtf: MTF) {
+        this.mtf = mtf
+        showLog("МТФ сохранён")
+    }
+    fun returnMTF(): MTF? = mtf
 }

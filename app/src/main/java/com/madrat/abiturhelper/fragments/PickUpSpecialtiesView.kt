@@ -12,9 +12,14 @@ import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.Feu
+import com.madrat.abiturhelper.model.faculties.Fit
+import com.madrat.abiturhelper.model.faculties.MTF
 import com.madrat.abiturhelper.model.faculties.Unti
 import com.madrat.abiturhelper.model.faculties.feu.*
 import com.madrat.abiturhelper.model.faculties.fit.*
+import com.madrat.abiturhelper.model.faculties.mtf.SIM
+import com.madrat.abiturhelper.model.faculties.mtf.TB
+import com.madrat.abiturhelper.model.faculties.mtf.UK
 import com.madrat.abiturhelper.model.faculties.unti.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
@@ -1333,6 +1338,76 @@ class PickUpSpecialtiesView
             return IST(isitdOchnBudg, isitdOchnLgot, isitdOchnPlat, itipkOchnBudg,
                     itipkOchnLgot, itipkOchnPlat, zaochnPlat)
         }
+        fun separateMOA(list: ArrayList<Student>): MOA {
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+            val ochnCelevoe = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "МОА_очн_бюдж" || list[i].specialtySecond == "МОА_очн_бюдж"
+                        || list[i].specialtyThird == "МОА_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МОА_очн_льгот" || list[i].specialtySecond == "МОА_очн_льгот"
+                        || list[i].specialtyThird == "МОА_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МОА_очн_плат" || list[i].specialtySecond == "МОА_очн_плат"
+                        || list[i].specialtyThird == "МОА_очн_плат")
+                    ochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "МОА_очн_целевое" || list[i].specialtySecond == "МОА_очн_целевое"
+                        || list[i].specialtyThird == "МОА_очн_целевое")
+                    ochnCelevoe.add(list[i])
+            }
+            return MOA(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+        }
+        fun separatePRI(list: ArrayList<Student>): PRI {
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+            val ochnCelevoe = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "ПРИ_очн_бюдж" || list[i].specialtySecond == "ПРИ_очн_бюдж"
+                        || list[i].specialtyThird == "ПРИ_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ПРИ_очн_льгот" || list[i].specialtySecond == "ПРИ_очн_льгот"
+                        || list[i].specialtyThird == "ПРИ_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "ПРИ_очн_плат" || list[i].specialtySecond == "ПРИ_очн_плат"
+                        || list[i].specialtyThird == "ПРИ_очн_плат")
+                    ochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "ПРИ_очн_целевое" || list[i].specialtySecond == "ПРИ_очн_целевое"
+                        || list[i].specialtyThird == "ПРИ_очн_целевое")
+                    ochnCelevoe.add(list[i])
+            }
+            return PRI(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+        }
+        fun separatePRO(list: ArrayList<Student>): PRO {
+            val gdOchnBudg = ArrayList<Student>()
+            val gdOchnLgot = ArrayList<Student>()
+            val gdOchnPlat = ArrayList<Student>()
+            val ivtZaochnPlat = ArrayList<Student>()
+            val ekZaochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "ПРО(ГД)_очн_бюдж" || list[i].specialtySecond == "ПРО(ГД)_очн_бюдж"
+                        || list[i].specialtyThird == "ПРО(ГД)_очн_бюдж")
+                    gdOchnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ПРО(ГД)_очн_льгот" || list[i].specialtySecond == "ПРО(ГД)_очн_льгот"
+                        || list[i].specialtyThird == "ПРО(ГД)_очн_льгот")
+                    gdOchnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "ПРО(ГД)_очн_плат" || list[i].specialtySecond == "ПРО(ГД)_очн_плат"
+                        || list[i].specialtyThird == "ПРО(ГД)_очн_плат")
+                    gdOchnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "ПРО(ИВТ)_заочн_плат" || list[i].specialtySecond == "ПРО(ИВТ)_заочн_плат"
+                        || list[i].specialtyThird == "ПРО(ИВТ)_заочн_плат")
+                    ivtZaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "ПРО(ЭК)_заочн_плат" || list[i].specialtySecond == "ПРО(ЭК)_заочн_плат"
+                        || list[i].specialtyThird == "ПРО(ЭК)_заочн_плат")
+                    ekZaochnPlat.add(list[i])
+            }
+            return PRO(gdOchnBudg, gdOchnLgot, gdOchnPlat, ivtZaochnPlat, ekZaochnPlat)
+        }
 
         scoreTypes?.physicsStudents?.let { checkForIASB(it) }
         scoreTypes?.computerScienceStudents?.let { checkForIASB(it) }
@@ -1385,6 +1460,14 @@ class PickUpSpecialtiesView
         val separatedIVT = separateIVT(ivt)
         val separatedINN = separateINN(inn)
         val separatedIST = separateIST(ist)
+        val separatedMOA = separateMOA(moa)
+        val separatedPRI = separatePRI(pri)
+        val separatedPRO = separatePRO(pro)
+
+
+        val fit = Fit(separatedIASB, separatedIB, separatedIBAS, separatedIVT, separatedINN,
+                separatedIST, separatedMOA, separatedPRI, separatedPRO)
+        myApplication.saveFIT(fit)
     }
     override fun checkForMTF() {
         val scoreTypes = myApplication.returnScoreTypes()
@@ -1452,6 +1535,120 @@ class PickUpSpecialtiesView
             }
         }
 
+        fun separateMASH(list: ArrayList<Student>): com.madrat.abiturhelper.model.faculties.mtf.MASH {
+            val lZaochnBudg = ArrayList<Student>()
+            val lZaochnLgot = ArrayList<Student>()
+            val lZaochnPlat = ArrayList<Student>()
+            val lOchnBudg = ArrayList<Student>()
+            val lOchnLgot = ArrayList<Student>()
+            val lOchnPlat = ArrayList<Student>()
+            val sZaochnBudg = ArrayList<Student>()
+            val sZaochnLgot = ArrayList<Student>()
+            val sZaochnPlat = ArrayList<Student>()
+            val sOchnBudg = ArrayList<Student>()
+            val sOchnLgot = ArrayList<Student>()
+            val sOchnPlat = ArrayList<Student>()
+            val sOchnCelevoe = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "МАШ(Л)_заочн_бюдж" || list[i].specialtySecond == "МАШ(Л)_заочн_бюдж"
+                        || list[i].specialtyThird == "МАШ(Л)_заочн_бюдж")
+                    lZaochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(Л)_заочн_льгот" || list[i].specialtySecond == "МАШ(Л)_заочн_льгот"
+                        || list[i].specialtyThird == "МАШ(Л)_заочн_льгот")
+                    lZaochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(Л)_заочн_плат" || list[i].specialtySecond == "МАШ(Л)_заочн_плат"
+                        || list[i].specialtyThird == "МАШ(Л)_заочн_плат")
+                    lZaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(Л)_очн_бюдж" || list[i].specialtySecond == "МАШ(Л)_очн_бюдж"
+                        || list[i].specialtyThird == "МАШ(Л)_очн_бюдж")
+                    lOchnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(Л)_очн_льгот" || list[i].specialtySecond == "МАШ(Л)_очн_льгот"
+                        || list[i].specialtyThird == "МАШ(Л)_очн_льгот")
+                    lOchnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(Л)_очн_плат" || list[i].specialtySecond == "МАШ(Л)_очн_плат"
+                        || list[i].specialtyThird == "МАШ(Л)_очн_плат")
+                    lOchnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_заочн_бюдж" || list[i].specialtySecond == "МАШ(С)_заочн_бюдж"
+                        || list[i].specialtyThird == "МАШ(С)_заочн_бюдж")
+                    sZaochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_заочн_льгот" || list[i].specialtySecond == "МАШ(С)_заочн_льгот"
+                        || list[i].specialtyThird == "МАШ(С)_заочн_льгот")
+                    sZaochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_заочн_плат" || list[i].specialtySecond == "МАШ(С)_заочн_плат"
+                        || list[i].specialtyThird == "МАШ(С)_заочн_плат")
+                    sZaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_очн_бюдж" || list[i].specialtySecond == "МАШ(С)_очн_бюдж"
+                        || list[i].specialtyThird == "МАШ(С)_очн_бюдж")
+                    sOchnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_очн_льгот" || list[i].specialtySecond == "МАШ(С)_очн_льгот"
+                        || list[i].specialtyThird == "МАШ(С)_очн_льгот")
+                    sOchnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_очн_плат" || list[i].specialtySecond == "МАШ(С)_очн_плат"
+                        || list[i].specialtyThird == "МАШ(С)_очн_плат")
+                    sOchnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "МАШ(С)_очн_целевое" || list[i].specialtySecond == "МАШ(С)_очн_целевое"
+                        || list[i].specialtyThird == "МАШ(С)_очн_целевое")
+                    sOchnCelevoe.add(list[i])
+            }
+            return com.madrat.abiturhelper.model.faculties.mtf.MASH(lZaochnBudg, lZaochnLgot, lZaochnPlat,
+                    lOchnBudg, lOchnLgot, lOchnPlat, sZaochnBudg, sZaochnLgot, sZaochnPlat, sOchnBudg, sOchnLgot, sOchnPlat, sOchnCelevoe)
+        }
+        fun separateSIM(list: ArrayList<Student>): SIM {
+            val zaochnPlat = ArrayList<Student>()
+            val ochnBudg = ArrayList<Student>()
+            val ochnLgot = ArrayList<Student>()
+            val ochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "СиМ_заочн_плат" || list[i].specialtySecond == "СиМ_заочн_плат"
+                        || list[i].specialtyThird == "СиМ_заочн_плат")
+                    zaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "СиМ_очн_бюдж" || list[i].specialtySecond == "СиМ_очн_бюдж"
+                        || list[i].specialtyThird == "СиМ_очн_бюдж")
+                    ochnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "СиМ_очн_льгот" || list[i].specialtySecond == "СиМ_очн_льгот"
+                        || list[i].specialtyThird == "СиМ_очн_льгот")
+                    ochnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "СиМ_очн_плат" || list[i].specialtySecond == "СиМ_очн_плат"
+                        || list[i].specialtyThird == "СиМ_очн_плат")
+                    ochnPlat.add(list[i])
+            }
+            return SIM(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+        }
+        fun separateTB(list: ArrayList<Student>): TB {
+            val btpipZaochnPlat = ArrayList<Student>()
+            val btpipOchnBudg = ArrayList<Student>()
+            val btpipOchnLgot = ArrayList<Student>()
+            val btpipOchnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "ТБ(БТПиП)_заочн_плат" || list[i].specialtySecond == "ТБ(БТПиП)_заочн_плат"
+                        || list[i].specialtyThird == "ТБ(БТПиП)_заочн_плат")
+                    btpipZaochnPlat.add(list[i])
+                else if (list[i].specialtyFirst == "ТБ(БТПиП)_очн_бюдж" || list[i].specialtySecond == "ТБ(БТПиП)_очн_бюдж"
+                        || list[i].specialtyThird == "ТБ(БТПиП)_очн_бюдж")
+                    btpipOchnBudg.add(list[i])
+                else if (list[i].specialtyFirst == "ТБ(БТПиП)_очн_льгот" || list[i].specialtySecond == "ТБ(БТПиП)_очн_льгот"
+                        || list[i].specialtyThird == "ТБ(БТПиП)_очн_льгот")
+                    btpipOchnLgot.add(list[i])
+                else if (list[i].specialtyFirst == "ТБ(БТПиП)_очн_плат" || list[i].specialtySecond == "ТБ(БТПиП)_очн_плат"
+                        || list[i].specialtyThird == "ТБ(БТПиП)_очн_плат")
+                    btpipOchnPlat.add(list[i])
+            }
+            return TB(btpipZaochnPlat, btpipOchnBudg, btpipOchnLgot, btpipOchnPlat)
+        }
+        fun separateUK(list: ArrayList<Student>): UK {
+            val zaochnPlat = ArrayList<Student>()
+
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == "УК_заочн_плат" || list[i].specialtySecond == "УК_заочн_плат"
+                        || list[i].specialtyThird == "УК_заочн_плат")
+                    zaochnPlat.add(list[i])
+            }
+            return UK(zaochnPlat)
+        }
+
         scoreTypes?.physicsStudents?.let { checkForMASH(it) }
         scoreTypes?.computerScienceStudents?.let { checkForMASH(it) }
         scoreTypes?.socialScienceStudents?.let { checkForMASH(it) }
@@ -1471,6 +1668,14 @@ class PickUpSpecialtiesView
         scoreTypes?.computerScienceStudents?.let { checkForUK(it) }
         scoreTypes?.socialScienceStudents?.let { checkForUK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForUK(it) }
+
+        val separatedMASH = separateMASH(mash)
+        val separatedSIM = separateSIM(sim)
+        val separatedTB = separateTB(tb)
+        val separatedUK = separateUK(uk)
+
+        val mtf = MTF(separatedMASH, separatedSIM, separatedTB, separatedUK)
+        myApplication.saveMTF(mtf)
     }
     override fun checkForUNIT() {
         val scoreTypes = myApplication.returnScoreTypes()

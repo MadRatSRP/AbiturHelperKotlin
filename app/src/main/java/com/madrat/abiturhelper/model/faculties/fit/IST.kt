@@ -9,5 +9,5 @@ data class IST(
         val itipkOchnBudg: ArrayList<Student>,
         val itipkOchnLgot: ArrayList<Student>,
         val itipkOchnPlat: ArrayList<Student>,
-        val itipkZaochnPlat: ArrayList<Student>
+        val zaochnPlat: ArrayList<Student>
 )

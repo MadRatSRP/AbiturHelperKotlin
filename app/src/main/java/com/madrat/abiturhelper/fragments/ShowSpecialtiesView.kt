@@ -188,8 +188,113 @@ class ShowSpecialtiesView
             }
         }
     }
-    fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {}
-    fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {}
+    private fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val bundle = Bundle()
+        val fit = myApplication.returnFIT()
+
+        fun moveToSpecialty(list: ArrayList<Student>) {
+            bundle.stringAndSerializable(specialty, list)
+            toSpecialty(bundle)
+        }
+
+        fit?.let {
+            when (position) {
+                // ИАСБ
+                0 -> moveToSpecialty(it.iasb.ochnBudg)
+                1 -> moveToSpecialty(it.iasb.ochnLgot)
+                2 -> moveToSpecialty(it.iasb.ochnPlat)
+                // ИБ
+                3 -> moveToSpecialty(it.ib.vechPlat)
+                4 -> moveToSpecialty(it.ib.ochnBudg)
+                5 -> moveToSpecialty(it.ib.ochnLgot)
+                6 -> moveToSpecialty(it.ib.ochnPlat)
+                // ИБАС
+                7 -> moveToSpecialty(it.ibas.ochnBudg)
+                8 -> moveToSpecialty(it.ibas.ochnLgot)
+                9 -> moveToSpecialty(it.ibas.ochnPlat)
+                // ИВТ
+                10 -> moveToSpecialty(it.ivt.poZaochnPlat)
+                11 -> moveToSpecialty(it.ivt.poOchnBudg)
+                12 -> moveToSpecialty(it.ivt.poOchnLgot)
+                13 -> moveToSpecialty(it.ivt.poOchnPlat)
+                14 -> moveToSpecialty(it.ivt.poOchnCelevoe)
+                15 -> moveToSpecialty(it.ivt.saprOchnBudg)
+                16 -> moveToSpecialty(it.ivt.saprOchnLgot)
+                17 -> moveToSpecialty(it.ivt.saprOchnPlat)
+                // ИНН
+                18 -> moveToSpecialty(it.inn.zaochnPlat)
+                19 -> moveToSpecialty(it.inn.ochnBudg)
+                20 -> moveToSpecialty(it.inn.ochnLgot)
+                21 -> moveToSpecialty(it.inn.ochnPlat)
+                // ИСТ
+                22 -> moveToSpecialty(it.ist.isitdOchnBudg)
+                23 -> moveToSpecialty(it.ist.isitdOchnLgot)
+                24 -> moveToSpecialty(it.ist.isitdOchnPlat)
+                25 -> moveToSpecialty(it.ist.itipkOchnBudg)
+                26 -> moveToSpecialty(it.ist.itipkOchnLgot)
+                27 -> moveToSpecialty(it.ist.itipkOchnPlat)
+                28 -> moveToSpecialty(it.ist.zaochnPlat)
+                // МОА
+                29 -> moveToSpecialty(it.moa.ochnBudg)
+                30 -> moveToSpecialty(it.moa.ochnLgot)
+                31 -> moveToSpecialty(it.moa.ochnPlat)
+                32 -> moveToSpecialty(it.moa.ochnCelevoe)
+                // ПРИ
+                33 -> moveToSpecialty(it.pri.ochnBudg)
+                34 -> moveToSpecialty(it.pri.ochnLgot)
+                35 -> moveToSpecialty(it.pri.ochnPlat)
+                36 -> moveToSpecialty(it.pri.ochnCelevoe)
+                // ПРО
+                37 -> moveToSpecialty(it.pro.gdOchnBudg)
+                38 -> moveToSpecialty(it.pro.gdOchnLgot)
+                39 -> moveToSpecialty(it.pro.gdOchnPlat)
+                40 -> moveToSpecialty(it.pro.ivtZaochnPlat)
+                41 -> moveToSpecialty(it.pro.ekZaochnPlat)
+            }
+        }
+    }
+    private fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val bundle = Bundle()
+        val mtf = myApplication.returnMTF()
+
+        fun moveToSpecialty(list: ArrayList<Student>) {
+            bundle.stringAndSerializable(specialty, list)
+            toSpecialty(bundle)
+        }
+
+        mtf?.let {
+            when (position) {
+                // МАШ
+                0 -> moveToSpecialty(it.mash.lZaochnBudg)
+                1 -> moveToSpecialty(it.mash.lZaochnLgot)
+                2 -> moveToSpecialty(it.mash.lZaochnPlat)
+                3 -> moveToSpecialty(it.mash.lOchnBudg)
+                4 -> moveToSpecialty(it.mash.lOchnLgot)
+                5 -> moveToSpecialty(it.mash.lOchnPlat)
+                6 -> moveToSpecialty(it.mash.sZaochnBudg)
+                7 -> moveToSpecialty(it.mash.sZaochnLgot)
+                8 -> moveToSpecialty(it.mash.sZaochnPlat)
+                9 -> moveToSpecialty(it.mash.sOchnBudg)
+                10 -> moveToSpecialty(it.mash.sOchnLgot)
+                11 -> moveToSpecialty(it.mash.sOchnPlat)
+                12 -> moveToSpecialty(it.mash.sOchnCelevoe)
+                // СИМ
+                13 -> moveToSpecialty(it.sim.zaochnPlat)
+                14 -> moveToSpecialty(it.sim.ochnBudg)
+                15 -> moveToSpecialty(it.sim.ochnLgot)
+                16 -> moveToSpecialty(it.sim.ochnPlat)
+                // ТБ
+                17 -> moveToSpecialty(it.tb.btpipZaochnPlat)
+                18 -> moveToSpecialty(it.tb.btpipOchnBudg)
+                19 -> moveToSpecialty(it.tb.btpipOchnLgot)
+                20 -> moveToSpecialty(it.tb.btpipOchnPlat)
+                // УК
+                21 -> moveToSpecialty(it.uk.zaochnPlat)
+            }
+        }
+    }
     fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {}
     fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {}
 
