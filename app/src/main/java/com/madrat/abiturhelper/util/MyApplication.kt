@@ -20,6 +20,7 @@ class MyApplication: Application() {
     private var fit: Fit? = null
     private var mtf: MTF? = null
     private var unit: UNIT? = null
+    private var fee: FEE? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -158,4 +159,11 @@ class MyApplication: Application() {
         showLog("УНИТ сохранён")
     }
     fun returnUNIT(): UNIT? = unit
+
+    // ФЭЭ
+    fun saveFEE(fee: FEE) {
+        this.fee = fee
+        showLog("ФЭЭ сохранён")
+    }
+    fun returnFEE(): FEE? = fee
 }
