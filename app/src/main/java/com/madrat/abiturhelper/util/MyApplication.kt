@@ -5,10 +5,7 @@ import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.ScoreTypes
 import com.madrat.abiturhelper.model.Student
-import com.madrat.abiturhelper.model.faculties.Feu
-import com.madrat.abiturhelper.model.faculties.Fit
-import com.madrat.abiturhelper.model.faculties.MTF
-import com.madrat.abiturhelper.model.faculties.Unti
+import com.madrat.abiturhelper.model.faculties.*
 
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }
@@ -22,6 +19,7 @@ class MyApplication: Application() {
     private var feu: Feu? = null
     private var fit: Fit? = null
     private var mtf: MTF? = null
+    private var unit: UNIT? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -153,4 +151,11 @@ class MyApplication: Application() {
         showLog("МТФ сохранён")
     }
     fun returnMTF(): MTF? = mtf
+
+    // УНИТ
+    fun saveUNIT(unit: UNIT) {
+        this.unit = unit
+        showLog("УНИТ сохранён")
+    }
+    fun returnUNIT(): UNIT? = unit
 }

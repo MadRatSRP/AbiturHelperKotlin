@@ -295,8 +295,58 @@ class ShowSpecialtiesView
             }
         }
     }
-    fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {}
-    fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {}
+    private fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val bundle = Bundle()
+        val unit = myApplication.returnUNIT()
+
+        fun moveToSpecialty(list: ArrayList<Student>) {
+            bundle.stringAndSerializable(specialty, list)
+            toSpecialty(bundle)
+        }
+
+        unit?.let {
+            when (position) {
+                // НТТК
+                0 -> moveToSpecialty(it.nttk.zaochnBudg)
+                1 -> moveToSpecialty(it.nttk.zaochnLgot)
+                2 -> moveToSpecialty(it.nttk.zaochnPlat)
+                // НТТС
+                3 -> moveToSpecialty(it.ntts.ochnBudg)
+                4 -> moveToSpecialty(it.ntts.ochnLgot)
+                5 -> moveToSpecialty(it.ntts.ochnPlat)
+                // ПМ
+                6 -> moveToSpecialty(it.pm.bmOchnBudg)
+                7 -> moveToSpecialty(it.pm.bmOchnLgot)
+                8 -> moveToSpecialty(it.pm.bmOchnPlat)
+                9 -> moveToSpecialty(it.pm.dpmOchnBudg)
+                10 -> moveToSpecialty(it.pm.dpmOchnLgot)
+                11 -> moveToSpecialty(it.pm.dpmOchnPlat)
+                // ПСЖД
+                12 -> moveToSpecialty(it.psjd.vOchnPlat)
+                13 -> moveToSpecialty(it.psjd.lOchnPlat)
+                14 -> moveToSpecialty(it.psjd.zaochnPlat)
+                // ТТП
+                15 -> moveToSpecialty(it.ttp.zaochnBudg)
+                16 -> moveToSpecialty(it.ttp.zaochnLgot)
+                17 -> moveToSpecialty(it.ttp.zaochnPlat)
+                18 -> moveToSpecialty(it.ttp.ochnBudg)
+                19 -> moveToSpecialty(it.ttp.ochnLgot)
+                20 -> moveToSpecialty(it.ttp.ochnPlat)
+                // ЭТТК
+                21 -> moveToSpecialty(it.ettk.aiahOchnBudg)
+                22 -> moveToSpecialty(it.ettk.aiahOchnLgot)
+                23 -> moveToSpecialty(it.ettk.aiahOchnPlat)
+                24 -> moveToSpecialty(it.ettk.aiahOchnCelevoe)
+                25 -> moveToSpecialty(it.ettk.psjdOchnBudg)
+                26 -> moveToSpecialty(it.ettk.psjdOchnLgot)
+                27 -> moveToSpecialty(it.ettk.psjdOchnPlat)
+            }
+        }
+    }
+    private fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {
+
+    }
 
     override fun toSpecialty(bundle: Bundle) {
         view?.let {
