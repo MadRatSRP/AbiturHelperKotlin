@@ -1,0 +1,40 @@
+
+        /*fee?.let {
+            when (position) {
+                // РАД
+                0 -> moveToSpecialty(it.rad.ochnBudg)
+                1 -> moveToSpecialty(it.rad.ochnLgot)
+                2 -> moveToSpecialty(it.rad.ochnPlat)
+                3 -> moveToSpecialty(it.rad.ochnCelevoe)
+                // ТИТ
+                4 -> moveToSpecialty(it.tit.iskZaochnPlat)
+                5 -> moveToSpecialty(it.tit.ochnBudg)
+                6 -> moveToSpecialty(it.tit.ochnLgot)
+                7 -> moveToSpecialty(it.tit.ochnPlat)
+                // ЭИН
+                8 -> moveToSpecialty(it.ein.mteOchnBudg)
+                9 -> moveToSpecialty(it.ein.mteOchnLgot)
+                10 -> moveToSpecialty(it.ein.mteOchnPlat)
+                11 -> moveToSpecialty(it.ein.peOchnBudg)
+                12 -> moveToSpecialty(it.ein.peOchnLgot)
+                13 -> moveToSpecialty(it.ein.peOchnPlat)
+                // ЭИЭ
+                14 -> moveToSpecialty(it.eie.zaochnPlat)
+                15 -> moveToSpecialty(it.eie.ochnBudg)
+                16 -> moveToSpecialty(it.eie.ochnLgot)
+                17 -> moveToSpecialty(it.eie.ochnPlat)
+                18 -> moveToSpecialty(it.eie.ochnCelevoe)
+                // ЭМ
+                19 -> moveToSpecialty(it.em.dvsZaochnBudg)
+                20 -> moveToSpecialty(it.em.dvsZaochnLgot)
+                21 -> moveToSpecialty(it.em.dvsZaochnPlat)
+                22 -> moveToSpecialty(it.em.dvsOchnBudg)
+                23 -> moveToSpecialty(it.em.dvsOchnLgot)
+                24 -> moveToSpecialty(it.em.dvsOchnPlat)
+                25 -> moveToSpecialty(it.em.tOchnBudg)
+                26 -> moveToSpecialty(it.em.tOchnLgot)
+                27 -> moveToSpecialty(it.em.tOchnPlat)
+                28 -> moveToSpecialty(it.em.tOchnCelevoe)
+                29 -> moveToSpecialty(it.em.emksZaochnPlat)
+            }
+        }*/

@@ -43,28 +43,86 @@ class ShowSpecialtiesView
         val pos = arguments?.getInt("pos")
         when (pos) {
             //УНТИ
-            0 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
+            0 -> {
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
+                    onUNTISpecialtyClicked(specialty, position)}
+
+                val listUNTI = myApplication.returnUnti()
+                for (i in 0 until list.size) {
+                    listUNTI?.let {
+                        list[i].amountOfStatements = it[i].size
+
+                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                    }
+                }
+            }
             //ФЭУ
-            1 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFEUSpecialtyClicked(specialty, position)}
+            1 -> {
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
+                    onFEUSpecialtyClicked(specialty, position)}
+
+                val listFEU = myApplication.returnFeu()
+                for (i in 0 until list.size) {
+                    listFEU?.let {
+                        list[i].amountOfStatements = it[i].size
+
+                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                    }
+                }
+            }
             //ФИТ
-            2 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFITSpecialtyClicked(specialty, position)}
+            2 -> {
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
+                    onFITSpecialtyClicked(specialty, position)}
+
+                val listFIT = myApplication.returnFIT()
+                for (i in 0 until list.size) {
+                    listFIT?.let {
+                        list[i].amountOfStatements = it[i].size
+
+                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                    }
+                }
+            }
             //МТФ
-            3 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onMTFSpecialtyClicked(specialty, position)}
+            3 -> {
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
+                    onMTFSpecialtyClicked(specialty, position)}
+
+                val listMTF = myApplication.returnMTF()
+                for (i in 0 until list.size) {
+                    listMTF?.let {
+                        list[i].amountOfStatements = it[i].size
+
+                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                    }
+                }
+            }
             //УНИТ
-            4 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNITSpecialtyClicked(specialty, position)}
+            4 -> {
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
+                    onUNITSpecialtyClicked(specialty, position)}
+
+                val listUNIT = myApplication.returnUNIT()
+                for (i in 0 until list.size) {
+                    listUNIT?.let {
+                        list[i].amountOfStatements = it[i].size
+
+                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                    }
+                }
+            }
             //ФЭЭ
             5 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFEESpecialtyClicked(specialty, position)}
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
+                    onFEESpecialtyClicked(specialty, position)}
 
-                //val fee = myApplication.returnFEE()
-                val listFEE = myApplication.returnListFEE()
-
-                /*fee?.let {
-                    list[0].amountOfStatements = it.rad.ochnBudg.size
-                }*/
+                val listFEE = myApplication.returnFEE()
                 for (i in 0 until list.size) {
                     listFEE?.let {
-                        list[i].amountOfStatements = listFEE[i].size
+                        list[i].amountOfStatements = it[i].size
+
+                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
                     }
                 }
             }
@@ -90,14 +148,14 @@ class ShowSpecialtiesView
     private fun onUNTISpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
-        val unti = myApplication.returnUnti()
+        val listUNTI = myApplication.returnUnti()
 
         fun moveToSpecialty(list: ArrayList<Student>) {
             bundle.stringAndSerializable(specialty, list)
             toSpecialty(bundle)
         }
 
-        unti?.let {
+        /*unti?.let {
             when (position) {
                 //АТП
                 0 -> {
@@ -159,19 +217,23 @@ class ShowSpecialtiesView
                 39 -> moveToSpecialty(it.specialtiesUTS.ochnPlat)
                 40 -> moveToSpecialty(it.specialtiesUTS.ochnCelevoe)
             }
+        }*/
+
+        listUNTI?.let {
+            moveToSpecialty(it[position])
         }
     }
     private fun onFEUSpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
-        val feu = myApplication.returnFeu()
+        val listFEU = myApplication.returnFeu()
 
         fun moveToSpecialty(list: ArrayList<Student>) {
             bundle.stringAndSerializable(specialty, list)
             toSpecialty(bundle)
         }
 
-        feu?.let {
+        /*feu?.let {
             when (position) {
                 // БИ
                 0 -> moveToSpecialty(it.bi.zaochnPlat)
@@ -201,19 +263,23 @@ class ShowSpecialtiesView
                 19 -> moveToSpecialty(it.ek.fOchnPlat)
                 20 -> moveToSpecialty(it.ek.epoOchnPlat)
             }
+        }*/
+
+        listFEU?.let {
+            moveToSpecialty(it[position])
         }
     }
     private fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
-        val fit = myApplication.returnFIT()
+        val listFIT = myApplication.returnFIT()
 
         fun moveToSpecialty(list: ArrayList<Student>) {
             bundle.stringAndSerializable(specialty, list)
             toSpecialty(bundle)
         }
 
-        fit?.let {
+        /*fit?.let {
             when (position) {
                 // ИАСБ
                 0 -> moveToSpecialty(it.iasb.ochnBudg)
@@ -267,19 +333,23 @@ class ShowSpecialtiesView
                 40 -> moveToSpecialty(it.pro.ivtZaochnPlat)
                 41 -> moveToSpecialty(it.pro.ekZaochnPlat)
             }
+        }*/
+
+        listFIT?.let {
+            moveToSpecialty(it[position])
         }
     }
     private fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
-        val mtf = myApplication.returnMTF()
+        val listMTF = myApplication.returnMTF()
 
         fun moveToSpecialty(list: ArrayList<Student>) {
             bundle.stringAndSerializable(specialty, list)
             toSpecialty(bundle)
         }
 
-        mtf?.let {
+        /*mtf?.let {
             when (position) {
                 // МАШ
                 0 -> moveToSpecialty(it.mash.lZaochnBudg)
@@ -308,19 +378,23 @@ class ShowSpecialtiesView
                 // УК
                 21 -> moveToSpecialty(it.uk.zaochnPlat)
             }
+        }*/
+
+        listMTF?.let {
+            moveToSpecialty(it[position])
         }
     }
     private fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
-        val unit = myApplication.returnUNIT()
+        val listUNIT = myApplication.returnUNIT()
 
         fun moveToSpecialty(list: ArrayList<Student>) {
             bundle.stringAndSerializable(specialty, list)
             toSpecialty(bundle)
         }
 
-        unit?.let {
+        /*unit?.let {
             when (position) {
                 // НТТК
                 0 -> moveToSpecialty(it.nttk.zaochnBudg)
@@ -357,13 +431,16 @@ class ShowSpecialtiesView
                 26 -> moveToSpecialty(it.ettk.psjdOchnLgot)
                 27 -> moveToSpecialty(it.ettk.psjdOchnPlat)
             }
+        }*/
+        listUNIT?.let {
+            moveToSpecialty(it[position])
         }
     }
     private fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
         val fee = myApplication.returnFEE()
-        val listFEE = myApplication.returnListFEE()
+        val listFEE = myApplication.returnFEE()
         showLog("Размер listFEE" + listFEE?.size)
 
         fun moveToSpecialty(list: ArrayList<Student>) {
@@ -374,47 +451,6 @@ class ShowSpecialtiesView
         listFEE?.let {
             moveToSpecialty(it[position])
         }
-
-
-        /*fee?.let {
-            when (position) {
-                // РАД
-                0 -> moveToSpecialty(it.rad.ochnBudg)
-                1 -> moveToSpecialty(it.rad.ochnLgot)
-                2 -> moveToSpecialty(it.rad.ochnPlat)
-                3 -> moveToSpecialty(it.rad.ochnCelevoe)
-                // ТИТ
-                4 -> moveToSpecialty(it.tit.iskZaochnPlat)
-                5 -> moveToSpecialty(it.tit.ochnBudg)
-                6 -> moveToSpecialty(it.tit.ochnLgot)
-                7 -> moveToSpecialty(it.tit.ochnPlat)
-                // ЭИН
-                8 -> moveToSpecialty(it.ein.mteOchnBudg)
-                9 -> moveToSpecialty(it.ein.mteOchnLgot)
-                10 -> moveToSpecialty(it.ein.mteOchnPlat)
-                11 -> moveToSpecialty(it.ein.peOchnBudg)
-                12 -> moveToSpecialty(it.ein.peOchnLgot)
-                13 -> moveToSpecialty(it.ein.peOchnPlat)
-                // ЭИЭ
-                14 -> moveToSpecialty(it.eie.zaochnPlat)
-                15 -> moveToSpecialty(it.eie.ochnBudg)
-                16 -> moveToSpecialty(it.eie.ochnLgot)
-                17 -> moveToSpecialty(it.eie.ochnPlat)
-                18 -> moveToSpecialty(it.eie.ochnCelevoe)
-                // ЭМ
-                19 -> moveToSpecialty(it.em.dvsZaochnBudg)
-                20 -> moveToSpecialty(it.em.dvsZaochnLgot)
-                21 -> moveToSpecialty(it.em.dvsZaochnPlat)
-                22 -> moveToSpecialty(it.em.dvsOchnBudg)
-                23 -> moveToSpecialty(it.em.dvsOchnLgot)
-                24 -> moveToSpecialty(it.em.dvsOchnPlat)
-                25 -> moveToSpecialty(it.em.tOchnBudg)
-                26 -> moveToSpecialty(it.em.tOchnLgot)
-                27 -> moveToSpecialty(it.em.tOchnPlat)
-                28 -> moveToSpecialty(it.em.tOchnCelevoe)
-                29 -> moveToSpecialty(it.em.emksZaochnPlat)
-            }
-        }*/
     }
 
     override fun toSpecialty(bundle: Bundle) {

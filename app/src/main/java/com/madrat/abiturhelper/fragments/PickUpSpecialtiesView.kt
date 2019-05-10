@@ -12,7 +12,6 @@ import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.*
-import com.madrat.abiturhelper.model.faculties.fee.*
 import com.madrat.abiturhelper.model.faculties.feu.*
 import com.madrat.abiturhelper.model.faculties.fit.*
 import com.madrat.abiturhelper.model.faculties.mtf.SIM
@@ -377,6 +376,8 @@ class PickUpSpecialtiesView
         val tmo = ArrayList<Student>()
         val uts = ArrayList<Student>()
 
+        val listUNTI = ArrayList<ArrayList<Student>>()
+
         fun checkForATP(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
                 if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
@@ -490,7 +491,7 @@ class PickUpSpecialtiesView
             }
         }
 
-        fun separateATP(list: ArrayList<Student>): ATP {
+        fun separateATP(list: ArrayList<Student>)/*: ATP*/ {
             val zaochnBudg = ArrayList<Student>()
             val zaochnLgot = ArrayList<Student>()
             val zaochnPlat = ArrayList<Student>()
@@ -525,9 +526,11 @@ class PickUpSpecialtiesView
             showLog("АТП с размером ${list.size} был разбит на ЗаочноеБюджет - ${zaochnBudg.size}, ЗаочноеЛьгот - ${zaochnLgot.size}, " +
                     "ЗаочноеПлат - ${zaochnPlat.size},\nОчноеБюджет - ${ochnBudg.size}, ОчноеЛьгот -  ${ochnLgot.size}, " +
                     "ОчноеПлат - ${ochnPlat.size}, ОчноеЦелевое -  ${ochnCelevoe.size}")
-            return ATP(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            val collection = arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg,
+                    ochnLgot, ochnPlat, ochnCelevoe)
+            listUNTI.addAll(collection)
         }
-        fun separateKTO(list: ArrayList<Student>): KTO {
+        fun separateKTO(list: ArrayList<Student>)/*: KTO*/ {
             val atkmOchnBudg = ArrayList<Student>()
             val atkmOchnLgot = ArrayList<Student>()
             val atkmOchnPlat = ArrayList<Student>()
@@ -577,10 +580,11 @@ class PickUpSpecialtiesView
                     "ТМ_ОчноеПлатное - ${tmOchnPlat.size}, ТМ_ОчноеЦелевое -  ${tmOchnCelevoe.size}, " +
                     "ВечернееБюджет - ${vechBudg.size}, ВечернееЛьготное - ${vechLgot.size}, " +
                     "ВечернееПлатное - ${vechPlat.size}")
-            return KTO(atkmOchnBudg, atkmOchnLgot, atkmOchnPlat, tmOchnBudg, tmOchnLgot,
+            val collection = arrayListOf(atkmOchnBudg, atkmOchnLgot, atkmOchnPlat, tmOchnBudg, tmOchnLgot,
                     tmOchnPlat, tmOchnCelevoe, vechBudg, vechLgot, vechPlat)
+            listUNTI.addAll(collection)
         }
-        fun separateMASH(list: ArrayList<Student>): MASH {
+        fun separateMASH(list: ArrayList<Student>)/*: MASH*/ {
             val tmZaochnBudg = ArrayList<Student>()
             val tmZaochnLgot = ArrayList<Student>()
             val tmZaochnPlat = ArrayList<Student>()
@@ -598,9 +602,10 @@ class PickUpSpecialtiesView
             }
             showLog("МАШ с размером ${list.size} был разбит на ТМ_ЗаочноеБюджет - ${tmZaochnBudg.size}, " +
                     "ТМ_ЗаочноеЛьготное - ${tmZaochnLgot.size}, ТМ_ЗаочноеПлатное - ${tmZaochnPlat.size}")
-            return MASH(tmZaochnBudg, tmZaochnLgot, tmZaochnPlat)
+            val collection = arrayListOf(tmZaochnBudg, tmZaochnLgot, tmZaochnPlat)
+            listUNTI.addAll(collection)
         }
-        fun separateMiTM(list: ArrayList<Student>): MiTM {
+        fun separateMiTM(list: ArrayList<Student>)/*: MiTM*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -618,9 +623,10 @@ class PickUpSpecialtiesView
             }
             showLog("МиТМ с размером ${list.size} был разбит на ОчноеБюджет - ${ochnBudg.size}, " +
                     "ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}")
-            return MiTM(ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat)
+            listUNTI.addAll(collection)
         }
-        fun separateMHT(list: ArrayList<Student>): MHT {
+        fun separateMHT(list: ArrayList<Student>)/*: MHT*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -638,9 +644,10 @@ class PickUpSpecialtiesView
             }
             showLog("МХТ с размером ${list.size} был разбит на ОчноеБюджет - ${ochnBudg.size}, " +
                     "ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}")
-            return MHT(ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat)
+            listUNTI.addAll(collection)
         }
-        fun separatePTMK(list: ArrayList<Student>): PTMK {
+        fun separatePTMK(list: ArrayList<Student>)/*: PTMK*/ {
             val zaochnBudg = ArrayList<Student>()
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
@@ -663,9 +670,10 @@ class PickUpSpecialtiesView
             showLog("ПТМК с размером ${list.size} был разбит на ЗаочноеБюджет - ${zaochnBudg.size}, " +
                     "ОчноеБюджет - ${ochnBudg.size}, ОчноеЛьготное - ${ochnLgot.size}, " +
                     "ОчноеПлатное - ${ochnPlat.size}")
-            return PTMK(zaochnBudg, ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(zaochnBudg, ochnBudg, ochnLgot, ochnPlat)
+            listUNTI.addAll(collection)
         }
-        fun separateTMO(list: ArrayList<Student>): TMO {
+        fun separateTMO(list: ArrayList<Student>)/*: TMO*/ {
             val oipmZaochnBudg = ArrayList<Student>()
             val oipmZaochnLgot = ArrayList<Student>()
             val oipmZaochnPlat = ArrayList<Student>()
@@ -701,9 +709,11 @@ class PickUpSpecialtiesView
                     "ОИиПМ_ЗаочноеЛьготное - ${oipmZaochnLgot.size}, ОИиПМ_ЗаочноеПлатное - ${oipmZaochnPlat.size}, " +
                     "\nОчноеБюджет - ${ochnBudg.size}, ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}, " +
                     "ОчноеЦелевое - ${ochnCelevoe.size}")
-            return TMO(oipmZaochnBudg, oipmZaochnLgot, oipmZaochnPlat, ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            val collection = arrayListOf(oipmZaochnBudg, oipmZaochnLgot, oipmZaochnPlat,
+                    ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            listUNTI.addAll(collection)
         }
-        fun separateUTS(list: ArrayList<Student>): UTS {
+        fun separateUTS(list: ArrayList<Student>)/*: UTS*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -725,7 +735,8 @@ class PickUpSpecialtiesView
             }
             showLog("УТС с размером ${list.size} был разбит на ОчноеБюджет - ${ochnBudg.size}, " +
                     "ОчноеЛьготное - ${ochnLgot.size}, ОчноеПлатное - ${ochnPlat.size}, ОчноеЦелевое - ${ochnCelevoe.size}")
-            return UTS(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            listUNTI.addAll(collection)
         }
 
         scoreTypes?.physicsStudents?.let { checkForATP(it) }
@@ -768,19 +779,20 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForUTS(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForUTS(it) }
 
-        val atpSeparated = separateATP(atp)
-        val ktoSeparated = separateKTO(kto)
-        val mashSeparated = separateMASH(mash)
-        val mitmSeparated = separateMiTM(mitm)
-        val mhtSeparated = separateMHT(mht)
-        val ptmkSeparated = separatePTMK(ptmk)
-        val tmoSeparated = separateTMO(tmo)
-        val utsSeparated = separateUTS(uts)
+        /*val atpSeparated = */separateATP(atp)
+        /*val ktoSeparated = */separateKTO(kto)
+        /*val mashSeparated = */separateMASH(mash)
+        /*val mitmSeparated = */separateMiTM(mitm)
+        /*val mhtSeparated = */separateMHT(mht)
+        /*val ptmkSeparated = */separatePTMK(ptmk)
+        /*val tmoSeparated = */separateTMO(tmo)
+        /*val utsSeparated = */separateUTS(uts)
 
-        val unti = Unti(atpSeparated, ktoSeparated, mashSeparated, mitmSeparated, mhtSeparated,
-                ptmkSeparated, tmoSeparated, utsSeparated)
-        myApplication.saveUnti(unti)
+        /*val unti = Unti(atpSeparated, ktoSeparated, mashSeparated, mitmSeparated, mhtSeparated,
+                ptmkSeparated, tmoSeparated, utsSeparated)*/
+        myApplication.saveUnti(listUNTI)
     }
+
     override fun checkForFEU() {
         val scoreTypes = myApplication.returnScoreTypes()
         val bi = ArrayList<Student>()
@@ -790,6 +802,8 @@ class PickUpSpecialtiesView
         val eb = ArrayList<Student>()
         val ek = ArrayList<Student>()
         var check = ArrayList<Student>()
+
+        val listFEU = ArrayList<ArrayList<Student>>()
 
         fun checkForBI(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -866,7 +880,7 @@ class PickUpSpecialtiesView
            showLog("CHECK = " + check.size.toString())
        }*/
 
-        fun separateBI(list: ArrayList<Student>): BI {
+        fun separateBI(list: ArrayList<Student>)/*: BI*/ {
             val zaochnPlat = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
 
@@ -880,9 +894,10 @@ class PickUpSpecialtiesView
                     ochnPlat.add(list[i])
             }
 
-            return BI(zaochnPlat, ochnPlat)
+            val collection = arrayListOf(zaochnPlat, ochnPlat)
+            listFEU.addAll(collection)
         }
-        fun separatePI(list: ArrayList<Student>): PI {
+        fun separatePI(list: ArrayList<Student>)/*: PI*/ {
             val kisOchnBudg = ArrayList<Student>()
             val kisOchnLgot = ArrayList<Student>()
             val kisOchnPlat = ArrayList<Student>()
@@ -911,9 +926,11 @@ class PickUpSpecialtiesView
                     ceOchnPlat.add(list[i])
             }
 
-            return PI(kisOchnBudg, kisOchnLgot, kisOchnPlat, ceOchnBudg, ceOchnLgot, ceOchnPlat)
+            val collection = arrayListOf(kisOchnBudg, kisOchnLgot, kisOchnPlat,
+                    ceOchnBudg, ceOchnLgot, ceOchnPlat)
+            listFEU.addAll(collection)
         }
-        fun separateSC(list: ArrayList<Student>): SC {
+        fun separateSC(list: ArrayList<Student>)/*: SC*/ {
             val zaochnPlat = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
 
@@ -926,9 +943,10 @@ class PickUpSpecialtiesView
                     ochnPlat.add(list[i])
             }
 
-            return SC(zaochnPlat, ochnPlat)
+            val collection = arrayListOf(zaochnPlat, ochnPlat)
+            listFEU.addAll(collection)
         }
-        fun separateTD(list: ArrayList<Student>): TD {
+        fun separateTD(list: ArrayList<Student>)/*: TD*/ {
             val zaochnPlat = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
 
@@ -940,9 +958,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ТД_очн_плат")
                     ochnPlat.add(list[i])
             }
-            return TD(zaochnPlat, ochnPlat)
+            val collection = arrayListOf(zaochnPlat, ochnPlat)
+            listFEU.addAll(collection)
         }
-        fun separateEB(list: ArrayList<Student>): EB {
+        fun separateEB(list: ArrayList<Student>)/*: EB*/ {
             val zaochnPlat = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
 
@@ -954,9 +973,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ЭБ_очн_плат")
                     ochnPlat.add(list[i])
             }
-            return EB(zaochnPlat, ochnPlat)
+            val collection = arrayListOf(zaochnPlat, ochnPlat)
+            listFEU.addAll(collection)
         }
-        fun separateEK(list: ArrayList<Student>): EK {
+        fun separateEK(list: ArrayList<Student>)/*: EK*/ {
             val buaZaochnPlat = ArrayList<Student>()
             val buaOchnPlat = ArrayList<Student>()
             val logOchnPlat = ArrayList<Student>()
@@ -989,8 +1009,9 @@ class PickUpSpecialtiesView
                     epoOchnPlat.add(list[i])
             }
 
-            return EK(buaZaochnPlat, buaOchnPlat, logOchnPlat,
-                    ocOchnPlat, fZaochnPlat, fOchnPlat, epoOchnPlat)
+            val collection = arrayListOf(buaZaochnPlat, buaOchnPlat, logOchnPlat, ocOchnPlat,
+                    fZaochnPlat, fOchnPlat, epoOchnPlat)
+            listFEU.addAll(collection)
         }
 
         scoreTypes?.physicsStudents?.let { checkForBI(it) }
@@ -1028,12 +1049,12 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { check(it) }
         scoreTypes?.partAndAllDataStudents?.let { check(it) }*/
 
-        val separatedBI = separateBI(bi)
-        val separatedPI = separatePI(pi)
-        val separatedSC = separateSC(sc)
-        val separatedTD = separateTD(td)
-        val separatedEB = separateEB(eb)
-        val separatedEK = separateEK(ek)
+        /*val separatedBI = */separateBI(bi)
+        /*val separatedPI = */separatePI(pi)
+        /*val separatedSC = */separateSC(sc)
+        /*val separatedTD = */separateTD(td)
+        /*val separatedEB = */separateEB(eb)
+        /*val separatedEK = */separateEK(ek)
 
         showLog(bi.size.toString())
         showLog(pi.size.toString())
@@ -1042,9 +1063,9 @@ class PickUpSpecialtiesView
         showLog(eb.size.toString())
         showLog(ek.size.toString())
 
-        val feu = Feu(separatedBI,  separatedPI, separatedSC,
-                separatedTD, separatedEB, separatedEK)
-        myApplication.saveFeu(feu)
+        /*val feu = Feu(separatedBI,  separatedPI, separatedSC,
+                separatedTD, separatedEB, separatedEK)*/
+        myApplication.saveFeu(listFEU)
     }
     override fun checkForFIT() {
         val scoreTypes = myApplication.returnScoreTypes()
@@ -1057,6 +1078,8 @@ class PickUpSpecialtiesView
         val moa = ArrayList<Student>()
         val pri = ArrayList<Student>()
         val pro = ArrayList<Student>()
+
+        val listFIT = ArrayList<ArrayList<Student>>()
 
         fun checkForIASB(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -1178,7 +1201,7 @@ class PickUpSpecialtiesView
             }
         }
 
-        fun separateIASB(list: ArrayList<Student>): IASB {
+        fun separateIASB(list: ArrayList<Student>)/*: IASB*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -1195,9 +1218,10 @@ class PickUpSpecialtiesView
                     ochnPlat.add(list[i])
             }
 
-            return IASB(ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat)
+            listFIT.addAll(collection)
         }
-        fun separateIB(list: ArrayList<Student>): IB {
+        fun separateIB(list: ArrayList<Student>)/*: IB*/ {
             val vechPlat = ArrayList<Student>()
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
@@ -1218,9 +1242,10 @@ class PickUpSpecialtiesView
                     ochnPlat.add(list[i])
             }
 
-            return IB(vechPlat, ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(vechPlat, ochnBudg, ochnLgot, ochnPlat)
+            listFIT.addAll(collection)
         }
-        fun separateIBAS(list: ArrayList<Student>): IBAS {
+        fun separateIBAS(list: ArrayList<Student>)/*: IBAS*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -1236,9 +1261,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ИБАС_очн_плат")
                     ochnPlat.add(list[i])
             }
-            return IBAS(ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat)
+            listFIT.addAll(collection)
         }
-        fun separateIVT(list: ArrayList<Student>): IVT {
+        fun separateIVT(list: ArrayList<Student>)/*: IVT*/ {
             val poZaochnPlat = ArrayList<Student>()
             val poOchnBudg = ArrayList<Student>()
             val poOchnLgot = ArrayList<Student>()
@@ -1275,10 +1301,11 @@ class PickUpSpecialtiesView
                     saprOchnPlat.add(list[i])
             }
 
-            return IVT(poZaochnPlat, poOchnBudg, poOchnLgot, poOchnPlat, poOchnCelevoe,
-                    saprOchnBudg, saprOchnLgot, saprOchnPlat)
+            val collection = arrayListOf(poZaochnPlat, poOchnBudg, poOchnLgot, poOchnPlat,
+                    poOchnCelevoe, saprOchnBudg, saprOchnLgot, saprOchnPlat)
+            listFIT.addAll(collection)
         }
-        fun separateINN(list: ArrayList<Student>): INN {
+        fun separateINN(list: ArrayList<Student>)/*: INN*/ {
             val zaochnPlat = ArrayList<Student>()
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
@@ -1299,9 +1326,10 @@ class PickUpSpecialtiesView
                     ochnPlat.add(list[i])
             }
 
-            return INN(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+            listFIT.addAll(collection)
         }
-        fun separateIST(list: ArrayList<Student>): IST {
+        fun separateIST(list: ArrayList<Student>)/*: IST*/ {
             val isitdOchnBudg = ArrayList<Student>()
             val isitdOchnLgot = ArrayList<Student>()
             val isitdOchnPlat = ArrayList<Student>()
@@ -1334,10 +1362,11 @@ class PickUpSpecialtiesView
                     zaochnPlat.add(list[i])
             }
 
-            return IST(isitdOchnBudg, isitdOchnLgot, isitdOchnPlat, itipkOchnBudg,
-                    itipkOchnLgot, itipkOchnPlat, zaochnPlat)
+            val collection = arrayListOf(isitdOchnBudg, isitdOchnLgot, isitdOchnPlat,
+                    itipkOchnBudg, itipkOchnLgot, itipkOchnPlat, zaochnPlat)
+            listFIT.addAll(collection)
         }
-        fun separateMOA(list: ArrayList<Student>): MOA {
+        fun separateMOA(list: ArrayList<Student>)/*: MOA*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -1357,9 +1386,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "МОА_очн_целевое")
                     ochnCelevoe.add(list[i])
             }
-            return MOA(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            listFIT.addAll(collection)
         }
-        fun separatePRI(list: ArrayList<Student>): PRI {
+        fun separatePRI(list: ArrayList<Student>)/*: PRI*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -1379,9 +1409,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ПРИ_очн_целевое")
                     ochnCelevoe.add(list[i])
             }
-            return PRI(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
+            listFIT.addAll(collection)
         }
-        fun separatePRO(list: ArrayList<Student>): PRO {
+        fun separatePRO(list: ArrayList<Student>)/*: PRO*/ {
             val gdOchnBudg = ArrayList<Student>()
             val gdOchnLgot = ArrayList<Student>()
             val gdOchnPlat = ArrayList<Student>()
@@ -1405,7 +1436,9 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ПРО(ЭК)_заочн_плат")
                     ekZaochnPlat.add(list[i])
             }
-            return PRO(gdOchnBudg, gdOchnLgot, gdOchnPlat, ivtZaochnPlat, ekZaochnPlat)
+            val collection = arrayListOf(gdOchnBudg, gdOchnLgot, gdOchnPlat,
+                    ivtZaochnPlat, ekZaochnPlat)
+            listFIT.addAll(collection)
         }
 
         scoreTypes?.physicsStudents?.let { checkForIASB(it) }
@@ -1453,20 +1486,20 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForPRO(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForPRO(it) }
 
-        val separatedIASB = separateIASB(iasb)
-        val separatedIB = separateIB(ib)
-        val separatedIBAS = separateIBAS(ibas)
-        val separatedIVT = separateIVT(ivt)
-        val separatedINN = separateINN(inn)
-        val separatedIST = separateIST(ist)
-        val separatedMOA = separateMOA(moa)
-        val separatedPRI = separatePRI(pri)
-        val separatedPRO = separatePRO(pro)
+        /*val separatedIASB = */separateIASB(iasb)
+        /*val separatedIB = */separateIB(ib)
+        /*val separatedIBAS = */separateIBAS(ibas)
+        /*val separatedIVT = */separateIVT(ivt)
+        /*val separatedINN = */separateINN(inn)
+        /*val separatedIST = */separateIST(ist)
+        /*val separatedMOA = */separateMOA(moa)
+        /*val separatedPRI = */separatePRI(pri)
+        /*val separatedPRO = */separatePRO(pro)
 
 
-        val fit = Fit(separatedIASB, separatedIB, separatedIBAS, separatedIVT, separatedINN,
-                separatedIST, separatedMOA, separatedPRI, separatedPRO)
-        myApplication.saveFIT(fit)
+        /*val fit = Fit(separatedIASB, separatedIB, separatedIBAS, separatedIVT, separatedINN,
+                separatedIST, separatedMOA, separatedPRI, separatedPRO)*/
+        myApplication.saveFIT(listFIT)
     }
     override fun checkForMTF() {
         val scoreTypes = myApplication.returnScoreTypes()
@@ -1474,6 +1507,8 @@ class PickUpSpecialtiesView
         val sim = ArrayList<Student>()
         val tb = ArrayList<Student>()
         val uk = ArrayList<Student>()
+
+        val listMTF = ArrayList<ArrayList<Student>>()
 
         fun checkForMASH(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -1534,7 +1569,7 @@ class PickUpSpecialtiesView
             }
         }
 
-        fun separateMASH(list: ArrayList<Student>): com.madrat.abiturhelper.model.faculties.mtf.MASH {
+        fun separateMASH(list: ArrayList<Student>)/*: com.madrat.abiturhelper.model.faculties.mtf.MASH*/ {
             val lZaochnBudg = ArrayList<Student>()
             val lZaochnLgot = ArrayList<Student>()
             val lZaochnPlat = ArrayList<Student>()
@@ -1590,10 +1625,11 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "МАШ(С)_очн_целевое")
                     sOchnCelevoe.add(list[i])
             }
-            return com.madrat.abiturhelper.model.faculties.mtf.MASH(lZaochnBudg, lZaochnLgot, lZaochnPlat,
-                    lOchnBudg, lOchnLgot, lOchnPlat, sZaochnBudg, sZaochnLgot, sZaochnPlat, sOchnBudg, sOchnLgot, sOchnPlat, sOchnCelevoe)
+            val collection = arrayListOf(lZaochnBudg, lZaochnLgot, lZaochnPlat,lOchnBudg, lOchnLgot,
+                    lOchnPlat, sZaochnBudg, sZaochnLgot, sZaochnPlat, sOchnBudg, sOchnLgot, sOchnPlat, sOchnCelevoe)
+            listMTF.addAll(collection)
         }
-        fun separateSIM(list: ArrayList<Student>): SIM {
+        fun separateSIM(list: ArrayList<Student>)/*: SIM*/ {
             val zaochnPlat = ArrayList<Student>()
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
@@ -1613,9 +1649,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "СиМ_очн_плат")
                     ochnPlat.add(list[i])
             }
-            return SIM(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+            listMTF.addAll(collection)
         }
-        fun separateTB(list: ArrayList<Student>): TB {
+        fun separateTB(list: ArrayList<Student>)/*: TB*/ {
             val btpipZaochnPlat = ArrayList<Student>()
             val btpipOchnBudg = ArrayList<Student>()
             val btpipOchnLgot = ArrayList<Student>()
@@ -1635,9 +1672,11 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ТБ(БТПиП)_очн_плат")
                     btpipOchnPlat.add(list[i])
             }
-            return TB(btpipZaochnPlat, btpipOchnBudg, btpipOchnLgot, btpipOchnPlat)
+            val collection = arrayListOf(btpipZaochnPlat, btpipOchnBudg,
+                    btpipOchnLgot, btpipOchnPlat)
+            listMTF.addAll(collection)
         }
-        fun separateUK(list: ArrayList<Student>): UK {
+        fun separateUK(list: ArrayList<Student>)/*: UK*/ {
             val zaochnPlat = ArrayList<Student>()
 
             for (i in 0 until list.size) {
@@ -1645,7 +1684,8 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "УК_заочн_плат")
                     zaochnPlat.add(list[i])
             }
-            return UK(zaochnPlat)
+            val collection = arrayListOf(zaochnPlat)
+            listMTF.addAll(collection)
         }
 
         scoreTypes?.physicsStudents?.let { checkForMASH(it) }
@@ -1668,13 +1708,13 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForUK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForUK(it) }
 
-        val separatedMASH = separateMASH(mash)
-        val separatedSIM = separateSIM(sim)
-        val separatedTB = separateTB(tb)
-        val separatedUK = separateUK(uk)
+        /*val separatedMASH = */separateMASH(mash)
+        /*val separatedSIM = */separateSIM(sim)
+        /*val separatedTB = */separateTB(tb)
+        /*val separatedUK = */separateUK(uk)
 
-        val mtf = MTF(separatedMASH, separatedSIM, separatedTB, separatedUK)
-        myApplication.saveMTF(mtf)
+        //val mtf = MTF(separatedMASH, separatedSIM, separatedTB, separatedUK)
+        myApplication.saveMTF(listMTF)
     }
     override fun checkForUNIT() {
         val scoreTypes = myApplication.returnScoreTypes()
@@ -1684,6 +1724,8 @@ class PickUpSpecialtiesView
         val psjd = ArrayList<Student>()
         val ttp = ArrayList<Student>()
         val ettk = ArrayList<Student>()
+
+        val listUNIT = ArrayList<ArrayList<Student>>()
 
         fun checkForNTTK(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -1766,7 +1808,7 @@ class PickUpSpecialtiesView
             }
         }
 
-        fun separateNTTK(list: ArrayList<Student>): NTTK {
+        fun separateNTTK(list: ArrayList<Student>)/*: NTTK*/ {
             val zaochnBudg = ArrayList<Student>()
             val zaochnLgot = ArrayList<Student>()
             val zaochnPlat = ArrayList<Student>()
@@ -1782,9 +1824,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "НТТК_заочн_плат")
                     zaochnPlat.add(list[i])
             }
-            return NTTK(zaochnBudg, zaochnLgot, zaochnPlat)
+            val collection = arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat)
+            listUNIT.addAll(collection)
         }
-        fun separateNTTS(list: ArrayList<Student>): NTTS {
+        fun separateNTTS(list: ArrayList<Student>)/*: NTTS*/ {
             val ochnBudg = ArrayList<Student>()
             val ochnLgot = ArrayList<Student>()
             val ochnPlat = ArrayList<Student>()
@@ -1800,9 +1843,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "НТТС_очн_плат")
                     ochnPlat.add(list[i])
             }
-            return NTTS(ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat)
+            listUNIT.addAll(collection)
         }
-        fun separatePM(list: ArrayList<Student>): PM {
+        fun separatePM(list: ArrayList<Student>)/*: PM*/ {
             val bmOchnBudg = ArrayList<Student>()
             val bmOchnLgot = ArrayList<Student>()
             val bmOchnPlat = ArrayList<Student>()
@@ -1830,9 +1874,11 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ПМ(ДПМ)_очн_плат")
                     dpmOchnPlat.add(list[i])
             }
-            return PM(bmOchnBudg, bmOchnLgot, bmOchnPlat, dpmOchnBudg, dpmOchnLgot, dpmOchnPlat)
+            val collection = arrayListOf(bmOchnBudg, bmOchnLgot, bmOchnPlat,
+                    dpmOchnBudg, dpmOchnLgot, dpmOchnPlat)
+            listUNIT.addAll(collection)
         }
-        fun separatePSJD(list: ArrayList<Student>): PSJD {
+        fun separatePSJD(list: ArrayList<Student>)/*: PSJD*/ {
             val vOchnPlat = ArrayList<Student>()
             val lOchnPlat = ArrayList<Student>()
             val zaochnPlat = ArrayList<Student>()
@@ -1848,9 +1894,10 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ПСЖД_заочн_плат")
                     zaochnPlat.add(list[i])
             }
-            return PSJD(vOchnPlat, lOchnPlat, zaochnPlat)
+            val collection = arrayListOf(vOchnPlat, lOchnPlat, zaochnPlat)
+            listUNIT.addAll(collection)
         }
-        fun separateTTP(list: ArrayList<Student>): TTP {
+        fun separateTTP(list: ArrayList<Student>)/*: TTP*/ {
             val zaochnBudg = ArrayList<Student>()
             val zaochnLgot = ArrayList<Student>()
             val zaochnPlat = ArrayList<Student>()
@@ -1878,9 +1925,11 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ТТП_очн_плат")
                     ochnPlat.add(list[i])
             }
-            return TTP(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+            val collection = arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat,
+                    ochnBudg, ochnLgot, ochnPlat)
+            listUNIT.addAll(collection)
         }
-        fun separateETTK(list: ArrayList<Student>): ETTK {
+        fun separateETTK(list: ArrayList<Student>)/*: ETTK*/ {
             val aiahOchnBudg = ArrayList<Student>()
             val aiahOchnLgot = ArrayList<Student>()
             val aiahOchnPlat = ArrayList<Student>()
@@ -1912,8 +1961,9 @@ class PickUpSpecialtiesView
                         || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_плат")
                     psjdOchnPlat.add(list[i])
             }
-            return ETTK(aiahOchnBudg, aiahOchnLgot, aiahOchnPlat, aiahOchnCelevoe,
+            val collection = arrayListOf(aiahOchnBudg, aiahOchnLgot, aiahOchnPlat, aiahOchnCelevoe,
                     psjdOchnBudg, psjdOchnLgot, psjdOchnPlat)
+            listUNIT.addAll(collection)
         }
 
         scoreTypes?.physicsStudents?.let { checkForNTTK(it) }
@@ -1946,16 +1996,24 @@ class PickUpSpecialtiesView
         scoreTypes?.socialScienceStudents?.let { checkForETTK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForETTK(it) }
 
-        val separatedNTTK = separateNTTK(nttk)
+        /*val separatedNTTK = separateNTTK(nttk)
         val separatedNTTS = separateNTTS(ntts)
         val separatedPM = separatePM(pm)
         val separatedPSJD = separatePSJD(psjd)
         val separatedTTP = separateTTP(ttp)
-        val separatedETTK = separateETTK(ettk)
+        val separatedETTK = separateETTK(ettk)*/
 
-        val unit = UNIT(separatedNTTK, separatedNTTS, separatedPM,
+        separateNTTK(nttk)
+        separateNTTS(ntts)
+        separatePM(pm)
+        separatePSJD(psjd)
+        separateTTP(ttp)
+        separateETTK(ettk)
+
+        /*val unit = UNIT(separatedNTTK, separatedNTTS, separatedPM,
                 separatedPSJD, separatedTTP, separatedETTK)
-        myApplication.saveUNIT(unit)
+        myApplication.saveUNIT(unit)*/
+        myApplication.saveUNIT(listUNIT)
     }
     override fun checkForFEE() {
         val scoreTypes = myApplication.returnScoreTypes()
@@ -2250,7 +2308,7 @@ class PickUpSpecialtiesView
         separateEIE(eie)
         separateEM(em)
 
-        myApplication.saveListFEE(listFEE)
+        myApplication.saveFEE(listFEE)
 
         //val fee = FEE(separatedRAD, separatedTIT, separatedEIN, separatedEIE, separatedEM)
         //myApplication.saveFEE(fee)

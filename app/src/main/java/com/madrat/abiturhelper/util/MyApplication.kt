@@ -15,13 +15,18 @@ class MyApplication: Application() {
     private var scoreTypes: ScoreTypes? = null
     private var faculties: Faculties? = null
 
-    private var unti: Unti? = null
+    /*private var unti: Unti? = null
     private var feu: Feu? = null
     private var fit: Fit? = null
     private var mtf: MTF? = null
     private var unit: UNIT? = null
-    private var fee: FEE? = null
+    private var fee: FEE? = null*/
 
+    private var listUNTI: ArrayList<ArrayList<Student>>? = null
+    private var listFEU: ArrayList<ArrayList<Student>>? = null
+    private var listFIT: ArrayList<ArrayList<Student>>? = null
+    private var listMTF: ArrayList<ArrayList<Student>>? = null
+    private var listUNIT: ArrayList<ArrayList<Student>>? = null
     private var listFEE: ArrayList<ArrayList<Student>>? = null
 
     //Score
@@ -127,54 +132,57 @@ class MyApplication: Application() {
         }
         return faculties
     }
-    // УНТИ
-    fun saveUnti(unti: Unti) {
-        this.unti = unti
-        showLog("УНТИ сохранён")
+    // listUNTI
+    fun saveUnti(list: ArrayList<ArrayList<Student>>) {
+        this.listUNTI = list
+        showLog("Список UNTI сохранён")
     }
-    fun returnUnti(): Unti? = unti
-
-    // ФЭУ
-    fun saveFeu(feu: Feu) {
-        this.feu = feu
-        showLog("ФЭУ сохранён")
+    fun returnUnti(): ArrayList<ArrayList<Student>>? {
+        showLog("Возвращён listUNTI, размер: " + listUNTI?.size)
+        return listUNTI
     }
-    fun returnFeu(): Feu? = feu
-
-    // ФИТ
-    fun saveFIT(fit: Fit) {
-        this.fit = fit
-        showLog("ФИТ сохранён")
+    // listFEU
+    fun saveFeu(list: ArrayList<ArrayList<Student>>) {
+        this.listFEU = list
+        showLog("Список FEU сохранён")
     }
-    fun returnFIT(): Fit? = fit
-
-    // МТФ
-    fun saveMTF(mtf: MTF) {
-        this.mtf = mtf
-        showLog("МТФ сохранён")
+    fun returnFeu(): ArrayList<ArrayList<Student>>? {
+        showLog("Возвращён listFEU, размер: " + listFEU?.size)
+        return listFEU
     }
-    fun returnMTF(): MTF? = mtf
-
-    // УНИТ
-    fun saveUNIT(unit: UNIT) {
-        this.unit = unit
-        showLog("УНИТ сохранён")
+    // listFIT
+    fun saveFIT(list: ArrayList<ArrayList<Student>>) {
+        this.listFIT = list
+        showLog("Список FIT сохранён")
     }
-    fun returnUNIT(): UNIT? = unit
-
-    // ФЭЭ
-    fun saveFEE(fee: FEE) {
-        this.fee = fee
-        showLog("ФЭЭ сохранён")
+    fun returnFIT(): ArrayList<ArrayList<Student>>? {
+        showLog("Возвращён listFIT, размер: " + listFIT?.size)
+        return listFIT
     }
-    fun returnFEE(): FEE? = fee
-
-    //listFee
-    fun saveListFEE(list: ArrayList<ArrayList<Student>>) {
+    // listMTF
+    fun saveMTF(list: ArrayList<ArrayList<Student>>) {
+        this.listMTF = list
+        showLog("Список MTF сохранён")
+    }
+    fun returnMTF(): ArrayList<ArrayList<Student>>? {
+        showLog("Возвращён listMTF, размер: " + listMTF?.size)
+        return listMTF
+    }
+    // listUNIT
+    fun saveUNIT(list: ArrayList<ArrayList<Student>>) {
+        this.listUNIT = list
+        showLog("Список UNIT сохранён")
+    }
+    fun returnUNIT(): ArrayList<ArrayList<Student>>? {
+        showLog("Возвращён listUNIT, размер: " + listUNIT?.size)
+        return listUNIT
+    }
+    // listFee
+    fun saveFEE(list: ArrayList<ArrayList<Student>>) {
         this.listFEE = list
         showLog("Список ФЭЭ сохранён")
     }
-    fun returnListFEE(): ArrayList<ArrayList<Student>>? {
+    fun returnFEE(): ArrayList<ArrayList<Student>>? {
         showLog("Возвращён ListFEE, размер: " + listFEE?.size)
         return listFEE
     }
