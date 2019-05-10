@@ -14,5 +14,6 @@ data class Specialty(
         val faculty: String,
         val entriesTotal: Int,
         val enrolledAmount: Int,
-        val entriesFree: Int = entriesTotal - enrolledAmount
+        val entriesFree: Int = entriesTotal - enrolledAmount,
+        var amountOfStatements: Int = 0
 ) : Serializable

@@ -22,6 +22,8 @@ class MyApplication: Application() {
     private var unit: UNIT? = null
     private var fee: FEE? = null
 
+    private var listFEE: ArrayList<ArrayList<Student>>? = null
+
     //Score
     fun saveScore(scores: Score) {
         this.scores = scores
@@ -166,4 +168,14 @@ class MyApplication: Application() {
         showLog("ФЭЭ сохранён")
     }
     fun returnFEE(): FEE? = fee
+
+    //listFee
+    fun saveListFEE(list: ArrayList<ArrayList<Student>>) {
+        this.listFEE = list
+        showLog("Список ФЭЭ сохранён")
+    }
+    fun returnListFEE(): ArrayList<ArrayList<Student>>? {
+        showLog("Возвращён ListFEE, размер: " + listFEE?.size)
+        return listFEE
+    }
 }

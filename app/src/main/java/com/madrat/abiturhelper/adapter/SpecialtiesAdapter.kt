@@ -36,6 +36,7 @@ class SpecialtiesAdapter(private val clickListener: (Specialty, Int) -> Unit)
             specialtyName.text = specialty.shortName
             entriesTotalValue.text = specialty.entriesTotal.toString()
             entriesFreeValue.text = specialty.entriesFree.toString()
+            amountOfStatementsValue.text = specialty.amountOfStatements.toString()
         }
     }
 }

@@ -27,6 +27,8 @@ class ShowSpecialtiesView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +41,6 @@ class ShowSpecialtiesView
         @Suppress("UNCHECKED_CAST")
         val list = arguments?.getSerializable("array") as? ArrayList<Specialty> ?: return null
         val pos = arguments?.getInt("pos")
-
         when (pos) {
             //УНТИ
             0 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
@@ -52,7 +53,21 @@ class ShowSpecialtiesView
             //УНИТ
             4 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNITSpecialtyClicked(specialty, position)}
             //ФЭЭ
-            5 -> adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFEESpecialtyClicked(specialty, position)}
+            5 -> {
+                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onFEESpecialtyClicked(specialty, position)}
+
+                //val fee = myApplication.returnFEE()
+                val listFEE = myApplication.returnListFEE()
+
+                /*fee?.let {
+                    list[0].amountOfStatements = it.rad.ochnBudg.size
+                }*/
+                for (i in 0 until list.size) {
+                    listFEE?.let {
+                        list[i].amountOfStatements = listFEE[i].size
+                    }
+                }
+            }
         }
         view.specialtiesRecyclerView.adapter = adapter
 
@@ -348,13 +363,20 @@ class ShowSpecialtiesView
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
         val fee = myApplication.returnFEE()
+        val listFEE = myApplication.returnListFEE()
+        showLog("Размер listFEE" + listFEE?.size)
 
         fun moveToSpecialty(list: ArrayList<Student>) {
             bundle.stringAndSerializable(specialty, list)
             toSpecialty(bundle)
         }
 
-        fee?.let {
+        listFEE?.let {
+            moveToSpecialty(it[position])
+        }
+
+
+        /*fee?.let {
             when (position) {
                 // РАД
                 0 -> moveToSpecialty(it.rad.ochnBudg)
@@ -392,7 +414,7 @@ class ShowSpecialtiesView
                 28 -> moveToSpecialty(it.em.tOchnCelevoe)
                 29 -> moveToSpecialty(it.em.emksZaochnPlat)
             }
-        }
+        }*/
     }
 
     override fun toSpecialty(bundle: Bundle) {
