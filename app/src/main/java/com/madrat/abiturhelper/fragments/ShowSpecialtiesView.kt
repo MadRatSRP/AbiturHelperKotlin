@@ -18,6 +18,7 @@ import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.stringAndSerializable
 import kotlinx.android.synthetic.main.fragment_specialties.*
 import kotlinx.android.synthetic.main.fragment_specialties.view.*
+import kotlin.reflect.KFunction2
 
 class ShowSpecialtiesView
     : Fragment(), ShowSpecialtiesMVP.View {
@@ -44,8 +45,7 @@ class ShowSpecialtiesView
         when (pos) {
             //УНТИ
             0 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
-                    onUNTISpecialtyClicked(specialty, position)}
+                adapter = initializeAdapter(this::onUNTISpecialtyClicked)
 
                 val listUNTI = myApplication.returnUnti()
                 for (i in 0 until list.size) {
@@ -58,8 +58,7 @@ class ShowSpecialtiesView
             }
             //ФЭУ
             1 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
-                    onFEUSpecialtyClicked(specialty, position)}
+                adapter = initializeAdapter(this::onFEUSpecialtyClicked)
 
                 val listFEU = myApplication.returnFeu()
                 for (i in 0 until list.size) {
@@ -72,8 +71,7 @@ class ShowSpecialtiesView
             }
             //ФИТ
             2 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
-                    onFITSpecialtyClicked(specialty, position)}
+                adapter = initializeAdapter(this::onFITSpecialtyClicked)
 
                 val listFIT = myApplication.returnFIT()
                 for (i in 0 until list.size) {
@@ -86,8 +84,7 @@ class ShowSpecialtiesView
             }
             //МТФ
             3 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
-                    onMTFSpecialtyClicked(specialty, position)}
+                adapter = initializeAdapter(this::onMTFSpecialtyClicked)
 
                 val listMTF = myApplication.returnMTF()
                 for (i in 0 until list.size) {
@@ -100,8 +97,7 @@ class ShowSpecialtiesView
             }
             //УНИТ
             4 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
-                    onUNITSpecialtyClicked(specialty, position)}
+                adapter = initializeAdapter(this::onUNITSpecialtyClicked)
 
                 val listUNIT = myApplication.returnUNIT()
                 for (i in 0 until list.size) {
@@ -114,8 +110,7 @@ class ShowSpecialtiesView
             }
             //ФЭЭ
             5 -> {
-                adapter = SpecialtiesAdapter{specialty: Specialty, position: Int ->
-                    onFEESpecialtyClicked(specialty, position)}
+                adapter = initializeAdapter(this::onFEESpecialtyClicked)
 
                 val listFEE = myApplication.returnFEE()
                 for (i in 0 until list.size) {
@@ -136,8 +131,8 @@ class ShowSpecialtiesView
         return view
     }
 
-    fun initializeAdapter(): SpecialtiesAdapter {
-        return SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
+    fun initializeAdapter(example: (Specialty, Int) -> Unit): SpecialtiesAdapter {
+        return SpecialtiesAdapter{specialty: Specialty, position: Int -> example(specialty, position)}
     }
 
     override fun showSpecialties(specialties: ArrayList<Specialty>) {
@@ -439,7 +434,7 @@ class ShowSpecialtiesView
     private fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {
         showLog("Выбрана: ${specialty.shortName}")
         val bundle = Bundle()
-        val fee = myApplication.returnFEE()
+        //val fee = myApplication.returnFEE()
         val listFEE = myApplication.returnFEE()
         showLog("Размер listFEE" + listFEE?.size)
 
