@@ -16,7 +16,7 @@ data class Student(
         val specialtyThird: String,
         val russian: Int = 0,
         val maths: Int = 0,
-        val physics: Int?,
+        val physics: Int = 0,
         val computerScience: Int?,
         val socialScience: Int?,
         val additionalScore: Int?,

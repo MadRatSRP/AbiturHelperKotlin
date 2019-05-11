@@ -24,6 +24,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
+    <View
+        android:id="@+id/bachelorDividerFirst"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bachelorFirstLast"/>
     <LinearLayout
         android:id="@+id/bachelorMaths"
         android:orientation="horizontal"
@@ -31,7 +37,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorFirstLast">
+        app:layout_constraintTop_toBottomOf="@id/bachelorDividerFirst">
         <TextView
             android:id="@+id/bachelorMathsText"
             android:text="@string/textMaths"
@@ -40,6 +46,96 @@
             android:layout_weight="1"/>
         <TextView
             android:id="@+id/bachelorMathsValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bachelorRussian"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bachelorMaths">
+        <TextView
+            android:id="@+id/bachelorRussianText"
+            android:text="@string/textRussian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/bachelorRussianValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/bachelorDividerSecond"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bachelorRussian"/>
+    <LinearLayout
+        android:id="@+id/bachelorPhysics"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bachelorDividerSecond">
+        <TextView
+            android:id="@+id/bachelorPhysicsText"
+            android:text="@string/textPhysics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/bachelorPhysicsValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bachelorComputerScience"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bachelorPhysics">
+        <TextView
+            android:id="@+id/bachelorComputerScienceText"
+            android:text="@string/textComputerScience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/bachelorComputerScienceValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/bachelorSocialScience"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bachelorComputerScience">
+        <TextView
+            android:id="@+id/bachelorSocialScienceText"
+            android:text="@string/textSocialScience"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/bachelorSocialScienceValue"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

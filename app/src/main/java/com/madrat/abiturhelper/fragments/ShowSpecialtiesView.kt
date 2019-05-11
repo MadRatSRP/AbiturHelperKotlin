@@ -51,11 +51,19 @@ class ShowSpecialtiesView
                     listUNTI?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        val minimalMaths = it[i].minBy { r -> r.maths }
-                        val minimalRussian = it[i].minBy { r -> r.russian }
+                        if (list[i].profileTerm == "Физика") {
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
-                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
+                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                        }
+
+                        /*val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }*/
+
+                        /*minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }*/
                     }
                 }
             }
@@ -68,11 +76,19 @@ class ShowSpecialtiesView
                     listFEU?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        val minimalMaths = it[i].minBy { r -> r.maths }
-                        val minimalRussian = it[i].minBy { r -> r.russian }
+                        if (list[i].profileTerm == "Физика") {
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
-                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
+                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                        }
+
+                        /*val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }*/
+
+                        /*minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }*/
                     }
                 }
             }
@@ -85,11 +101,19 @@ class ShowSpecialtiesView
                     listFIT?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        val minimalMaths = it[i].minBy { r -> r.maths }
-                        val minimalRussian = it[i].minBy { r -> r.russian }
+                        if (list[i].profileTerm == "Физика") {
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
-                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
+                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                        }
+
+                        /*val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }*/
+
+                        /*minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }*/
                     }
                 }
             }
@@ -102,11 +126,18 @@ class ShowSpecialtiesView
                     listMTF?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        val minimalMaths = it[i].minBy { r -> r.maths }
-                        val minimalRussian = it[i].minBy { r -> r.russian }
+                        if (list[i].profileTerm == "Физика") {
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
-                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
+                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                        }
+                        /*val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }*/
+
+                        /*minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }*/
                     }
                 }
             }
@@ -119,11 +150,18 @@ class ShowSpecialtiesView
                     listUNIT?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        val minimalMaths = it[i].minBy { r -> r.maths }
-                        val minimalRussian = it[i].minBy { r -> r.russian }
+                        if (list[i].profileTerm == "Физика") {
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
-                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
+                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                        }
+
+                        /*val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths + r.russian }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }*/
                     }
                 }
             }
@@ -136,11 +174,19 @@ class ShowSpecialtiesView
                     listFEE?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        val minimalMaths = it[i].minBy { r -> r.maths }
-                        val minimalRussian = it[i].minBy { r -> r.russian }
+                        /*val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }*/
 
-                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
-                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
+                        if (list[i].profileTerm == "Физика") {
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                        }
+
+                        /*minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }*/
                     }
                 }
             }

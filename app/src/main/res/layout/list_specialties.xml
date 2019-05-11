@@ -82,43 +82,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/specialtyAmountOfStatements"/>
+    <TextView
+        android:id="@+id/specialtyMinimalScoreHint"
+        android:gravity="center"
+        android:text="@string/facultyMinimalScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/specialtyDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <LinearLayout
-        android:id="@+id/specialtyMinimalMaths"
+        android:id="@+id/specialtyMinimalScore"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/specialtyDivider">
+        app:layout_constraintTop_toBottomOf="@id/specialtyMinimalScoreHint">
         <TextView
-            android:id="@+id/specialtyMinimalMathsText"
-            android:text="@string/facultyMinimalMaths"
+            android:id="@+id/specialtyMinimalScoreText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:id="@+id/specialtyMinimalMathsValue"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/specialtyMinimalRussian"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/specialtyMinimalMaths">
-        <TextView
-            android:id="@+id/specialtyMinimalRussianText"
-            android:text="@string/facultyMinimalRussian"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/specialtyMinimalRussianValue"
+            android:id="@+id/specialtyMinimalScoreValue"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

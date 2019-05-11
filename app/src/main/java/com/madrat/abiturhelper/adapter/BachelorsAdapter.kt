@@ -31,12 +31,13 @@ class BachelorsAdapter
     inner class BachelorsHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(student: Student) {
-            /*facultyName.text = faculty.name
-            entriesTotalValue.text = faculty.entriesTotalAmount.toString()
-            entriesFreeValue.text = faculty.entriesFreeAmount.toString()*/
             bachelorFirstName.text = student.firstName
             bachelorLastName.text = student.lastName
             bachelorMathsValue.text = student.maths.toString()
+            bachelorRussianValue.text = student.russian.toString()
+            bachelorPhysicsValue.text = student.physics.toString()
+            bachelorComputerScienceValue.text = student.computerScience.toString()
+            bachelorSocialScienceValue.text = student.socialScience.toString()
         }
     }
 }

@@ -27,8 +27,8 @@
     <string name="facultyEntriesTotalText">Всего мест</string>
     <string name="facultyEntriesFreeText">Свободно мест</string>
     <string name="facultyAmountOfStatementsText">Подано заявлений</string>
-    <string name="facultyMinimalMaths">MinimalMaths</string>
-    <string name="facultyMinimalRussian">MinimalRussian</string>
+    <string name="facultyMinimalScore">Минимальный балл</string>
+    <string name="facultyMathsAndPhysics">Математика + Физика</string>
 
     <string name="bachelorFirstName">Имя</string>
     <string name="bachelorLastName">Фамилия</string>

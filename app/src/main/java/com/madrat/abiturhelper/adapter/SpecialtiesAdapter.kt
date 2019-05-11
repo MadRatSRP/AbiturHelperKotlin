@@ -37,8 +37,10 @@ class SpecialtiesAdapter(private val clickListener: (Specialty, Int) -> Unit)
             specialtyEntriesTotalValue.text = specialty.entriesTotal.toString()
             specialtyEntriesFreeValue.text = specialty.entriesFree.toString()
             specialtyAmountOfStatementsValue.text = specialty.amountOfStatements.toString()
-            specialtyMinimalMathsValue.text = specialty.minimalMaths.toString()
-            specialtyMinimalRussianValue.text = specialty.minimalRussian.toString()
+            /*specialtyMinimalMathsValue.text = specialty.minimalMaths.toString()
+            specialtyMinimalRussianValue.text = specialty.minimalRussian.toString()*/
+            specialtyMinimalScoreText.text = specialty.scoreTitle
+            specialtyMinimalScoreValue.text = specialty.minimalScore.toString()
         }
     }
 }
