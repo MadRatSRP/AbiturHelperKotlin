@@ -34,8 +34,8 @@ class FacultiesAdapter(private val clickListener: (Faculty, Int) -> Unit)
             containerView.setOnClickListener { clickListener(faculty, position) }
 
             facultyName.text = faculty.name
-            entriesTotalValue.text = faculty.entriesTotalAmount.toString()
-            entriesFreeValue.text = faculty.entriesFreeAmount.toString()
+            specialtyEntriesTotalValue.text = faculty.entriesTotalAmount.toString()
+            specialtyEntriesFreeValue.text = faculty.entriesFreeAmount.toString()
         }
     }
 }

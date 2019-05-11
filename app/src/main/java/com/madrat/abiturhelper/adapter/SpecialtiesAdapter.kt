@@ -34,9 +34,11 @@ class SpecialtiesAdapter(private val clickListener: (Specialty, Int) -> Unit)
             containerView.setOnClickListener { clickListener(specialty, position) }
 
             specialtyName.text = specialty.shortName
-            entriesTotalValue.text = specialty.entriesTotal.toString()
-            entriesFreeValue.text = specialty.entriesFree.toString()
-            amountOfStatementsValue.text = specialty.amountOfStatements.toString()
+            specialtyEntriesTotalValue.text = specialty.entriesTotal.toString()
+            specialtyEntriesFreeValue.text = specialty.entriesFree.toString()
+            specialtyAmountOfStatementsValue.text = specialty.amountOfStatements.toString()
+            specialtyMinimalMathsValue.text = specialty.minimalMaths.toString()
+            specialtyMinimalRussianValue.text = specialty.minimalRussian.toString()
         }
     }
 }

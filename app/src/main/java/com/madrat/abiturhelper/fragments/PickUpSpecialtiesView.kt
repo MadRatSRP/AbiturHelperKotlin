@@ -11,14 +11,6 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
-import com.madrat.abiturhelper.model.faculties.*
-import com.madrat.abiturhelper.model.faculties.feu.*
-import com.madrat.abiturhelper.model.faculties.fit.*
-import com.madrat.abiturhelper.model.faculties.mtf.SIM
-import com.madrat.abiturhelper.model.faculties.mtf.TB
-import com.madrat.abiturhelper.model.faculties.mtf.UK
-import com.madrat.abiturhelper.model.faculties.unit.*
-import com.madrat.abiturhelper.model.faculties.unti.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
@@ -113,6 +105,12 @@ class PickUpSpecialtiesView
         return specialtiesList
     }
     override fun grabStudents(path: String): ArrayList<Student> {
+        fun checkTextForBeingEmpty(text: String): Int {
+            return if (text.isEmpty()) {
+                0
+            } else text.toInt()
+        }
+
         val studentsList = ArrayList<Student>()
         val file = context?.assets?.open(path)
         val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
@@ -149,9 +147,9 @@ class PickUpSpecialtiesView
 
             studentsList.add(Student(studentId, lastName, firstName, patronymic, documentsDate, getWay,
                     status, cancelReason, admissions, category, specialtyFirst, specialtySecond, specialtyThird,
-                    russian.toIntOrNull(), maths.toIntOrNull(), physics.toIntOrNull(), computerScience.toIntOrNull(),
-                    socialScience.toIntOrNull(), additionalScore.toIntOrNull(), isCertificateAvailable.toBoolean(),
-                    isChargeAvailable.toBoolean(), priority.toIntOrNull()))
+                    checkTextForBeingEmpty(russian), checkTextForBeingEmpty(maths), physics.toIntOrNull(),
+                    computerScience.toIntOrNull(), socialScience.toIntOrNull(), additionalScore.toIntOrNull(),
+                    isCertificateAvailable.toBoolean(), isChargeAvailable.toBoolean(), priority.toIntOrNull()))
         }
         showLog("Подавших документы: ${studentsList.size}")
         return studentsList

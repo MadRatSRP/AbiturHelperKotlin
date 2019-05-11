@@ -14,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
     <LinearLayout
-        android:id="@+id/entriesTotal"
+        android:id="@+id/specialtyEntriesTotal"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,55 +22,103 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/specialtyName">
         <TextView
-            android:id="@+id/entriesTotalText"
+            android:id="@+id/specialtyEntriesTotalText"
             android:text="@string/facultyEntriesTotalText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:id="@+id/entriesTotalValue"
+            android:id="@+id/specialtyEntriesTotalValue"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/entriesFree"
+        android:id="@+id/specialtyEntriesFree"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/entriesTotal">
+        app:layout_constraintTop_toBottomOf="@id/specialtyEntriesTotal">
         <TextView
-            android:id="@+id/entriesFreeText"
+            android:id="@+id/specialtyEntriesFreeText"
             android:text="@string/facultyEntriesFreeText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:id="@+id/entriesFreeValue"
+            android:id="@+id/specialtyEntriesFreeValue"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/amountOfStatements"
+        android:id="@+id/specialtyAmountOfStatements"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/entriesFree">
+        app:layout_constraintTop_toBottomOf="@id/specialtyEntriesFree">
         <TextView
-            android:id="@+id/amountOfStatementsText"
+            android:id="@+id/specialtyAmountOfStatementsText"
             android:text="@string/facultyAmountOfStatementsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <TextView
-            android:id="@+id/amountOfStatementsValue"
+            android:id="@+id/specialtyAmountOfStatementsValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <View
+        android:id="@+id/specialtyDivider"
+        style="@style/Divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/specialtyAmountOfStatements"/>
+    <LinearLayout
+        android:id="@+id/specialtyMinimalMaths"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/specialtyDivider">
+        <TextView
+            android:id="@+id/specialtyMinimalMathsText"
+            android:text="@string/facultyMinimalMaths"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/specialtyMinimalMathsValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/specialtyMinimalRussian"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/specialtyMinimalMaths">
+        <TextView
+            android:id="@+id/specialtyMinimalRussianText"
+            android:text="@string/facultyMinimalRussian"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/specialtyMinimalRussianValue"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

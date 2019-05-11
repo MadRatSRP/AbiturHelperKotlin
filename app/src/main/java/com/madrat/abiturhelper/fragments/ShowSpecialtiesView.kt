@@ -18,7 +18,6 @@ import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.stringAndSerializable
 import kotlinx.android.synthetic.main.fragment_specialties.*
 import kotlinx.android.synthetic.main.fragment_specialties.view.*
-import kotlin.reflect.KFunction2
 
 class ShowSpecialtiesView
     : Fragment(), ShowSpecialtiesMVP.View {
@@ -52,7 +51,11 @@ class ShowSpecialtiesView
                     listUNTI?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
                     }
                 }
             }
@@ -65,7 +68,11 @@ class ShowSpecialtiesView
                     listFEU?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
                     }
                 }
             }
@@ -78,7 +85,11 @@ class ShowSpecialtiesView
                     listFIT?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
                     }
                 }
             }
@@ -91,7 +102,11 @@ class ShowSpecialtiesView
                     listMTF?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
                     }
                 }
             }
@@ -104,7 +119,11 @@ class ShowSpecialtiesView
                     listUNIT?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
                     }
                 }
             }
@@ -117,7 +136,11 @@ class ShowSpecialtiesView
                     listFEE?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        //list[i].minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalMaths = it[i].minBy { r -> r.maths }
+                        val minimalRussian = it[i].minBy { r -> r.russian }
+
+                        minimalMaths?.let { r-> list[i].minimalMaths = r.maths }
+                        minimalRussian?.let { r -> list[i].minimalRussian = r.russian }
                     }
                 }
             }
@@ -131,7 +154,7 @@ class ShowSpecialtiesView
         return view
     }
 
-    fun initializeAdapter(example: (Specialty, Int) -> Unit): SpecialtiesAdapter {
+    private fun initializeAdapter(example: (Specialty, Int) -> Unit): SpecialtiesAdapter {
         return SpecialtiesAdapter{specialty: Specialty, position: Int -> example(specialty, position)}
     }
 
