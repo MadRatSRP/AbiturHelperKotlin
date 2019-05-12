@@ -1,10 +1,7 @@
 package com.madrat.abiturhelper.util
 
 import android.app.Application
-import com.madrat.abiturhelper.model.Faculties
-import com.madrat.abiturhelper.model.Score
-import com.madrat.abiturhelper.model.ScoreTypes
-import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.*
 
 class MyApplication: Application() {
@@ -14,6 +11,8 @@ class MyApplication: Application() {
     private var bachelors: ArrayList<Student>? = null
     private var scoreTypes: ScoreTypes? = null
     private var faculties: Faculties? = null
+
+    private var facultyList: ArrayList<Faculty>? = null
 
     /*private var unti: Unti? = null
     private var feu: Feu? = null
@@ -185,5 +184,14 @@ class MyApplication: Application() {
     fun returnFEE(): ArrayList<ArrayList<Student>>? {
         showLog("Возвращён ListFEE, размер: " + listFEE?.size)
         return listFEE
+    }
+
+    fun saveFacultyList(facultyList: ArrayList<Faculty>) {
+        this.facultyList = facultyList
+        showLog("facultyList сохранён")
+    }
+    fun returnFacultyList(): ArrayList<Faculty>? {
+        showLog("Возвращён facultyList, размер: " + facultyList?.size)
+        return facultyList
     }
 }

@@ -28,8 +28,6 @@ class PickUpSpecialtiesView
 
     private val myApplication = MyApplication.instance
 
-    private var facultyList = ArrayList<Faculty>()
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -43,7 +41,8 @@ class PickUpSpecialtiesView
           и высчитать свободные баллы для факультетов*/
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
-        showFaculties(facultyList)
+        val facultyList = myApplication.returnFacultyList()
+        facultyList?.let { showFaculties(it) }
 
         /*Третий шаг - */
         separateStudentsBySpecialties()
@@ -272,14 +271,26 @@ class PickUpSpecialtiesView
 
         val faculties = myApplication.returnFaculties()
 
+
+        val facultyList = ArrayList<Faculty>()
+
         facultyList.clear()
 
-        calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
-        calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
-        calculateAvailableFacultyPlaces("ФИТ", faculties?.fitList)
-        calculateAvailableFacultyPlaces("МТФ", faculties?.mtfList)
-        calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
-        calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
+        val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
+        val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
+        val calculatedPlacesFIT = calculateAvailableFacultyPlaces("ФИТ", faculties?.fitList)
+        val calculatedPlacesMTF = calculateAvailableFacultyPlaces("МТФ", faculties?.mtfList)
+        val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
+        val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
+
+        facultyList.addAll(calculatedPlacesUNTI)
+        facultyList.addAll(calculatedPlacesFEU)
+        facultyList.addAll(calculatedPlacesFIT)
+        facultyList.addAll(calculatedPlacesMTF)
+        facultyList.addAll(calculatedPlacesUNIT)
+        facultyList.addAll(calculatedPlacesFEE)
+
+        myApplication.saveFacultyList(facultyList)
 
         println("Второй этап завершён")
     }
@@ -339,7 +350,9 @@ class PickUpSpecialtiesView
         }
         return noOrNotEnoughDataStudents
     }
-    override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?) {
+    override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
+            : ArrayList<Faculty> {
+        val facultyList = ArrayList<Faculty>()
         var total = 0
         var free = 0
 
@@ -352,6 +365,7 @@ class PickUpSpecialtiesView
 
         showLog("Для $name - мест всего $total, мест свободно $free")
         facultyList.add(Faculty(name, total, free))
+        return facultyList
     }
 
     /*Третий этап*/
