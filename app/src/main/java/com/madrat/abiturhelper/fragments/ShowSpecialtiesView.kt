@@ -51,12 +51,29 @@ class ShowSpecialtiesView
                     listUNTI?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        if (list[i].profileTerm == "Физика") {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                        when(list[i].profileTerm) {
+                            "Физика" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            }
+                            "Обществознание" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            }
+                            "Информатика и ИКТ" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            }
+                            else -> return null
                         }
 
                         /*val minimalMaths = it[i].minBy { r -> r.maths }
@@ -76,12 +93,29 @@ class ShowSpecialtiesView
                     listFEU?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        if (list[i].profileTerm == "Физика") {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                        when(list[i].profileTerm) {
+                            "Физика" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            }
+                            "Обществознание" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            }
+                            "Информатика и ИКТ" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            }
+                            else -> return null
                         }
 
                         /*val minimalMaths = it[i].minBy { r -> r.maths }
@@ -101,12 +135,29 @@ class ShowSpecialtiesView
                     listFIT?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        if (list[i].profileTerm == "Физика") {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                        when(list[i].profileTerm) {
+                            "Физика" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            }
+                            "Обществознание" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            }
+                            "Информатика и ИКТ" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            }
+                            else -> return null
                         }
 
                         /*val minimalMaths = it[i].minBy { r -> r.maths }
@@ -126,12 +177,29 @@ class ShowSpecialtiesView
                     listMTF?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        if (list[i].profileTerm == "Физика") {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                        when(list[i].profileTerm) {
+                            "Физика" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            }
+                            "Обществознание" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            }
+                            "Информатика и ИКТ" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            }
+                            else -> return null
                         }
                         /*val minimalMaths = it[i].minBy { r -> r.maths }
                         val minimalRussian = it[i].minBy { r -> r.russian }*/
@@ -150,12 +218,29 @@ class ShowSpecialtiesView
                     listUNIT?.let {
                         list[i].amountOfStatements = it[i].size
 
-                        if (list[i].profileTerm == "Физика") {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                        when(list[i].profileTerm) {
+                            "Физика" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            }
+                            "Обществознание" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            }
+                            "Информатика и ИКТ" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            }
+                            else -> return null
                         }
 
                         /*val minimalRussian = it[i].minBy { r -> r.russian }
@@ -177,12 +262,29 @@ class ShowSpecialtiesView
                         /*val minimalMaths = it[i].minBy { r -> r.maths }
                         val minimalRussian = it[i].minBy { r -> r.russian }*/
 
-                        if (list[i].profileTerm == "Физика") {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                        when(list[i].profileTerm) {
+                            "Физика" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.physics }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            }
+                            "Обществознание" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            }
+                            "Информатика и ИКТ" -> {
+                                val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            }
+                            else -> return null
                         }
 
                         /*minimalMaths?.let { r-> list[i].minimalMaths = r.maths }

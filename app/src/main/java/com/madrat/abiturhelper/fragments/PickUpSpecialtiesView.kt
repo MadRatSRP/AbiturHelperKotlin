@@ -148,8 +148,9 @@ class PickUpSpecialtiesView
             studentsList.add(Student(studentId, lastName, firstName, patronymic, documentsDate, getWay,
                     status, cancelReason, admissions, category, specialtyFirst, specialtySecond, specialtyThird,
                     checkTextForBeingEmpty(russian), checkTextForBeingEmpty(maths), checkTextForBeingEmpty(physics),
-                    computerScience.toIntOrNull(), socialScience.toIntOrNull(), additionalScore.toIntOrNull(),
-                    isCertificateAvailable.toBoolean(), isChargeAvailable.toBoolean(), priority.toIntOrNull()))
+                    checkTextForBeingEmpty(computerScience), checkTextForBeingEmpty(socialScience),
+                    additionalScore.toIntOrNull(), isCertificateAvailable.toBoolean(),
+                    isChargeAvailable.toBoolean(), priority.toIntOrNull()))
         }
         showLog("Подавших документы: ${studentsList.size}")
         return studentsList
