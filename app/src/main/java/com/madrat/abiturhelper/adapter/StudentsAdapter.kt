@@ -9,8 +9,8 @@ import com.madrat.abiturhelper.util.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_bachelors.*
 
-class BachelorsAdapter
-    : RecyclerView.Adapter<BachelorsAdapter.BachelorsHolder>(){
+class StudentsAdapter
+    : RecyclerView.Adapter<StudentsAdapter.BachelorsHolder>(){
     private var bachelors = ArrayList<Student>()
 
     fun updateBachelorsList(new_bachelors: ArrayList<Student>) {

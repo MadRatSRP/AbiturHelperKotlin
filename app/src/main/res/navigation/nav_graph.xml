@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/showBachelors"
-        android:name="com.madrat.abiturhelper.fragments.ShowBachelors"
+        android:name="com.madrat.abiturhelper.fragments.ShowStudentsView"
         android:label="fragment_show_bachelors"
         tools:layout="@layout/fragment_show_bachelors" />
 </navigation>
