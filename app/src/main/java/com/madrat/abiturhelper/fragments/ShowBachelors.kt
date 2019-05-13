@@ -8,15 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.BachelorsAdapter
-import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
-import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_show_bachelors.view.*
 import kotlinx.android.synthetic.main.fragment_specialties.*
 
 class ShowBachelors: Fragment() {
     private var adapter: BachelorsAdapter? = null
+    private val myApplication = MyApplication.instance
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -29,8 +29,9 @@ class ShowBachelors: Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title = title
         val view = inflater.inflate(R.layout.fragment_show_bachelors, container, false)
 
-        @Suppress("UNCHECKED_CAST")
-        val list = arguments?.getSerializable("array") as? ArrayList<Student> ?: return null
+        /*@Suppress("UNCHECKED_CAST")
+        val list = arguments?.getSerializable("array") as? ArrayList<Student> ?: return null*/
+        val list = myApplication.returnCurrentListOfStudents()
 
         adapter = BachelorsAdapter()
         //adapter = SpecialtiesAdapter{specialty: Specialty, position: Int -> onUNTISpecialtyClicked(specialty, position)}
@@ -38,7 +39,7 @@ class ShowBachelors: Fragment() {
 
         view.bachelorsRecyclerView.linearManager()
 
-        showSpecialties(list)
+        list?.let { showSpecialties(it) }
 
         return view
     }

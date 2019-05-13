@@ -14,12 +14,7 @@ class MyApplication: Application() {
 
     private var facultyList: ArrayList<Faculty>? = null
 
-    /*private var unti: Unti? = null
-    private var feu: Feu? = null
-    private var fit: Fit? = null
-    private var mtf: MTF? = null
-    private var unit: UNIT? = null
-    private var fee: FEE? = null*/
+    private var currentListOfStudents: ArrayList<Student>? = null
 
     private var listUNTI: ArrayList<ArrayList<Student>>? = null
     private var listFEU: ArrayList<ArrayList<Student>>? = null
@@ -136,7 +131,7 @@ class MyApplication: Application() {
         this.listUNTI = list
         showLog("Список UNTI сохранён")
     }
-    fun returnUnti(): ArrayList<ArrayList<Student>>? {
+    fun returnUNTI(): ArrayList<ArrayList<Student>>? {
         showLog("Возвращён listUNTI, размер: " + listUNTI?.size)
         return listUNTI
     }
@@ -145,7 +140,7 @@ class MyApplication: Application() {
         this.listFEU = list
         showLog("Список FEU сохранён")
     }
-    fun returnFeu(): ArrayList<ArrayList<Student>>? {
+    fun returnFEU(): ArrayList<ArrayList<Student>>? {
         showLog("Возвращён listFEU, размер: " + listFEU?.size)
         return listFEU
     }
@@ -193,5 +188,14 @@ class MyApplication: Application() {
     fun returnFacultyList(): ArrayList<Faculty>? {
         showLog("Возвращён facultyList, размер: " + facultyList?.size)
         return facultyList
+    }
+
+    fun saveCurrentListOfStudents(list: ArrayList<Student>) {
+        this.currentListOfStudents = list
+        showLog("currentListOfStudents сохранён")
+    }
+    fun returnCurrentListOfStudents(): ArrayList<Student>? {
+        showLog("Возвращён currentListOfStudents, размер: " + currentListOfStudents?.size)
+        return currentListOfStudents
     }
 }

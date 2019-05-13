@@ -13,18 +13,14 @@ import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.presenters.fragments.ShowSpecialtiesPresenter
-import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
-import com.madrat.abiturhelper.util.stringAndSerializable
 import kotlinx.android.synthetic.main.fragment_specialties.*
 import kotlinx.android.synthetic.main.fragment_specialties.view.*
 
 class ShowSpecialtiesView
     : Fragment(), ShowSpecialtiesMVP.View {
     private var adapter: SpecialtiesAdapter? = null
-    private val myApplication = MyApplication.instance
-
     private var showSpecialtiesPresenter: ShowSpecialtiesPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,9 +34,9 @@ class ShowSpecialtiesView
             when (pos) {
                 //УНТИ
                 0 -> {
-                    adapter = initializeAdapter(this::onUNTISpecialtyClicked)
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onUNTISpecialtyClicked)
 
-                    val listUNTI = myApplication.returnUnti()
+                    val listUNTI = showSpecialtiesPresenter?.returnUNTI()
                     for (i in 0 until list.size) {
                         listUNTI?.let {
                             list[i].amountOfStatements = it[i].size
@@ -74,9 +70,9 @@ class ShowSpecialtiesView
                 }
                 //ФЭУ
                 1 -> {
-                    adapter = initializeAdapter(this::onFEUSpecialtyClicked)
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFEUSpecialtyClicked)
 
-                    val listFEU = myApplication.returnFeu()
+                    val listFEU = showSpecialtiesPresenter?.returnFEU()
                     for (i in 0 until list.size) {
                         listFEU?.let {
                             list[i].amountOfStatements = it[i].size
@@ -110,9 +106,9 @@ class ShowSpecialtiesView
                 }
                 //ФИТ
                 2 -> {
-                    adapter = initializeAdapter(this::onFITSpecialtyClicked)
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFITSpecialtyClicked)
 
-                    val listFIT = myApplication.returnFIT()
+                    val listFIT = showSpecialtiesPresenter?.returnFIT()
                     for (i in 0 until list.size) {
                         listFIT?.let {
                             list[i].amountOfStatements = it[i].size
@@ -146,9 +142,9 @@ class ShowSpecialtiesView
                 }
                 //МТФ
                 3 -> {
-                    adapter = initializeAdapter(this::onMTFSpecialtyClicked)
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onMTFSpecialtyClicked)
 
-                    val listMTF = myApplication.returnMTF()
+                    val listMTF = showSpecialtiesPresenter?.returnMTF()
                     for (i in 0 until list.size) {
                         listMTF?.let {
                             list[i].amountOfStatements = it[i].size
@@ -182,9 +178,9 @@ class ShowSpecialtiesView
                 }
                 //УНИТ
                 4 -> {
-                    adapter = initializeAdapter(this::onUNITSpecialtyClicked)
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onUNITSpecialtyClicked)
 
-                    val listUNIT = myApplication.returnUNIT()
+                    val listUNIT = showSpecialtiesPresenter?.returnUNIT()
                     for (i in 0 until list.size) {
                         listUNIT?.let {
                             list[i].amountOfStatements = it[i].size
@@ -218,9 +214,9 @@ class ShowSpecialtiesView
                 }
                 //ФЭЭ
                 5 -> {
-                    adapter = initializeAdapter(this::onFEESpecialtyClicked)
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFEESpecialtyClicked)
 
-                    val listFEE = myApplication.returnFEE()
+                    val listFEE = showSpecialtiesPresenter?.returnFEE()
                     for (i in 0 until list.size) {
                         listFEE?.let {
                             list[i].amountOfStatements = it[i].size
@@ -271,100 +267,60 @@ class ShowSpecialtiesView
     override fun setupMVP() {
         showSpecialtiesPresenter = ShowSpecialtiesPresenter()
     }
-    override fun initializeAdapter(example: (Specialty, Int) -> Unit): SpecialtiesAdapter {
-        return SpecialtiesAdapter{specialty: Specialty, position: Int -> example(specialty, position)}
-    }
-
     override fun showSpecialties(specialties: ArrayList<Specialty>) {
         adapter?.updateSpecialtiesList(specialties)
         specialtiesRecyclerView?.adapter = adapter
     }
-
-    private fun onUNTISpecialtyClicked(specialty: Specialty, position: Int) {
-        showLog("Выбрана: ${specialty.shortName}")
-        val bundle = Bundle()
-        val listUNTI = myApplication.returnUnti()
-
-        fun moveToSpecialty(list: ArrayList<Student>) {
-            bundle.stringAndSerializable(specialty, list)
-            toSpecialty(bundle)
-        }
-        listUNTI?.let {
-            moveToSpecialty(it[position])
-        }
-    }
-    private fun onFEUSpecialtyClicked(specialty: Specialty, position: Int) {
-        showLog("Выбрана: ${specialty.shortName}")
-        val bundle = Bundle()
-        val listFEU = myApplication.returnFeu()
-
-        fun moveToSpecialty(list: ArrayList<Student>) {
-            bundle.stringAndSerializable(specialty, list)
-            toSpecialty(bundle)
-        }
-        listFEU?.let {
-            moveToSpecialty(it[position])
-        }
-    }
-    private fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {
-        showLog("Выбрана: ${specialty.shortName}")
-        val bundle = Bundle()
-        val listFIT = myApplication.returnFIT()
-
-        fun moveToSpecialty(list: ArrayList<Student>) {
-            bundle.stringAndSerializable(specialty, list)
-            toSpecialty(bundle)
-        }
-        listFIT?.let {
-            moveToSpecialty(it[position])
-        }
-    }
-    private fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {
-        showLog("Выбрана: ${specialty.shortName}")
-        val bundle = Bundle()
-        val listMTF = myApplication.returnMTF()
-
-        fun moveToSpecialty(list: ArrayList<Student>) {
-            bundle.stringAndSerializable(specialty, list)
-            toSpecialty(bundle)
-        }
-        listMTF?.let {
-            moveToSpecialty(it[position])
-        }
-    }
-    private fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {
-        showLog("Выбрана: ${specialty.shortName}")
-        val bundle = Bundle()
-        val listUNIT = myApplication.returnUNIT()
-
-        fun moveToSpecialty(list: ArrayList<Student>) {
-            bundle.stringAndSerializable(specialty, list)
-            toSpecialty(bundle)
-        }
-        listUNIT?.let {
-            moveToSpecialty(it[position])
-        }
-    }
-    private fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {
-        showLog("Выбрана: ${specialty.shortName}")
-        val bundle = Bundle()
-        //val fee = myApplication.returnFEE()
-        val listFEE = myApplication.returnFEE()
-        showLog("Размер listFEE" + listFEE?.size)
-
-        fun moveToSpecialty(list: ArrayList<Student>) {
-            bundle.stringAndSerializable(specialty, list)
-            toSpecialty(bundle)
-        }
-        listFEE?.let {
-            moveToSpecialty(it[position])
-        }
-    }
-
-    override fun toSpecialty(bundle: Bundle) {
+    override fun toStudents(bundle: Bundle) {
         view?.let {
             Navigation.findNavController(it)
                     .navigate(R.id.action_showSpecialtiesView_to_showBachelors, bundle)
+        }
+    }
+    override fun moveToStudents(list: ArrayList<Student>, specialty: Specialty) {
+        val bundle = showSpecialtiesPresenter?.returnSpecialtyBundle(list, specialty)
+        bundle?.let { toStudents(it) }
+    }
+    override fun onUNTISpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val listUNTI = showSpecialtiesPresenter?.returnUNTI()
+        listUNTI?.let {
+            moveToStudents(it[position], specialty)
+        }
+    }
+    override fun onFEUSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val listFEU = showSpecialtiesPresenter?.returnFEU()
+        listFEU?.let {
+            moveToStudents(it[position], specialty)
+        }
+    }
+    override fun onFITSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val listFIT = showSpecialtiesPresenter?.returnFIT()
+        listFIT?.let {
+            moveToStudents(it[position], specialty)
+        }
+    }
+    override fun onMTFSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val listMTF = showSpecialtiesPresenter?.returnMTF()
+        listMTF?.let {
+            moveToStudents(it[position], specialty)
+        }
+    }
+    override fun onUNITSpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val listUNIT = showSpecialtiesPresenter?.returnUNIT()
+        listUNIT?.let {
+            moveToStudents(it[position], specialty)
+        }
+    }
+    override fun onFEESpecialtyClicked(specialty: Specialty, position: Int) {
+        showLog("Выбрана: ${specialty.shortName}")
+        val listFEE = showSpecialtiesPresenter?.returnFEE()
+        listFEE?.let {
+            moveToStudents(it[position], specialty)
         }
     }
 }
