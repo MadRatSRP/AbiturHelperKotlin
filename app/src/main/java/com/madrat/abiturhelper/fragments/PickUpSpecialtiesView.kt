@@ -11,7 +11,6 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
 import com.madrat.abiturhelper.model.Faculty
-import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.PickUpSpecialtiesPresenter
 import com.madrat.abiturhelper.repository.PickUpSpecialtiesRepository
 import com.madrat.abiturhelper.util.linearManager
@@ -73,22 +72,19 @@ class PickUpSpecialtiesView
     }
     override fun onFacultyClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
-        val faculties = pickUpSpecialtiesPresenter?.returnFaculties()
-        faculties?.let {
-            when (position) {
-                //УНТИ
-                0 -> moveToSpecialties(position,"УНТИ", it.untiList)
-                //ФЭУ
-                1 -> moveToSpecialties(position,"ФЭУ", it.feuList)
-                //ФИТ
-                2 -> moveToSpecialties(position,"ФИТ", it.fitList)
-                //МТФ
-                3 -> moveToSpecialties(position,"МТФ", it.mtfList)
-                //УНИТ
-                4 -> moveToSpecialties(position,"УНИТ", it.unitList)
-                //ФЭЭ
-                5 -> moveToSpecialties(position,"ФЭЭ", it.feeList)
-            }
+        when (position) {
+            //УНТИ
+            0 -> moveToSpecialties(position, R.string.titleUNTI)
+            //ФЭУ
+            1 -> moveToSpecialties(position, R.string.titleFEU)
+            //ФИТ
+            2 -> moveToSpecialties(position, R.string.titleFIT)
+            //МТФ
+            3 -> moveToSpecialties(position, R.string.titleMTF)
+            //УНИТ
+            4 -> moveToSpecialties(position, R.string.titleUNIT)
+            //ФЭЭ
+            5 -> moveToSpecialties(position, R.string.titleFEE)
         }
     }
     override fun toSpecialties(bundle: Bundle) {
@@ -97,8 +93,8 @@ class PickUpSpecialtiesView
                 .navigate(R.id.action_pickUpSpecialtiesView_to_showSpecialtiesView, bundle)
         }
     }
-    override fun moveToSpecialties(position: Int, title: String, list: ArrayList<Specialty>) {
-        val bundle = pickUpSpecialtiesPresenter?.returnFacultyBundle(position, title, list)
+    override fun moveToSpecialties(position: Int, titleId: Int) {
+        val bundle = context?.let { pickUpSpecialtiesPresenter?.returnFacultyBundle(it, position, titleId) }
         bundle?.let { toSpecialties(it) }
     }
 }

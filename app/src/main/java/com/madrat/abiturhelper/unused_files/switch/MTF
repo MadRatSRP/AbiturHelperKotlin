@@ -1,0 +1,30 @@
+        /*mtf?.let {
+            when (position) {
+                // МАШ
+                0 -> moveToSpecialty(it.mash.lZaochnBudg)
+                1 -> moveToSpecialty(it.mash.lZaochnLgot)
+                2 -> moveToSpecialty(it.mash.lZaochnPlat)
+                3 -> moveToSpecialty(it.mash.lOchnBudg)
+                4 -> moveToSpecialty(it.mash.lOchnLgot)
+                5 -> moveToSpecialty(it.mash.lOchnPlat)
+                6 -> moveToSpecialty(it.mash.sZaochnBudg)
+                7 -> moveToSpecialty(it.mash.sZaochnLgot)
+                8 -> moveToSpecialty(it.mash.sZaochnPlat)
+                9 -> moveToSpecialty(it.mash.sOchnBudg)
+                10 -> moveToSpecialty(it.mash.sOchnLgot)
+                11 -> moveToSpecialty(it.mash.sOchnPlat)
+                12 -> moveToSpecialty(it.mash.sOchnCelevoe)
+                // СИМ
+                13 -> moveToSpecialty(it.sim.zaochnPlat)
+                14 -> moveToSpecialty(it.sim.ochnBudg)
+                15 -> moveToSpecialty(it.sim.ochnLgot)
+                16 -> moveToSpecialty(it.sim.ochnPlat)
+                // ТБ
+                17 -> moveToSpecialty(it.tb.btpipZaochnPlat)
+                18 -> moveToSpecialty(it.tb.btpipOchnBudg)
+                19 -> moveToSpecialty(it.tb.btpipOchnLgot)
+                20 -> moveToSpecialty(it.tb.btpipOchnPlat)
+                // УК
+                21 -> moveToSpecialty(it.uk.zaochnPlat)
+            }
+        }*/

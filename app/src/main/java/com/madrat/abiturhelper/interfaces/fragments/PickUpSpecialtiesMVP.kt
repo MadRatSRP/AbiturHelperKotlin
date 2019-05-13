@@ -14,7 +14,7 @@ interface PickUpSpecialtiesMVP {
 
         fun toSpecialties(bundle: Bundle)
         fun onFacultyClicked(faculty: Faculty, position: Int)
-        fun moveToSpecialties(position: Int, title: String, list: ArrayList<Specialty>)
+        fun moveToSpecialties(position: Int, titleId: Int)
     }
     interface Presenter {
         //Первый этап
@@ -44,7 +44,7 @@ interface PickUpSpecialtiesMVP {
 
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?
-        fun returnFacultyBundle(position: Int, title: String, list: ArrayList<Specialty>): Bundle
+        fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle
     }
     interface Repository {
 

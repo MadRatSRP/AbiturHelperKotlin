@@ -2288,9 +2288,11 @@ class PickUpSpecialtiesPresenter(private var pv: PickUpSpecialtiesMVP.View,
             = myApplication.returnFacultyList()
     override fun returnFaculties(): Faculties?
             = myApplication.returnFaculties()
-    override fun returnFacultyBundle(position: Int, title: String, list: ArrayList<Specialty>): Bundle {
+    override fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle {
         val bundle = Bundle()
-        bundle.stringAndSerializable(title, list)
+        val title = context.getString(titleId)
+
+        bundle.putString("title", title)
         bundle.putInt("pos", position)
         return bundle
     }
