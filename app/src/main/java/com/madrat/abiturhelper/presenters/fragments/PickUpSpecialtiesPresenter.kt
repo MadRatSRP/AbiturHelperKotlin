@@ -2,19 +2,18 @@ package com.madrat.abiturhelper.presenters.fragments
 
 import android.content.Context
 import android.os.Bundle
-import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.showLog
-import com.madrat.abiturhelper.util.stringAndSerializable
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
-class PickUpSpecialtiesPresenter(private var pv: PickUpSpecialtiesMVP.View,
-                                 private var pr: PickUpSpecialtiesMVP.Repository)
-    : PickUpSpecialtiesMVP.Presenter{
+class PickUpSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
+                                 private var pr: WorkWithSpecialtiesMVP.Repository)
+    : WorkWithSpecialtiesMVP.Presenter{
 
     private val myApplication = MyApplication.instance
 

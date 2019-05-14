@@ -5,14 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PickUpSpecialtiesView">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pickUpSpecialtiesRecyclerView"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+    tools:context=".fragments.WorkWithSpecialtiesView">
+    <Button
+        android:id="@+id/workWithSpecialtiesToCurrentList"
+        android:text="К актуальному списку"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+    <Button
+        android:id="@+id/workWithSpecialtiesToResultScreen"
+        android:text="Подобрать специальности"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

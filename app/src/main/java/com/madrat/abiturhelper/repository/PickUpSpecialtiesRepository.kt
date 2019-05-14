@@ -1,6 +1,6 @@
 package com.madrat.abiturhelper.repository
 
-import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 
-class PickUpSpecialtiesRepository: PickUpSpecialtiesMVP.Repository {
+class PickUpSpecialtiesRepository: WorkWithSpecialtiesMVP.Repository {
 }

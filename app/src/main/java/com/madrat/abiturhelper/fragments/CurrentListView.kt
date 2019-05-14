@@ -1,9 +1,11 @@
 package com.madrat.abiturhelper.fragments
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -25,8 +27,34 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
+        currentListSwipeRefresh?.setOnRefreshListener {
+            Handler().postDelayed({
+                checkFacultyListSize()
+                currentListSwipeRefresh?.isRefreshing = false
+            }, 1500)
+        }
+
+
+    }
+    fun checkFacultyListSize() {
         val facultyList = currentListPresenter?.returnFacultyList()
-        facultyList?.let { showFaculties(it) }
+        showLog(facultyList?.size.toString())
+        if (facultyList?.size == null) showMoveToWorkWithSpecialtiesAlertDialog()
+        else facultyList.let { showFaculties(it) }
+    }
+
+    fun showMoveToWorkWithSpecialtiesAlertDialog() {
+        val builder = context?.let { AlertDialog.Builder(it) }
+        builder?.setCancelable(true)
+        builder?.setTitle("Переход на экран работы со специальностями")
+        builder?.setMessage("Будет выполнен переход на экран работы со специальностями")
+
+        builder?.setPositiveButton("OK"){_, _ ->
+            toSpecialties(null,
+                    R.id.action_currentList_to_pickUpSpecialtiesView)
+        }
+        builder?.setNeutralButton("Отмена") {_, _ ->}
+        builder?.show()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -64,14 +92,14 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
             5 -> moveToSpecialties(position, R.string.titleFEE)
         }
     }
-    override fun toSpecialties(bundle: Bundle) {
+    override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let {
             Navigation.findNavController(it)
-                    .navigate(R.id.action_currentList_to_showSpecialtiesView, bundle)
+                    .navigate(actionId, bundle)
         }
     }
     override fun moveToSpecialties(position: Int, titleId: Int) {
         val bundle = context?.let { currentListPresenter?.returnFacultyBundle(it, position, titleId) }
-        bundle?.let { toSpecialties(it) }
+        bundle?.let { toSpecialties(it, R.id.action_currentList_to_showSpecialtiesView) }
     }
 }

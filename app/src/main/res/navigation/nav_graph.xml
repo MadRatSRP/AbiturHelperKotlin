@@ -30,14 +30,17 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/pickUpSpecialtiesView"
-        android:name="com.madrat.abiturhelper.fragments.PickUpSpecialtiesView"
-        tools:layout="@layout/fragment_pick_up_specialties" >
+        android:name="com.madrat.abiturhelper.fragments.WorkWithSpecialtiesView"
+        tools:layout="@layout/fragment_work_with_specialties" >
         <action
             android:id="@+id/action_pickUpSpecialtiesView_to_resultView"
             app:destination="@id/resultView" />
         <action
             android:id="@+id/action_pickUpSpecialtiesView_to_showSpecialtiesView"
             app:destination="@id/showSpecialtiesView" />
+        <action
+            android:id="@+id/action_pickUpSpecialtiesView_to_currentList"
+            app:destination="@id/currentList" />
     </fragment>
     <fragment
         android:id="@+id/showSpecialtiesView"
@@ -58,5 +61,8 @@
         <action
             android:id="@+id/action_currentList_to_showSpecialtiesView"
             app:destination="@id/showSpecialtiesView" />
+        <action
+            android:id="@+id/action_currentList_to_pickUpSpecialtiesView"
+            app:destination="@id/pickUpSpecialtiesView" />
     </fragment>
 </navigation>

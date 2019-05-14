@@ -10,7 +10,7 @@ interface CurrentListMVP {
         fun setupMVP()
         fun showFaculties(faculties: ArrayList<Faculty>)
         fun onFacultyClicked(faculty: Faculty, position: Int)
-        fun toSpecialties(bundle: Bundle)
+        fun toSpecialties(bundle: Bundle?, actionId: Int)
         fun moveToSpecialties(position: Int, titleId: Int)
     }
     interface Presenter {

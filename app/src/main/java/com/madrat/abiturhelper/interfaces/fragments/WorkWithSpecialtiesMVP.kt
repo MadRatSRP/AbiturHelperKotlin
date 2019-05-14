@@ -7,14 +7,14 @@ import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
 
-interface PickUpSpecialtiesMVP {
+interface WorkWithSpecialtiesMVP {
     interface View {
         fun setupMVP()
-        fun showFaculties(faculties: ArrayList<Faculty>)
+        fun toActionId(actionId: Int)
 
-        fun toSpecialties(bundle: Bundle)
+        /*fun showFaculties(faculties: ArrayList<Faculty>)
         fun onFacultyClicked(faculty: Faculty, position: Int)
-        fun moveToSpecialties(position: Int, titleId: Int)
+        fun moveToSpecialties(position: Int, titleId: Int)*/
     }
     interface Presenter {
         //Первый этап

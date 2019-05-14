@@ -9,24 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
-import com.madrat.abiturhelper.interfaces.fragments.PickUpSpecialtiesMVP
+import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.presenters.fragments.PickUpSpecialtiesPresenter
 import com.madrat.abiturhelper.repository.PickUpSpecialtiesRepository
-import com.madrat.abiturhelper.util.linearManager
-import com.madrat.abiturhelper.util.showLog
-import kotlinx.android.synthetic.main.fragment_pick_up_specialties.*
-import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
+import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
 
-class PickUpSpecialtiesView
-    : Fragment(), PickUpSpecialtiesMVP.View{
+class WorkWithSpecialtiesView
+    : Fragment(), WorkWithSpecialtiesMVP.View{
     private var adapter: FacultiesAdapter? = null
     private var pickUpSpecialtiesPresenter: PickUpSpecialtiesPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
-        pickUpSpecialtiesRecyclerView.linearManager()
 
         // Первый шаг - разбить список специальностей по факультетам,
         // выделить из списка студентов тех, кто собирается поступать на бакалавриат
@@ -36,20 +32,24 @@ class PickUpSpecialtiesView
         // и высчитать свободные баллы для факультетов
         pickUpSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
-        // Получаем список факультетов и производим апдейт списка
-        val facultyList = pickUpSpecialtiesPresenter?.returnFacultyList()
-        facultyList?.let { showFaculties(it) }
-
         // Третий шаг
         pickUpSpecialtiesPresenter?.separateStudentsBySpecialties()
+
+        workWithSpecialtiesToCurrentList.setOnClickListener {
+            toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
+        }
+
+        workWithSpecialtiesToResultScreen.setOnClickListener {
+            toActionId(R.id.action_pickUpSpecialtiesView_to_resultView)
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
-        val view = inflater.inflate(R.layout.fragment_pick_up_specialties, container, false)
+        val view = inflater.inflate(R.layout.fragment_work_with_specialties, container, false)
 
-        adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onFacultyClicked(faculty, position)}
-        view.pickUpSpecialtiesRecyclerView.adapter = adapter
+        /*adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onFacultyClicked(faculty, position)}
+        view.pickUpSpecialtiesRecyclerView.adapter = adapter*/
 
         return view
     }
@@ -58,7 +58,7 @@ class PickUpSpecialtiesView
         pickUpSpecialtiesPresenter = PickUpSpecialtiesPresenter(this,
                 PickUpSpecialtiesRepository())
     }
-    override fun showFaculties(faculties: ArrayList<Faculty>) {
+    /*override fun showFaculties(faculties: ArrayList<Faculty>) {
         pickUpSpecialtiesRecyclerView.post {
             adapter?.updateFacultiesList(faculties)
             pickUpSpecialtiesRecyclerView.adapter = adapter
@@ -68,8 +68,8 @@ class PickUpSpecialtiesView
             adapter?.updateFacultiesList(faculties)
             pickUpSpecialtiesRecyclerView.adapter = adapter
         }*/
-    }
-    override fun onFacultyClicked(faculty: Faculty, position: Int) {
+    }*/
+    /*override fun onFacultyClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
         when (position) {
             //УНТИ
@@ -85,15 +85,15 @@ class PickUpSpecialtiesView
             //ФЭЭ
             5 -> moveToSpecialties(position, R.string.titleFEE)
         }
-    }
-    override fun toSpecialties(bundle: Bundle) {
+    }*/
+    override fun toActionId(actionId: Int) {
         view?.let {
             Navigation.findNavController(it)
-                .navigate(R.id.action_pickUpSpecialtiesView_to_showSpecialtiesView, bundle)
+                .navigate(/*R.id.action_pickUpSpecialtiesView_to_showSpecialtiesView*/actionId)
         }
     }
-    override fun moveToSpecialties(position: Int, titleId: Int) {
+    /*override fun moveToSpecialties(position: Int, titleId: Int) {
         val bundle = context?.let { pickUpSpecialtiesPresenter?.returnFacultyBundle(it, position, titleId) }
-        bundle?.let { toSpecialties(it) }
-    }
+        bundle?.let { toActionId(it) }
+    }*/
 }
