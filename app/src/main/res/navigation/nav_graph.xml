@@ -52,4 +52,11 @@
         android:name="com.madrat.abiturhelper.fragments.ShowStudentsView"
         android:label="fragment_show_bachelors"
         tools:layout="@layout/fragment_show_bachelors" />
+    <fragment
+        android:id="@+id/currentList"
+        android:name="com.madrat.abiturhelper.fragments.CurrentListView" >
+        <action
+            android:id="@+id/action_currentList_to_showSpecialtiesView"
+            app:destination="@id/showSpecialtiesView" />
+    </fragment>
 </navigation>

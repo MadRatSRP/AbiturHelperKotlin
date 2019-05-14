@@ -12,6 +12,8 @@
     <string name="additionalScoreTitle">Дополнительные баллы</string>
     <string name="additionalScoreHint">Укажите сумму своих дополнительных баллов:</string>
 
+    <string name="currentListTitle">Актуальный список</string>
+
     <string name="textResult">Результат</string>
     <string name="textSum">Сумма баллов</string>
 

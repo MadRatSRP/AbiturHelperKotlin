@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.fragment_pick_up_specialties.view.*
 class PickUpSpecialtiesView
     : Fragment(), PickUpSpecialtiesMVP.View{
     private var adapter: FacultiesAdapter? = null
-
     private var pickUpSpecialtiesPresenter: PickUpSpecialtiesPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
