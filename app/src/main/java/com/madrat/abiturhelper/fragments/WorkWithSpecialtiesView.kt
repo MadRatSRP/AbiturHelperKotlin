@@ -10,15 +10,14 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
-import com.madrat.abiturhelper.model.Faculty
-import com.madrat.abiturhelper.presenters.fragments.PickUpSpecialtiesPresenter
+import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
 import com.madrat.abiturhelper.repository.PickUpSpecialtiesRepository
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
 
 class WorkWithSpecialtiesView
     : Fragment(), WorkWithSpecialtiesMVP.View{
     private var adapter: FacultiesAdapter? = null
-    private var pickUpSpecialtiesPresenter: PickUpSpecialtiesPresenter? = null
+    private var workWithSpecialtiesPresenter: WorkWithSpecialtiesPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -26,14 +25,17 @@ class WorkWithSpecialtiesView
 
         // Первый шаг - разбить список специальностей по факультетам,
         // выделить из списка студентов тех, кто собирается поступать на бакалавриат
-        context?.let { pickUpSpecialtiesPresenter?.generateBachelorsAndSpecialtiesLists(it) }
+        context?.let { workWithSpecialtiesPresenter?.generateBachelorsAndSpecialtiesLists(it) }
 
         // Второй шаг - разбить список поступающих по типу баллов
         // и высчитать свободные баллы для факультетов
-        pickUpSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+        workWithSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
         // Третий шаг
-        pickUpSpecialtiesPresenter?.separateStudentsBySpecialties()
+        workWithSpecialtiesPresenter?.separateStudentsBySpecialties()
+
+        // Четвёртый шаг
+        context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
 
         workWithSpecialtiesToCurrentList.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
@@ -55,7 +57,7 @@ class WorkWithSpecialtiesView
     }
 
     override fun setupMVP() {
-        pickUpSpecialtiesPresenter = PickUpSpecialtiesPresenter(this,
+        workWithSpecialtiesPresenter = WorkWithSpecialtiesPresenter(this,
                 PickUpSpecialtiesRepository())
     }
     /*override fun showFaculties(faculties: ArrayList<Faculty>) {
@@ -93,7 +95,7 @@ class WorkWithSpecialtiesView
         }
     }
     /*override fun moveToSpecialties(position: Int, titleId: Int) {
-        val bundle = context?.let { pickUpSpecialtiesPresenter?.returnFacultyBundle(it, position, titleId) }
+        val bundle = context?.let { workWithSpecialtiesPresenter?.returnFacultyBundle(it, position, titleId) }
         bundle?.let { toActionId(it) }
     }*/
 }

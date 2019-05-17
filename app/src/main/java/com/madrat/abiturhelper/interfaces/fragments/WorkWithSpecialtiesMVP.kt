@@ -41,10 +41,26 @@ interface WorkWithSpecialtiesMVP {
         fun checkForMTF()
         fun checkForUNIT()
         fun checkForFEE()
+        // Четвёртый этап
+        // Нахождение минимального балла для каждой из специальностей
+        fun checkSpecialtiesForMinimalScore(context: Context)
+        fun checkUNTIForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
+        fun checkFEUForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
+        fun checkFITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
+        fun checkMTFForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
+        fun checkUNITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
+        fun checkFEEForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
 
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?
         fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle
+        fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
+        fun returnUNTI(): ArrayList<ArrayList<Student>>?
+        fun returnFEU(): ArrayList<ArrayList<Student>>?
+        fun returnFIT(): ArrayList<ArrayList<Student>>?
+        fun returnMTF(): ArrayList<ArrayList<Student>>?
+        fun returnUNIT(): ArrayList<ArrayList<Student>>?
+        fun returnFEE(): ArrayList<ArrayList<Student>>?
     }
     interface Repository {
 

@@ -27,23 +27,23 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
+        checkFacultyListSize()
+
         currentListSwipeRefresh?.setOnRefreshListener {
             Handler().postDelayed({
                 checkFacultyListSize()
                 currentListSwipeRefresh?.isRefreshing = false
             }, 1500)
         }
-
-
     }
-    fun checkFacultyListSize() {
+    private fun checkFacultyListSize() {
         val facultyList = currentListPresenter?.returnFacultyList()
         showLog(facultyList?.size.toString())
         if (facultyList?.size == null) showMoveToWorkWithSpecialtiesAlertDialog()
         else facultyList.let { showFaculties(it) }
     }
 
-    fun showMoveToWorkWithSpecialtiesAlertDialog() {
+    private fun showMoveToWorkWithSpecialtiesAlertDialog() {
         val builder = context?.let { AlertDialog.Builder(it) }
         builder?.setCancelable(true)
         builder?.setTitle("Переход на экран работы со специальностями")

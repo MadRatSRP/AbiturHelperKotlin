@@ -1,0 +1,230 @@
+override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupMVP()
+
+        val pos = arguments?.getInt("pos")
+        val list = pos?.let { showSpecialtiesPresenter?.getSpecialtiesListByPosition(it) }
+
+        list?.let {
+            when (pos) {
+                //УНТИ
+                0 -> {
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onUNTISpecialtyClicked)
+
+                    val listUNTI = showSpecialtiesPresenter?.returnUNTI()
+                    for (i in 0 until list.size) {
+                        listUNTI?.let {
+                            list[i].amountOfStatements = it[i].size
+
+                            when(list[i].profileTerm) {
+                                "Физика" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                }
+                                "Обществознание" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                                }
+                                "Информатика и ИКТ" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                                }
+                                else -> return
+                            }
+                        }
+                    }
+                }
+                //ФЭУ
+                1 -> {
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFEUSpecialtyClicked)
+
+                    val listFEU = showSpecialtiesPresenter?.returnFEU()
+                    for (i in 0 until list.size) {
+                        listFEU?.let {
+                            list[i].amountOfStatements = it[i].size
+
+                            when(list[i].profileTerm) {
+                                "Физика" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                }
+                                "Обществознание" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                                }
+                                "Информатика и ИКТ" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                                }
+                                else -> return
+                            }
+                        }
+                    }
+                }
+                //ФИТ
+                2 -> {
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFITSpecialtyClicked)
+
+                    val listFIT = showSpecialtiesPresenter?.returnFIT()
+                    for (i in 0 until list.size) {
+                        listFIT?.let {
+                            list[i].amountOfStatements = it[i].size
+
+                            when(list[i].profileTerm) {
+                                "Физика" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                }
+                                "Обществознание" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                                }
+                                "Информатика и ИКТ" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                                }
+                                else -> return
+                            }
+                        }
+                    }
+                }
+                //МТФ
+                3 -> {
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onMTFSpecialtyClicked)
+
+                    val listMTF = showSpecialtiesPresenter?.returnMTF()
+                    for (i in 0 until list.size) {
+                        listMTF?.let {
+                            list[i].amountOfStatements = it[i].size
+
+                            when(list[i].profileTerm) {
+                                "Физика" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                }
+                                "Обществознание" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                                }
+                                "Информатика и ИКТ" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                                }
+                                else -> return
+                            }
+                        }
+                    }
+                }
+                //УНИТ
+                4 -> {
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onUNITSpecialtyClicked)
+
+                    val listUNIT = showSpecialtiesPresenter?.returnUNIT()
+                    for (i in 0 until list.size) {
+                        listUNIT?.let {
+                            list[i].amountOfStatements = it[i].size
+
+                            when(list[i].profileTerm) {
+                                "Физика" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                }
+                                "Обществознание" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                                }
+                                "Информатика и ИКТ" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                                }
+                                else -> return
+                            }
+                        }
+                    }
+                }
+                //ФЭЭ
+                5 -> {
+                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFEESpecialtyClicked)
+
+                    val listFEE = showSpecialtiesPresenter?.returnFEE()
+                    for (i in 0 until list.size) {
+                        listFEE?.let {
+                            list[i].amountOfStatements = it[i].size
+
+                            when(list[i].profileTerm) {
+                                "Физика" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                                }
+                                "Обществознание" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                                }
+                                "Информатика и ИКТ" -> {
+                                    val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+
+                                    list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+
+                                    minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                                }
+                                else -> return
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        list?.let { showSpecialties(it) }
+    }
