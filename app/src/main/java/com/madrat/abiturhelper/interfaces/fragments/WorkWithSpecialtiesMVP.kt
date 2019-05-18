@@ -50,11 +50,20 @@ interface WorkWithSpecialtiesMVP {
         fun checkMTFForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
         fun checkUNITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
         fun checkFEEForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
+        fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
+
+        // Пятый этап
+        fun checkForZeroMinimalScore()
+        fun checkUNTIForZeroMinimalScore(position: Int): ArrayList<Specialty>
+        fun checkFEUForZeroMinimalScore(position: Int): ArrayList<Specialty>
+        fun checkFITForZeroMinimalScore(position: Int): ArrayList<Specialty>
+        fun checkMTFForZeroMinimalScore(position: Int): ArrayList<Specialty>
+        fun checkUNITForZeroMinimalScore(position: Int): ArrayList<Specialty>
+        fun checkFEEForZeroMinimalScore(position: Int): ArrayList<Specialty>
 
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?
         fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle
-        fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
         fun returnUNTI(): ArrayList<ArrayList<Student>>?
         fun returnFEU(): ArrayList<ArrayList<Student>>?
         fun returnFIT(): ArrayList<ArrayList<Student>>?

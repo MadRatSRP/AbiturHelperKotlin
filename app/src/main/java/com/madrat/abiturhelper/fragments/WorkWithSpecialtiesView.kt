@@ -37,6 +37,9 @@ class WorkWithSpecialtiesView
         // Четвёртый шаг
         context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
 
+        // Пятый шаг
+        workWithSpecialtiesPresenter?.checkForZeroMinimalScore()
+
         workWithSpecialtiesToCurrentList.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
         }

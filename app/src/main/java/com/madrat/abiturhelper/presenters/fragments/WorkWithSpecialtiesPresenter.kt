@@ -2415,7 +2415,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         }
         return list
     }
-
     override fun checkMTFForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
         val list = getSpecialtiesListByPosition(position)
         val listMTF = returnMTF()
@@ -2549,6 +2548,100 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             else -> null
         }
     }
+
+    // Пятый этап
+    override fun checkForZeroMinimalScore() {
+        val zeroList = ArrayList<Specialty>()
+
+        val listUNTI = checkUNTIForZeroMinimalScore(0)
+        val listFEU = checkFEUForZeroMinimalScore(1)
+        val listFIT = checkFITForZeroMinimalScore(2)
+        val listMTF = checkMTFForZeroMinimalScore(3)
+        val listUNIT = checkUNITForZeroMinimalScore(4)
+        val listFEE = checkFEEForZeroMinimalScore(5)
+
+        zeroList.addAll(listUNTI)
+        zeroList.addAll(listFEU)
+        zeroList.addAll(listFIT)
+        zeroList.addAll(listMTF)
+        zeroList.addAll(listUNIT)
+        zeroList.addAll(listFEE)
+        showLog("ZEROLIST ${zeroList.size}")
+    }
+    override fun checkUNTIForZeroMinimalScore(position: Int): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        val listWithZeroMinimalScore = ArrayList<Specialty>()
+
+        list?.let {
+            for (i in 0 until list.size) {
+                if (list[i].minimalScore == 0)
+                    listWithZeroMinimalScore.add(list[i])
+            }
+        }
+        return listWithZeroMinimalScore
+    }
+    override fun checkFEUForZeroMinimalScore(position: Int): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        val listWithZeroMinimalScore = ArrayList<Specialty>()
+
+        list?.let {
+            for (i in 0 until list.size) {
+                if (list[i].minimalScore == 0)
+                    listWithZeroMinimalScore.add(list[i])
+            }
+        }
+        return listWithZeroMinimalScore
+    }
+    override fun checkFITForZeroMinimalScore(position: Int): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        val listWithZeroMinimalScore = ArrayList<Specialty>()
+
+        list?.let {
+            for (i in 0 until list.size) {
+                if (list[i].minimalScore == 0)
+                    listWithZeroMinimalScore.add(list[i])
+            }
+        }
+        return listWithZeroMinimalScore
+    }
+    override fun checkMTFForZeroMinimalScore(position: Int): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        val listWithZeroMinimalScore = ArrayList<Specialty>()
+
+        list?.let {
+            for (i in 0 until list.size) {
+                if (list[i].minimalScore == 0)
+                    listWithZeroMinimalScore.add(list[i])
+            }
+        }
+        return listWithZeroMinimalScore
+    }
+    override fun checkUNITForZeroMinimalScore(position: Int): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        val listWithZeroMinimalScore = ArrayList<Specialty>()
+
+        list?.let {
+            for (i in 0 until list.size) {
+                if (list[i].minimalScore == 0)
+                    listWithZeroMinimalScore.add(list[i])
+            }
+        }
+        return listWithZeroMinimalScore
+    }
+    override fun checkFEEForZeroMinimalScore(position: Int): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        val listWithZeroMinimalScore = ArrayList<Specialty>()
+
+        list?.let {
+            for (i in 0 until list.size) {
+                if (list[i].minimalScore == 0)
+                    listWithZeroMinimalScore.add(list[i])
+            }
+        }
+        return listWithZeroMinimalScore
+    }
+
+
 
     override fun returnFacultyList(): ArrayList<Faculty>?
             = myApplication.returnFacultyList()
