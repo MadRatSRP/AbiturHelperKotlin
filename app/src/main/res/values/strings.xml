@@ -30,6 +30,7 @@
     <string name="facultyEntriesFreeText">Свободно мест</string>
     <string name="facultyAmountOfStatementsText">Подано заявлений</string>
     <string name="facultyMinimalScore">Минимальный балл</string>
+
     <string name="facultyMathsAndPhysics">Математика + Физика</string>
     <string name="facultyMathsAndSocialScience">Математика + Обществознание</string>
     <string name="facultyMathsAndComputerScience">Математика + Информатика</string>

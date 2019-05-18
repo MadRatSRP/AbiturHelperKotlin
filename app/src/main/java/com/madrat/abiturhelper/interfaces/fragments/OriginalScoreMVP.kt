@@ -23,5 +23,7 @@ interface OriginalScoreMVP {
 
         fun saveUserData(maths: String, russian: String, physics: String,
                          computerScience: String, socialScience: String)
+
+        fun checkTextForBeingEmpty(text: String): Int
     }
 }

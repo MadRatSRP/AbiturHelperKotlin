@@ -1,0 +1,27 @@
+    val list = getSpecialtiesListByPosition(position)
+    var listWithZeroMinimalScore = ArrayList<Specialty>()
+
+    //showLog("ФИЗИКА ${scores?.physics}")
+
+    list?.let {
+        scores?.let {
+            /*if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                listWithZeroMinimalScore = list.filter { it.minimalScore == 0 } as ArrayList<Specialty>*/
+
+            // Физика
+            if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
+                                                        it.minimalScore == 0} as ArrayList<Specialty>
+        }
+    }
+
+    return listWithZeroMinimalScore
+
+
+    /*list?.let {
+        for (i in 0 until list.size) {
+            if (list[i].minimalScore == 0)
+                listWithZeroMinimalScore.add(list[i])
+        }
+    }
+    return listWithZeroMinimalScore*/

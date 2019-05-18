@@ -2,10 +2,7 @@ package com.madrat.abiturhelper.interfaces.fragments
 
 import android.content.Context
 import android.os.Bundle
-import com.madrat.abiturhelper.model.Faculties
-import com.madrat.abiturhelper.model.Faculty
-import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.model.Student
+import com.madrat.abiturhelper.model.*
 
 interface WorkWithSpecialtiesMVP {
     interface View {
@@ -54,12 +51,12 @@ interface WorkWithSpecialtiesMVP {
 
         // Пятый этап
         fun checkForZeroMinimalScore()
-        fun checkUNTIForZeroMinimalScore(position: Int): ArrayList<Specialty>
-        fun checkFEUForZeroMinimalScore(position: Int): ArrayList<Specialty>
-        fun checkFITForZeroMinimalScore(position: Int): ArrayList<Specialty>
-        fun checkMTFForZeroMinimalScore(position: Int): ArrayList<Specialty>
-        fun checkUNITForZeroMinimalScore(position: Int): ArrayList<Specialty>
-        fun checkFEEForZeroMinimalScore(position: Int): ArrayList<Specialty>
+        fun checkUNTIForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFEUForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkMTFForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkUNITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFEEForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
 
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?

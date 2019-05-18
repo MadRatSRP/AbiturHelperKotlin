@@ -11,8 +11,14 @@ class OriginalScorePresenter(private var ssv: OriginalScoreMVP.View) : OriginalS
                               computerScience: String, socialScience: String) {
         val myApplication = MyApplication.instance
 
-        myApplication.saveScore(Score(returnInt(maths), returnInt(russian), physics.toIntOrNull(),
-                computerScience.toIntOrNull(), socialScience.toIntOrNull()))
+        myApplication.saveScore(Score(returnInt(maths), returnInt(russian), checkTextForBeingEmpty(physics),
+                checkTextForBeingEmpty(computerScience), checkTextForBeingEmpty(socialScience)))
+    }
+
+    override fun checkTextForBeingEmpty(text: String): Int {
+        return if (text.isEmpty()) {
+            0
+        } else text.toInt()
     }
 
     override fun addFieldsListeners() {
