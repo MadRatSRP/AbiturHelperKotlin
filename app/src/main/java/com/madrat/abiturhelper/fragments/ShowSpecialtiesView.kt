@@ -26,39 +26,36 @@ class ShowSpecialtiesView
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
-
         val pos = arguments?.getInt("pos")
         val list = pos?.let { showSpecialtiesPresenter?.getSpecialtiesListByPosition(it) }
 
-        list?.let {
-            when (pos) {
-                //УНТИ
-                0 -> {
-                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onUNTISpecialtyClicked)
-                }
-                //ФЭУ
-                1 -> {
-                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFEUSpecialtyClicked)
-                }
-                //ФИТ
-                2 -> {
-                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFITSpecialtyClicked)
-                }
-                //МТФ
-                3 -> {
-                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onMTFSpecialtyClicked)
-                }
-                //УНИТ
-                4 -> {
-                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onUNITSpecialtyClicked)
-                }
-                //ФЭЭ
-                5 -> {
-                    adapter = showSpecialtiesPresenter?.initializeAdapter(this::onFEESpecialtyClicked)
-                }
+        adapter = when (pos) {
+            //УНТИ
+            0 -> {
+                showSpecialtiesPresenter?.initializeAdapter(this::onUNTISpecialtyClicked)
             }
+            //ФЭУ
+            1 -> {
+                showSpecialtiesPresenter?.initializeAdapter(this::onFEUSpecialtyClicked)
+            }
+            //ФИТ
+            2 -> {
+                showSpecialtiesPresenter?.initializeAdapter(this::onFITSpecialtyClicked)
+            }
+            //МТФ
+            3 -> {
+                showSpecialtiesPresenter?.initializeAdapter(this::onMTFSpecialtyClicked)
+            }
+            //УНИТ
+            4 -> {
+                showSpecialtiesPresenter?.initializeAdapter(this::onUNITSpecialtyClicked)
+            }
+            //ФЭЭ
+            5 -> {
+                showSpecialtiesPresenter?.initializeAdapter(this::onFEESpecialtyClicked)
+            }
+            else -> null
         }
-
         list?.let { showSpecialties(it) }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
