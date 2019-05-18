@@ -314,16 +314,20 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val facultyList = ArrayList<Faculty>()
         var total = 0
         var free = 0
+        var amountOfSpecialties = 0
 
         list?.let {
             for (i in 0 until it.size) {
                 total += it[i].entriesTotal
                 free += it[i].entriesFree
             }
+            amountOfSpecialties = it.size
         }
 
+        //val amountOfSpecialties = list?.size
+
         showLog("Для $name - мест всего $total, мест свободно $free")
-        facultyList.add(Faculty(name, total, free))
+        facultyList.add(Faculty(name, total, free, amountOfSpecialties))
         return facultyList
     }
     /*Третий этап*/

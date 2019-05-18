@@ -55,4 +55,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/facultyAmountOfSpecialties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/specialtyEntriesFree">
+        <TextView
+            android:id="@+id/facultyAmountOfSpecialtiesText"
+            android:text="@string/amountOfSpecialties"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/facultyAmountOfSpecialtiesValue"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,4 +47,6 @@
     <string name="titleMTF">МТФ</string>
     <string name="titleUNIT">УНИТ</string>
     <string name="titleFEE">"ФЭЭ"</string>
+
+    <string name="amountOfSpecialties">Количество специальностей</string>
 </resources>
