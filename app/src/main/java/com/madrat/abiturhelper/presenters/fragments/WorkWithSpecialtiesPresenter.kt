@@ -7,7 +7,6 @@ import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.showLog
-import kotlinx.coroutines.*
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
@@ -21,27 +20,17 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
     private val myApplication = MyApplication.instance
 
     /*Первый этап*/
-    override fun generateBachelorsAndSpecialtiesLists(context: Context)
-            = GlobalScope.launch(Dispatchers.Main) {
+    override fun generateBachelorsAndSpecialtiesLists(context: Context) {
         showLog("Начат первый этап")
-        val fun1 = async {
-            val specialties = withContext(Dispatchers.IO) { grabSpecialties(context, "specialties.csv") }
-            val bachelorsAndSpecialists = withContext(Dispatchers.IO) { divideSpecialtiesByEducationLevel(specialties) }
-            withContext(Dispatchers.IO) { divideSpecialtiesByFaculty(bachelorsAndSpecialists) }
-        }
-        val fun2 = async {
-            val students = withContext(Dispatchers.IO) { grabStudents(context, "abiturs.csv") }
-            withContext(Dispatchers.IO) { divideStudentsByAdmissions(students) }
-        }
-
         val time = measureTimeMillis {
-            fun1.await()
-            fun2.await()
+            val specialties = grabSpecialties(context, "specialties.csv")
+            val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
+            divideSpecialtiesByFaculty(bachelorsAndSpecialists)
+
+            val students = grabStudents(context, "abiturs.csv")
+            divideStudentsByAdmissions(students)
         }
-        println("Completed in $time ms")
-        showLog("Первый этап завершён")
-
-
+        showLog("Первый этап завершён за $time ms")
     }
     override fun grabSpecialties(context: Context, path: String): ArrayList<Specialty> {
         val specialtiesList = ArrayList<Specialty>()
@@ -2729,6 +2718,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         }
         return listWithZeroMinimalScore
     }
+
     override fun checkUNITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
@@ -2766,6 +2756,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         }
         return listWithZeroMinimalScore
     }
+    
     override fun checkFEEForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
@@ -2784,21 +2775,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                 if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
-                // Все три
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
-                    listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
-                // Физика + Информатика
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
-                    listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
-                            || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
-                // Обществознание + Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
-                    listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
-                            || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
-                // Физика + Обществознание
-                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
-                    listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
-                            || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
         }
         return listWithZeroMinimalScore

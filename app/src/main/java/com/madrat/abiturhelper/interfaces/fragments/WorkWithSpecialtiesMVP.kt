@@ -3,7 +3,6 @@ package com.madrat.abiturhelper.interfaces.fragments
 import android.content.Context
 import android.os.Bundle
 import com.madrat.abiturhelper.model.*
-import kotlinx.coroutines.Job
 
 interface WorkWithSpecialtiesMVP {
     interface View {
@@ -16,8 +15,7 @@ interface WorkWithSpecialtiesMVP {
     }
     interface Presenter {
         //Первый этап
-        fun generateBachelorsAndSpecialtiesLists(context: Context): Job
-
+        fun generateBachelorsAndSpecialtiesLists(context: Context)
         fun grabSpecialties(context: Context, path: String): ArrayList<Specialty>
         fun grabStudents(context: Context, path: String): ArrayList<Student>
         fun checkTextForBeingEmpty(text: String): Int

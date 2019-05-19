@@ -29,24 +29,24 @@ class WorkWithSpecialtiesView
 
         // Второй шаг - разбить список поступающих по типу баллов
         // и высчитать свободные баллы для факультетов
-        //workWithSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+        workWithSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
         // Третий шаг
-        //workWithSpecialtiesPresenter?.separateStudentsBySpecialties()
+        workWithSpecialtiesPresenter?.separateStudentsBySpecialties()
 
         // Четвёртый шаг
-        //context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
+        context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
 
         // Пятый шаг
-        //workWithSpecialtiesPresenter?.checkForZeroMinimalScore()
+        workWithSpecialtiesPresenter?.checkForZeroMinimalScore()
 
-        /*workWithSpecialtiesToCurrentList.setOnClickListener {
+        workWithSpecialtiesToCurrentList.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
         }
 
         workWithSpecialtiesToResultScreen.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_resultView)
-        }*/
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

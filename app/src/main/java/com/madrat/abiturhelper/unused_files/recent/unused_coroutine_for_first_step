@@ -1,0 +1,18 @@
+    override fun generateBachelorsAndSpecialtiesLists(context: Context)
+            = GlobalScope.launch(Dispatchers.Main) {
+        showLog("Начат первый этап")
+        val workWithSpecialties = async {
+            val specialties = withContext(Dispatchers.IO) { grabSpecialties(context, "specialties.csv") }
+            val bachelorsAndSpecialists = withContext(Dispatchers.IO) { divideSpecialtiesByEducationLevel(specialties) }
+            withContext(Dispatchers.IO) { divideSpecialtiesByFaculty(bachelorsAndSpecialists) }
+        }
+        val workWithStudents = async {
+            val students = withContext(Dispatchers.IO) { grabStudents(context, "abiturs.csv") }
+            withContext(Dispatchers.IO) { divideStudentsByAdmissions(students) }
+        }
+        val time = measureTimeMillis {
+            workWithSpecialties.await()
+            workWithStudents.await()
+        }
+        showLog("Первый этап завершён за $time ms")
+    }
