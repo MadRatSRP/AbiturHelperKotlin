@@ -7,10 +7,12 @@ import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.showLog
+import kotlinx.coroutines.*
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
 import java.io.InputStreamReader
+import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                                    private var pr: WorkWithSpecialtiesMVP.Repository)
@@ -19,19 +21,27 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
     private val myApplication = MyApplication.instance
 
     /*Первый этап*/
-    override fun generateBachelorsAndSpecialtiesLists(context: Context) {
+    override fun generateBachelorsAndSpecialtiesLists(context: Context)
+            = GlobalScope.launch(Dispatchers.Main) {
         showLog("Начат первый этап")
-        val specialties = grabSpecialties(context, "specialties.csv")
-        val students = grabStudents(context, "abiturs.csv")
+        val fun1 = async {
+            val specialties = withContext(Dispatchers.IO) { grabSpecialties(context, "specialties.csv") }
+            val bachelorsAndSpecialists = withContext(Dispatchers.IO) { divideSpecialtiesByEducationLevel(specialties) }
+            withContext(Dispatchers.IO) { divideSpecialtiesByFaculty(bachelorsAndSpecialists) }
+        }
+        val fun2 = async {
+            val students = withContext(Dispatchers.IO) { grabStudents(context, "abiturs.csv") }
+            withContext(Dispatchers.IO) { divideStudentsByAdmissions(students) }
+        }
 
-
-        val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
-
-        divideSpecialtiesByFaculty(bachelorsAndSpecialists)
-
-
-        divideStudentsByAdmissions(students)
+        val time = measureTimeMillis {
+            fun1.await()
+            fun2.await()
+        }
+        println("Completed in $time ms")
         showLog("Первый этап завершён")
+
+
     }
     override fun grabSpecialties(context: Context, path: String): ArrayList<Specialty> {
         val specialtiesList = ArrayList<Specialty>()
