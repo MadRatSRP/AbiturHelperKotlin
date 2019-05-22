@@ -113,16 +113,9 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         } else text.toInt()
     }
     override fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty> {
-        val bachelorsAndSpecialists = ArrayList<Specialty>()
-
-        for (i in 0 until list.size) {
-            when (list[i].educationLevel) {
-                "Академический бакалавр" ->
-                    bachelorsAndSpecialists.add(list[i])
-                "Специалист" ->
-                    bachelorsAndSpecialists.add(list[i])
-            }
-        }
+        val bachelorsAndSpecialists = list.filter {
+            it.educationLevel == "Академический бакалавр" || it.educationLevel == "Специалист" }
+                as ArrayList<Specialty>
         showLog("Специальностей, ведущих набор на бакалавриат и специалитет: ${bachelorsAndSpecialists.size}")
         return bachelorsAndSpecialists
     }
