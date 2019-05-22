@@ -127,30 +127,26 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         return bachelorsAndSpecialists
     }
     override fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>) {
-        val untiList = ArrayList<Specialty>()
-        val feuList = ArrayList<Specialty>()
-        val fitList = ArrayList<Specialty>()
-        val mtfList = ArrayList<Specialty>()
-        val unitList = ArrayList<Specialty>()
-        val feeList = ArrayList<Specialty>()
+        // УНТИ
+        val listUNTI = list.filter { it.faculty == "Учебно-научный технологический институт" }
+                as ArrayList<Specialty>
+        // ФЭУ
+        val listFEU = list.filter { it.faculty == "Факультет экономики и управления" }
+                as ArrayList<Specialty>
+        // ФИТ
+        val listFIT = list.filter { it.faculty == "Факультет информационных технологий" }
+                as ArrayList<Specialty>
+        // МТФ
+        val listMTF = list.filter { it.faculty == "Механико-технологический факультет" }
+                as ArrayList<Specialty>
+        // УНИТ
+        val listUNIT = list.filter { it.faculty == "Учебно-научный институт транспорта" }
+                as ArrayList<Specialty>
+        // ФЭЭ
+        val listFEE = list.filter { it.faculty == "Факультет энергетики и электроники" }
+                as ArrayList<Specialty>
 
-        for (i in 0 until list.size) {
-            when(list[i].faculty) {
-                "Учебно-научный технологический институт" ->
-                    untiList.add(list[i])
-                "Факультет экономики и управления" ->
-                    feuList.add(list[i])
-                "Факультет информационных технологий" ->
-                    fitList.add(list[i])
-                "Механико-технологический факультет" ->
-                    mtfList.add(list[i])
-                "Учебно-научный институт транспорта" ->
-                    unitList.add(list[i])
-                "Факультет энергетики и электроники" ->
-                    feeList.add(list[i])
-            }
-        }
-        myApplication.saveFaculties(Faculties(untiList, feuList, fitList, mtfList, unitList, feeList))
+        myApplication.saveFaculties(Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE))
     }
     override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
         val bachelors = ArrayList<Student>()
