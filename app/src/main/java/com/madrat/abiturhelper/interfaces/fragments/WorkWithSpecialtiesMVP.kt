@@ -28,7 +28,6 @@ interface WorkWithSpecialtiesMVP {
         fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student>
-        fun withdrawStudentsWithoutData(bachelors: ArrayList<Student>): ArrayList<Student>
         fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?): ArrayList<Faculty>
         //Третий этап
         fun separateStudentsBySpecialties()
