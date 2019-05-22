@@ -18,16 +18,12 @@ import kotlinx.android.synthetic.main.fragment_result.*
 class ShowResultView : Fragment(), ShowResultMVP.View {
     private var showResultPresenter: ShowResultPresenter? = null
 
-    private val myApplication = MyApplication.instance
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
-        setupFields()
 
-        val zeroList = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
-        val sizeOfZeroList = zeroList?.sumBy { it.size }
-        //showLog("$sizeOfZeroList")
+        // Получаем количество специальностей с неустановленным минимальным баллом
+        val sizeOfZeroList = showResultPresenter?.returnAmountOfSpecialtiesWithZeroMinimalScore()
         resultAmountOfZeroMinimalScoreSpecialtiesValue.text = sizeOfZeroList.toString()
     }
 
@@ -38,29 +34,6 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
     }
 
     override fun setupMVP() {
-        //showResultPresenter = ShowResultPresenter(this, arguments!!)
-    }
-
-    override fun checkField(linearLayout: LinearLayout, textViewValue: TextView, key: String) {
-        /*textViewValue.text = showResultPresenter?.returnString(key, scoreBundle)
-        if (textViewValue.text.toString().toInt() == 0) {
-            linearLayout.visibility = View.GONE
-        }*/
-    }
-
-    override fun setupFields() {
-        /*val scoreBundle = arguments?.getBundle("scoreBundle")
-
-        mathsValue.text = showResultPresenter?.returnString(scoreBundle,"maths")
-        russianValue.text = showResultPresenter?.returnString(scoreBundle,"russian")*/
-
-        /*val additionalBundle = arguments?.getBundle("additionalBundle")
-        essayValue.text = showResultPresenter?.returnString(additionalBundle,"soc")*/
-
-        /*checkField(physics, physicsValue, "physics")
-        checkField(computerScience, computerScienceValue, "computerScience")
-        checkField(socialScience, socialScienceValue, "socialScience")*/
-
-        //resultValue.text = showResultPresenter?.returnSum()
+        showResultPresenter = ShowResultPresenter()
     }
 }

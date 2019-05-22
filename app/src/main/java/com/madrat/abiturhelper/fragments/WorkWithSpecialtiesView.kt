@@ -40,6 +40,9 @@ class WorkWithSpecialtiesView
         // Пятый шаг
         workWithSpecialtiesPresenter?.checkForZeroMinimalScore()
 
+        // Шестой шаг
+        workWithSpecialtiesPresenter?.checkForFittingSpecialties()
+
         workWithSpecialtiesToCurrentList.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
         }

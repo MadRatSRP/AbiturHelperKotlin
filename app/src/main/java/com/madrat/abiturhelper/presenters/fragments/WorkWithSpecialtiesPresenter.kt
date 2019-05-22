@@ -16,7 +16,6 @@ import kotlin.system.measureTimeMillis
 class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                                    private var pr: WorkWithSpecialtiesMVP.Repository)
     : WorkWithSpecialtiesMVP.Presenter{
-
     private val myApplication = MyApplication.instance
 
     /*Первый этап*/
@@ -2797,6 +2796,381 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             }
         }
         return listWithZeroMinimalScore
+    }
+
+    // Шестой этап
+    override fun checkForFittingSpecialties() {
+        val scores = myApplication.returnScore()
+        val fittingList = ArrayList<ArrayList<Specialty>>()
+
+        val listUNTI = checkUNTIForFittingSpecialties(0, scores)
+        val listFEU = checkFEUForFittingSpecialties(1, scores)
+        val listFIT = checkFITForFittingSpecialties(2, scores)
+        val listMTF = checkMTFForFittingSpecialties(3, scores)
+        val listUNIT = checkUNITForFittingSpecialties(4, scores)
+        val listFEE = checkFEEForFittingSpecialties(5, scores)
+
+        showLog("${listUNTI.size} ${listFEU.size} ${listFIT.size} ${listMTF.size}" +
+                "${listUNIT.size} ${listFEE.size}")
+
+        /*val collection = arrayListOf(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
+        zeroList.addAll(collection)*/
+
+        //myApplication.saveListOfSpecialtiesWithZeroMinimalScore(zeroList)
+    }
+    override fun checkUNTIForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        var listWithFittingSpecialties = ArrayList<Specialty>()
+
+        scores?.let {
+            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
+            val mathsAndComputerScience = scores.maths + scores.computerScience
+            val mathsAndSocialScience = scores.maths + scores.socialScience
+
+            list?.let {
+                // Физика
+                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)} as ArrayList<Specialty>
+                // Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)} as ArrayList<Specialty>
+                // Обществознание
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Обществознание" && (it.minimalScore == mathsAndSocialScience
+                            || it.minimalScore < mathsAndSocialScience)} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 && ((it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics))
+                            || (it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience ||
+                            it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+                // Информатика + Физика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics)))}
+                            as ArrayList<Specialty>
+                // Информатика + Обществознание
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+            }
+        }
+        return listWithFittingSpecialties
+    }
+    override fun checkFEUForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        var listWithFittingSpecialties = ArrayList<Specialty>()
+
+        scores?.let {
+            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
+            val mathsAndComputerScience = scores.maths + scores.computerScience
+            val mathsAndSocialScience = scores.maths + scores.socialScience
+
+            list?.let {
+                // Физика
+                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)} as ArrayList<Specialty>
+                // Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)} as ArrayList<Specialty>
+                // Обществознание
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Обществознание" && (it.minimalScore == mathsAndSocialScience
+                            || it.minimalScore < mathsAndSocialScience)} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 && ((it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics))
+                            || (it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience ||
+                            it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+                // Информатика + Физика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Физика"
+                                    && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics)))}
+                            as ArrayList<Specialty>
+                // Информатика + Обществознание
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                                    || it.minimalScore < mathsAndPhysics)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+            }
+        }
+        return listWithFittingSpecialties
+    }
+    override fun checkFITForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        var listWithFittingSpecialties = ArrayList<Specialty>()
+
+        scores?.let {
+            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
+            val mathsAndComputerScience = scores.maths + scores.computerScience
+            val mathsAndSocialScience = scores.maths + scores.socialScience
+
+            list?.let {
+                // Физика
+                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)} as ArrayList<Specialty>
+                // Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)} as ArrayList<Specialty>
+                // Обществознание
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Обществознание" && (it.minimalScore == mathsAndSocialScience
+                            || it.minimalScore < mathsAndSocialScience)} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 && ((it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics))
+                            || (it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience ||
+                            it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+                // Информатика + Физика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Физика"
+                                    && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics)))}
+                            as ArrayList<Specialty>
+                // Информатика + Обществознание
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                                    || it.minimalScore < mathsAndPhysics)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+            }
+        }
+        return listWithFittingSpecialties
+    }
+    override fun checkMTFForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        var listWithFittingSpecialties = ArrayList<Specialty>()
+
+        scores?.let {
+            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
+            val mathsAndComputerScience = scores.maths + scores.computerScience
+            val mathsAndSocialScience = scores.maths + scores.socialScience
+
+            list?.let {
+                // Физика
+                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)} as ArrayList<Specialty>
+                // Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)} as ArrayList<Specialty>
+                // Обществознание
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Обществознание" && (it.minimalScore == mathsAndSocialScience
+                            || it.minimalScore < mathsAndSocialScience)} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 && ((it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics))
+                            || (it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience ||
+                            it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+                // Информатика + Физика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Физика"
+                                    && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics)))}
+                            as ArrayList<Specialty>
+                // Информатика + Обществознание
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                                    || it.minimalScore < mathsAndPhysics)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+            }
+        }
+        return listWithFittingSpecialties
+    }
+    override fun checkUNITForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        var listWithFittingSpecialties = ArrayList<Specialty>()
+
+        scores?.let {
+            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
+            val mathsAndComputerScience = scores.maths + scores.computerScience
+            val mathsAndSocialScience = scores.maths + scores.socialScience
+
+            list?.let {
+                // Физика
+                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)} as ArrayList<Specialty>
+                // Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)} as ArrayList<Specialty>
+                // Обществознание
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Обществознание" && (it.minimalScore == mathsAndSocialScience
+                            || it.minimalScore < mathsAndSocialScience)} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 && ((it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics))
+                            || (it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience ||
+                            it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+                // Информатика + Физика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Физика"
+                                    && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics)))}
+                            as ArrayList<Specialty>
+                // Информатика + Обществознание
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                                    || it.minimalScore < mathsAndPhysics)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+            }
+        }
+        return listWithFittingSpecialties
+    }
+    override fun checkFEEForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+        val list = getSpecialtiesListByPosition(position)
+        var listWithFittingSpecialties = ArrayList<Specialty>()
+
+        scores?.let {
+            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
+            val mathsAndComputerScience = scores.maths + scores.computerScience
+            val mathsAndSocialScience = scores.maths + scores.socialScience
+
+            list?.let {
+                // Физика
+                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                            || it.minimalScore < mathsAndPhysics)} as ArrayList<Specialty>
+                // Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                            || it.minimalScore < mathsAndComputerScience)} as ArrayList<Specialty>
+                // Обществознание
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            it.scoreTitle == "Математика + Обществознание" && (it.minimalScore == mathsAndSocialScience
+                            || it.minimalScore < mathsAndSocialScience)} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 && ((it.scoreTitle == "Математика + Физика"
+                            && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics))
+                            || (it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience ||
+                            it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                            && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+                // Информатика + Физика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Физика"
+                                    && (it.minimalScore == mathsAndPhysics || it.minimalScore < mathsAndPhysics)))}
+                            as ArrayList<Specialty>
+                // Информатика + Обществознание
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Информатика" && (it.minimalScore == mathsAndComputerScience
+                                    || it.minimalScore < mathsAndComputerScience)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithFittingSpecialties = list.filter {it.minimalScore != 0 &&
+                            ((it.scoreTitle == "Математика + Физика" && (it.minimalScore == mathsAndPhysics
+                                    || it.minimalScore < mathsAndPhysics)) || (it.scoreTitle == "Математика + Обществознание"
+                                    && (it.minimalScore == mathsAndSocialScience || it.minimalScore < mathsAndSocialScience)))}
+                            as ArrayList<Specialty>
+            }
+        }
+        return listWithFittingSpecialties
     }
 
     override fun returnFacultyList(): ArrayList<Faculty>?

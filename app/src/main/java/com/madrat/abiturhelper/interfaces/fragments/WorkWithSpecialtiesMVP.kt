@@ -58,6 +58,15 @@ interface WorkWithSpecialtiesMVP {
         fun checkUNITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
         fun checkFEEForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
 
+        // Шестой этап
+        fun checkForFittingSpecialties()
+        fun checkUNTIForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFEUForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFITForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkMTFForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkUNITForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFEEForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?
         fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle
