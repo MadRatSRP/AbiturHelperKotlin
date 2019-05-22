@@ -142,15 +142,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         myApplication.saveFaculties(Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE))
     }
     override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
-        val bachelors = ArrayList<Student>()
-
-        for (i in 0 until list.size) {
-            if (list[i].admissions == "бак")
-                bachelors.add(list[i])
-        }
-
-        showLog("Бакалавры: ${bachelors.size}")
-
+        val bachelors = list.filter { it.admissions == "бак"} as ArrayList<Student>
         myApplication.saveBachelors(bachelors)
     }
     /*Второй этап*/
