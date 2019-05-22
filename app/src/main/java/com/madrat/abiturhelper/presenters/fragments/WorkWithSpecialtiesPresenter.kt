@@ -2553,7 +2553,8 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
     // Пятый этап
     override fun checkForZeroMinimalScore() {
         val scores = myApplication.returnScore()
-        val zeroList = ArrayList<Specialty>()
+        //val zeroList = ArrayList<Specialty>()
+        val zeroList = ArrayList<ArrayList<Specialty>>()
 
         val listUNTI = checkUNTIForZeroMinimalScore(0, scores)
         val listFEU = checkFEUForZeroMinimalScore(1, scores)
@@ -2562,13 +2563,18 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val listUNIT = checkUNITForZeroMinimalScore(4, scores)
         val listFEE = checkFEEForZeroMinimalScore(5, scores)
 
-        zeroList.addAll(listUNTI)
+        /*zeroList.addAll(listUNTI)
         zeroList.addAll(listFEU)
         zeroList.addAll(listFIT)
         zeroList.addAll(listMTF)
         zeroList.addAll(listUNIT)
         zeroList.addAll(listFEE)
-        showLog("ZEROLIST ${zeroList.size}")
+        showLog("ZEROLIST ${zeroList.size}")*/
+
+        val collection = arrayListOf(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
+        zeroList.addAll(collection)
+
+        myApplication.saveListOfSpecialtiesWithZeroMinimalScore(zeroList)
     }
     override fun checkUNTIForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
@@ -2581,26 +2587,26 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
                                                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Информатика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание
-                if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Все три
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Информатика
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание + Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Обществознание
-                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
@@ -2618,26 +2624,26 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Информатика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание
-                if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Все три
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Информатика
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание + Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Обществознание
-                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
@@ -2655,26 +2661,26 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Информатика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание
-                if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Все три
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Информатика
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание + Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Обществознание
-                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
@@ -2692,33 +2698,32 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Информатика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание
-                if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Все три
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Информатика
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание + Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Обществознание
-                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
         }
         return listWithZeroMinimalScore
     }
-
     override fun checkUNITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
@@ -2730,33 +2735,32 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Информатика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание
-                if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Все три
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Информатика
-                if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание + Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
                 // Физика + Обществознание
-                if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
                             || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
         }
         return listWithZeroMinimalScore
     }
-    
     override fun checkFEEForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
@@ -2768,19 +2772,32 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Физика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Информатика
-                if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience == 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Информатика" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
                 // Обществознание
-                if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                else if (scores.physics == 0 && scores.computerScience == 0 && scores.socialScience != 0 )
                     listWithZeroMinimalScore = list.filter {it.scoreTitle == "Математика + Обществознание" &&
                             it.minimalScore == 0} as ArrayList<Specialty>
+                // Все три
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithZeroMinimalScore = list.filter {it.minimalScore == 0} as ArrayList<Specialty>
+                // Физика + Информатика
+                else if (scores.physics != 0 && scores.computerScience != 0 && scores.socialScience == 0 )
+                    listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
+                            || it.scoreTitle == "Математика + Физика") && it.minimalScore == 0} as ArrayList<Specialty>
+                // Обществознание + Информатика
+                else if (scores.physics == 0 && scores.computerScience != 0 && scores.socialScience != 0 )
+                    listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Информатика"
+                            || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
+                // Физика + Обществознание
+                else if (scores.physics != 0 && scores.computerScience == 0 && scores.socialScience != 0 )
+                    listWithZeroMinimalScore = list.filter {(it.scoreTitle == "Математика + Физика"
+                            || it.scoreTitle == "Математика + Обществознание") && it.minimalScore == 0} as ArrayList<Specialty>
             }
         }
         return listWithZeroMinimalScore
     }
-
-
 
     override fun returnFacultyList(): ArrayList<Faculty>?
             = myApplication.returnFacultyList()

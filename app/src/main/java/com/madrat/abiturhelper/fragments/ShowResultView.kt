@@ -11,18 +11,24 @@ import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
+import com.madrat.abiturhelper.util.MyApplication
+import com.madrat.abiturhelper.util.showLog
+import kotlinx.android.synthetic.main.fragment_result.*
 
 class ShowResultView : Fragment(), ShowResultMVP.View {
-
-    companion object { val instance = ShowResultView() }
-
     private var showResultPresenter: ShowResultPresenter? = null
+
+    private val myApplication = MyApplication.instance
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
         setupFields()
 
+        val zeroList = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
+        val sizeOfZeroList = zeroList?.sumBy { it.size }
+        //showLog("$sizeOfZeroList")
+        resultAmountOfZeroMinimalScoreSpecialtiesValue.text = sizeOfZeroList.toString()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

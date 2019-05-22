@@ -2,7 +2,6 @@ package com.madrat.abiturhelper.util
 
 import android.app.Application
 import com.madrat.abiturhelper.model.*
-import com.madrat.abiturhelper.model.faculties.*
 
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }
@@ -15,6 +14,8 @@ class MyApplication: Application() {
     private var facultyList: ArrayList<Faculty>? = null
 
     private var currentListOfStudents: ArrayList<Student>? = null
+
+    private var listOfSpecialtiesWithZeroMinimalScore: ArrayList<ArrayList<Specialty>>? = null
 
     private var listUNTI: ArrayList<ArrayList<Student>>? = null
     private var listFEU: ArrayList<ArrayList<Student>>? = null
@@ -197,5 +198,15 @@ class MyApplication: Application() {
     fun returnCurrentListOfStudents(): ArrayList<Student>? {
         showLog("Возвращён currentListOfStudents, размер: " + currentListOfStudents?.size)
         return currentListOfStudents
+    }
+
+    fun saveListOfSpecialtiesWithZeroMinimalScore(list: ArrayList<ArrayList<Specialty>>) {
+        this.listOfSpecialtiesWithZeroMinimalScore = list
+        showLog("listOfSpecialtiesWithZeroMinimalScore сохранён")
+    }
+    fun returnListOfSpecialtiesWithZeroMinimalScore(): ArrayList<ArrayList<Specialty>>? {
+        showLog("Возвращён listOfSpecialtiesWithZeroMinimalScore, " +
+                "размер: " + listOfSpecialtiesWithZeroMinimalScore?.size)
+        return listOfSpecialtiesWithZeroMinimalScore
     }
 }

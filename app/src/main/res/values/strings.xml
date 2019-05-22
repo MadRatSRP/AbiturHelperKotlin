@@ -50,4 +50,6 @@
     <string name="titleFEE">"ФЭЭ"</string>
 
     <string name="amountOfSpecialties">Количество специальностей</string>
+
+    <string name="resultAmountOfZeroMinimalScoreSpecialties">Количество специальностей без минимального балла</string>
 </resources>
