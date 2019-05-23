@@ -145,6 +145,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val bachelors = list.filter { it.admissions == "бак"} as ArrayList<Student>
         myApplication.saveBachelors(bachelors)
     }
+
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         val bachelors = myApplication.returnBachelors()
@@ -204,20 +205,13 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
     // Обществознание
     override fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>)
             = bachelors.filter { it.physics == 0 && it.computerScience == 0 && it.socialScience != 0 } as ArrayList<Student>
+    // Баллы по двум/трем предметам
+    override fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>)
+            = bachelors.filter { (it.physics != 0 && it.computerScience != 0 && it.socialScience != 0)
+            || (it.physics != 0 && it.computerScience != 0 && it.socialScience == 0)
+            || (it.physics != 0 && it.computerScience == 0 && it.socialScience != 0)
+            || (it.physics == 0 && it.computerScience != 0 && it.socialScience != 0) } as ArrayList<Student>
 
-    override fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student> {
-        val partAndAllDataStudents = ArrayList<Student>()
-
-        for (i in 0 until bachelors.size) {
-            if (!(bachelors[i].physics != null && bachelors[i].computerScience == null && bachelors[i].socialScience == null)
-                    && !(bachelors[i].physics == null && bachelors[i].computerScience != null
-                            && bachelors[i].socialScience == null) && !(bachelors[i].physics == null
-                            && bachelors[i].computerScience == null && bachelors[i].socialScience != null)) {
-                partAndAllDataStudents.add(bachelors[i])
-            }
-        }
-        return partAndAllDataStudents
-    }
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
             : ArrayList<Faculty> {
         val facultyList = ArrayList<Faculty>()
@@ -237,6 +231,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         facultyList.add(Faculty(name, total, free, amountOfSpecialties))
         return facultyList
     }
+
     /*Третий этап*/
     override fun separateStudentsBySpecialties() {
         checkForUnti()
