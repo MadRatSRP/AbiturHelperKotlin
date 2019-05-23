@@ -185,12 +185,9 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ", faculties?.unitList)
         val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ", faculties?.feeList)
 
-        facultyList.addAll(calculatedPlacesUNTI)
-        facultyList.addAll(calculatedPlacesFEU)
-        facultyList.addAll(calculatedPlacesFIT)
-        facultyList.addAll(calculatedPlacesMTF)
-        facultyList.addAll(calculatedPlacesUNIT)
-        facultyList.addAll(calculatedPlacesFEE)
+        val collection = arrayListOf(calculatedPlacesUNTI, calculatedPlacesFEU, calculatedPlacesFIT,
+                calculatedPlacesMTF, calculatedPlacesUNIT, calculatedPlacesFEE)
+        facultyList.addAll(collection)
 
         myApplication.saveFacultyList(facultyList)
 
@@ -213,23 +210,11 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             || (it.physics == 0 && it.computerScience != 0 && it.socialScience != 0) } as ArrayList<Student>
 
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
-            : ArrayList<Faculty> {
-        val facultyList = ArrayList<Faculty>()
-        var total = 0
-        var free = 0
-        var amountOfSpecialties = 0
-
-        list?.let {
-            for (i in 0 until it.size) {
-                total += it[i].entriesTotal
-                free += it[i].entriesFree
-            }
-            amountOfSpecialties = it.size
-        }
-
-        showLog("Для $name - мест всего $total, мест свободно $free")
-        facultyList.add(Faculty(name, total, free, amountOfSpecialties))
-        return facultyList
+            : Faculty {
+        val total = list?.sumBy { it.entriesTotal }
+        val free = list?.sumBy { it.entriesFree }
+        val amountOfSpecialties = list?.size
+        return Faculty(name, total, free, amountOfSpecialties)
     }
 
     /*Третий этап*/

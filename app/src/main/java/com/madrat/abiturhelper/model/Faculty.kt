@@ -2,7 +2,7 @@ package com.madrat.abiturhelper.model
 
 data class Faculty(
         val name: String,
-        val entriesTotalAmount: Int,
-        val entriesFreeAmount: Int,
-        val amountOfSpecialties: Int
+        val entriesTotalAmount: Int?,
+        val entriesFreeAmount: Int?,
+        val amountOfSpecialties: Int?
 )
