@@ -148,6 +148,19 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
     /*Второй этап*/
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
+        showLog("Начат второй этап")
+        val time = measureTimeMillis {
+            // Получить и сохранить списки студентов, разделённые по баллам
+            val scoreTypes = returnStudentsSeparatedByScoreType()
+            myApplication.saveScoreTypes(scoreTypes)
+
+            // Получаем и сохраняем количество общих и свободных мест для каждого из факультетов
+            val listOfFaculties = returnListOfFaculties()
+            myApplication.saveFacultyList(listOfFaculties)
+        }
+        showLog("Второй этап завершён за $time ms")
+    }
+    override fun returnStudentsSeparatedByScoreType(): ScoreTypes {
         val bachelors = myApplication.returnBachelors()
 
         // Вычисляем количество студентов, у которых достаточно баллов
@@ -161,22 +174,18 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             (it.maths == 0 && it.russian == 0) || it.maths == 0 || it.russian == 0
                     || (it.physics == 0 && it.computerScience == 0 && it.socialScience == 0)} as ArrayList<Student>
 
-        val scoreTypes = ScoreTypes(
+        return ScoreTypes(
                 withdrawPhysicsStudents(studentsWithEnoughData),
                 withdrawComputerScienceStudents(studentsWithEnoughData),
                 withdrawSocialScienceStudents(studentsWithEnoughData),
                 studentsWithoutEnoughData,
                 withdrawStudentsWithPartAndFullData(studentsWithEnoughData)
         )
-
-        myApplication.saveScoreTypes(scoreTypes)
-
-        val faculties = myApplication.returnFaculties()
-
-
+    }
+    override fun returnListOfFaculties(): ArrayList<Faculty> {
         val facultyList = ArrayList<Faculty>()
-
-        facultyList.clear()
+        val faculties = myApplication.returnFaculties()
+        //facultyList.clear()
 
         val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ", faculties?.untiList)
         val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ", faculties?.feuList)
@@ -188,10 +197,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val collection = arrayListOf(calculatedPlacesUNTI, calculatedPlacesFEU, calculatedPlacesFIT,
                 calculatedPlacesMTF, calculatedPlacesUNIT, calculatedPlacesFEE)
         facultyList.addAll(collection)
-
-        myApplication.saveFacultyList(facultyList)
-
-        println("Второй этап завершён")
+        return facultyList
     }
     // Физика
     override fun withdrawPhysicsStudents(bachelors: ArrayList<Student>)
@@ -208,7 +214,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             || (it.physics != 0 && it.computerScience != 0 && it.socialScience == 0)
             || (it.physics != 0 && it.computerScience == 0 && it.socialScience != 0)
             || (it.physics == 0 && it.computerScience != 0 && it.socialScience != 0) } as ArrayList<Student>
-
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
             : Faculty {
         val total = list?.sumBy { it.entriesTotal }

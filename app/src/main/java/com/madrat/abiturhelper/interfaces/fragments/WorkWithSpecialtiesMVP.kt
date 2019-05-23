@@ -24,6 +24,8 @@ interface WorkWithSpecialtiesMVP {
         fun divideStudentsByAdmissions(list: ArrayList<Student>)
         //Второй этап
         fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+        fun returnStudentsSeparatedByScoreType(): ScoreTypes
+        fun returnListOfFaculties(): ArrayList<Faculty>
         fun withdrawPhysicsStudents(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
