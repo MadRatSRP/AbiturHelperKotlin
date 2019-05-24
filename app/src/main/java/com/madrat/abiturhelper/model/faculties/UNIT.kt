@@ -1,12 +1,12 @@
 package com.madrat.abiturhelper.model.faculties
 
-import com.madrat.abiturhelper.model.faculties.unit.*
+import com.madrat.abiturhelper.model.Student
 
 data class UNIT(
-        val nttk: NTTK,
-        val ntts: NTTS,
-        val pm: PM,
-        val psjd: PSJD,
-        val ttp: TTP,
-        val ettk: ETTK
+        val nttk: ArrayList<Student>,
+        val ntts: ArrayList<Student>,
+        val pm: ArrayList<Student>,
+        val psjd: ArrayList<Student>,
+        val ttp: ArrayList<Student>,
+        val ettk: ArrayList<Student>
 )

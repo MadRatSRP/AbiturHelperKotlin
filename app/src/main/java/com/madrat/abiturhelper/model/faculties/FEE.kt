@@ -1,11 +1,11 @@
 package com.madrat.abiturhelper.model.faculties
 
-import com.madrat.abiturhelper.model.faculties.fee.*
+import com.madrat.abiturhelper.model.Student
 
 data class FEE(
-        val rad: RAD,
-        val tit: TIT,
-        val ein: EIN,
-        val eie: EIE,
-        val em: EM
+        val rad: ArrayList<Student>,
+        val tit: ArrayList<Student>,
+        val ein: ArrayList<Student>,
+        val eie: ArrayList<Student>,
+        val em: ArrayList<Student>
 )

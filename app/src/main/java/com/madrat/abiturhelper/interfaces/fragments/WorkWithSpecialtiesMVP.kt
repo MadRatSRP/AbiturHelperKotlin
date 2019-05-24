@@ -3,6 +3,7 @@ package com.madrat.abiturhelper.interfaces.fragments
 import android.content.Context
 import android.os.Bundle
 import com.madrat.abiturhelper.model.*
+import com.madrat.abiturhelper.model.faculties.*
 
 interface WorkWithSpecialtiesMVP {
     interface View {
@@ -37,6 +38,7 @@ interface WorkWithSpecialtiesMVP {
         fun separateStudentsBySpecialties()
         // УНТИ
         fun checkForUNTI()
+        fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
         fun separateForATP(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateForKTO(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateForMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
@@ -47,6 +49,7 @@ interface WorkWithSpecialtiesMVP {
         fun separateForUTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФЭУ
         fun checkForFEU()
+        fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>>
         fun separateBI(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separatePI(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateSC(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
@@ -55,6 +58,7 @@ interface WorkWithSpecialtiesMVP {
         fun separateEK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФИТ
         fun checkForFIT()
+        fun separateFIT(fit: FIT): ArrayList<ArrayList<Student>>
         fun separateIASB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateIB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateIBAS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
@@ -66,12 +70,14 @@ interface WorkWithSpecialtiesMVP {
         fun separatePRO(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // МТФ
         fun checkForMTF()
+        fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>>
         fun separateMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateSIM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateTB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateUK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // УНИТ
         fun checkForUNIT()
+        fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>>
         fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateNTTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separatePM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
@@ -80,6 +86,7 @@ interface WorkWithSpecialtiesMVP {
         fun separateETTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФЭЭ
         fun checkForFEE()
+        fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>
         fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateTIT(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateEIN(list: ArrayList<Student>): ArrayList<ArrayList<Student>>

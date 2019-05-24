@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
+import com.madrat.abiturhelper.model.faculties.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.filterForSpecialty
 import com.madrat.abiturhelper.util.showLog
@@ -147,7 +148,8 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         myApplication.saveBachelors(bachelors)
     }
 
-    /*Второй этап*/
+    // Второй этап
+
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         showLog("Начат второй этап")
         val time = measureTimeMillis {
@@ -399,16 +401,22 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForUTS(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForUTS(it) }
 
+        // Получаем список списков студентов специальности УНТИ и сохраняем его
+        val unti = UNTI(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
+        val separatedUNTI = separateUNTI(unti)
+        myApplication.saveUnti(separatedUNTI)
+    }
+    override fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>> {
         val listUNTI = ArrayList<ArrayList<Student>>()
 
-        val separatedATP = separateForATP(atp)
-        val separatedKTO = separateForKTO(kto)
-        val separatedMASH = separateForMASH(mash)
-        val separatedMiTM = separateForMiTM(mitm)
-        val separatedMHT = separateForMHT(mht)
-        val separatedPTMK = separateForPTMK(ptmk)
-        val separatedTMO = separateForTMO(tmo)
-        val separatedUTS = separateForUTS(uts)
+        val separatedATP = separateForATP(unti.atp)
+        val separatedKTO = separateForKTO(unti.kto)
+        val separatedMASH = separateForMASH(unti.mash)
+        val separatedMiTM = separateForMiTM(unti.mitm)
+        val separatedMHT = separateForMHT(unti.mht)
+        val separatedPTMK = separateForPTMK(unti.ptmk)
+        val separatedTMO = separateForTMO(unti.tmo)
+        val separatedUTS = separateForUTS(unti.uts)
 
         listUNTI.addAll(separatedATP)
         listUNTI.addAll(separatedKTO)
@@ -419,7 +427,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         listUNTI.addAll(separatedTMO)
         listUNTI.addAll(separatedUTS)
 
-        myApplication.saveUnti(listUNTI)
+        return listUNTI
     }
     override fun separateForATP(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val zaochnBudg = list.filterForSpecialty("АТП_заочн_бюдж")
@@ -605,14 +613,19 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForEK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForEK(it) }
 
+        val feu = FEU(bi, pi, sc, td, eb, ek)
+        val separatedFEU = separateFEU(feu)
+        myApplication.saveFeu(separatedFEU)
+    }
+    override fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>> {
         val listFEU = ArrayList<ArrayList<Student>>()
 
-        val separatedBI = separateBI(bi)
-        val separatedPI = separatePI(pi)
-        val separatedSC = separateSC(sc)
-        val separatedTD = separateTD(td)
-        val separatedEB = separateEB(eb)
-        val separatedEK = separateEK(ek)
+        val separatedBI = separateBI(feu.bi)
+        val separatedPI = separatePI(feu.pi)
+        val separatedSC = separateSC(feu.sc)
+        val separatedTD = separateTD(feu.td)
+        val separatedEB = separateEB(feu.eb)
+        val separatedEK = separateEK(feu.ek)
 
         listFEU.addAll(separatedBI)
         listFEU.addAll(separatedPI)
@@ -621,7 +634,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         listFEU.addAll(separatedEB)
         listFEU.addAll(separatedEK)
 
-        myApplication.saveFeu(listFEU)
+        return listFEU
     }
     override fun separateBI(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val zaochnPlat = list.filterForSpecialty("БИ_заочн_плат")
@@ -847,17 +860,22 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForPRO(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForPRO(it) }
 
+        val fit = FIT(iasb, ib, ibas, ivt, inn, ist, moa, pri, pro)
+        val separatedFIT = separateFIT(fit)
+        myApplication.saveFIT(separatedFIT)
+    }
+    override fun separateFIT(fit: FIT): ArrayList<ArrayList<Student>> {
         val listFIT = ArrayList<ArrayList<Student>>()
 
-        val separatedIASB = separateIASB(iasb)
-        val separatedIB = separateIB(ib)
-        val separatedIBAS = separateIBAS(ibas)
-        val separatedIVT = separateIVT(ivt)
-        val separatedINN = separateINN(inn)
-        val separatedIST = separateIST(ist)
-        val separatedMOA = separateMOA(moa)
-        val separatedPRI = separatePRI(pri)
-        val separatedPRO = separatePRO(pro)
+        val separatedIASB = separateIASB(fit.iasb)
+        val separatedIB = separateIB(fit.ib)
+        val separatedIBAS = separateIBAS(fit.ibas)
+        val separatedIVT = separateIVT(fit.ivt)
+        val separatedINN = separateINN(fit.inn)
+        val separatedIST = separateIST(fit.ist)
+        val separatedMOA = separateMOA(fit.moa)
+        val separatedPRI = separatePRI(fit.pri)
+        val separatedPRO = separatePRO(fit.pro)
 
         listFIT.addAll(separatedIASB)
         listFIT.addAll(separatedIB)
@@ -869,7 +887,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         listFIT.addAll(separatedPRI)
         listFIT.addAll(separatedPRO)
 
-        myApplication.saveFIT(listFIT)
+        return listFIT
     }
     override fun separateIASB(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val ochnBudg = list.filterForSpecialty("ИАСБ_очн_бюдж")
@@ -1038,19 +1056,24 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForUK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForUK(it) }
 
+        val mtf = MTF(mash, sim, tb, uk)
+        val separatedMTF = separateMTF(mtf)
+        myApplication.saveMTF(separatedMTF)
+    }
+    override fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>> {
         val listMTF = ArrayList<ArrayList<Student>>()
 
-        val separatedMASH = separateMASH(mash)
-        val separatedSIM = separateSIM(sim)
-        val separatedTB = separateTB(tb)
-        val separatedUK = separateUK(uk)
+        val separatedMASH = separateMASH(mtf.mash)
+        val separatedSIM = separateSIM(mtf.sim)
+        val separatedTB = separateTB(mtf.tb)
+        val separatedUK = separateUK(mtf.uk)
 
         listMTF.addAll(separatedMASH)
         listMTF.addAll(separatedSIM)
         listMTF.addAll(separatedTB)
         listMTF.addAll(separatedUK)
 
-        myApplication.saveMTF(listMTF)
+        return listMTF
     }
     override fun separateMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val lZaochnBudg = list.filterForSpecialty("МАШ(Л)_заочн_бюдж")
@@ -1212,14 +1235,19 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForETTK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForETTK(it) }
 
+        val unit = UNIT(nttk, ntts, pm, psjd, ttp, ettk)
+        val separatedUNIT = separateUNIT(unit)
+        myApplication.saveUNIT(separatedUNIT)
+    }
+    override fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>> {
         val listUNIT = ArrayList<ArrayList<Student>>()
 
-        val separatedNTTK = separateNTTK(nttk)
-        val separatedNTTS = separateNTTS(ntts)
-        val separatedPM = separatePM(pm)
-        val separatedPSJD = separatePSJD(psjd)
-        val separatedTTP = separateTTP(ttp)
-        val separatedETTK = separateETTK(ettk)
+        val separatedNTTK = separateNTTK(unit.nttk)
+        val separatedNTTS = separateNTTS(unit.ntts)
+        val separatedPM = separatePM(unit.pm)
+        val separatedPSJD = separatePSJD(unit.psjd)
+        val separatedTTP = separateTTP(unit.ttp)
+        val separatedETTK = separateETTK(unit.ettk)
 
         listUNIT.addAll(separatedNTTK)
         listUNIT.addAll(separatedNTTS)
@@ -1228,7 +1256,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         listUNIT.addAll(separatedTTP)
         listUNIT.addAll(separatedETTK)
 
-        myApplication.saveUNIT(listUNIT)
+        return listUNIT
     }
     override fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val zaochnBudg = list.filterForSpecialty("НТТК_заочн_бюдж")
@@ -1395,13 +1423,18 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForEM(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForEM(it) }
 
+        val fee = FEE(rad, tit, ein, eie, em)
+        val separatedFEE = separateFEE(fee)
+        myApplication.saveFEE(separatedFEE)
+    }
+    override fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>> {
         val listFEE = ArrayList<ArrayList<Student>>()
 
-        val separatedRAD = separateRAD(rad)
-        val separatedTIT = separateTIT(tit)
-        val separatedEIN = separateEIN(ein)
-        val separatedEIE = separateEIE(eie)
-        val separatedEM = separateEM(em)
+        val separatedRAD = separateRAD(fee.rad)
+        val separatedTIT = separateTIT(fee.tit)
+        val separatedEIN = separateEIN(fee.ein)
+        val separatedEIE = separateEIE(fee.eie)
+        val separatedEM = separateEM(fee.em)
 
         listFEE.addAll(separatedRAD)
         listFEE.addAll(separatedTIT)
@@ -1409,7 +1442,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         listFEE.addAll(separatedEIE)
         listFEE.addAll(separatedEM)
 
-        myApplication.saveFEE(listFEE)
+        return listFEE
     }
     override fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val ochnBudg = list.filterForSpecialty("РАД_очн_бюдж")

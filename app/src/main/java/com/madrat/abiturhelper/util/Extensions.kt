@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.BuildConfig
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
-import com.madrat.abiturhelper.model.faculties.Unti
 
 fun Fragment.setFragment(fragment: Fragment, fragmentManager: FragmentManager, id: Int) {
     fragmentManager.beginTransaction()
