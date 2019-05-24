@@ -661,6 +661,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                 ptmkSeparated, tmoSeparated, utsSeparated)*/
         myApplication.saveUnti(listUNTI)
     }
+    // ФЭУ
     override fun checkForFEU() {
         val scoreTypes = myApplication.returnScoreTypes()
         val bi = ArrayList<Student>()
@@ -669,7 +670,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val td = ArrayList<Student>()
         val eb = ArrayList<Student>()
         val ek = ArrayList<Student>()
-        var check = ArrayList<Student>()
 
         val listFEU = ArrayList<ArrayList<Student>>()
 
@@ -742,146 +742,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             }
         }
 
-        /*fun check(list: ArrayList<Student>) {
-           val filteredMap = list.filter { it.specialtyFirst == "ПИ(КИС)_очн_бюдж" /*|| it.specialtyFirst == "ПИ(КИС)_очн_льгот"*/ }
-           check = filteredMap as ArrayList<Student>
-           showLog("CHECK = " + check.size.toString())
-       }*/
-
-        fun separateBI(list: ArrayList<Student>)/*: BI*/ {
-            val zaochnPlat = ArrayList<Student>()
-            val ochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "БИ_заочн_плат" || list[i].specialtySecond == "БИ_заочн_плат"
-                        || list[i].specialtyThird == "БИ_заочн_плат") {
-                    zaochnPlat.add(list[i])
-                }
-                else if (list[i].specialtyFirst == "БИ_очн_плат" || list[i].specialtySecond == "БИ_очн_плат"
-                        || list[i].specialtyThird == "БИ_очн_плат")
-                    ochnPlat.add(list[i])
-            }
-
-            val collection = arrayListOf(zaochnPlat, ochnPlat)
-            listFEU.addAll(collection)
-        }
-        fun separatePI(list: ArrayList<Student>)/*: PI*/ {
-            val kisOchnBudg = ArrayList<Student>()
-            val kisOchnLgot = ArrayList<Student>()
-            val kisOchnPlat = ArrayList<Student>()
-            val ceOchnBudg = ArrayList<Student>()
-            val ceOchnLgot = ArrayList<Student>()
-            val ceOchnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ПИ(КИС)_очн_бюдж" || list[i].specialtySecond == "ПИ(КИС)_очн_бюдж"
-                        || list[i].specialtyThird == "ПИ(КИС)_очн_бюдж")
-                    kisOchnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ПИ(КИС)_очн_льгот" || list[i].specialtySecond == "ПИ(КИС)_очн_льгот"
-                        || list[i].specialtyThird == "ПИ(КИС)_очн_льгот")
-                    kisOchnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ПИ(КИС)_очн_плат" || list[i].specialtySecond == "ПИ(КИС)_очн_плат"
-                        || list[i].specialtyThird == "ПИ(КИС)_очн_плат")
-                    kisOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ПИ(ЦЭ)_очн_бюдж" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_бюдж"
-                        || list[i].specialtyThird == "ПИ(ЦЭ)_очн_бюдж")
-                    ceOchnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_льгот"
-                        || list[i].specialtyThird == "ПИ(ЦЭ)_очн_льгот")
-                    ceOchnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ПИ(ЦЭ)_очн_плат" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_плат"
-                        || list[i].specialtyThird == "ПИ(ЦЭ)_очн_плат")
-                    ceOchnPlat.add(list[i])
-            }
-
-            val collection = arrayListOf(kisOchnBudg, kisOchnLgot, kisOchnPlat,
-                    ceOchnBudg, ceOchnLgot, ceOchnPlat)
-            listFEU.addAll(collection)
-        }
-        fun separateSC(list: ArrayList<Student>)/*: SC*/ {
-            val zaochnPlat = ArrayList<Student>()
-            val ochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "СЦ_заочн_плат" || list[i].specialtySecond == "СЦ_заочн_плат"
-                        || list[i].specialtyThird == "СЦ_заочн_плат")
-                    zaochnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "СЦ_очн_плат" || list[i].specialtySecond == "СЦ_очн_плат"
-                        || list[i].specialtyThird == "СЦ_очн_плат")
-                    ochnPlat.add(list[i])
-            }
-
-            val collection = arrayListOf(zaochnPlat, ochnPlat)
-            listFEU.addAll(collection)
-        }
-        fun separateTD(list: ArrayList<Student>)/*: TD*/ {
-            val zaochnPlat = ArrayList<Student>()
-            val ochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ТД_заочн_плат" || list[i].specialtySecond == "ТД_заочн_плат"
-                        || list[i].specialtyThird == "ТД_заочн_плат")
-                    zaochnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ТД_очн_плат" || list[i].specialtySecond == "ТД_очн_плат"
-                        || list[i].specialtyThird == "ТД_очн_плат")
-                    ochnPlat.add(list[i])
-            }
-            val collection = arrayListOf(zaochnPlat, ochnPlat)
-            listFEU.addAll(collection)
-        }
-        fun separateEB(list: ArrayList<Student>)/*: EB*/ {
-            val zaochnPlat = ArrayList<Student>()
-            val ochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ЭБ_заоч_плат" || list[i].specialtySecond == "ЭБ_заоч_плат"
-                        || list[i].specialtyThird == "ЭБ_заоч_плат")
-                    zaochnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭБ_очн_плат" || list[i].specialtySecond == "ЭБ_очн_плат"
-                        || list[i].specialtyThird == "ЭБ_очн_плат")
-                    ochnPlat.add(list[i])
-            }
-            val collection = arrayListOf(zaochnPlat, ochnPlat)
-            listFEU.addAll(collection)
-        }
-        fun separateEK(list: ArrayList<Student>)/*: EK*/ {
-            val buaZaochnPlat = ArrayList<Student>()
-            val buaOchnPlat = ArrayList<Student>()
-            val logOchnPlat = ArrayList<Student>()
-            val ocOchnPlat = ArrayList<Student>()
-            val fZaochnPlat = ArrayList<Student>()
-            val fOchnPlat = ArrayList<Student>()
-            val epoOchnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ЭК(БУА)_заоч_плат" || list[i].specialtySecond == "ЭК(БУА)_заоч_плат"
-                        || list[i].specialtyThird == "ЭК(БУА)_заоч_плат")
-                    buaZaochnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭК(БУА)_очн_плат" || list[i].specialtySecond == "ЭК(БУА)_очн_плат"
-                        || list[i].specialtyThird == "ЭК(БУА)_очн_плат")
-                    buaOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭК(ЛОГ)_очн_плат" || list[i].specialtySecond == "ЭК(ЛОГ)_очн_плат"
-                        || list[i].specialtyThird == "ЭК(ЛОГ)_очн_плат")
-                    logOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭК(ОЦ)_очн_плат" || list[i].specialtySecond == "ЭК(ОЦ)_очн_плат"
-                        || list[i].specialtyThird == "ЭК(ОЦ)_очн_плат")
-                    ocOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭК(Ф)_заоч_плат" || list[i].specialtySecond == "ЭК(Ф)_заоч_плат"
-                        || list[i].specialtyThird == "ЭК(Ф)_заоч_плат")
-                    fZaochnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭК(Ф)_очн_плат" || list[i].specialtySecond == "ЭК(Ф)_очн_плат"
-                        || list[i].specialtyThird == "ЭК(Ф)_очн_плат")
-                    fOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭК(ЭПО)_очн_плат" || list[i].specialtySecond == "ЭК(ЭПО)_очн_плат"
-                        || list[i].specialtyThird == "ЭК(ЭПО)_очн_плат")
-                    epoOchnPlat.add(list[i])
-            }
-
-            val collection = arrayListOf(buaZaochnPlat, buaOchnPlat, logOchnPlat, ocOchnPlat,
-                    fZaochnPlat, fOchnPlat, epoOchnPlat)
-            listFEU.addAll(collection)
-        }
-
         scoreTypes?.physicsStudents?.let { checkForBI(it) }
         scoreTypes?.computerScienceStudents?.let { checkForBI(it) }
         scoreTypes?.socialScienceStudents?.let { checkForBI(it) }
@@ -934,6 +794,52 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         /*val feu = Feu(separatedBI,  separatedPI, separatedSC,
                 separatedTD, separatedEB, separatedEK)*/
         myApplication.saveFeu(listFEU)
+    }
+    override fun separateBI(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val zaochnPlat = list.filterForSpecialty("БИ_заочн_плат")
+        val ochnPlat = list.filterForSpecialty("БИ_очн_плат")
+
+        return arrayListOf(zaochnPlat, ochnPlat)
+    }
+    override fun separatePI(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val kisOchnBudg = list.filterForSpecialty("ПИ(КИС)_очн_бюдж")
+        val kisOchnLgot = list.filterForSpecialty("ПИ(КИС)_очн_льгот")
+        val kisOchnPlat = list.filterForSpecialty("ПИ(КИС)_очн_плат")
+        val ceOchnBudg = list.filterForSpecialty("ПИ(ЦЭ)_очн_бюдж")
+        val ceOchnLgot = list.filterForSpecialty("ПИ(ЦЭ)_очн_льгот")
+        val ceOchnPlat = list.filterForSpecialty("ПИ(ЦЭ)_очн_плат")
+
+        return arrayListOf(kisOchnBudg, kisOchnLgot, kisOchnPlat, ceOchnBudg, ceOchnLgot, ceOchnPlat)
+    }
+    override fun separateSC(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val zaochnPlat = list.filterForSpecialty("СЦ_заочн_плат")
+        val ochnPlat = list.filterForSpecialty("СЦ_очн_плат")
+
+        return arrayListOf(zaochnPlat, ochnPlat)
+    }
+    override fun separateTD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val zaochnPlat = list.filterForSpecialty("ТД_заочн_плат")
+        val ochnPlat = list.filterForSpecialty("ТД_очн_плат")
+
+        return arrayListOf(zaochnPlat, ochnPlat)
+    }
+    override fun separateEB(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val zaochnPlat = list.filterForSpecialty("ЭБ_заоч_плат")
+        val ochnPlat = list.filterForSpecialty("ЭБ_очн_плат")
+
+        return arrayListOf(zaochnPlat, ochnPlat)
+    }
+    override fun separateEK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val buaZaochnPlat = list.filterForSpecialty("ЭК(БУА)_заоч_плат")
+        val buaOchnPlat = list.filterForSpecialty("ЭК(БУА)_очн_плат")
+        val logOchnPlat = list.filterForSpecialty("ЭК(ЛОГ)_очн_плат")
+        val ocOchnPlat = list.filterForSpecialty("ЭК(ОЦ)_очн_плат")
+        val fZaochnPlat = list.filterForSpecialty("ЭК(Ф)_заоч_плат")
+        val fOchnPlat = list.filterForSpecialty("ЭК(Ф)_очн_плат")
+        val epoOchnPlat = list.filterForSpecialty("ЭК(ЭПО)_очн_плат")
+
+        return arrayListOf(buaZaochnPlat, buaOchnPlat, logOchnPlat, ocOchnPlat,
+                fZaochnPlat, fOchnPlat, epoOchnPlat)
     }
     // ФИТ
     override fun checkForFIT() {
