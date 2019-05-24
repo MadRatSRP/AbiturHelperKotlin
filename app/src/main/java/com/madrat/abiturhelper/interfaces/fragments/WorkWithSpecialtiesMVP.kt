@@ -31,14 +31,22 @@ interface WorkWithSpecialtiesMVP {
         fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>): ArrayList<Student>
         fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>): ArrayList<Student>
         fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?): Faculty
+
         //Третий этап
+
         fun separateStudentsBySpecialties()
         fun checkForUnti()
         fun checkForFEU()
         fun checkForFIT()
         fun checkForMTF()
         fun checkForUNIT()
+        // ФЭЭ
         fun checkForFEE()
+        fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateTIT(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateEIN(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateEIE(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateEM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // Четвёртый этап
         // Нахождение минимального балла для каждой из специальностей
         fun checkSpecialtiesForMinimalScore(context: Context)
