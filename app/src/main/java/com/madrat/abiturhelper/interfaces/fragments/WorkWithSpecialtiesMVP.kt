@@ -38,7 +38,12 @@ interface WorkWithSpecialtiesMVP {
         fun checkForUnti()
         fun checkForFEU()
         fun checkForFIT()
+        // МТФ
         fun checkForMTF()
+        fun separateMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateSIM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateTB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateUK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // УНИТ
         fun checkForUNIT()
         fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
