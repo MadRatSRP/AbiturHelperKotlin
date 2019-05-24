@@ -52,3 +52,8 @@ fun Bundle.stringAndSerializable(title: String, list: ArrayList<Specialty>) {
     this.putString("title", title)
     this.putSerializable("array", list)
 }
+
+fun ArrayList<Student>.filterForSpecialty(specialtyName: String): ArrayList<Student> {
+    return this.filter { it.specialtyFirst == specialtyName || it.specialtySecond == specialtyName
+            || it.specialtyThird == specialtyName} as ArrayList<Student>
+}
