@@ -223,7 +223,8 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         return Faculty(name, total, free, amountOfSpecialties)
     }
 
-    /*Третий этап*/
+    // Третий этап
+
     override fun separateStudentsBySpecialties() {
         checkForUnti()
         checkForFEU()
@@ -1583,6 +1584,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         //val mtf = MTF(separatedMASH, separatedSIM, separatedTB, separatedUK)
         myApplication.saveMTF(listMTF)
     }
+    // УНИТ
     override fun checkForUNIT() {
         val scoreTypes = myApplication.returnScoreTypes()
         val nttk = ArrayList<Student>()
@@ -1591,8 +1593,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val psjd = ArrayList<Student>()
         val ttp = ArrayList<Student>()
         val ettk = ArrayList<Student>()
-
-        val listUNIT = ArrayList<ArrayList<Student>>()
 
         fun checkForNTTK(list: ArrayList<Student>) {
             for (i in 0 until list.size) {
@@ -1675,164 +1675,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
             }
         }
 
-        fun separateNTTK(list: ArrayList<Student>)/*: NTTK*/ {
-            val zaochnBudg = ArrayList<Student>()
-            val zaochnLgot = ArrayList<Student>()
-            val zaochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "НТТК_заочн_бюдж" || list[i].specialtySecond == "НТТК_заочн_бюдж"
-                        || list[i].specialtyThird == "НТТК_заочн_бюдж")
-                    zaochnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "НТТК_заочн_льгот" || list[i].specialtySecond == "НТТК_заочн_льгот"
-                        || list[i].specialtyThird == "НТТК_заочн_льгот")
-                    zaochnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "НТТК_заочн_плат" || list[i].specialtySecond == "НТТК_заочн_плат"
-                        || list[i].specialtyThird == "НТТК_заочн_плат")
-                    zaochnPlat.add(list[i])
-            }
-            val collection = arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat)
-            listUNIT.addAll(collection)
-        }
-        fun separateNTTS(list: ArrayList<Student>)/*: NTTS*/ {
-            val ochnBudg = ArrayList<Student>()
-            val ochnLgot = ArrayList<Student>()
-            val ochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "НТТС_очн_бюдж" || list[i].specialtySecond == "НТТС_очн_бюдж"
-                        || list[i].specialtyThird == "НТТС_очн_бюдж")
-                    ochnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "НТТС_очн_льгот" || list[i].specialtySecond == "НТТС_очн_льгот"
-                        || list[i].specialtyThird == "НТТС_очн_льгот")
-                    ochnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "НТТС_очн_плат" || list[i].specialtySecond == "НТТС_очн_плат"
-                        || list[i].specialtyThird == "НТТС_очн_плат")
-                    ochnPlat.add(list[i])
-            }
-            val collection = arrayListOf(ochnBudg, ochnLgot, ochnPlat)
-            listUNIT.addAll(collection)
-        }
-        fun separatePM(list: ArrayList<Student>)/*: PM*/ {
-            val bmOchnBudg = ArrayList<Student>()
-            val bmOchnLgot = ArrayList<Student>()
-            val bmOchnPlat = ArrayList<Student>()
-            val dpmOchnBudg = ArrayList<Student>()
-            val dpmOchnLgot = ArrayList<Student>()
-            val dpmOchnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ПМ(БМ)_очн_бюдж" || list[i].specialtySecond == "ПМ(БМ)_очн_бюдж"
-                        || list[i].specialtyThird == "ПМ(БМ)_очн_бюдж")
-                    bmOchnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ПМ(БМ)_очн_льгот" || list[i].specialtySecond == "ПМ(БМ)_очн_льгот"
-                        || list[i].specialtyThird == "ПМ(БМ)_очн_льгот")
-                    bmOchnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ПМ(БМ)_очн_плат" || list[i].specialtySecond == "ПМ(БМ)_очн_плат"
-                        || list[i].specialtyThird == "ПМ(БМ)_очн_плат")
-                    bmOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ПМ(ДПМ)_очн_бюдж" || list[i].specialtySecond == "ПМ(ДПМ)_очн_бюдж"
-                        || list[i].specialtyThird == "ПМ(ДПМ)_очн_бюдж")
-                    dpmOchnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ПМ(ДПМ)_очн_льгот" || list[i].specialtySecond == "ПМ(ДПМ)_очн_льгот"
-                        || list[i].specialtyThird == "ПМ(ДПМ)_очн_льгот")
-                    dpmOchnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ПМ(ДПМ)_очн_плат" || list[i].specialtySecond == "ПМ(ДПМ)_очн_плат"
-                        || list[i].specialtyThird == "ПМ(ДПМ)_очн_плат")
-                    dpmOchnPlat.add(list[i])
-            }
-            val collection = arrayListOf(bmOchnBudg, bmOchnLgot, bmOchnPlat,
-                    dpmOchnBudg, dpmOchnLgot, dpmOchnPlat)
-            listUNIT.addAll(collection)
-        }
-        fun separatePSJD(list: ArrayList<Student>)/*: PSJD*/ {
-            val vOchnPlat = ArrayList<Student>()
-            val lOchnPlat = ArrayList<Student>()
-            val zaochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ПСЖД(В)_очн_плат" || list[i].specialtySecond == "ПСЖД(В)_очн_плат"
-                        || list[i].specialtyThird == "ПСЖД(В)_очн_плат")
-                    vOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ПСЖД(Л)_очн_плат" || list[i].specialtySecond == "ПСЖД(Л)_очн_плат"
-                        || list[i].specialtyThird == "ПСЖД(Л)_очн_плат")
-                    lOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ПСЖД_заочн_плат" || list[i].specialtySecond == "ПСЖД_заочн_плат"
-                        || list[i].specialtyThird == "ПСЖД_заочн_плат")
-                    zaochnPlat.add(list[i])
-            }
-            val collection = arrayListOf(vOchnPlat, lOchnPlat, zaochnPlat)
-            listUNIT.addAll(collection)
-        }
-        fun separateTTP(list: ArrayList<Student>)/*: TTP*/ {
-            val zaochnBudg = ArrayList<Student>()
-            val zaochnLgot = ArrayList<Student>()
-            val zaochnPlat = ArrayList<Student>()
-            val ochnBudg = ArrayList<Student>()
-            val ochnLgot = ArrayList<Student>()
-            val ochnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ТТП_заочн_бюдж" || list[i].specialtySecond == "ТТП_заочн_бюдж"
-                        || list[i].specialtyThird == "ТТП_заочн_бюдж")
-                    zaochnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ТТП_заочн_льгот" || list[i].specialtySecond == "ТТП_заочн_льгот"
-                        || list[i].specialtyThird == "ТТП_заочн_льгот")
-                    zaochnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ТТП_заочн_плат" || list[i].specialtySecond == "ТТП_заочн_плат"
-                        || list[i].specialtyThird == "ТТП_заочн_плат")
-                    zaochnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ТТП_очн_бюдж" || list[i].specialtySecond == "ТТП_очн_бюдж"
-                        || list[i].specialtyThird == "ТТП_очн_бюдж")
-                    ochnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ТТП_очн_льгот" || list[i].specialtySecond == "ТТП_очн_льгот"
-                        || list[i].specialtyThird == "ТТП_очн_льгот")
-                    ochnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ТТП_очн_плат" || list[i].specialtySecond == "ТТП_очн_плат"
-                        || list[i].specialtyThird == "ТТП_очн_плат")
-                    ochnPlat.add(list[i])
-            }
-            val collection = arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat,
-                    ochnBudg, ochnLgot, ochnPlat)
-            listUNIT.addAll(collection)
-        }
-        fun separateETTK(list: ArrayList<Student>)/*: ETTK*/ {
-            val aiahOchnBudg = ArrayList<Student>()
-            val aiahOchnLgot = ArrayList<Student>()
-            val aiahOchnPlat = ArrayList<Student>()
-            val aiahOchnCelevoe = ArrayList<Student>()
-            val psjdOchnBudg = ArrayList<Student>()
-            val psjdOchnLgot = ArrayList<Student>()
-            val psjdOchnPlat = ArrayList<Student>()
-
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_бюдж" || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_бюдж"
-                        || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_бюдж")
-                    aiahOchnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_льгот" || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_льгот"
-                        || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_льгот")
-                    aiahOchnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_плат" || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_плат"
-                        || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_плат")
-                    aiahOchnPlat.add(list[i])
-                else if (list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_целевое" || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_целевое"
-                        || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_целевое")
-                    aiahOchnCelevoe.add(list[i])
-                else if (list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_бюдж" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_бюдж"
-                        || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_бюдж")
-                    psjdOchnBudg.add(list[i])
-                else if (list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_льгот" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_льгот"
-                        || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_льгот")
-                    psjdOchnLgot.add(list[i])
-                else if (list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_плат" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_плат"
-                        || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_плат")
-                    psjdOchnPlat.add(list[i])
-            }
-            val collection = arrayListOf(aiahOchnBudg, aiahOchnLgot, aiahOchnPlat, aiahOchnCelevoe,
-                    psjdOchnBudg, psjdOchnLgot, psjdOchnPlat)
-            listUNIT.addAll(collection)
-        }
-
         scoreTypes?.physicsStudents?.let { checkForNTTK(it) }
         scoreTypes?.computerScienceStudents?.let { checkForNTTK(it) }
         scoreTypes?.socialScienceStudents?.let { checkForNTTK(it) }
@@ -1863,26 +1705,78 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         scoreTypes?.socialScienceStudents?.let { checkForETTK(it) }
         scoreTypes?.partAndAllDataStudents?.let { checkForETTK(it) }
 
-        /*val separatedNTTK = separateNTTK(nttk)
+        val listUNIT = ArrayList<ArrayList<Student>>()
+
+        val separatedNTTK = separateNTTK(nttk)
         val separatedNTTS = separateNTTS(ntts)
         val separatedPM = separatePM(pm)
         val separatedPSJD = separatePSJD(psjd)
         val separatedTTP = separateTTP(ttp)
-        val separatedETTK = separateETTK(ettk)*/
+        val separatedETTK = separateETTK(ettk)
 
-        separateNTTK(nttk)
-        separateNTTS(ntts)
-        separatePM(pm)
-        separatePSJD(psjd)
-        separateTTP(ttp)
-        separateETTK(ettk)
+        listUNIT.addAll(separatedNTTK)
+        listUNIT.addAll(separatedNTTS)
+        listUNIT.addAll(separatedPM)
+        listUNIT.addAll(separatedPSJD)
+        listUNIT.addAll(separatedTTP)
+        listUNIT.addAll(separatedETTK)
 
-        /*val unit = UNIT(separatedNTTK, separatedNTTS, separatedPM,
-                separatedPSJD, separatedTTP, separatedETTK)
-        myApplication.saveUNIT(unit)*/
         myApplication.saveUNIT(listUNIT)
     }
+    override fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val zaochnBudg = list.filterForSpecialty("НТТК_заочн_бюдж")
+        val zaochnLgot = list.filterForSpecialty("НТТК_заочн_льгот")
+        val zaochnPlat = list.filterForSpecialty("НТТК_заочн_плат")
 
+        return arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat)
+    }
+    override fun separateNTTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val ochnBudg = list.filterForSpecialty("НТТС_очн_бюдж")
+        val ochnLgot = list.filterForSpecialty("НТТС_очн_льгот")
+        val ochnPlat = list.filterForSpecialty("НТТС_очн_плат")
+
+        return arrayListOf(ochnBudg, ochnLgot, ochnPlat)
+    }
+    override fun separatePM(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val bmOchnBudg = list.filterForSpecialty("ПМ(БМ)_очн_бюдж")
+        val bmOchnLgot = list.filterForSpecialty("ПМ(БМ)_очн_льгот")
+        val bmOchnPlat = list.filterForSpecialty("ПМ(БМ)_очн_плат")
+        val dpmOchnBudg = list.filterForSpecialty("ПМ(ДПМ)_очн_бюдж")
+        val dpmOchnLgot = list.filterForSpecialty("ПМ(ДПМ)_очн_льгот")
+        val dpmOchnPlat = list.filterForSpecialty("ПМ(ДПМ)_очн_плат")
+
+        return arrayListOf(bmOchnBudg, bmOchnLgot, bmOchnPlat,
+                dpmOchnBudg, dpmOchnLgot, dpmOchnPlat)
+    }
+    override fun separatePSJD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val vOchnPlat = list.filterForSpecialty("ПСЖД(В)_очн_плат")
+        val lOchnPlat = list.filterForSpecialty("ПСЖД(Л)_очн_плат")
+        val zaochnPlat = list.filterForSpecialty("ПСЖД_заочн_плат")
+
+        return arrayListOf(vOchnPlat, lOchnPlat, zaochnPlat)
+    }
+    override fun separateTTP(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val zaochnBudg = list.filterForSpecialty("ТТП_заочн_бюдж")
+        val zaochnLgot = list.filterForSpecialty("ТТП_заочн_льгот")
+        val zaochnPlat = list.filterForSpecialty("ТТП_заочн_плат")
+        val ochnBudg = list.filterForSpecialty("ТТП_очн_бюдж")
+        val ochnLgot = list.filterForSpecialty("ТТП_очн_льгот")
+        val ochnPlat = list.filterForSpecialty("ТТП_очн_плат")
+
+        return arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
+    }
+    override fun separateETTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
+        val aiahOchnBudg = list.filterForSpecialty("ЭТТК(АиАХ)_очн_бюдж")
+        val aiahOchnLgot = list.filterForSpecialty("ЭТТК(АиАХ)_очн_льгот")
+        val aiahOchnPlat = list.filterForSpecialty("ЭТТК(АиАХ)_очн_плат")
+        val aiahOchnCelevoe = list.filterForSpecialty("ЭТТК(АиАХ)_очн_целевое")
+        val psjdOchnBudg = list.filterForSpecialty("ЭТТК(ПСЖД)_очн_бюдж")
+        val psjdOchnLgot = list.filterForSpecialty("ЭТТК(ПСЖД)_очн_льгот")
+        val psjdOchnPlat = list.filterForSpecialty("ЭТТК(ПСЖД)_очн_плат")
+
+        return arrayListOf(aiahOchnBudg, aiahOchnLgot, aiahOchnPlat, aiahOchnCelevoe,
+                psjdOchnBudg, psjdOchnLgot, psjdOchnPlat)
+    }
     // ФЭЭ
     override fun checkForFEE() {
         val scoreTypes = myApplication.returnScoreTypes()
@@ -2063,6 +1957,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
     }
 
     // Четвертый этап
+
     override fun checkSpecialtiesForMinimalScore(context: Context) {
         val listUNTI = checkUNTIForMinimalScore(context, 0)
         val listFEU = checkFEUForMinimalScore(context, 1)

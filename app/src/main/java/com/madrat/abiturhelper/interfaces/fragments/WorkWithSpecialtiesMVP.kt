@@ -39,7 +39,14 @@ interface WorkWithSpecialtiesMVP {
         fun checkForFEU()
         fun checkForFIT()
         fun checkForMTF()
+        // УНИТ
         fun checkForUNIT()
+        fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateNTTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separatePM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separatePSJD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateTTP(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun separateETTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФЭЭ
         fun checkForFEE()
         fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
@@ -47,8 +54,10 @@ interface WorkWithSpecialtiesMVP {
         fun separateEIN(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateEIE(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun separateEM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
+
         // Четвёртый этап
         // Нахождение минимального балла для каждой из специальностей
+
         fun checkSpecialtiesForMinimalScore(context: Context)
         fun checkUNTIForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
         fun checkFEUForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
