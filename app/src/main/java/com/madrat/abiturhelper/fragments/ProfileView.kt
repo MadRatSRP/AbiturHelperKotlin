@@ -21,7 +21,7 @@ class ProfileView: Fragment(), ProfileMVP.View {
         setupFields()
 
         profileShowFinalList.setOnClickListener {
-            val bundle = returnBundleWithListID(300)
+            val bundle = profilePresenter?.returnBundleWithListID(300)
             toSpecialties(bundle, R.id.action_profile_to_showFittingSpecialties)
         }
     }
@@ -42,13 +42,7 @@ class ProfileView: Fragment(), ProfileMVP.View {
         socialScienceValue.text = profilePresenter?.setupSocialScience()*/
     }
 
-    fun toSpecialties(bundle: Bundle?, actionId: Int) {
+    override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
-    }
-    fun returnBundleWithListID(listId: Int): Bundle {
-        val bundle = Bundle()
-        bundle.putInt("listId", listId)
-
-        return bundle
     }
 }

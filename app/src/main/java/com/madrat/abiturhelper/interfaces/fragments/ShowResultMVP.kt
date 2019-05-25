@@ -35,5 +35,7 @@ interface ShowResultMVP {
         fun returnAmountOfSpecialtiesWithZeroMinimalScore(): Int?
         fun returnAmountOfFittingSpecialties(): Int?
         fun returnFittingSpecialties(): ArrayList<ArrayList<Specialty>>
+        fun completeAndSaveSummedList()
+        fun returnBundleWithListID(listId: Int): Bundle
     }
 }

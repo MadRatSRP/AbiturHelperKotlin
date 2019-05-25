@@ -1,8 +1,8 @@
 package com.madrat.abiturhelper.presenters.fragments
 
+import android.os.Bundle
 import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.util.MyApplication
-import com.madrat.abiturhelper.util.returnString
 
 class ProfilePresenter(private var pv: ProfileMVP.View) : ProfileMVP.Presenter {
     var myApplication = MyApplication.instance
@@ -22,4 +22,11 @@ class ProfilePresenter(private var pv: ProfileMVP.View) : ProfileMVP.Presenter {
     override fun setupSocialScience(): String? {
         return returnString(myApplication.returnSocialScience())
     }*/
+
+    override fun returnBundleWithListID(listId: Int): Bundle {
+        val bundle = Bundle()
+        bundle.putInt("listId", listId)
+
+        return bundle
+    }
 }

@@ -32,11 +32,11 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         resultAmountOfFittingSpecialtiesValue.text = sizeOfFittingList.toString()
 
         resultShowSpecialtiesWithZeroMinimalScore.setOnClickListener {
-            val bundle = returnBundleWithListID(100)
+            val bundle = showResultPresenter?.returnBundleWithListID(100)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
         resultShowFittingSpecialties.setOnClickListener {
-            val bundle = returnBundleWithListID(200)
+            val bundle = showResultPresenter?.returnBundleWithListID(200)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
 
@@ -58,11 +58,5 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
     }
     override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
-    }
-    fun returnBundleWithListID(listId: Int): Bundle {
-        val bundle = Bundle()
-        bundle.putInt("listId", listId)
-
-        return bundle
     }
 }

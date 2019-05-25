@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.presenters.fragments
 
+import android.os.Bundle
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
 import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Score
@@ -665,7 +666,7 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         val fittingList = myApplication.returnListOfFittingSpecialties()
         return fittingList?.sumBy { it.size }
     }
-    fun completeAndSaveSummedList() {
+    override fun completeAndSaveSummedList() {
         val zeroList = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
         val fittingList = myApplication.returnListOfFittingSpecialties()
         val completeList = ArrayList<ArrayList<Specialty>>()
@@ -683,5 +684,11 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         showLog("РАЗМЕР2 ${completeList.sumBy { it.size }}")
 
         myApplication.saveCompleteListOfSpecialties(completeList)
+    }
+    override fun returnBundleWithListID(listId: Int): Bundle {
+        val bundle = Bundle()
+        bundle.putInt("listId", listId)
+
+        return bundle
     }
 }
