@@ -15,7 +15,9 @@ class MyApplication: Application() {
 
     private var currentListOfStudents: ArrayList<Student>? = null
 
-    private var listOfSpecialtiesWithZeroMinimalScore: ArrayList<ArrayList<Specialty>>? = null
+    private var listOfSpecialtiesWithZeroMinimalScore: Faculties? = null
+
+    private var listOfFittingSpecialties: Faculties? = null
 
     private var listUNTI: ArrayList<ArrayList<Student>>? = null
     private var listFEU: ArrayList<ArrayList<Student>>? = null
@@ -102,12 +104,12 @@ class MyApplication: Application() {
     fun saveFaculties(faculties: Faculties) {
         this.faculties = faculties
         this.faculties?.let {
-            val unti = it.untiList.size
-            val feu = it.feuList.size
-            val fit = it.fitList.size
-            val mtf = it.mtfList.size
-            val unit = it.unitList.size
-            val fee = it.feeList.size
+            val unti = it.listUNTI.size
+            val feu = it.listFEU.size
+            val fit = it.listFIT.size
+            val mtf = it.listMTF.size
+            val unit = it.listUNIT.size
+            val fee = it.listFEE.size
 
             showLog("Сохранён Faculties: УНТИ - $unti, ФЭУ - $feu, ФИТ - $fit,\n МТФ - $mtf, " +
                     "УНИТ - $unit, ФЭЭ - $fee")
@@ -115,12 +117,12 @@ class MyApplication: Application() {
     }
     fun returnFaculties(): Faculties? {
         this.faculties?.let {
-            val unti = it.untiList.size
-            val feu = it.feuList.size
-            val fit = it.fitList.size
-            val mtf = it.mtfList.size
-            val unit = it.unitList.size
-            val fee = it.feeList.size
+            val unti = it.listUNTI.size
+            val feu = it.listFEU.size
+            val fit = it.listFIT.size
+            val mtf = it.listMTF.size
+            val unit = it.listUNIT.size
+            val fee = it.listFEE.size
 
             showLog("Возвращён Faculties: УНТИ - $unti, ФЭУ - $feu, ФИТ - $fit,\n МТФ - $mtf, " +
                     "УНИТ - $unit, ФЭЭ - $fee")
@@ -200,13 +202,22 @@ class MyApplication: Application() {
         return currentListOfStudents
     }
 
-    fun saveListOfSpecialtiesWithZeroMinimalScore(list: ArrayList<ArrayList<Specialty>>) {
+    fun saveListOfSpecialtiesWithZeroMinimalScore(list: Faculties) {
         this.listOfSpecialtiesWithZeroMinimalScore = list
         showLog("listOfSpecialtiesWithZeroMinimalScore сохранён")
     }
-    fun returnListOfSpecialtiesWithZeroMinimalScore(): ArrayList<ArrayList<Specialty>>? {
-        showLog("Возвращён listOfSpecialtiesWithZeroMinimalScore, " +
-                "размер: " + listOfSpecialtiesWithZeroMinimalScore?.size)
+    fun returnListOfSpecialtiesWithZeroMinimalScore(): Faculties? {
+        /*showLog("Возвращён listOfSpecialtiesWithZeroMinimalScore, " +
+                "размер: " + listOfSpecialtiesWithZeroMinimalScore?.size)*/
         return listOfSpecialtiesWithZeroMinimalScore
+    }
+
+    fun saveListOfFittingSpecialties(list: Faculties) {
+        this.listOfFittingSpecialties = list
+        showLog("listOfFittingSpecialties сохранён")
+    }
+    fun returnListOfFittingSpecialties(): Faculties? {
+        //showLog("Возвращён listOfFittingSpecialties, размер: " + listOfFittingSpecialties?.size)
+        return listOfFittingSpecialties
     }
 }

@@ -17,17 +17,17 @@ class ShowSpecialtiesPresenter: ShowSpecialtiesMVP.Presenter {
         val faculties = myApplication.returnFaculties()
         return when (pos) {
             //УНТИ
-            0 -> faculties?.untiList
+            0 -> faculties?.listUNTI
             //ФЭУ
-            1 -> faculties?.feuList
+            1 -> faculties?.listFEU
             //ФИТ
-            2 -> faculties?.fitList
+            2 -> faculties?.listFIT
             //МТФ
-            3 -> faculties?.mtfList
+            3 -> faculties?.listMTF
             //УНИТ
-            4 -> faculties?.unitList
+            4 -> faculties?.listUNIT
             //ФЭЭ
-            5 -> faculties?.feeList
+            5 -> faculties?.listFEE
             else -> null
         }
     }

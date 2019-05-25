@@ -1,10 +1,19 @@
 package com.madrat.abiturhelper.model
 
 data class Faculties(
-     var untiList: ArrayList<Specialty>,
-     var feuList: ArrayList<Specialty>,
-     var fitList: ArrayList<Specialty>,
-     var mtfList: ArrayList<Specialty>,
-     var unitList: ArrayList<Specialty>,
-     var feeList: ArrayList<Specialty>
-)
+        // УНТИ
+        var listUNTI: ArrayList<Specialty>,
+        // ФЭУ
+        var listFEU: ArrayList<Specialty>,
+        // ФИТ
+        var listFIT: ArrayList<Specialty>,
+        // МТФ
+        var listMTF: ArrayList<Specialty>,
+        // УНИТ
+        var listUNIT: ArrayList<Specialty>,
+        // ФЭЭ
+        var listFEE: ArrayList<Specialty>
+) {
+    fun returnAmountOfSpecialties(): Int = listUNTI.size + listFEU.size + listFIT.size+
+                listMTF.size+ listUNIT.size + listFEE.size
+}

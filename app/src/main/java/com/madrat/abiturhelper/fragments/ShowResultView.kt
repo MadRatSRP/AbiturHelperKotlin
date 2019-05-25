@@ -21,10 +21,18 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
+        // Пятый шаг
+        showResultPresenter?.checkForZeroMinimalScore()
+        // Шестой шаг
+        showResultPresenter?.checkForFittingSpecialties()
 
         // Получаем количество специальностей с неустановленным минимальным баллом
         val sizeOfZeroList = showResultPresenter?.returnAmountOfSpecialtiesWithZeroMinimalScore()
         resultAmountOfZeroMinimalScoreSpecialtiesValue.text = sizeOfZeroList.toString()
+
+        // Получаем количество специальностей с подходящими баллами
+        val sizeOfFittingList = showResultPresenter?.returnAmountOfFittingSpecialties()
+        resultAmountOfFittingSpecialtiesValue.text = sizeOfFittingList.toString()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
