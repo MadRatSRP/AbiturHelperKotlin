@@ -25,6 +25,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resultAmountOfZeroMinimalScoreSpecialtiesText"/>
+    <Button
+        android:id="@+id/resultShowSpecialtiesWithZeroMinimalScore"
+        android:text="@string/resultShowSpecialties"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultAmountOfZeroMinimalScoreSpecialtiesValue"/>
     <TextView
         android:id="@+id/resultAmountOfFittingSpecialtiesText"
         android:gravity="center"
@@ -33,7 +43,7 @@
         android:layout_height="wrap_content" 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/resultAmountOfZeroMinimalScoreSpecialtiesValue"/>
+        app:layout_constraintTop_toBottomOf="@id/resultShowSpecialtiesWithZeroMinimalScore"/>
     <TextView
         android:id="@+id/resultAmountOfFittingSpecialtiesValue"
         android:gravity="center"
@@ -43,4 +53,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/resultAmountOfFittingSpecialtiesText"/>
+    <Button
+        android:id="@+id/resultShowFittingSpecialties"
+        android:text="@string/resultShowSpecialties"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/resultAmountOfFittingSpecialtiesValue"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

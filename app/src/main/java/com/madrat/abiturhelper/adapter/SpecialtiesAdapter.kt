@@ -9,11 +9,11 @@ import com.madrat.abiturhelper.util.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_specialties.*
 
-class SpecialtiesAdapter(private val clickListener: (Specialty, Int) -> Unit)
+class SpecialtiesAdapter(private val clickListener: ((Specialty, Int) -> Unit)?)
     : RecyclerView.Adapter<SpecialtiesAdapter.SpecialtiesHolder>(){
     private var specialties = ArrayList<Specialty>()
 
-    fun updateSpecialtiesList(new_specialties: List<Specialty>) {
+    fun updateSpecialtiesList(new_specialties: ArrayList<Specialty>) {
         specialties.clear()
         specialties.addAll(new_specialties)
         this.notifyDataSetChanged()
@@ -30,8 +30,8 @@ class SpecialtiesAdapter(private val clickListener: (Specialty, Int) -> Unit)
 
     inner class SpecialtiesHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(position: Int, specialty: Specialty, clickListener: (Specialty, Int) -> Unit) {
-            containerView.setOnClickListener { clickListener(specialty, position) }
+        fun bind(position: Int, specialty: Specialty, clickListener: ((Specialty, Int) -> Unit)?) {
+            containerView.setOnClickListener { clickListener?.invoke(specialty, position) }
 
             specialtyName.text = specialty.shortName
             specialtyEntriesTotalValue.text = specialty.entriesTotal.toString()

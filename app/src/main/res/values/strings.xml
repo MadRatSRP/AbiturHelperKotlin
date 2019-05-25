@@ -53,4 +53,5 @@
 
     <string name="resultAmountOfZeroMinimalScoreSpecialties">Количество специальностей без минимального балла</string>
     <string name="resultAmountOfFittingSpecialties">Количество специальностей, подходящих под баллы пользователя</string>
+    <string name="resultShowSpecialties">Показать специальности</string>
 </resources>

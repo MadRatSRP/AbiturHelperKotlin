@@ -9,6 +9,7 @@ import com.madrat.abiturhelper.model.Specialty
 interface ShowResultMVP {
     interface View {
         fun setupMVP()
+        fun toSpecialties(bundle: Bundle?, actionId: Int)
     }
 
     interface Presenter {
@@ -33,5 +34,6 @@ interface ShowResultMVP {
         fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
         fun returnAmountOfSpecialtiesWithZeroMinimalScore(): Int?
         fun returnAmountOfFittingSpecialties(): Int?
+        fun returnFittingSpecialties(): ArrayList<ArrayList<Specialty>>
     }
 }

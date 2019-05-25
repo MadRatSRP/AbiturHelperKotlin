@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
@@ -33,6 +35,15 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         // Получаем количество специальностей с подходящими баллами
         val sizeOfFittingList = showResultPresenter?.returnAmountOfFittingSpecialties()
         resultAmountOfFittingSpecialtiesValue.text = sizeOfFittingList.toString()
+
+        resultShowSpecialtiesWithZeroMinimalScore.setOnClickListener {
+            val bundle = returnBundleWithListID(100)
+            toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
+        }
+        resultShowFittingSpecialties.setOnClickListener {
+            val bundle = returnBundleWithListID(200)
+            toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,5 +54,14 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
 
     override fun setupMVP() {
         showResultPresenter = ShowResultPresenter()
+    }
+    override fun toSpecialties(bundle: Bundle?, actionId: Int) {
+        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
+    }
+    fun returnBundleWithListID(listId: Int): Bundle {
+        val bundle = Bundle()
+        bundle.putInt("listId", listId)
+
+        return bundle
     }
 }

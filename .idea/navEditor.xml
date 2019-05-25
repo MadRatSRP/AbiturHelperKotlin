@@ -86,6 +86,15 @@
                             <option name="y" value="23" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_resultView_to_showFittingSpecialties">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -138,6 +147,18 @@
                           <Point>
                             <option name="x" value="986" />
                             <option name="y" value="319" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="showFittingSpecialties">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="947" />
+                            <option name="y" value="-57" />
                           </Point>
                         </option>
                       </LayoutPositions>

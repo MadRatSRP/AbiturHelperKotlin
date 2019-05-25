@@ -15,9 +15,8 @@ class MyApplication: Application() {
 
     private var currentListOfStudents: ArrayList<Student>? = null
 
-    private var listOfSpecialtiesWithZeroMinimalScore: Faculties? = null
-
-    private var listOfFittingSpecialties: Faculties? = null
+    private var listOfSpecialtiesWithZeroMinimalScore: ArrayList<ArrayList<Specialty>>? = null
+    private var listOfFittingSpecialties: ArrayList<ArrayList<Specialty>>? = null
 
     private var listUNTI: ArrayList<ArrayList<Student>>? = null
     private var listFEU: ArrayList<ArrayList<Student>>? = null
@@ -202,21 +201,21 @@ class MyApplication: Application() {
         return currentListOfStudents
     }
 
-    fun saveListOfSpecialtiesWithZeroMinimalScore(list: Faculties) {
+    fun saveListOfSpecialtiesWithZeroMinimalScore(list: ArrayList<ArrayList<Specialty>>) {
         this.listOfSpecialtiesWithZeroMinimalScore = list
         showLog("listOfSpecialtiesWithZeroMinimalScore сохранён")
     }
-    fun returnListOfSpecialtiesWithZeroMinimalScore(): Faculties? {
+    fun returnListOfSpecialtiesWithZeroMinimalScore(): ArrayList<ArrayList<Specialty>>? {
         /*showLog("Возвращён listOfSpecialtiesWithZeroMinimalScore, " +
                 "размер: " + listOfSpecialtiesWithZeroMinimalScore?.size)*/
         return listOfSpecialtiesWithZeroMinimalScore
     }
 
-    fun saveListOfFittingSpecialties(list: Faculties) {
+    fun saveListOfFittingSpecialties(list: ArrayList<ArrayList<Specialty>>) {
         this.listOfFittingSpecialties = list
         showLog("listOfFittingSpecialties сохранён")
     }
-    fun returnListOfFittingSpecialties(): Faculties? {
+    fun returnListOfFittingSpecialties(): ArrayList<ArrayList<Specialty>>? {
         //showLog("Возвращён listOfFittingSpecialties, размер: " + listOfFittingSpecialties?.size)
         return listOfFittingSpecialties
     }

@@ -23,7 +23,11 @@
     <fragment
         android:id="@+id/resultView"
         android:name="com.madrat.abiturhelper.fragments.ShowResultView"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultView_to_showFittingSpecialties"
+            app:destination="@id/showFittingSpecialties" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.madrat.abiturhelper.fragments.ProfileView"
@@ -65,4 +69,8 @@
             android:id="@+id/action_currentList_to_pickUpSpecialtiesView"
             app:destination="@id/pickUpSpecialtiesView" />
     </fragment>
+    <fragment
+        android:id="@+id/showFittingSpecialties"
+        android:name="com.madrat.abiturhelper.fragments.ShowFittingSpecialties"
+        android:label="ShowFittingSpecialties" />
 </navigation>
