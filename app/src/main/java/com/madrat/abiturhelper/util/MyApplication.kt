@@ -17,6 +17,7 @@ class MyApplication: Application() {
 
     private var listOfSpecialtiesWithZeroMinimalScore: ArrayList<ArrayList<Specialty>>? = null
     private var listOfFittingSpecialties: ArrayList<ArrayList<Specialty>>? = null
+    private var completeListOfSpecialties: ArrayList<ArrayList<Specialty>>? = null
 
     private var listUNTI: ArrayList<ArrayList<Student>>? = null
     private var listFEU: ArrayList<ArrayList<Student>>? = null
@@ -218,5 +219,13 @@ class MyApplication: Application() {
     fun returnListOfFittingSpecialties(): ArrayList<ArrayList<Specialty>>? {
         //showLog("Возвращён listOfFittingSpecialties, размер: " + listOfFittingSpecialties?.size)
         return listOfFittingSpecialties
+    }
+
+    fun saveCompleteListOfSpecialties(list: ArrayList<ArrayList<Specialty>>) {
+        this.completeListOfSpecialties = list
+        showLog("completeListOfSpecialties сохранён")
+    }
+    fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>? {
+        return completeListOfSpecialties
     }
 }

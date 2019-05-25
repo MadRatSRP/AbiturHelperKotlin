@@ -665,4 +665,23 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         val fittingList = myApplication.returnListOfFittingSpecialties()
         return fittingList?.sumBy { it.size }
     }
+    fun completeAndSaveSummedList() {
+        val zeroList = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
+        val fittingList = myApplication.returnListOfFittingSpecialties()
+        val completeList = ArrayList<ArrayList<Specialty>>()
+
+        zeroList?.let {
+            fittingList?.let {
+                for (i in 0 until zeroList.size) {
+                    val array = (zeroList[i] + fittingList[i]) as ArrayList<Specialty>
+                    completeList.add(array)
+                    completeList[i].sortBy { it.minimalScore }
+                }
+            }
+        }
+        showLog("РАЗМЕР ${completeList.size}")
+        showLog("РАЗМЕР2 ${completeList.sumBy { it.size }}")
+
+        myApplication.saveCompleteListOfSpecialties(completeList)
+    }
 }

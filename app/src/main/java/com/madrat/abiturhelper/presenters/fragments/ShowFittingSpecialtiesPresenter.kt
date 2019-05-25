@@ -11,4 +11,6 @@ class ShowFittingSpecialtiesPresenter: ShowFittingSpecialtiesMVP.Presenter {
             = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
     fun returnListOfFittingSpecialties(): ArrayList<ArrayList<Specialty>>?
             = myApplication.returnListOfFittingSpecialties()
+    fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
+            = myApplication.returnCompleteListOfSpecilaties()
 }

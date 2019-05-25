@@ -28,14 +28,12 @@ class ShowFittingSpecialties: Fragment(), ShowFittingSpecialtiesMVP.View {
         val faculties: ArrayList<ArrayList<Specialty>>? = when(arguments?.getInt("listId")) {
             100 -> showFittingSpecialtiesPresenter?.returnListOfSpecialtiesWithZeroMinimalScore()
             200 -> showFittingSpecialtiesPresenter?.returnListOfFittingSpecialties()
+            300 -> showFittingSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
             else -> null
         }
-        //faculties?.listFEE?.let { showSpecialties(it) }
 
         fittingSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 showSpecialties(faculties?.get(position))
             }

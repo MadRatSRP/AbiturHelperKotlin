@@ -190,4 +190,14 @@
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/profileShowFinalList"
+        android:text="@string/profileShowFinalList"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

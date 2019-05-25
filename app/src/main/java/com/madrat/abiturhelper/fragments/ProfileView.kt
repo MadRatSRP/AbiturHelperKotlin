@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.presenters.fragments.ProfilePresenter
@@ -18,8 +19,12 @@ class ProfileView: Fragment(), ProfileMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
         setupFields()
-    }
 
+        profileShowFinalList.setOnClickListener {
+            val bundle = returnBundleWithListID(300)
+            toSpecialties(bundle, R.id.action_profile_to_showFittingSpecialties)
+        }
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileTitle)
@@ -29,12 +34,21 @@ class ProfileView: Fragment(), ProfileMVP.View {
     override fun setupMVP() {
         profilePresenter = ProfilePresenter(this)
     }
-
     override fun setupFields() {
         /*mathsValue.text = profilePresenter?.setupMaths()
         russianValue.text = profilePresenter?.setupRussian()
         physicsValue.text = profilePresenter?.setupPhysics()
         computerScienceValue.text = profilePresenter?.setupComputerScience()
         socialScienceValue.text = profilePresenter?.setupSocialScience()*/
+    }
+
+    fun toSpecialties(bundle: Bundle?, actionId: Int) {
+        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
+    }
+    fun returnBundleWithListID(listId: Int): Bundle {
+        val bundle = Bundle()
+        bundle.putInt("listId", listId)
+
+        return bundle
     }
 }

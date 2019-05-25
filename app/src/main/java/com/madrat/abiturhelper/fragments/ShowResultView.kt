@@ -1,20 +1,15 @@
 package com.madrat.abiturhelper.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
-import com.madrat.abiturhelper.util.MyApplication
-import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_result.*
 
 class ShowResultView : Fragment(), ShowResultMVP.View {
@@ -43,6 +38,12 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         resultShowFittingSpecialties.setOnClickListener {
             val bundle = returnBundleWithListID(200)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
+        }
+
+        showResultPresenter?.completeAndSaveSummedList()
+
+        resultSaveAndMoveToProfile.setOnClickListener {
+            toSpecialties(null, R.id.action_resultView_to_profile)
         }
     }
 
