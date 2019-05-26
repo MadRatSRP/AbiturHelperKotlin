@@ -13,6 +13,7 @@ import com.madrat.abiturhelper.interfaces.fragments.SelectSpecialtiesForCalculat
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.SelectSpecialtiesForCalculatingPresenter
 import com.madrat.abiturhelper.util.linearManager
+import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_select_specialties_for_calculation.*
 import kotlinx.android.synthetic.main.fragment_select_specialties_for_calculation.view.*
 
@@ -32,7 +33,8 @@ class SelectSpecialtiesForCalculating
         selectForSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                showSpecialties(faculties?.get(position))
+                showLog("POS$position")
+                showSpecialties(faculties?.get(position), position)
             }
         }
     }
@@ -53,8 +55,9 @@ class SelectSpecialtiesForCalculating
     override fun setupMVP() {
         selectSpecialtiesForCalculatingPresenter = SelectSpecialtiesForCalculatingPresenter()
     }
-    override fun showSpecialties(specialties: ArrayList<Specialty>?) {
+    override fun showSpecialties(specialties: ArrayList<Specialty>?, position: Int) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }
+        adapter?.saveNewChecker(position)
         selectForRecyclerView?.adapter = adapter
     }
 }

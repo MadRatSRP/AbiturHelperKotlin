@@ -5,7 +5,7 @@ import com.madrat.abiturhelper.model.Specialty
 interface SelectSpecialtiesForCalculatingMVP {
     interface View {
         fun setupMVP()
-        fun showSpecialties(specialties: ArrayList<Specialty>?)
+        fun showSpecialties(specialties: ArrayList<Specialty>?, position: Int)
     }
     interface Presenter {
         fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?

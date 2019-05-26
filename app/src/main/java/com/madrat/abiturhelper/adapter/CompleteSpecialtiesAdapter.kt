@@ -1,8 +1,8 @@
 package com.madrat.abiturhelper.adapter
 
+import android.util.SparseBooleanArray
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.inflate
@@ -18,10 +18,15 @@ import kotlinx.android.synthetic.main.list_specialties.specialtyName
 
 class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckListener?*/)
     : RecyclerView.Adapter<CompleteSpecialtiesAdapter.CompleteSpecialtiesHolder>(){
-    /*@NonNull
-    private var onItemCheckListener: OnItemCheckListener? = null*/
+
+    private var checker: Int? = null
     private var selectedSpecialties = ArrayList<Specialty>()
     private var specialties = ArrayList<Specialty>()
+
+    private var itemStateArrayUNTI = SparseBooleanArray()
+    private var itemStateArrayFEU = SparseBooleanArray()
+
+    //private var itemStateArray = SparseBooleanArray()
 
     /*interface OnItemCheckListener {
         fun onItemCheck(specialty: Specialty)
@@ -36,6 +41,9 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
         specialties.addAll(new_specialties)
         this.notifyDataSetChanged()
     }
+    fun saveNewChecker(newChecker: Int) {
+        this.checker = newChecker
+    }
     fun returnSelectedSpecialties()
             = selectedSpecialties
 
@@ -45,9 +53,9 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
     override fun onBindViewHolder(holder: CompleteSpecialtiesHolder, position: Int){
         val selectedSpecialty = specialties[position]
 
-        holder.bind(selectedSpecialty)
+        holder.bind(selectedSpecialty, position)
         holder.setOnClickListener(View.OnClickListener {
-            holder.completeCheckbox.isChecked = !holder.completeCheckbox.isChecked
+            /*holder.completeCheckbox.isChecked = !holder.completeCheckbox.isChecked
             if (holder.completeCheckbox.isChecked) {
                 //onItemCheckListener?.onItemCheck(currentSpecialty)
                 selectedSpecialties.add(selectedSpecialty)
@@ -56,6 +64,47 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
                 //onItemCheckListener?.onItemUncheck(currentSpecialty)
                 selectedSpecialties.remove(selectedSpecialty)
                 showLog("chosenSpecialties${selectedSpecialties.size}")
+            }*/
+
+            /*if (!itemStateArray.get(position, false)) {
+                holder.completeCheckbox.isChecked = true
+                selectedSpecialties.add(selectedSpecialty)
+                itemStateArray.put(position, true)
+            }
+            else {
+                holder.completeCheckbox.isChecked = false
+                selectedSpecialties.remove(selectedSpecialty)
+                itemStateArray.put(position, false)
+            }*/
+
+            val adapterPosition = holder.adapterPosition
+            // УНТИ
+            if (checker == 0) {
+                if (!itemStateArrayUNTI.get(adapterPosition, false)) {
+                    holder.completeCheckbox.isChecked = true
+                    selectedSpecialties.add(selectedSpecialty)
+                    showLog("chosenSpecialties${selectedSpecialties.size}")
+                    itemStateArrayUNTI.put(adapterPosition, true)
+                }
+                else {
+                    holder.completeCheckbox.isChecked = false
+                    selectedSpecialties.remove(selectedSpecialty)
+                    showLog("chosenSpecialties${selectedSpecialties.size}")
+                    itemStateArrayUNTI.put(adapterPosition, false)
+                }
+            }
+            // ФЭУ
+            else if (checker == 1) {
+                if (!itemStateArrayFEU.get(adapterPosition, false)) {
+                    holder.completeCheckbox.isChecked = true
+                    selectedSpecialties.add(selectedSpecialty)
+                    itemStateArrayFEU.put(adapterPosition, true)
+                }
+                else {
+                    holder.completeCheckbox.isChecked = false
+                    selectedSpecialties.remove(selectedSpecialty)
+                    itemStateArrayFEU.put(adapterPosition, false)
+                }
             }
         })
     }
@@ -67,7 +116,7 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
     inner class CompleteSpecialtiesHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-        fun bind(specialty: Specialty) {
+        fun bind(specialty: Specialty, position: Int) {
 
             specialtyName.text = specialty.shortName
             specialtyEntriesTotalValue.text = specialty.entriesTotal.toString()
@@ -76,7 +125,20 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
             specialtyMinimalScoreText.text = specialty.scoreTitle
             specialtyMinimalScoreValue.text = specialty.minimalScore.toString()
 
-            completeCheckbox.isClickable = false
+            /*if (!itemStateArray.get(position, false)) {
+                completeCheckbox.isChecked = false
+            } else {
+                completeCheckbox.isChecked = true
+            }*/
+
+            if (checker == 0) {
+                completeCheckbox.isChecked = itemStateArrayUNTI.get(position, false)
+            }
+            else if (checker == 1) {
+                completeCheckbox.isChecked = itemStateArrayFEU.get(position, false)
+            }
+
+
         }
 
         fun setOnClickListener(onClickListener: View.OnClickListener) {
