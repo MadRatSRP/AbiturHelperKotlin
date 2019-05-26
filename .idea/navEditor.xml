@@ -112,6 +112,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="selectSpecialtiesForCalculating">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="49" />
+                            <option name="y" value="-352" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="setupAdditional">
                     <value>
                       <LayoutPositions>

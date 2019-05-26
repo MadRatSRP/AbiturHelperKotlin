@@ -2,7 +2,7 @@
     <string name="app_name">AbiturHelper</string>
 
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
-    <string name="countGraduationChancesTitle">Оценить шанс поступления</string>
+    <string name="calculateGraduationChancesTitle">Оценить шанс поступления</string>
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScore">Сумма дополнительных баллов</string>
@@ -17,6 +17,8 @@
 
     <string name="textResult">Результат</string>
     <string name="textSum">Сумма баллов</string>
+
+    <string name="selectSpecialtiesForCalculatingTitle">Выберите специальности для рассчёта</string>
 
     <string name="showResult">Сохранить результат</string>
     <string name="showAdditionalScore">Показать дополнительные баллы</string>

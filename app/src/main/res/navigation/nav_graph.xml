@@ -80,4 +80,8 @@
         android:id="@+id/showFittingSpecialties"
         android:name="com.madrat.abiturhelper.fragments.ShowFittingSpecialties"
         android:label="ShowFittingSpecialties" />
+    <fragment
+        android:id="@+id/selectSpecialtiesForCalculating"
+        android:name="com.madrat.abiturhelper.fragments.SelectSpecialtiesForCalculating"
+        android:label="SelectSpecialtiesForCalculating" />
 </navigation>

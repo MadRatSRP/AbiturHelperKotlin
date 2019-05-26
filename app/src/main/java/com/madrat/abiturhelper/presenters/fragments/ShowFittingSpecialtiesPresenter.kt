@@ -7,10 +7,10 @@ import com.madrat.abiturhelper.util.MyApplication
 class ShowFittingSpecialtiesPresenter: ShowFittingSpecialtiesMVP.Presenter {
     private val myApplication = MyApplication.instance
 
-    fun returnListOfSpecialtiesWithZeroMinimalScore(): ArrayList<ArrayList<Specialty>>?
+    override fun returnListOfSpecialtiesWithZeroMinimalScore(): ArrayList<ArrayList<Specialty>>?
             = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
-    fun returnListOfFittingSpecialties(): ArrayList<ArrayList<Specialty>>?
+    override fun returnListOfFittingSpecialties(): ArrayList<ArrayList<Specialty>>?
             = myApplication.returnListOfFittingSpecialties()
-    fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
+    override fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
             = myApplication.returnCompleteListOfSpecilaties()
 }
