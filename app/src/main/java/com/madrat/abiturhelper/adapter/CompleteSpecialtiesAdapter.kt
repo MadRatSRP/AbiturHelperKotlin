@@ -6,6 +6,7 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.inflate
+import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_complete_specialties.*
 import kotlinx.android.synthetic.main.list_specialties.specialtyAmountOfStatementsValue
@@ -15,39 +16,46 @@ import kotlinx.android.synthetic.main.list_specialties.specialtyMinimalScoreText
 import kotlinx.android.synthetic.main.list_specialties.specialtyMinimalScoreValue
 import kotlinx.android.synthetic.main.list_specialties.specialtyName
 
-class CompleteSpecialtiesAdapter(@NonNull onItemCheckListener: OnItemCheckListener?)
+class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckListener?*/)
     : RecyclerView.Adapter<CompleteSpecialtiesAdapter.CompleteSpecialtiesHolder>(){
-    @NonNull
-    private var onItemCheckListener: OnItemCheckListener? = null
+    /*@NonNull
+    private var onItemCheckListener: OnItemCheckListener? = null*/
+    private var selectedSpecialties = ArrayList<Specialty>()
     private var specialties = ArrayList<Specialty>()
 
-    interface OnItemCheckListener {
+    /*interface OnItemCheckListener {
         fun onItemCheck(specialty: Specialty)
         fun onItemUncheck(specialty: Specialty)
     }
     init {
         this.onItemCheckListener = onItemCheckListener
-    }
+    }*/
 
     fun updateSpecialtiesList(new_specialties: ArrayList<Specialty>) {
         specialties.clear()
         specialties.addAll(new_specialties)
         this.notifyDataSetChanged()
     }
+    fun returnSelectedSpecialties()
+            = selectedSpecialties
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompleteSpecialtiesHolder
             = CompleteSpecialtiesHolder(parent.inflate(com.madrat.abiturhelper.R.layout.list_complete_specialties))
 
     override fun onBindViewHolder(holder: CompleteSpecialtiesHolder, position: Int){
-        val currentSpecialty = specialties[position]
+        val selectedSpecialty = specialties[position]
 
-        holder.bind(specialties[position])
+        holder.bind(selectedSpecialty)
         holder.setOnClickListener(View.OnClickListener {
             holder.completeCheckbox.isChecked = !holder.completeCheckbox.isChecked
             if (holder.completeCheckbox.isChecked) {
-                onItemCheckListener?.onItemCheck(currentSpecialty)
+                //onItemCheckListener?.onItemCheck(currentSpecialty)
+                selectedSpecialties.add(selectedSpecialty)
+                showLog("chosenSpecialties: ${selectedSpecialties.size}")
             } else {
-                onItemCheckListener?.onItemUncheck(currentSpecialty)
+                //onItemCheckListener?.onItemUncheck(currentSpecialty)
+                selectedSpecialties.remove(selectedSpecialty)
+                showLog("chosenSpecialties${selectedSpecialties.size}")
             }
         })
     }

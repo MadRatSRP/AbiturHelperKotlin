@@ -9,20 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.CompleteSpecialtiesAdapter
-import com.madrat.abiturhelper.adapter.CompleteSpecialtiesAdapter.OnItemCheckListener
 import com.madrat.abiturhelper.interfaces.fragments.SelectSpecialtiesForCalculatingMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.SelectSpecialtiesForCalculatingPresenter
 import com.madrat.abiturhelper.util.linearManager
-import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_select_specialties_for_calculation.*
 import kotlinx.android.synthetic.main.fragment_select_specialties_for_calculation.view.*
 
 
 class SelectSpecialtiesForCalculating
     : Fragment(), SelectSpecialtiesForCalculatingMVP.View {
-    private var chosenSpecialties = ArrayList<Specialty>()
-
     private var adapter: CompleteSpecialtiesAdapter? = null
     private var selectSpecialtiesForCalculatingPresenter
             : SelectSpecialtiesForCalculatingPresenter? = null
@@ -47,16 +43,7 @@ class SelectSpecialtiesForCalculating
         val view = inflater.inflate(R.layout.fragment_select_specialties_for_calculation,
                 container, false)
 
-        adapter = CompleteSpecialtiesAdapter(object : OnItemCheckListener {
-            override fun onItemCheck(specialty: Specialty) {
-                chosenSpecialties.add(specialty)
-                showLog("chosenSpecialties${chosenSpecialties.size}")
-            }
-            override fun onItemUncheck(specialty: Specialty) {
-                chosenSpecialties.remove(specialty)
-                showLog("chosenSpecialties${chosenSpecialties.size}")
-            }
-        })
+        adapter = CompleteSpecialtiesAdapter()
         view.selectForRecyclerView.adapter = adapter
         view.selectForRecyclerView.linearManager()
 
