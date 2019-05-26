@@ -58,6 +58,7 @@ class CompleteSpecialtiesAdapter(@NonNull onItemCheckListener: OnItemCheckListen
 
     inner class CompleteSpecialtiesHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
+
         fun bind(specialty: Specialty) {
 
             specialtyName.text = specialty.shortName

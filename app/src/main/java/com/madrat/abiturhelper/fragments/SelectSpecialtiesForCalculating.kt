@@ -52,7 +52,6 @@ class SelectSpecialtiesForCalculating
                 chosenSpecialties.add(specialty)
                 showLog("chosenSpecialties${chosenSpecialties.size}")
             }
-
             override fun onItemUncheck(specialty: Specialty) {
                 chosenSpecialties.remove(specialty)
                 showLog("chosenSpecialties${chosenSpecialties.size}")
