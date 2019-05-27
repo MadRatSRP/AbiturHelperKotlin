@@ -1,20 +1,21 @@
 package com.madrat.abiturhelper.interfaces.fragments
 
 import android.os.Bundle
+import com.madrat.abiturhelper.model.Score
 
 interface ProfileMVP {
     interface View {
         fun setupMVP()
-        fun setupFields()
+        fun setupScoreFields()
         fun toSpecialties(bundle: Bundle?, actionId: Int)
     }
 
     interface Presenter {
-        /*fun setupMaths(): String?
-        fun setupRussian(): String?
-        fun setupPhysics(): String?
-        fun setupComputerScience(): String?
-        fun setupSocialScience(): String?*/
+        fun updateScores(maths: Int, russian: Int, physics: Int, computerScience: Int,
+                         socialScience: Int, additionalScore: Int)
+
+        fun returnScore(): Score?
+        fun returnAdditionalScore(): Int?
         fun returnBundleWithListID(listId: Int): Bundle
     }
 }

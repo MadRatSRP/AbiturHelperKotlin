@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.madrat.abiturhelper.fragments.ProfileView"
+        android:name="com.madrat.abiturhelper.fragments.ShowProfileView"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profile_to_showFittingSpecialties"
