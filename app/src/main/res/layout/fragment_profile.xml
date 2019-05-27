@@ -20,92 +20,152 @@
             style="@style/Divider"
             android:layout_weight="1"/>
         <LinearLayout
-            android:id="@+id/maths"
-            android:layout_marginTop="7sp"
+            android:id="@+id/profileMaths"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/mathsText"
+                android:id="@+id/profileMathsText"
                 style="@style/profileTextDescription"
                 android:text="@string/textMaths" />
             <TextView
-                android:id="@+id/mathsValue"
-                style="@style/profileTextDescription"
+                android:id="@+id/profileMathsValue"
+                android:textSize="20sp"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
                 android:gravity="center" />
+            <ImageButton
+                android:id="@+id/profileMathsEditValue"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/russian"
-            android:layout_marginTop="7sp"
+            android:id="@+id/profileRussian"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/russianText"
+                android:id="@+id/profileRussianText"
                 android:text="@string/textRussian"
                 style="@style/profileTextDescription" />
             <TextView
-                android:id="@+id/russianValue"
-                style="@style/profileTextDescription"
-                android:gravity="center" />
+                android:id="@+id/profileRussianValue"
+                android:textSize="20sp"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"  />
+            <ImageButton
+                android:id="@+id/profileRussianEditValue"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/physics"
-            android:layout_marginTop="7sp"
+            android:id="@+id/profilePhysics"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/physicsText"
+                android:id="@+id/profilePhysicsText"
                 android:text="@string/textPhysics"
                 style="@style/profileTextDescription" />
             <TextView
-                android:id="@+id/physicsValue"
-                style="@style/profileTextDescription"
+                android:id="@+id/profilePhysicsValue"
+                android:textSize="20sp"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
                 android:gravity="center" />
+            <ImageButton
+                android:id="@+id/profilePhysicsEditValue"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/computerScience"
-            android:layout_marginTop="7sp"
+            android:id="@+id/profileComputerScience"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/computerScienceText"
+                android:id="@+id/profileComputerScienceText"
                 android:text="@string/textComputerScience"
                 style="@style/profileTextDescription" />
             <TextView
-                android:id="@+id/computerScienceValue"
-                android:gravity="center"
-                style="@style/profileTextDescription" />
+                android:id="@+id/profileComputerScienceValue"
+                android:textSize="20sp"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+            <ImageButton
+                android:id="@+id/profileComputerScienceEditValue"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/socialScience"
-            android:layout_marginTop="7sp"
+            android:id="@+id/profileSocialScience"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/socialScienceText"
+                android:id="@+id/profileSocialScienceText"
                 android:text="@string/textSocialScience"
                 style="@style/profileTextDescription" />
             <TextView
-                android:id="@+id/socialScienceValue"
-                android:gravity="center"
-                style="@style/profileTextDescription" />
+                android:id="@+id/profileSocialScienceValue"
+                android:textSize="20sp"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+            <ImageButton
+                android:id="@+id/profileSocialScienceEditValue"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/additionalScore"
         style="@style/profileLinearLayoutMain"
-        app:layout_constraintTop_toBottomOf="@id/score"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/score">
         <TextView
             android:id="@+id/profileAdditionalScoreTitle"
             android:text="@string/additionalScoreTitle"
@@ -116,7 +176,9 @@
             android:layout_weight="1"/>
         <LinearLayout
             android:id="@+id/profileAdditionalScore"
-            android:layout_marginTop="7sp"
+            android:layout_marginStart="55dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -127,27 +189,52 @@
                 android:text="@string/profileAdditionalScoreSum" />
             <TextView
                 android:id="@+id/profileAdditionalScoreValue"
-                style="@style/profileTextDescription" />
+                android:textSize="20sp"
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+            <ImageButton
+                android:id="@+id/profileAdditionalScoreEditValue"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_edit"
+                android:layout_marginStart="7dp"
+                android:layout_width="30dp"
+                android:layout_height="25dp" />
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/profileListOfSpecialties"
-        style="@style/profileTextTitle"
-        android:layout_marginTop="12sp"
-        android:text="@string/profileListOfSpecialties"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
     <Button
-        android:id="@+id/profileShowFinalList"
-        android:text="@string/profileShowFinalList"
+        android:id="@+id/profileUpdateScores"
+        android:text="@string/profileUpdateScores"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/profileListOfSpecialties"/>
+        app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
+    <LinearLayout
+        android:id="@+id/profileFinalListOfSpecialties"
+        style="@style/profileLinearLayoutMain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileUpdateScores">
+        <TextView
+            android:id="@+id/profileFinalListOfSpecialtiesTitle"
+            android:text="@string/profileFinalListOfSpecialtiesTitle"
+            style="@style/profileTextTitle"
+            android:layout_weight="1"/>
+        <View
+            style="@style/Divider"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/profileShowFinalList"
+            android:text="@string/profileShowFinalList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

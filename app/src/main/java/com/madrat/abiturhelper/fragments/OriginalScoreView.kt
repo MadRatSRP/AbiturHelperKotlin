@@ -30,9 +30,9 @@ class OriginalScoreView : Fragment(), OriginalScoreMVP.View {
 
         toAdditionalScore.setOnClickListener { view->
             //originalScorePresenter.addFieldsListeners()
-            originalScorePresenter.saveUserData(mathsValue.text.toString(), russianValue.text.toString(),
-                                             physicsValue.text.toString(), computerScienceValue.text.toString(),
-                                             socialScienceValue.text.toString())
+            originalScorePresenter.saveUserData(profileMathsValue.text.toString(), profileRussianValue.text.toString(),
+                                             profilePhysicsValue.text.toString(), profileComputerScienceValue.text.toString(),
+                                             profileSocialScienceValue.text.toString())
             Navigation.findNavController(view).navigate(R.id.action_setupScore_to_setupAdditional)
         }
     }
@@ -57,62 +57,62 @@ class OriginalScoreView : Fragment(), OriginalScoreMVP.View {
 
     override fun mathsIsValid(math_passing: Int, score_limit: Int){
         when {
-            mathsValue?.text.isNullOrBlank() ->
-                mathsValue?.error = "Баллы за математику не введены"
+            profileMathsValue?.text.isNullOrBlank() ->
+                profileMathsValue?.error = "Баллы за математику не введены"
 
-            mathsValue?.text.toString().toInt() < math_passing ->
-                mathsValue?.error = "Балл по математике меньше проходного(%d)".format(math_passing)
+            profileMathsValue?.text.toString().toInt() < math_passing ->
+                profileMathsValue?.error = "Балл по математике меньше проходного(%d)".format(math_passing)
 
-            mathsValue?.text.toString().toInt() > score_limit ->
-                mathsValue?.error = "Введённый балл больше %d".format(score_limit)
+            profileMathsValue?.text.toString().toInt() > score_limit ->
+                profileMathsValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
     override fun russianIsValid(rus_passing: Int, score_limit: Int){
         when {
-            russianValue?.text.isNullOrBlank() ->
-                russianValue?.error = "Баллы за русский язык не введены"
+            profileRussianValue?.text.isNullOrBlank() ->
+                profileRussianValue?.error = "Баллы за русский язык не введены"
 
-            russianValue?.text.toString().toInt() < rus_passing ->
-                russianValue?.error = "Балл по русскому языку меньше проходного(%d)".format(rus_passing)
+            profileRussianValue?.text.toString().toInt() < rus_passing ->
+                profileRussianValue?.error = "Балл по русскому языку меньше проходного(%d)".format(rus_passing)
 
-            russianValue?.text.toString().toInt() > score_limit ->
-                russianValue?.error = "Введённый балл больше %d".format(score_limit)
+            profileRussianValue?.text.toString().toInt() > score_limit ->
+                profileRussianValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
     override fun physicsIsValid(phys_passing: Int, score_limit: Int){
         when {
-            physicsValue?.text.isNullOrBlank() ->
-                physicsValue?.error = "Баллы за физику не введены"
+            profilePhysicsValue?.text.isNullOrBlank() ->
+                profilePhysicsValue?.error = "Баллы за физику не введены"
 
-            physicsValue?.text.toString().toInt() < phys_passing ->
-                physicsValue?.error = "Балл по физике меньше проходного(%d)".format(phys_passing)
+            profilePhysicsValue?.text.toString().toInt() < phys_passing ->
+                profilePhysicsValue?.error = "Балл по физике меньше проходного(%d)".format(phys_passing)
 
-            physicsValue?.text.toString().toInt() > score_limit ->
-                physicsValue?.error = "Введённый балл больше %d".format(score_limit)
+            profilePhysicsValue?.text.toString().toInt() > score_limit ->
+                profilePhysicsValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
     override fun computerScienceIsValid(comp_passing: Int, score_limit: Int){
         when {
-            computerScienceValue?.text.isNullOrBlank() ->
-                computerScienceValue?.error = "Баллы за информатику не введены"
+            profileComputerScienceValue?.text.isNullOrBlank() ->
+                profileComputerScienceValue?.error = "Баллы за информатику не введены"
 
-            computerScienceValue?.text.toString().toInt() < comp_passing ->
-                computerScienceValue?.error = "Балл по информатике меньше проходного(%d)".format(comp_passing)
+            profileComputerScienceValue?.text.toString().toInt() < comp_passing ->
+                profileComputerScienceValue?.error = "Балл по информатике меньше проходного(%d)".format(comp_passing)
 
-            computerScienceValue?.text.toString().toInt() > score_limit ->
-                computerScienceValue?.error = "Введённый балл больше %d".format(score_limit)
+            profileComputerScienceValue?.text.toString().toInt() > score_limit ->
+                profileComputerScienceValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
     override fun socialScienceIsValid(soc_passing: Int, score_limit: Int){
         when {
-            socialScienceValue?.text.isNullOrBlank() ->
-                socialScienceValue?.error = "Баллы за обществознание не введены"
+            profileSocialScienceValue?.text.isNullOrBlank() ->
+                profileSocialScienceValue?.error = "Баллы за обществознание не введены"
 
-            socialScienceValue?.text.toString().toInt() < soc_passing->
-                socialScienceValue?.error = "Балл по обществознанию меньше проходного(%d)".format(soc_passing)
+            profileSocialScienceValue?.text.toString().toInt() < soc_passing->
+                profileSocialScienceValue?.error = "Балл по обществознанию меньше проходного(%d)".format(soc_passing)
 
-            socialScienceValue?.text.toString().toInt() > score_limit ->
-                socialScienceValue?.error = "Введённый балл больше %d".format(score_limit)
+            profileSocialScienceValue?.text.toString().toInt() > score_limit ->
+                profileSocialScienceValue?.error = "Введённый балл больше %d".format(score_limit)
         }
     }
 }

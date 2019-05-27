@@ -10,10 +10,12 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.presenters.fragments.ProfilePresenter
+import com.madrat.abiturhelper.util.MyApplication
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileView: Fragment(), ProfileMVP.View {
     var profilePresenter: ProfilePresenter? = null
+    private val myApplication = MyApplication.instance
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -24,6 +26,19 @@ class ProfileView: Fragment(), ProfileMVP.View {
             val bundle = profilePresenter?.returnBundleWithListID(300)
             toSpecialties(bundle, R.id.action_profile_to_showFittingSpecialties)
         }
+
+        profileUpdateScores.setOnClickListener {
+
+        }
+
+        val score = myApplication.returnScore()
+        val additionalScore = myApplication.returnAdditionalScore()
+
+        profileMathsValue.text = score?.maths.toString()
+        profileRussianValue.text = score?.russian.toString()
+        profilePhysicsValue.text = score?.physics.toString()
+        profileComputerScienceValue.text = score?.computerScience.toString()
+        profileSocialScienceValue.text = score?.socialScience.toString()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

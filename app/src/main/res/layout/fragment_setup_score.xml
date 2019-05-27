@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.OriginalScoreView">
     <LinearLayout
-        android:id="@+id/maths"
+        android:id="@+id/profileMaths"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -18,14 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/mathsText"
+            android:id="@+id/profileMathsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/textMaths"
             android:textSize="19dp"/>
         <EditText
-            android:id="@+id/mathsValue"
+            android:id="@+id/profileMathsValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
@@ -34,25 +34,25 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/russian"
+        android:id="@+id/profileRussian"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/maths"
+        app:layout_constraintTop_toBottomOf="@id/profileMaths"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/russianText"
+            android:id="@+id/profileRussianText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/textRussian"
             android:textSize="19dp"/>
         <EditText
-            android:id="@+id/russianValue"
+            android:id="@+id/profileRussianValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
@@ -61,25 +61,25 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/physics"
+        android:id="@+id/profilePhysics"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/russian"
+        app:layout_constraintTop_toBottomOf="@id/profileRussian"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/physicsText"
+            android:id="@+id/profilePhysicsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/textPhysics"
             android:textSize="19dp"/>
         <EditText
-            android:id="@+id/physicsValue"
+            android:id="@+id/profilePhysicsValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
@@ -88,25 +88,25 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/computerScience"
+        android:id="@+id/profileComputerScience"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/physics"
+        app:layout_constraintTop_toBottomOf="@id/profilePhysics"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/computerScienceText"
+            android:id="@+id/profileComputerScienceText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/textComputerScience"
             android:textSize="19dp"/>
         <EditText
-            android:id="@+id/computerScienceValue"
+            android:id="@+id/profileComputerScienceValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
@@ -115,25 +115,25 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/socialScience"
+        android:id="@+id/profileSocialScience"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/computerScience"
+        app:layout_constraintTop_toBottomOf="@id/profileComputerScience"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/socialScienceText"
+            android:id="@+id/profileSocialScienceText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/textSocialScience"
             android:textSize="19dp"/>
         <EditText
-            android:id="@+id/socialScienceValue"
+            android:id="@+id/profileSocialScienceValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
