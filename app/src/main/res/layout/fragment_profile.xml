@@ -8,45 +8,36 @@
     tools:context=".fragments.ProfileView">
     <LinearLayout
         android:id="@+id/score"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
+        style="@style/profileLinearLayoutMain"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
             android:text="@string/setUpScoreTitle"
-            android:textSize="19dp"
-            android:layout_gravity="center"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            style="@style/profileTextTitle"
+            android:layout_weight="1"/>
+        <View
+            style="@style/Divider"
             android:layout_weight="1"/>
         <LinearLayout
             android:id="@+id/maths"
+            android:layout_marginTop="7sp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
                 android:id="@+id/mathsText"
-                android:text="@string/textMaths"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                style="@style/profileTextDescription"
+                android:text="@string/textMaths" />
             <TextView
                 android:id="@+id/mathsValue"
-                android:textSize="19dp"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/profileTextDescription"
+                android:gravity="center" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/russian"
+            android:layout_marginTop="7sp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,42 +45,31 @@
             <TextView
                 android:id="@+id/russianText"
                 android:text="@string/textRussian"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                style="@style/profileTextDescription" />
             <TextView
                 android:id="@+id/russianValue"
-                android:textSize="19dp"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/profileTextDescription"
+                android:gravity="center" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/physics"
+            android:layout_marginTop="7sp"
             android:orientation="horizontal"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
                 android:id="@+id/physicsText"
                 android:text="@string/textPhysics"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                style="@style/profileTextDescription" />
             <TextView
                 android:id="@+id/physicsValue"
-                android:textSize="19dp"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/profileTextDescription"
+                android:gravity="center" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/computerScience"
+            android:layout_marginTop="7sp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -97,20 +77,15 @@
             <TextView
                 android:id="@+id/computerScienceText"
                 android:text="@string/textComputerScience"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                style="@style/profileTextDescription" />
             <TextView
                 android:id="@+id/computerScienceValue"
-                android:textSize="19dp"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/profileTextDescription" />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/socialScience"
+            android:layout_marginTop="7sp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -118,78 +93,53 @@
             <TextView
                 android:id="@+id/socialScienceText"
                 android:text="@string/textSocialScience"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                style="@style/profileTextDescription" />
             <TextView
                 android:id="@+id/socialScienceValue"
-                android:textSize="19dp"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/scoreSum"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <TextView
-                android:id="@+id/scoreSumText"
-                android:text="@string/textSum"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-            <TextView
-                android:id="@+id/scoreSumValue"
-                android:textSize="19dp"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                style="@style/profileTextDescription" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/additionalScore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="10dp"
+        style="@style/profileLinearLayoutMain"
         app:layout_constraintTop_toBottomOf="@id/score"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
+            android:id="@+id/profileAdditionalScoreTitle"
             android:text="@string/additionalScoreTitle"
-            android:textSize="19dp"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            style="@style/profileTextTitle"
+            android:layout_weight="1"/>
+        <View
+            style="@style/Divider"
             android:layout_weight="1"/>
         <LinearLayout
-            android:id="@+id/essay"
+            android:id="@+id/profileAdditionalScore"
+            android:layout_marginTop="7sp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/essayText"
-                android:text="@string/profileAdditionalScore"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:id="@+id/profileAdditionalScoreText"
+                style="@style/profileTextDescription"
+                android:text="@string/profileAdditionalScoreSum" />
             <TextView
-                android:id="@+id/essayValue"
-                android:textSize="19dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:id="@+id/profileAdditionalScoreValue"
+                style="@style/profileTextDescription" />
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:id="@+id/profileListOfSpecialties"
+        style="@style/profileTextTitle"
+        android:layout_marginTop="12sp"
+        android:text="@string/profileListOfSpecialties"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
     <Button
         android:id="@+id/profileShowFinalList"
         android:text="@string/profileShowFinalList"
@@ -199,5 +149,5 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
+        app:layout_constraintTop_toBottomOf="@id/profileListOfSpecialties"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

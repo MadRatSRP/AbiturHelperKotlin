@@ -5,8 +5,9 @@
     <string name="calculateGraduationChancesTitle">Оценить шанс поступления</string>
 
     <string name="profileTitle">Профиль</string>
-    <string name="profileAdditionalScore">Сумма дополнительных баллов</string>
+    <string name="profileAdditionalScoreSum">Сумма баллов</string>
     <string name="profileShowFinalList">Показать конечный список специальностей</string>
+    <string name="profileListOfSpecialties">Список специальностей</string>
 
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
 
