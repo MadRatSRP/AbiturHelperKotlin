@@ -32,8 +32,11 @@
                 android:id="@+id/profileMathsText"
                 style="@style/profileTextDescription"
                 android:text="@string/textMaths" />
-            <TextView
+            <EditText
                 android:id="@+id/profileMathsValue"
+                android:enabled="false"
+                android:textColor="@color/BLACK"
+                android:background="@android:color/transparent"
                 android:textSize="20sp"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
@@ -60,8 +63,11 @@
                 android:id="@+id/profileRussianText"
                 android:text="@string/textRussian"
                 style="@style/profileTextDescription" />
-            <TextView
+            <EditText
                 android:id="@+id/profileRussianValue"
+                android:enabled="false"
+                android:textColor="@color/BLACK"
+                android:background="@android:color/transparent"
                 android:textSize="20sp"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
@@ -88,8 +94,11 @@
                 android:id="@+id/profilePhysicsText"
                 android:text="@string/textPhysics"
                 style="@style/profileTextDescription" />
-            <TextView
+            <EditText
                 android:id="@+id/profilePhysicsValue"
+                android:enabled="false"
+                android:textColor="@color/BLACK"
+                android:background="@android:color/transparent"
                 android:textSize="20sp"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
@@ -116,8 +125,11 @@
                 android:id="@+id/profileComputerScienceText"
                 android:text="@string/textComputerScience"
                 style="@style/profileTextDescription" />
-            <TextView
+            <EditText
                 android:id="@+id/profileComputerScienceValue"
+                android:enabled="false"
+                android:textColor="@color/BLACK"
+                android:background="@android:color/transparent"
                 android:textSize="20sp"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
@@ -144,8 +156,11 @@
                 android:id="@+id/profileSocialScienceText"
                 android:text="@string/textSocialScience"
                 style="@style/profileTextDescription" />
-            <TextView
+            <EditText
                 android:id="@+id/profileSocialScienceValue"
+                android:enabled="false"
+                android:textColor="@color/BLACK"
+                android:background="@android:color/transparent"
                 android:textSize="20sp"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
@@ -187,8 +202,11 @@
                 android:id="@+id/profileAdditionalScoreText"
                 style="@style/profileTextDescription"
                 android:text="@string/profileAdditionalScoreSum" />
-            <TextView
+            <EditText
                 android:id="@+id/profileAdditionalScoreValue"
+                android:enabled="false"
+                android:textColor="@color/BLACK"
+                android:background="@android:color/transparent"
                 android:textSize="20sp"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
