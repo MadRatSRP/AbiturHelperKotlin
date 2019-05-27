@@ -11,6 +11,7 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.presenters.fragments.ShowProfilePresenter
 import com.madrat.abiturhelper.util.MyApplication
+import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ShowProfileView: Fragment(), ProfileMVP.View {
@@ -21,13 +22,21 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         setupMVP()
         setupScoreFields()
 
-        profileUpdateScores.setOnClickListener {
-            showProfilePresenter?.updateScores(profileMathsValue.text.toString().toInt(),
-                    profileRussianValue.text.toString().toInt(),
-                    profilePhysicsValue.text.toString().toInt(),
-                    profileComputerScienceValue.text.toString().toInt(),
-                    profileSocialScienceValue.text.toString().toInt(),
-                    profileAdditionalScoreValue.text.toString().toInt())
+        profileMathsEditValue.setOnClickListener {  }
+        profileRussianEditValue.setOnClickListener {  }
+        profilePhysicsEditValue.setOnClickListener {  }
+        profileComputerScienceEditValue.setOnClickListener {  }
+        profileSocialScienceEditValue.setOnClickListener {  }
+        profileAdditionalScoreEditValue.setOnClickListener {  }
+
+        profileUpdateScores.setOnClickListener {v->
+            showProfilePresenter?.updateScores(profileMathsValue.text.toString(),
+                    profileRussianValue.text.toString(),
+                    profilePhysicsValue.text.toString(),
+                    profileComputerScienceValue.text.toString(),
+                    profileSocialScienceValue.text.toString(),
+                    profileAdditionalScoreValue.text.toString())
+            v.showSnack(R.string.profileUpdateScoresMessage)
         }
         profileShowFinalList.setOnClickListener {
             val bundle = showProfilePresenter?.returnBundleWithListID(300)

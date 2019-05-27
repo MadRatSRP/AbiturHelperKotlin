@@ -11,11 +11,12 @@ interface ProfileMVP {
     }
 
     interface Presenter {
-        fun updateScores(maths: Int, russian: Int, physics: Int, computerScience: Int,
-                         socialScience: Int, additionalScore: Int)
+        fun updateScores(maths: String, russian: String, physics: String, computerScience: String,
+                         socialScience: String, additionalScore: String)
 
         fun returnScore(): Score?
         fun returnAdditionalScore(): Int?
         fun returnBundleWithListID(listId: Int): Bundle
+        fun checkTextForBeingEmpty(text: String?): Int
     }
 }

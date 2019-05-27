@@ -6,9 +6,11 @@
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
-    <string name="profileUpdateScores">Сохранить изменения</string>
     <string name="profileShowFinalList">Показать список</string>
     <string name="profileFinalListOfSpecialtiesTitle">Подобранный список специальностей</string>
+
+    <string name="profileUpdateScores">Сохранить изменения</string>
+    <string name="profileUpdateScoresMessage">Баллы успешно обновлены</string>
 
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
 

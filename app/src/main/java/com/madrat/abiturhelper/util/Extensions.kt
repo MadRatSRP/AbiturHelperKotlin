@@ -5,24 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.madrat.abiturhelper.BuildConfig
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
-
-fun Fragment.setFragment(fragment: Fragment, fragmentManager: FragmentManager, id: Int) {
-    fragmentManager.beginTransaction()
-            .replace(id, fragment)
-            .commit()
-}
-fun Fragment.removeFragment(fragment: Fragment, fragmentManager: FragmentManager) {
-    fragmentManager.beginTransaction()
-            .remove(fragment)
-            .commit()
-}
 
 fun Any.showLog(message: String){
     if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, message)
@@ -55,4 +46,9 @@ fun ArrayList<Student>.filterForSpecialty(specialtyName: String): ArrayList<Stud
     val array = this.filter { it.specialtyFirst == specialtyName || it.specialtySecond == specialtyName
             || it.specialtyThird == specialtyName} as ArrayList<Student>
     return array
+}
+
+fun View.showSnack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LONG) {
+    val snack = Snackbar.make(this, messageRes, length)
+    snack.show()
 }
