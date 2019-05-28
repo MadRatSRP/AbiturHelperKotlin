@@ -9,8 +9,13 @@
     <string name="profileShowFinalList">Показать список</string>
     <string name="profileFinalListOfSpecialtiesTitle">Подобранный список специальностей</string>
 
+    <string name="profileAddToListsTitle">Добавить в списки</string>
+    <string name="profileAddToListsCalculatePositions">Рассчитать позиции</string>
+
     <string name="profileUpdateScores">Сохранить изменения</string>
     <string name="profileUpdateScoresMessage">Баллы успешно обновлены</string>
+
+    <string name="profileEditFieldDefaultValue">0</string>
 
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
 

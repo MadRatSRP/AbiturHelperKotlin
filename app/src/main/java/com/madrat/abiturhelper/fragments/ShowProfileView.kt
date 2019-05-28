@@ -12,12 +12,11 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.presenters.fragments.ShowProfilePresenter
-import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ShowProfileView: Fragment(), ProfileMVP.View {
-    var showProfilePresenter: ShowProfilePresenter? = null
+    private var showProfilePresenter: ShowProfilePresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -32,58 +31,28 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         var isAdditionalScoreEditable = true
 
         profileMathsEditValue.setOnClickListener {
-            isMathsEditable = if (isMathsEditable) {
-                setFieldEditable(profileMathsValue, profileMathsEditValue)
-                false
-            } else {
-                setFieldNonEditable(profileMathsValue, profileMathsEditValue)
-                true
-            }
+            isMathsEditable = checkFieldForBeingEditable(isMathsEditable,
+                    profileMathsValue, profileMathsEditValue)
         }
         profileRussianEditValue.setOnClickListener {
-            isRussianEditable = if (isRussianEditable) {
-                setFieldEditable(profileRussianValue, profileRussianEditValue)
-                false
-            } else {
-                setFieldNonEditable(profileRussianValue, profileRussianEditValue)
-                true
-            }
+            isRussianEditable = checkFieldForBeingEditable(isRussianEditable,
+                    profileRussianValue, profileRussianEditValue)
         }
         profilePhysicsEditValue.setOnClickListener {
-            isPhysicsEditable = if (isPhysicsEditable) {
-                setFieldEditable(profilePhysicsValue, profilePhysicsEditValue)
-                false
-            } else {
-                setFieldNonEditable(profilePhysicsValue, profilePhysicsEditValue)
-                true
-            }
+            isPhysicsEditable = checkFieldForBeingEditable(isPhysicsEditable,
+                    profilePhysicsValue, profilePhysicsEditValue)
         }
         profileComputerScienceEditValue.setOnClickListener {
-            isComputerScienceEditable = if (isComputerScienceEditable) {
-                setFieldEditable(profileComputerScienceValue, profileComputerScienceEditValue)
-                false
-            } else {
-                setFieldNonEditable(profileComputerScienceValue, profileComputerScienceEditValue)
-                true
-            }
+            isComputerScienceEditable = checkFieldForBeingEditable(isComputerScienceEditable,
+                    profileComputerScienceValue, profileComputerScienceEditValue)
         }
         profileSocialScienceEditValue.setOnClickListener {
-            isSocialScienceEditable = if (isSocialScienceEditable) {
-                setFieldEditable(profileSocialScienceValue, profileSocialScienceEditValue)
-                false
-            } else {
-                setFieldNonEditable(profileSocialScienceValue, profileSocialScienceEditValue)
-                true
-            }
+            isSocialScienceEditable = checkFieldForBeingEditable(isSocialScienceEditable,
+                    profileSocialScienceValue, profileSocialScienceEditValue)
         }
         profileAdditionalScoreEditValue.setOnClickListener {
-            isAdditionalScoreEditable = if (isAdditionalScoreEditable) {
-                setFieldEditable(profileAdditionalScoreValue, profileAdditionalScoreEditValue)
-                false
-            } else {
-                setFieldNonEditable(profileAdditionalScoreValue, profileAdditionalScoreEditValue)
-                true
-            }
+            isAdditionalScoreEditable = checkFieldForBeingEditable(isAdditionalScoreEditable,
+                    profileAdditionalScoreValue, profileAdditionalScoreEditValue)
         }
 
         profileUpdateScores.setOnClickListener {v->
@@ -114,7 +83,7 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         showProfilePresenter = ShowProfilePresenter(this)
     }
     override fun setupScoreFields() {
-        val score = showProfilePresenter?.returnScore()
+        val score = showProfilePresenter?.returnCheckedScore()
         val additionalScore = showProfilePresenter?.returnAdditionalScore()
 
         profileMathsValue.setText(score?.maths.toString())
@@ -130,11 +99,21 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
     override fun setFieldEditable(editField: EditText, imageButton: ImageButton) {
         editField.isEnabled = true
         editField.requestFocus()
+        editField.text.clear()
         imageButton.setImageResource(R.drawable.ic_save)
     }
     override fun setFieldNonEditable(editField: EditText, imageButton: ImageButton) {
         editField.isEnabled = false
         imageButton.setImageResource(R.drawable.ic_edit)
     }
-
+    override fun checkFieldForBeingEditable(boolean: Boolean, editField: EditText,
+                                            imageButton: ImageButton): Boolean {
+        return if (boolean) {
+            setFieldEditable(editField, imageButton)
+            false
+        } else {
+            setFieldNonEditable(editField, imageButton)
+            true
+        }
+    }
 }

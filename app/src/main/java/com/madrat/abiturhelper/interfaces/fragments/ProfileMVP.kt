@@ -10,8 +10,9 @@ interface ProfileMVP {
         fun setupMVP()
         fun setupScoreFields()
         fun toSpecialties(bundle: Bundle?, actionId: Int)
-        fun setFieldEditable(editFieldValue: EditText, editFieldChangeStatus: ImageButton)
-        fun setFieldNonEditable(editFieldValue: EditText, editFieldChangeStatus: ImageButton)
+        fun setFieldEditable(editField: EditText, imageButton: ImageButton)
+        fun setFieldNonEditable(editField: EditText, imageButton: ImageButton)
+        fun checkFieldForBeingEditable(boolean: Boolean, editField: EditText, imageButton: ImageButton): Boolean
     }
 
     interface Presenter {

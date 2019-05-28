@@ -28,8 +28,23 @@ class ShowProfilePresenter(private var pv: ProfileMVP.View) : ProfileMVP.Present
             0
         } else text.toInt()
     }
+    fun checkIntForBeingEmpty(value: Int?): Int {
+        return value ?: 0
+    }
 
     override fun returnScore() = myApplication.returnScore()
+    fun returnCheckedScore(): Score {
+        val score = returnScore()
+
+        val checkedMaths = checkIntForBeingEmpty(score?.maths)
+        val checkedRussian = checkIntForBeingEmpty(score?.russian)
+        val checkedPhysics = checkIntForBeingEmpty(score?.physics)
+        val checkedComputerScience = checkIntForBeingEmpty(score?.computerScience)
+        val checkedSocialScience = checkIntForBeingEmpty(score?.socialScience)
+
+        return Score(checkedMaths, checkedRussian, checkedPhysics,
+                checkedComputerScience, checkedSocialScience)
+    }
     override fun returnAdditionalScore() = myApplication.returnAdditionalScore()
     override fun returnBundleWithListID(listId: Int): Bundle {
         val bundle = Bundle()
