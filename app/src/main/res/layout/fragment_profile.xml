@@ -255,6 +255,32 @@
                 <View
                     style="@style/Divider"
                     android:layout_weight="1"/>
+                <LinearLayout
+                    android:id="@+id/profileFinalListOfSpecialtiesAmount"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/profileFinalListOfSpecialtiesAmountText"
+                        android:text="@string/profileAmountOfSpecialties"
+                        style="@style/profileTextDescription" />
+                    <EditText
+                        android:id="@+id/profileFinalListOfSpecialtiesAmountValue"
+                        android:text="@string/profileEditFieldDefaultValue"
+                        android:enabled="false"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/BLACK"
+                        android:background="@android:color/transparent"
+                        android:textSize="20sp"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"  />
+                </LinearLayout>
                 <Button
                     android:id="@+id/profileShowFinalList"
                     android:text="@string/profileShowFinalList"

@@ -17,6 +17,10 @@
 
     <string name="profileEditFieldDefaultValue">0</string>
 
+    <string name="profileAmountOfSpecialties">Количество специальностей</string>
+
+    <string name="selectSaveCheckedSpecialties">Сохранить выбранные специальности</string>
+
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
 
     <string name="additionalScoreTitle">Дополнительные баллы</string>

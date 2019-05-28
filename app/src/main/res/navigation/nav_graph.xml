@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_profile_to_showFittingSpecialties"
             app:destination="@id/showFittingSpecialties" />
+        <action
+            android:id="@+id/action_profile_to_selectSpecialtiesForCalculating"
+            app:destination="@id/selectSpecialtiesForCalculating" />
     </fragment>
     <fragment
         android:id="@+id/pickUpSpecialtiesView"

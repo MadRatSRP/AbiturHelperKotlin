@@ -22,6 +22,7 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
         setupScoreFields()
+        setupSpecialtiesFields()
 
         var isMathsEditable = true
         var isRussianEditable = true
@@ -68,6 +69,12 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
             val bundle = showProfilePresenter?.returnBundleWithListID(300)
             toSpecialties(bundle, R.id.action_profile_to_showFittingSpecialties)
         }
+        profileAddToListsAddNewSpecialty.setOnClickListener {
+            toSpecialties(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
+        }
+        profileAddToListsCalculatePositions.setOnClickListener {
+
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -92,6 +99,10 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         profileComputerScienceValue.setText(score?.computerScience.toString())
         profileSocialScienceValue.setText(score?.socialScience.toString())
         profileAdditionalScoreValue.setText(additionalScore.toString())
+    }
+    override fun setupSpecialtiesFields() {
+        val amountOfFinalSpecialties = showProfilePresenter?.returnAmountOfFinalSpecialties()
+        profileFinalListOfSpecialtiesAmountValue.setText(amountOfFinalSpecialties.toString())
     }
     override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }

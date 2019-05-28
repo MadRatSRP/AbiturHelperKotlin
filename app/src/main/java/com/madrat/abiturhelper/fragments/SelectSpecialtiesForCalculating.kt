@@ -17,7 +17,6 @@ import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_select_specialties_for_calculation.*
 import kotlinx.android.synthetic.main.fragment_select_specialties_for_calculation.view.*
 
-
 class SelectSpecialtiesForCalculating
     : Fragment(), SelectSpecialtiesForCalculatingMVP.View {
     private var adapter: CompleteSpecialtiesAdapter? = null
@@ -30,12 +29,19 @@ class SelectSpecialtiesForCalculating
 
         val faculties = selectSpecialtiesForCalculatingPresenter?.returnCompleteListOfSpecilaties()
 
-        selectForSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                showLog("POS$position")
-                showSpecialties(faculties?.get(position), position)
+        val sumOfFaculties = ArrayList<Specialty>()
+
+        faculties?.let {
+            for (i in 0 until faculties.size) {
+                sumOfFaculties += faculties[i]
             }
+        }
+
+        showSpecialties(sumOfFaculties)
+
+        selectSaveCheckedSpecialties.setOnClickListener {
+            val array = adapter?.returnSelectedSpecialties()
+            showLog("Список: ${array?.size}")
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,9 +61,9 @@ class SelectSpecialtiesForCalculating
     override fun setupMVP() {
         selectSpecialtiesForCalculatingPresenter = SelectSpecialtiesForCalculatingPresenter()
     }
-    override fun showSpecialties(specialties: ArrayList<Specialty>?, position: Int) {
+    override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }
-        adapter?.saveNewChecker(position)
+        //adapter?.saveNewChecker(position)
         selectForRecyclerView?.adapter = adapter
     }
 }

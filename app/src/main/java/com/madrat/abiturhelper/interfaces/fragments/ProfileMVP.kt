@@ -13,6 +13,7 @@ interface ProfileMVP {
         fun setFieldEditable(editField: EditText, imageButton: ImageButton)
         fun setFieldNonEditable(editField: EditText, imageButton: ImageButton)
         fun checkFieldForBeingEditable(boolean: Boolean, editField: EditText, imageButton: ImageButton): Boolean
+        fun setupSpecialtiesFields()
     }
 
     interface Presenter {
@@ -23,5 +24,8 @@ interface ProfileMVP {
         fun returnAdditionalScore(): Int?
         fun returnBundleWithListID(listId: Int): Bundle
         fun checkTextForBeingEmpty(text: String?): Int
+        fun checkIntForBeingEmpty(value: Int?): Int
+        fun returnCheckedScore(): Score
+        fun returnAmountOfFinalSpecialties(): Int?
     }
 }

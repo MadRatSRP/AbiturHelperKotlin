@@ -28,12 +28,16 @@ class ShowProfilePresenter(private var pv: ProfileMVP.View) : ProfileMVP.Present
             0
         } else text.toInt()
     }
-    fun checkIntForBeingEmpty(value: Int?): Int {
-        return value ?: 0
+    override fun checkIntForBeingEmpty(value: Int?): Int
+            = value ?: 0
+
+    override fun returnAmountOfFinalSpecialties(): Int? {
+        val specialties = myApplication.returnCompleteListOfSpecilaties()
+        return specialties?.sumBy { it.size }
     }
 
     override fun returnScore() = myApplication.returnScore()
-    fun returnCheckedScore(): Score {
+    override fun returnCheckedScore(): Score {
         val score = returnScore()
 
         val checkedMaths = checkIntForBeingEmpty(score?.maths)
