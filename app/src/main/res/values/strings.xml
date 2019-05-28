@@ -73,4 +73,10 @@
     <string name="resultAmountOfFittingSpecialties">Количество специальностей, подходящих под баллы пользователя</string>
     <string name="resultShowSpecialties">Показать специальности</string>
     <string name="resultSaveAndMoveToProfile">Сохранить и перейти к профилю</string>
+
+    <string name="selectedSpecialtyName">Название специальности</string>
+    <string name="selectedAmountOfStudents">Подавших документы</string>
+    <string name="selectedPosition">Ваша позиция в списке</string>
+    <string name="selectedOldMinimalScore">Старый минимальный балл</string>
+    <string name="selectedNewMinimalScore">Новый минимальный балл</string>
 </resources>
