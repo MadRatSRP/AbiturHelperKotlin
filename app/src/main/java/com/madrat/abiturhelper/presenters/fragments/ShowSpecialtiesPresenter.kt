@@ -15,6 +15,7 @@ class ShowSpecialtiesPresenter: ShowSpecialtiesMVP.Presenter {
     }
     override fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>? {
         val faculties = myApplication.returnFaculties()
+
         return when (pos) {
             //УНТИ
             0 -> faculties?.listUNTI

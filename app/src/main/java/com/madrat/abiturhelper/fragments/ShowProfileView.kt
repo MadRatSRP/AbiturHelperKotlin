@@ -79,7 +79,7 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
             toSpecialties(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
         }
         profileAddToListsCalculatePositions.setOnClickListener {
-
+            toSpecialties(null, R.id.action_profile_to_calculateUserPlacesView)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

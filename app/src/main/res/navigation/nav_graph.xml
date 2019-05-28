@@ -6,7 +6,7 @@
     app:startDestination="@id/setupScore">
     <fragment
         android:id="@+id/setupScore"
-        android:name="com.madrat.abiturhelper.fragments.OriginalScoreView"
+        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.OriginalScoreView"
         tools:layout="@layout/fragment_setup_score">
         <action
             android:id="@+id/action_setupScore_to_setupAdditional"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/setupAdditional"
-        android:name="com.madrat.abiturhelper.fragments.AdditionalScoreView"
+        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.AdditionalScoreView"
         tools:layout="@layout/fragment_score_additional" >
         <action
             android:id="@+id/action_setupAdditional_to_pickUpSpecialtiesView"
@@ -41,6 +41,9 @@
         <action
             android:id="@+id/action_profile_to_selectSpecialtiesForCalculating"
             app:destination="@id/selectSpecialtiesForCalculating" />
+        <action
+            android:id="@+id/action_profile_to_calculateUserPlacesView"
+            app:destination="@id/calculateUserPlacesView" />
     </fragment>
     <fragment
         android:id="@+id/pickUpSpecialtiesView"
@@ -87,4 +90,8 @@
         android:id="@+id/selectSpecialtiesForCalculating"
         android:name="com.madrat.abiturhelper.fragments.SelectSpecialtiesForCalculating"
         android:label="SelectSpecialtiesForCalculating" />
+    <fragment
+        android:id="@+id/calculateUserPlacesView"
+        android:name="com.madrat.abiturhelper.fragments.profile.CalculateUserPlacesView"
+        android:label="CalculateUserPlacesView" />
 </navigation>

@@ -8,6 +8,18 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="calculateUserPlacesView">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1238" />
+                            <option name="y" value="-40" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="currentList">
                     <value>
                       <LayoutPositions>
@@ -76,6 +88,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_profile_to_calculateUserPlacesView">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_profile_to_selectSpecialtiesForCalculating">
                               <value>
                                 <LayoutPositions />

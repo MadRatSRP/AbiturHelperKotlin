@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AdditionalScoreView">
+    tools:context=".fragments.pick_up_specialties.AdditionalScoreView">
     <TextView
         android:id="@+id/additionalScoreHint"
         android:gravity="center"

@@ -38,6 +38,7 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
     }
     private fun checkFacultyListSize() {
         val facultyList = currentListPresenter?.returnFacultyList()
+
         showLog(facultyList?.size.toString())
         if (facultyList?.size == null) showMoveToWorkWithSpecialtiesAlertDialog()
         else facultyList.let { showFaculties(it) }

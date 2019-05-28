@@ -23,6 +23,8 @@
 
     <string name="setUpScoreTitle">Баллы ЕГЭ</string>
 
+    <string name="calculateUserPlacesTitle">Вычислить позиции пользователя</string>
+
     <string name="additionalScoreTitle">Дополнительные баллы</string>
     <string name="additionalScoreHint">Укажите сумму своих дополнительных баллов:</string>
 

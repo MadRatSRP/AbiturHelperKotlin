@@ -103,7 +103,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
                     status, cancelReason, admissions, category, specialtyFirst, specialtySecond, specialtyThird,
                     checkTextForBeingEmpty(russian), checkTextForBeingEmpty(maths), checkTextForBeingEmpty(physics),
                     checkTextForBeingEmpty(computerScience), checkTextForBeingEmpty(socialScience),
-                    additionalScore.toIntOrNull(), isCertificateAvailable.toBoolean(),
+                    checkTextForBeingEmpty(additionalScore), isCertificateAvailable.toBoolean(),
                     isChargeAvailable.toBoolean(), priority.toIntOrNull()))
         }
         showLog("Подавших документы: ${studentsList.size}")

@@ -19,7 +19,7 @@ data class Student(
         val physics: Int = 0,
         val computerScience: Int = 0,
         val socialScience: Int = 0,
-        val additionalScore: Int?,
+        val additionalScore: Int = 0,
         val isCertificateAvailable: Boolean,
         val isChargeAvailable: Boolean,
         val priority: Int?

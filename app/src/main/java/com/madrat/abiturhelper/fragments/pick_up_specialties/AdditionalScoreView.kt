@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.fragments
+package com.madrat.abiturhelper.fragments.pick_up_specialties
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.presenters.fragments.AdditionalScorePresenter
 import com.madrat.abiturhelper.interfaces.fragments.AdditionalScoreMVP
-import kotlinx.android.synthetic.main.custom_spinner.view.*
 import kotlinx.android.synthetic.main.fragment_score_additional.*
 import kotlinx.android.synthetic.main.fragment_score_additional.view.*
 
