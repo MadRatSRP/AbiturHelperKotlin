@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.interfaces.fragments
 
+import android.util.SparseBooleanArray
 import com.madrat.abiturhelper.model.Specialty
 
 interface SelectSpecialtiesForCalculatingMVP {
@@ -9,5 +10,7 @@ interface SelectSpecialtiesForCalculatingMVP {
     }
     interface Presenter {
         fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
+        fun saveItemStateArray(itemStateArray: SparseBooleanArray?)
+        fun returnItemStateArray(): SparseBooleanArray?
     }
 }

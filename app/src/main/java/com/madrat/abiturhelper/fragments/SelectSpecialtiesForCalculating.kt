@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
@@ -25,7 +24,6 @@ class SelectSpecialtiesForCalculating
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupMVP()
 
         val faculties = selectSpecialtiesForCalculatingPresenter?.returnCompleteListOfSpecilaties()
 
@@ -42,6 +40,9 @@ class SelectSpecialtiesForCalculating
         selectSaveCheckedSpecialties.setOnClickListener {
             val array = adapter?.returnSelectedSpecialties()
             showLog("Список: ${array?.size}")
+
+            val itemStateArray = adapter?.returnItemStateArray()
+            selectSpecialtiesForCalculatingPresenter?.saveItemStateArray(itemStateArray)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -50,8 +51,11 @@ class SelectSpecialtiesForCalculating
                 .supportActionBar?.setTitle(R.string.selectSpecialtiesForCalculatingTitle)
         val view = inflater.inflate(R.layout.fragment_select_specialties_for_calculation,
                 container, false)
+        setupMVP()
 
-        adapter = CompleteSpecialtiesAdapter()
+        adapter = CompleteSpecialtiesAdapter(
+            selectSpecialtiesForCalculatingPresenter?.returnItemStateArray()
+        )
         view.selectForRecyclerView.adapter = adapter
         view.selectForRecyclerView.linearManager()
 

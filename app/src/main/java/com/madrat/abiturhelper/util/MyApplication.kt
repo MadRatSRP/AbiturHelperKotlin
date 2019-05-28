@@ -1,6 +1,7 @@
 package com.madrat.abiturhelper.util
 
 import android.app.Application
+import android.util.SparseBooleanArray
 import com.madrat.abiturhelper.model.*
 
 class MyApplication: Application() {
@@ -25,6 +26,10 @@ class MyApplication: Application() {
     private var listMTF: ArrayList<ArrayList<Student>>? = null
     private var listUNIT: ArrayList<ArrayList<Student>>? = null
     private var listFEE: ArrayList<ArrayList<Student>>? = null
+
+
+    // Позиции специальностей в списке для поступления
+    private var itemStateArray: SparseBooleanArray? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -228,4 +233,10 @@ class MyApplication: Application() {
     fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>? {
         return completeListOfSpecialties
     }
+
+    fun saveItemStateArray(list: SparseBooleanArray) {
+        this.itemStateArray = list
+    }
+    fun returnItemStateArray(): SparseBooleanArray?
+            = itemStateArray
 }

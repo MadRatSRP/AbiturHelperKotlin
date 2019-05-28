@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.inflate
-import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_complete_specialties.*
 import kotlinx.android.synthetic.main.list_specialties.specialtyAmountOfStatementsValue
@@ -16,35 +15,29 @@ import kotlinx.android.synthetic.main.list_specialties.specialtyMinimalScoreText
 import kotlinx.android.synthetic.main.list_specialties.specialtyMinimalScoreValue
 import kotlinx.android.synthetic.main.list_specialties.specialtyName
 
-class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckListener?*/)
+class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?)
     : RecyclerView.Adapter<CompleteSpecialtiesAdapter.CompleteSpecialtiesHolder>(){
 
     private var selectedSpecialties = ArrayList<Specialty>()
     private var specialties = ArrayList<Specialty>()
 
-    /*private var itemStateArrayUNTI = SparseBooleanArray()
-    private var itemStateArrayFEU = SparseBooleanArray()*/
+    private var itemStateArray: SparseBooleanArray = SparseBooleanArray()
 
-    private var itemStateArray = SparseBooleanArray()
-
-    /*interface OnItemCheckListener {
-        fun onItemCheck(specialty: Specialty)
-        fun onItemUncheck(specialty: Specialty)
-    }
     init {
-        this.onItemCheckListener = onItemCheckListener
-    }*/
+        itemStateArray?.let {
+            this.itemStateArray = itemStateArray
+        }
+    }
 
     fun updateSpecialtiesList(new_specialties: ArrayList<Specialty>) {
         specialties.clear()
         specialties.addAll(new_specialties)
         this.notifyDataSetChanged()
     }
-    /*fun saveNewChecker(newChecker: Int) {
-        this.checker = newChecker
-    }*/
     fun returnSelectedSpecialties()
             = selectedSpecialties
+    fun returnItemStateArray()
+            = itemStateArray
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CompleteSpecialtiesHolder
             = CompleteSpecialtiesHolder(parent.inflate(com.madrat.abiturhelper.R.layout.list_complete_specialties))
@@ -53,61 +46,43 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
         val selectedSpecialty = specialties[position]
 
         holder.bind(selectedSpecialty, position)
-        holder.setOnClickListener(View.OnClickListener {
-            /*holder.completeCheckbox.isChecked = !holder.completeCheckbox.isChecked
-            if (holder.completeCheckbox.isChecked) {
-                //onItemCheckListener?.onItemCheck(currentSpecialty)
-                selectedSpecialties.add(selectedSpecialty)
-                showLog("chosenSpecialties: ${selectedSpecialties.size}")
-            } else {
-                //onItemCheckListener?.onItemUncheck(currentSpecialty)
-                selectedSpecialties.remove(selectedSpecialty)
-                showLog("chosenSpecialties${selectedSpecialties.size}")
-            }*/
+        /*holder.setOnClickListener(View.OnClickListener {
+            val adapterPosition = holder.adapterPosition
+            if (!itemStateArray.get(adapterPosition, false)) {
+                mCheckedTextView.setChecked(true);
+                itemStateArray.put(adapterPosition, true);
+            }
+            else  {
+                mCheckedTextView.setChecked(false);
+                itemStateArray.put(adapterPosition, false);
+            }
 
-            if (!itemStateArray.get(position, false)) {
+            /*if (itemStateArray.get(position, true)) {
                 holder.completeCheckbox.isChecked = true
-                selectedSpecialties.add(selectedSpecialty)
                 itemStateArray.put(position, true)
+                selectedSpecialties.add(specialties[position])
             }
             else {
                 holder.completeCheckbox.isChecked = false
-                selectedSpecialties.remove(selectedSpecialty)
                 itemStateArray.put(position, false)
-            }
-
-            /*val adapterPosition = holder.adapterPosition
-            // УНТИ
-            if (checker == 0) {
-                if (!itemStateArrayUNTI.get(adapterPosition, false)) {
-                    holder.completeCheckbox.isChecked = true
-                    selectedSpecialties.add(selectedSpecialty)
-                    showLog("chosenSpecialties${selectedSpecialties.size}")
-                    itemStateArrayUNTI.put(adapterPosition, true)
-                }
-                else {
-                    holder.completeCheckbox.isChecked = false
-                    selectedSpecialties.remove(selectedSpecialty)
-                    showLog("chosenSpecialties${selectedSpecialties.size}")
-                    itemStateArrayUNTI.put(adapterPosition, false)
-                }
-            }
-            // ФЭУ
-            else if (checker == 1) {
-                if (!itemStateArrayFEU.get(adapterPosition, false)) {
-                    holder.completeCheckbox.isChecked = true
-                    selectedSpecialties.add(selectedSpecialty)
-                    itemStateArrayFEU.put(adapterPosition, true)
-                }
-                else {
-                    holder.completeCheckbox.isChecked = false
-                    selectedSpecialties.remove(selectedSpecialty)
-                    itemStateArrayFEU.put(adapterPosition, false)
-                }
+                selectedSpecialties.remove(specialties[position])
             }*/
-        })
-    }
+        })*/
 
+        holder.containerView.setOnClickListener {
+            val adapterPosition = holder.adapterPosition
+            if (!itemStateArray.get(adapterPosition, false)) {
+                holder.completeCheckbox.isChecked = true
+                itemStateArray.put(adapterPosition, true)
+                selectedSpecialties.add(specialties[adapterPosition])
+            }
+            else  {
+                holder.completeCheckbox.isChecked = false
+                itemStateArray.put(adapterPosition, false)
+                selectedSpecialties.remove(specialties[adapterPosition])
+            }
+        }
+    }
 
     override fun getItemCount(): Int
             = specialties.size
@@ -116,7 +91,6 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(specialty: Specialty, position: Int) {
-
             specialtyName.text = specialty.shortName
             specialtyEntriesTotalValue.text = specialty.entriesTotal.toString()
             specialtyEntriesFreeValue.text = specialty.entriesFree.toString()
@@ -124,22 +98,15 @@ class CompleteSpecialtiesAdapter(/*@NonNull onItemCheckListener: OnItemCheckList
             specialtyMinimalScoreText.text = specialty.scoreTitle
             specialtyMinimalScoreValue.text = specialty.minimalScore.toString()
 
-            if (!itemStateArray.get(position, false)) {
-                completeCheckbox.isChecked = false
-            } else {
-                completeCheckbox.isChecked = true
-            }
+            /*completeCheckbox.isChecked = false
 
-            /*if (checker == 0) {
-                completeCheckbox.isChecked = itemStateArrayUNTI.get(position, false)
-            }
-            else if (checker == 1) {
-                completeCheckbox.isChecked = itemStateArrayFEU.get(position, false)
-            }*/
+            completeCheckbox.isChecked = itemStateArray.get(position, false)*/
+
+            completeCheckbox.isChecked = itemStateArray.get(position, false)
         }
-        fun setOnClickListener(onClickListener: View.OnClickListener) {
+        /*fun setOnClickListener(onClickListener: View.OnClickListener) {
             //containerView.setOnClickListener { onClickListener }
             containerView.setOnClickListener(onClickListener)
-        }
+        }*/
     }
 }
