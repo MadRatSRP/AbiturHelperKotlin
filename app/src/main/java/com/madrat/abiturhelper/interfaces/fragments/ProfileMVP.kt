@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageButton
 import com.madrat.abiturhelper.model.Score
+import com.madrat.abiturhelper.model.Specialty
 
 interface ProfileMVP {
     interface View {
@@ -14,6 +15,7 @@ interface ProfileMVP {
         fun setFieldNonEditable(editField: EditText, imageButton: ImageButton)
         fun checkFieldForBeingEditable(boolean: Boolean, editField: EditText, imageButton: ImageButton): Boolean
         fun setupSpecialtiesFields()
+        fun showSelectedSpecialties(specialties: ArrayList<Specialty>?)
     }
 
     interface Presenter {
@@ -27,5 +29,7 @@ interface ProfileMVP {
         fun checkIntForBeingEmpty(value: Int?): Int
         fun returnCheckedScore(): Score
         fun returnAmountOfFinalSpecialties(): Int?
+
+        fun returnSelectedSpecialties(): ArrayList<Specialty>?
     }
 }

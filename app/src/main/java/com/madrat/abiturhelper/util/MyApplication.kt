@@ -30,6 +30,7 @@ class MyApplication: Application() {
 
     // Позиции специальностей в списке для поступления
     private var itemStateArray: SparseBooleanArray? = null
+    private var selectedSpecialties: ArrayList<Specialty>? = null
 
     //Score
     fun saveScore(scores: Score) {
@@ -239,4 +240,9 @@ class MyApplication: Application() {
     }
     fun returnItemStateArray(): SparseBooleanArray?
             = itemStateArray
+
+    fun saveSelectedSpecialties(selectedSpecialties: ArrayList<Specialty>) {
+        this.selectedSpecialties = selectedSpecialties
+    }
+    fun returnSelectedSpecialties() = selectedSpecialties
 }

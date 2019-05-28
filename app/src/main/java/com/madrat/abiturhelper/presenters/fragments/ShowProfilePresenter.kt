@@ -56,4 +56,7 @@ class ShowProfilePresenter(private var pv: ProfileMVP.View) : ProfileMVP.Present
 
         return bundle
     }
+
+    override fun returnSelectedSpecialties()
+            = myApplication.returnSelectedSpecialties()
 }

@@ -18,8 +18,9 @@ import kotlinx.android.synthetic.main.list_specialties.specialtyName
 class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?)
     : RecyclerView.Adapter<CompleteSpecialtiesAdapter.CompleteSpecialtiesHolder>(){
 
-    private var selectedSpecialties = ArrayList<Specialty>()
     private var specialties = ArrayList<Specialty>()
+
+    private var selectedSpecialties = ArrayList<Specialty>()
 
     private var itemStateArray: SparseBooleanArray = SparseBooleanArray()
 

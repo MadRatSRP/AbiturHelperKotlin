@@ -38,8 +38,9 @@ class SelectSpecialtiesForCalculating
         showSpecialties(sumOfFaculties)
 
         selectSaveCheckedSpecialties.setOnClickListener {
-            val array = adapter?.returnSelectedSpecialties()
-            showLog("Список: ${array?.size}")
+            val selectedSpecialties = adapter?.returnSelectedSpecialties()
+            //showLog("Список: ${array?.size}")
+            selectSpecialtiesForCalculatingPresenter?.saveSelectedSpecialties(selectedSpecialties)
 
             val itemStateArray = adapter?.returnItemStateArray()
             selectSpecialtiesForCalculatingPresenter?.saveItemStateArray(itemStateArray)

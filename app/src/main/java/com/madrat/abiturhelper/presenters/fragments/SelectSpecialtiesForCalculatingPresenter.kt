@@ -13,6 +13,10 @@ class SelectSpecialtiesForCalculatingPresenter
         itemStateArray?.let { myApplication.saveItemStateArray(it) }
     }
 
+    override fun saveSelectedSpecialties(selectedSpecialties: ArrayList<Specialty>?) {
+        selectedSpecialties?.let { myApplication.saveSelectedSpecialties(it) }
+    }
+
     override fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
             = myApplication.returnCompleteListOfSpecilaties()
     override fun returnItemStateArray()

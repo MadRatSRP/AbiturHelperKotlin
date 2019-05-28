@@ -12,5 +12,6 @@ interface SelectSpecialtiesForCalculatingMVP {
         fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
         fun saveItemStateArray(itemStateArray: SparseBooleanArray?)
         fun returnItemStateArray(): SparseBooleanArray?
+        fun saveSelectedSpecialties(selectedSpecialties: ArrayList<Specialty>?)
     }
 }
