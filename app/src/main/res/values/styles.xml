@@ -14,18 +14,18 @@
         <item name="android:background">?android:attr/listDivider</item>
     </style>
 
-    <style name="profileTextTitle">
+    <style name="textTitle">
         <item name="android:textSize">21sp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <style name="profileTextDescription">
+    <style name="textDescription">
         <item name="android:textSize">18sp</item>
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <style name="profileLinearLayoutMain">
+    <style name="mainLinearLayout">
         <item name="android:orientation">vertical</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

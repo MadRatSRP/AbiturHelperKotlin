@@ -55,7 +55,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setUpScoreTitle)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setupScoreTitle)
         val view = inflater.inflate(R.layout.fragment_setup_score, container, false)
 
         val spinnerItems = resources.getStringArray(R.array.additionalScoreSpinnerEntries)

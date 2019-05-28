@@ -3,12 +3,20 @@
 
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
     <string name="calculateGraduationChancesTitle">Оценить шанс поступления</string>
-
+    
+    <string name="setupScoreFullName">ФИО</string>
+    <string name="setupScoreLastName">Фамилия</string>
+    <string name="setupScoreFirstName">Имя</string>
+    <string name="setupScorePatronymic">Отчество</string>
+    
     <string name="setupScoreMathsText">Математика</string>
     <string name="setupScoreRussianText">Русский язык</string>
     <string name="setupScorePhysicsText">Физика</string>
     <string name="setupScoreComputerScienceText">Информатика</string>
     <string name="setupScoreSocialScienceText">Обществознание</string>
+
+    <string name="setupScoreTitle">Баллы ЕГЭ</string>
+    <string name="setupScoreAdditionalTitle">Дополнительные баллы</string>
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
@@ -27,11 +35,8 @@
 
     <string name="selectSaveCheckedSpecialties">Сохранить выбранные специальности</string>
 
-    <string name="setUpScoreTitle">Баллы ЕГЭ</string>
-
     <string name="calculateUserPlacesTitle">Вычислить позиции пользователя</string>
 
-    <string name="additionalScoreTitle">Дополнительные баллы</string>
     <string name="additionalScoreHint">Укажите сумму своих дополнительных баллов:</string>
 
     <string name="currentListTitle">Актуальный список</string>

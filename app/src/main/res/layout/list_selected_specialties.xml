@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/selectedSpecialtyNameText"
             android:text="@string/selectedSpecialtyName"
-            style="@style/profileTextDescription" />
+            style="@style/textDescription" />
         <TextView
             android:id="@+id/selectedSpecialtyNameValue"
             android:textSize="18sp"
@@ -44,7 +44,7 @@
         <TextView
             android:id="@+id/selectedAmountOfStudentsText"
             android:text="@string/selectedAmountOfStudents"
-            style="@style/profileTextDescription" />
+            style="@style/textDescription" />
         <TextView
             android:id="@+id/selectedAmountOfStudentsValue"
             android:textSize="18sp"
@@ -63,7 +63,7 @@
         <TextView
             android:id="@+id/selectedPositionText"
             android:text="@string/selectedPosition"
-            style="@style/profileTextDescription" />
+            style="@style/textDescription" />
         <TextView
             android:id="@+id/selectedPositionValue"
             android:textSize="18sp"
@@ -82,7 +82,7 @@
         <TextView
             android:id="@+id/selectedOldMinimalScoreText"
             android:text="@string/selectedOldMinimalScore"
-            style="@style/profileTextDescription" />
+            style="@style/textDescription" />
         <TextView
             android:id="@+id/selectedOldMinimalScoreValue"
             android:textSize="18sp"
@@ -101,7 +101,7 @@
         <TextView
             android:id="@+id/selectedNewMinimalScoreText"
             android:text="@string/selectedNewMinimalScore"
-            style="@style/profileTextDescription" />
+            style="@style/textDescription" />
         <TextView
             android:id="@+id/selectedNewMinimalScoreValue"
             android:textSize="18sp"

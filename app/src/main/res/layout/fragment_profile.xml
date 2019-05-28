@@ -15,10 +15,10 @@
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/score"
-                style="@style/profileLinearLayoutMain">
+                style="@style/mainLinearLayout">
                 <TextView
-                    android:text="@string/setUpScoreTitle"
-                    style="@style/profileTextTitle"
+                    android:text="@string/setupScoreTitle"
+                    style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
                     style="@style/Divider"
@@ -34,7 +34,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileMathsText"
-                        style="@style/profileTextDescription"
+                        style="@style/textDescription"
                         android:text="@string/setupScoreMathsText" />
                     <EditText
                         android:id="@+id/profileMathsValue"
@@ -67,7 +67,7 @@
                     <TextView
                         android:id="@+id/profileRussianText"
                         android:text="@string/setupScoreRussianText"
-                        style="@style/profileTextDescription" />
+                        style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileRussianValue"
                         android:text="@string/profileEditFieldDefaultValue"
@@ -99,7 +99,7 @@
                     <TextView
                         android:id="@+id/profilePhysicsText"
                         android:text="@string/setupScorePhysicsText"
-                        style="@style/profileTextDescription" />
+                        style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profilePhysicsValue"
                         android:text="@string/profileEditFieldDefaultValue"
@@ -131,7 +131,7 @@
                     <TextView
                         android:id="@+id/profileComputerScienceText"
                         android:text="@string/setupScoreComputerScienceText"
-                        style="@style/profileTextDescription" />
+                        style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileComputerScienceValue"
                         android:text="@string/profileEditFieldDefaultValue"
@@ -163,7 +163,7 @@
                     <TextView
                         android:id="@+id/profileSocialScienceText"
                         android:text="@string/setupScoreSocialScienceText"
-                        style="@style/profileTextDescription" />
+                        style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileSocialScienceValue"
                         android:text="@string/profileEditFieldDefaultValue"
@@ -186,14 +186,14 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/additionalScore"
-                style="@style/profileLinearLayoutMain"
+                style="@style/mainLinearLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/score">
                 <TextView
                     android:id="@+id/profileAdditionalScoreTitle"
-                    android:text="@string/additionalScoreTitle"
-                    style="@style/profileTextTitle"
+                    android:text="@string/setupScoreAdditionalTitle"
+                    style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
                     style="@style/Divider"
@@ -209,7 +209,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileAdditionalScoreText"
-                        style="@style/profileTextDescription"
+                        style="@style/textDescription"
                         android:text="@string/profileAdditionalScoreSum" />
                     <EditText
                         android:id="@+id/profileAdditionalScoreValue"
@@ -243,14 +243,14 @@
                 app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
             <LinearLayout
                 android:id="@+id/profileFinalListOfSpecialties"
-                style="@style/profileLinearLayoutMain"
+                style="@style/mainLinearLayout"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profileUpdateScores">
                 <TextView
                     android:id="@+id/profileFinalListOfSpecialtiesTitle"
                     android:text="@string/profileFinalListOfSpecialtiesTitle"
-                    style="@style/profileTextTitle"
+                    style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
                     style="@style/Divider"
@@ -268,7 +268,7 @@
                         android:gravity="center"
                         android:id="@+id/profileFinalListOfSpecialtiesAmountText"
                         android:text="@string/profileAmountOfSpecialties"
-                        style="@style/profileTextDescription" />
+                        style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileFinalListOfSpecialtiesAmountValue"
                         android:text="@string/profileEditFieldDefaultValue"
@@ -290,11 +290,11 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/profileAddToLists"
-                style="@style/profileLinearLayoutMain">
+                style="@style/mainLinearLayout">
                 <TextView
                     android:id="@+id/profileAddToListsTitle"
                     android:text="@string/profileAddToListsTitle"
-                    style="@style/profileTextTitle"
+                    style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
                     style="@style/Divider"
