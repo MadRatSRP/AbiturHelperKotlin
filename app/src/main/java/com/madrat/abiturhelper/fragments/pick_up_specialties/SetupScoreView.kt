@@ -11,13 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupScoreMVP
+import com.madrat.abiturhelper.model.FullName
 import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import kotlinx.android.synthetic.main.fragment_setup_score.view.*
 
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
-    private lateinit var setupScorePresenter: SetupScorePresenter
+    private var setupScorePresenter: SetupScorePresenter? = null
 
     private val passingMaths = 27
     private val passingRussian = 36
@@ -43,7 +44,11 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
             }
 
-            setupScorePresenter.saveScore(setupScoreMathsValue.text.toString(),
+            setupScorePresenter?.saveFullName(setupScoreLastNameValue.text.toString(),
+                    setupScoreFirstNameValue.text.toString(),
+                    setupScorePatronymicValue.text.toString())
+
+            setupScorePresenter?.saveScore(setupScoreMathsValue.text.toString(),
                     setupScoreRussianValue.text.toString(),
                     setupScorePhysicsValue.text.toString(),
                     setupScoreComputerScienceValue.text.toString(),

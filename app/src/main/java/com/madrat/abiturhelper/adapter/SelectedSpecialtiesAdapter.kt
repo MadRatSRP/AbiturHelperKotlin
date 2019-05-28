@@ -12,7 +12,7 @@ import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_selected_specialties.*
 
-class SelectedSpecialtiesAdapter()
+class SelectedSpecialtiesAdapter
     : RecyclerView.Adapter<SelectedSpecialtiesAdapter.SelectedSpecialtiesHolder>(){
     val myApplication = MyApplication.instance
 
@@ -80,16 +80,13 @@ class SelectedSpecialtiesAdapter()
             showLog("РАЗМЕР: ${currentStudentsList?.size}")
 
             val score = myApplication.returnScore()
-            val additionalScore = myApplication.returnAdditionalScore()
 
             val student = score?.let {
-                additionalScore?.let { it1 ->
-                    Student("007", "Алпеев", "Михаил", "Сергеевич",
-                            "####", "net", "Принято", "", "бак",
-                            "по конкурсу", " ", "", "",
-                            score.russian, score.maths, score.physics, score.computerScience, score.socialScience,
-                            it1, true, true, 0)
-                }
+                Student("007", "Алпеев", "Михаил", "Сергеевич",
+                        "####", "net", "Принято", "", "бак",
+                        "по конкурсу", " ", "", "",
+                        score.russian, score.maths, score.physics, score.computerScience, score.socialScience,
+                        score.additionalScore, true, true, 0)
             }
             student?.let { currentStudentsList?.add(it) }
             showLog("РАЗМЕР: ${currentStudentsList?.size}")
