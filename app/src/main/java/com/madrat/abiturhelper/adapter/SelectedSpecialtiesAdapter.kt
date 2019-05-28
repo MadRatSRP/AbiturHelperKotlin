@@ -28,14 +28,14 @@ class SelectedSpecialtiesAdapter()
             = SelectedSpecialtiesHolder(parent.inflate(R.layout.list_selected_specialties))
 
     override fun onBindViewHolder(holder: SelectedSpecialtiesHolder, position: Int)
-            = holder.bind(position, specialties[position])
+            = holder.bind(specialties[position])
 
     override fun getItemCount(): Int
             = specialties.size
 
     inner class SelectedSpecialtiesHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(position: Int, specialty: Specialty) {
+        fun bind(specialty: Specialty) {
             val profileTerm = specialty.profileTerm
             val oldMinimalScore = specialty.minimalScore
 
@@ -133,20 +133,14 @@ class SelectedSpecialtiesAdapter()
                 else -> 0
             }
 
-            selectedSpecialtyNameValue.setText(specialty.shortName)
-            selectedAmountOfStudentsValue.setText(currentStudentsList?.size.toString())
-
-            //currentStudentsList?.size?.let { selectedAmountOfStudentsValue.setText(it) }
-
-
-            selectedPositionValue.setText(newPosition.toString())
-            selectedOldMinimalScoreValue.setText(oldMinimalScore.toString())
-            selectedNewMinimalScoreValue.setText(newMinimalScore.toString())
+            selectedSpecialtyNameValue.text = specialty.shortName
+            selectedAmountOfStudentsValue.text = currentStudentsList?.size.toString()
+            selectedPositionValue.text = newPosition.toString()
+            selectedOldMinimalScoreValue.text = oldMinimalScore.toString()
+            selectedNewMinimalScoreValue.text = newMinimalScore.toString()
         }
     }
-
-
-    /*override*/ fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>? {
+    fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>? {
         val faculties = myApplication.returnFaculties()
 
         return when (pos) {

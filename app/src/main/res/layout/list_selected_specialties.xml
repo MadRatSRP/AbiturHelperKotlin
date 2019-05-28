@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginTop="15dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/selectedSpecialtyName"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,46 +19,41 @@
             android:id="@+id/selectedSpecialtyNameText"
             android:text="@string/selectedSpecialtyName"
             style="@style/profileTextDescription" />
-        <EditText
+        <TextView
             android:id="@+id/selectedSpecialtyNameValue"
-            android:enabled="false"
-            android:textColor="@color/BLACK"
-            android:background="@android:color/transparent"
-            android:textSize="20sp"
-            android:layout_width="100dp"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center" />
     </LinearLayout>
+    <View
+        android:id="@+id/selectedFirstDivider"
+        style="@style/Divider"
+        android:layout_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectedSpecialtyName"/>
     <LinearLayout
         android:id="@+id/selectedAmountOfStudents"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectedSpecialtyName">
+        app:layout_constraintTop_toBottomOf="@id/selectedFirstDivider">
         <TextView
             android:id="@+id/selectedAmountOfStudentsText"
             android:text="@string/selectedAmountOfStudents"
             style="@style/profileTextDescription" />
-        <EditText
+        <TextView
             android:id="@+id/selectedAmountOfStudentsValue"
-            android:enabled="false"
-            android:textColor="@color/BLACK"
-            android:background="@android:color/transparent"
-            android:textSize="20sp"
-            android:layout_width="55dp"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/selectedPosition"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -70,21 +64,15 @@
             android:id="@+id/selectedPositionText"
             android:text="@string/selectedPosition"
             style="@style/profileTextDescription" />
-        <EditText
+        <TextView
             android:id="@+id/selectedPositionValue"
-            android:enabled="false"
-            android:textColor="@color/BLACK"
-            android:background="@android:color/transparent"
-            android:textSize="20sp"
-            android:layout_width="55dp"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/selectedOldMinimalScore"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,21 +83,15 @@
             android:id="@+id/selectedOldMinimalScoreText"
             android:text="@string/selectedOldMinimalScore"
             style="@style/profileTextDescription" />
-        <EditText
+        <TextView
             android:id="@+id/selectedOldMinimalScoreValue"
-            android:enabled="false"
-            android:textColor="@color/BLACK"
-            android:background="@android:color/transparent"
-            android:textSize="20sp"
-            android:layout_width="55dp"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/selectedNewMinimalScore"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -120,13 +102,10 @@
             android:id="@+id/selectedNewMinimalScoreText"
             android:text="@string/selectedNewMinimalScore"
             style="@style/profileTextDescription" />
-        <EditText
+        <TextView
             android:id="@+id/selectedNewMinimalScoreValue"
-            android:enabled="false"
-            android:textColor="@color/BLACK"
-            android:background="@android:color/transparent"
-            android:textSize="20sp"
-            android:layout_width="55dp"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center" />
     </LinearLayout>
