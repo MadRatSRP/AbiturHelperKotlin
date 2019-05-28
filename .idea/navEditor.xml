@@ -146,39 +146,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="setupAdditional">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="41" />
-                            <option name="y" value="34" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_setupAdditional_to_pickUpSpecialtiesView">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="setupScore">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-245" />
-                            <option name="y" value="36" />
+                            <option name="x" value="5" />
+                            <option name="y" value="29" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_setupScore_to_setupAdditional">
+                            <entry key="action_setupScore_to_pickUpSpecialtiesView">
                               <value>
                                 <LayoutPositions />
                               </value>

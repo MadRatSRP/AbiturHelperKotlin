@@ -5,9 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.pick_up_specialties.OriginalScoreView">
+    tools:context=".fragments.pick_up_specialties.SetupScoreView">
     <LinearLayout
-        android:id="@+id/profileMaths"
+        android:id="@+id/setupScoreMaths"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -18,131 +18,153 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/profileMathsText"
+            android:id="@+id/setupScoreMathsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textMaths"
-            android:textSize="19dp"/>
+            android:text="@string/setupScoreMathsText"
+            android:textSize="19sp"/>
         <EditText
-            android:id="@+id/profileMathsValue"
+            android:id="@+id/setupScoreMathsValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/profileRussian"
+        android:id="@+id/setupScoreRussian"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/profileMaths"
+        app:layout_constraintTop_toBottomOf="@id/setupScoreMaths"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/profileRussianText"
+            android:id="@+id/setupScoreRussianText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textRussian"
-            android:textSize="19dp"/>
+            android:text="@string/setupScoreRussianText"
+            android:textSize="19sp"/>
         <EditText
-            android:id="@+id/profileRussianValue"
+            android:id="@+id/setupScoreRussianValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/profilePhysics"
+        android:id="@+id/setupScorePhysics"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/profileRussian"
+        app:layout_constraintTop_toBottomOf="@id/setupScoreRussian"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/profilePhysicsText"
+            android:id="@+id/setupScorePhysicsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textPhysics"
-            android:textSize="19dp"/>
+            android:text="@string/setupScorePhysicsText"
+            android:textSize="19sp"/>
         <EditText
-            android:id="@+id/profilePhysicsValue"
+            android:id="@+id/setupScorePhysicsValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/profileComputerScience"
+        android:id="@+id/setupScoreComputerScience"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/profilePhysics"
+        app:layout_constraintTop_toBottomOf="@id/setupScorePhysics"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/profileComputerScienceText"
+            android:id="@+id/setupScoreComputerScienceText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textComputerScience"
-            android:textSize="19dp"/>
+            android:text="@string/setupScoreComputerScienceText"
+            android:textSize="19sp"/>
         <EditText
-            android:id="@+id/profileComputerScienceValue"
+            android:id="@+id/setupScoreComputerScienceValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/profileSocialScience"
+        android:id="@+id/setupScoreSocialScience"
         android:orientation="horizontal"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/profileComputerScience"
+        app:layout_constraintTop_toBottomOf="@id/setupScoreComputerScience"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
         <TextView
-            android:id="@+id/profileSocialScienceText"
+            android:id="@+id/setupScoreSocialScienceText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/textSocialScience"
-            android:textSize="19dp"/>
+            android:text="@string/setupScoreSocialScienceText"
+            android:textSize="19sp"/>
         <EditText
-            android:id="@+id/profileSocialScienceValue"
+            android:id="@+id/setupScoreSocialScienceValue"
             android:ems="10"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/additionalScoreHint"
+        android:gravity="center"
+        android:text="@string/additionalScoreHint"
+        android:textSize="20sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setupScoreSocialScience"/>
+    <Spinner
+        android:id="@+id/additionalScoreSpinner"
+        android:gravity="center"
+        android:entries="@array/additionalScoreSpinnerEntries"
+        android:entryValues="@array/additionalScoreSpinnerEntryValues"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="55dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/additionalScoreHint"/>
     <Button
-        android:id="@+id/toAdditionalScore"
-        android:text="@string/showAdditionalScore"
+        android:id="@+id/showSpecialtiesScreen"
+        android:text="@string/pickUpSpecialtiesTitle"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

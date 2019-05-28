@@ -5,5 +5,6 @@ data class Score(
         var russian: Int = 0,
         var physics: Int,
         var computerScience: Int,
-        var socialScience: Int
+        var socialScience: Int,
+        var additionalScore: Int = 0
 )

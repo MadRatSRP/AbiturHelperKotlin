@@ -35,7 +35,7 @@
                     <TextView
                         android:id="@+id/profileMathsText"
                         style="@style/profileTextDescription"
-                        android:text="@string/textMaths" />
+                        android:text="@string/setupScoreMathsText" />
                     <EditText
                         android:id="@+id/profileMathsValue"
                         android:text="@string/profileEditFieldDefaultValue"
@@ -66,7 +66,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileRussianText"
-                        android:text="@string/textRussian"
+                        android:text="@string/setupScoreRussianText"
                         style="@style/profileTextDescription" />
                     <EditText
                         android:id="@+id/profileRussianValue"
@@ -98,7 +98,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profilePhysicsText"
-                        android:text="@string/textPhysics"
+                        android:text="@string/setupScorePhysicsText"
                         style="@style/profileTextDescription" />
                     <EditText
                         android:id="@+id/profilePhysicsValue"
@@ -130,7 +130,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileComputerScienceText"
-                        android:text="@string/textComputerScience"
+                        android:text="@string/setupScoreComputerScienceText"
                         style="@style/profileTextDescription" />
                     <EditText
                         android:id="@+id/profileComputerScienceValue"
@@ -162,7 +162,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileSocialScienceText"
-                        android:text="@string/textSocialScience"
+                        android:text="@string/setupScoreSocialScienceText"
                         style="@style/profileTextDescription" />
                     <EditText
                         android:id="@+id/profileSocialScienceValue"

@@ -1,11 +1,4 @@
-package com.madrat.abiturhelper.presenters.fragments
-
-import com.madrat.abiturhelper.interfaces.fragments.OriginalScoreMVP
-import com.madrat.abiturhelper.model.Score
-import com.madrat.abiturhelper.util.MyApplication
-import com.madrat.abiturhelper.util.returnInt
-
-class OriginalScorePresenter(private var ssv: OriginalScoreMVP.View) : OriginalScoreMVP.Presenter {
+class SetupScorePresenter(private var ssv: SetupScoreMVP.View) : SetupScoreMVP.Presenter {
 
     override fun saveUserData(maths: String, russian: String, physics: String,
                               computerScience: String, socialScience: String) {
@@ -39,5 +32,11 @@ class OriginalScorePresenter(private var ssv: OriginalScoreMVP.View) : OriginalS
     }
     override fun checkSocialScience(soc_passing: Int, score_limit: Int) {
         ssv.socialScienceIsValid(soc_passing, score_limit)
+    }
+
+    override fun saveAdditionalScore(additionalScore: Int) {
+        val myApplication = MyApplication.instance
+
+        myApplication.saveAdditionalScore(additionalScore)
     }
 }

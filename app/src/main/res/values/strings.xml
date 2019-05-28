@@ -4,6 +4,12 @@
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
     <string name="calculateGraduationChancesTitle">Оценить шанс поступления</string>
 
+    <string name="setupScoreMathsText">Математика</string>
+    <string name="setupScoreRussianText">Русский язык</string>
+    <string name="setupScorePhysicsText">Физика</string>
+    <string name="setupScoreComputerScienceText">Информатика</string>
+    <string name="setupScoreSocialScienceText">Обществознание</string>
+
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
     <string name="profileShowFinalList">Показать список</string>
@@ -36,13 +42,6 @@
     <string name="selectSpecialtiesForCalculatingTitle">Выберите специальности для рассчёта</string>
 
     <string name="showResult">Сохранить результат</string>
-    <string name="showAdditionalScore">Показать дополнительные баллы</string>
-
-    <string name="textMaths">Математика</string>
-    <string name="textRussian">Русский язык</string>
-    <string name="textPhysics">Физика</string>
-    <string name="textComputerScience">Информатика</string>
-    <string name="textSocialScience">Обществознание</string>
 
     <string name="facultyEntriesTotalText">Всего мест</string>
     <string name="facultyEntriesFreeText">Свободно мест</string>

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.WorkWithSpecialtiesView">
+    tools:context=".fragments.pick_up_specialties.WorkWithSpecialtiesView">
     <Button
         android:id="@+id/workWithSpecialtiesToCurrentList"
         android:text="К актуальному списку"

@@ -6,8 +6,12 @@ import com.madrat.abiturhelper.model.*
 
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }
+    // Score
+    private var fullName: FullName? = null
     private var scores: Score? = null
     private var additionalScore: Int? = 0
+
+
     private var bachelors: ArrayList<Student>? = null
     private var scoreTypes: ScoreTypes? = null
     private var faculties: Faculties? = null
@@ -33,6 +37,11 @@ class MyApplication: Application() {
     private var selectedSpecialties: ArrayList<Specialty>? = null
 
     //Score
+    fun saveFullName(fullName: FullName) {
+        this.fullName = fullName
+    }
+    fun returnFullName() = fullName
+
     fun saveScore(scores: Score) {
         this.scores = scores
         this.scores?.let {
@@ -68,6 +77,8 @@ class MyApplication: Application() {
         showLog("Возвращёны дополнительные баллы: ${this.additionalScore}")
         return additionalScore
     }
+
+
     //Bachelors
     fun saveBachelors(bachelors: ArrayList<Student>?) {
         this.bachelors = bachelors
