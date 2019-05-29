@@ -36,14 +36,14 @@
 
     <string name="selectSaveCheckedSpecialties">Сохранить выбор</string>
 
+    <string name="calculateUserPlacesTitle">Текущий список поступления</string>
+
     <string name="profileUpdateScores">Сохранить изменения</string>
     <string name="profileUpdateScoresMessage">Баллы успешно обновлены</string>
 
     <string name="profileEditFieldDefaultValue">0</string>
 
     <string name="profileAmountOfSpecialties">Количество специальностей</string>
-
-    <string name="calculateUserPlacesTitle">Вычислить позиции пользователя</string>
 
     <string name="additionalScoreHint">Укажите сумму своих дополнительных баллов:</string>
 

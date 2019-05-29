@@ -1,74 +1,45 @@
-package com.madrat.abiturhelper.fragments.profile
+package com.madrat.abiturhelper.unused_files.recent
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
-import com.madrat.abiturhelper.interfaces.fragments.GraduationConfirmChoiceMVP
-import com.madrat.abiturhelper.model.Graduation
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.util.MyApplication
-import com.madrat.abiturhelper.util.linearManager
+import com.madrat.abiturhelper.util.inflate
 import com.madrat.abiturhelper.util.showLog
-import kotlinx.android.synthetic.main.fragment_graduation_confirm_choice.*
-import kotlinx.android.synthetic.main.fragment_graduation_confirm_choice.view.*
+import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.list_selected_specialties.*
 
-class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
-    private var adapter: SpecialtiesAdapter? = null
+class SelectedSpecialtiesAdapter
+    : RecyclerView.Adapter<SelectedSpecialtiesAdapter.SelectedSpecialtiesHolder>(){
     val myApplication = MyApplication.instance
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    private var specialties = ArrayList<Specialty>()
 
-        val selectedSpecialties = myApplication.returnSelectedSpecialties()
-
-        selectedSpecialties?.let { showSelectedSpecialties(it) }
-
-        val graduationList = selectedSpecialties?.let { calculateGraduationData(it) }
-        graduationList?.let { myApplication.saveGraduationList(it) }
-
-        confirmChoiceShowGraduationList.setOnClickListener {
-            toSpecialties(null, R.id.action_confirm_choice_to_show_current_list)
-        }
-    }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity)
-                .supportActionBar?.setTitle(R.string.profileGraduationConfirmChoiceTitle)
-        val view = inflater.inflate(R.layout.fragment_graduation_confirm_choice,
-                container, false)
-
-        adapter = SpecialtiesAdapter(null)
-        view.confirmChoiceRecyclerView.adapter = adapter
-        view.confirmChoiceRecyclerView.linearManager()
-
-        return view
+    fun updateSpecialtiesList(new_specialties: ArrayList<Specialty>) {
+        specialties.clear()
+        specialties.addAll(new_specialties)
+        this.notifyDataSetChanged()
     }
 
-    /*override*/fun showSelectedSpecialties(specialties: ArrayList<Specialty>) {
-        adapter?.updateSpecialtiesList(specialties)
-        confirmChoiceRecyclerView.adapter = adapter
-    }
-    /*override*/ fun toSpecialties(bundle: Bundle?, actionId: Int) {
-        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectedSpecialtiesHolder
+            = SelectedSpecialtiesHolder(parent.inflate(R.layout.list_selected_specialties))
 
-    fun calculateGraduationData(selectedSpecialties: ArrayList<Specialty>): ArrayList<Graduation> {
-        val graduationList = ArrayList<Graduation>()
+    override fun onBindViewHolder(holder: SelectedSpecialtiesHolder, position: Int)
+            = holder.bind(specialties[position])
 
-        selectedSpecialties.forEach {
-            val specialtyName = it.shortName
-            val facultyName = it.faculty
-            val profileTerm = it.profileTerm
-            val oldMinimalScore = it.minimalScore
+    override fun getItemCount(): Int
+            = specialties.size
 
-            val facultyNumber = when(facultyName) {
+    inner class SelectedSpecialtiesHolder internal constructor(override val containerView: View)
+        : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        fun bind(specialty: Specialty) {
+            val profileTerm = specialty.profileTerm
+            val oldMinimalScore = specialty.minimalScore
+
+            val facultyNumber = when(specialty.faculty) {
                 // УНТИ
                 "Учебно-научный технологический институт" -> 0
                 // ФЭУ
@@ -84,7 +55,7 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
                 else -> 7
             }
 
-            val studentsOfFaculty = when (facultyName) {
+            val studentsOfFaculty = when (specialty.faculty) {
                 // УНТИ
                 "Учебно-научный технологический институт" -> myApplication.returnUNTI()
                 // ФЭУ
@@ -102,7 +73,7 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
 
             val specialtiesOfFaculty = getSpecialtiesListByPosition(facultyNumber)
 
-            val positionOfSpecialty = specialtiesOfFaculty?.indexOf(it)
+            val positionOfSpecialty = specialtiesOfFaculty?.indexOf(specialty)
             showLog("ПОЗИЦИЯ СПЕЦИАЛЬНОСТИ: $positionOfSpecialty")
 
             val currentStudentsList = positionOfSpecialty?.let{ studentsOfFaculty?.get(positionOfSpecialty) }
@@ -134,10 +105,10 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
             val newPosition = currentStudentsList?.indexOf(student)
             showLog("ПОЗИЦИЯ: $newPosition")
 
-            val newMinimalScore = when(profileTerm) {
+            val newMinimalScore = when(specialty.profileTerm) {
                 "Физика" -> {
                     val studentWithMinimalScore = currentStudentsList?.minBy {
-                        r -> r.maths + r.physics + r.additionalScore
+                        it -> it.maths + it.physics + it.additionalScore
                     }
                     studentWithMinimalScore?.let {
                         r -> r.maths + r.physics + r.additionalScore
@@ -145,7 +116,7 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
                 }
                 "Обществознание" -> {
                     val studentWithMinimalScore = currentStudentsList?.minBy {
-                        r -> r.maths + r.socialScience + r.additionalScore
+                        it -> it.maths + it.socialScience + it.additionalScore
                     }
                     studentWithMinimalScore?.let {
                         r -> r.maths + r.socialScience + r.additionalScore
@@ -153,7 +124,7 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
                 }
                 "Информатика и ИКТ" -> {
                     val studentWithMinimalScore = currentStudentsList?.minBy {
-                        r -> r.maths + r.computerScience + r.additionalScore
+                        it -> it.maths + it.computerScience + it.additionalScore
                     }
                     studentWithMinimalScore?.let {
                         r -> r.maths + r.computerScience + r.additionalScore
@@ -162,30 +133,13 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
                 else -> 0
             }
 
-            val amountOfStudents = currentStudentsList?.let { currentStudentsList.size }
-
-            val graduation = amountOfStudents?.let { amount ->
-                newPosition?.let { newPos ->
-                    newMinimalScore?.let { newMinScore ->
-                        Graduation(
-                                specialtyName,
-                                facultyName,
-                                amount,
-                                newPos,
-                                oldMinimalScore,
-                                newMinScore
-                        )
-                    }
-                }
-            }
-
-            graduation?.let { grad -> graduationList.add(grad) }
+            selectedSpecialtyNameValue.text = specialty.shortName
+            selectedAmountOfStudentsValue.text = currentStudentsList?.size.toString()
+            selectedPositionValue.text = newPosition.toString()
+            selectedOldMinimalScoreValue.text = oldMinimalScore.toString()
+            selectedNewMinimalScoreValue.text = newMinimalScore.toString()
         }
-
-        return graduationList
     }
-
-
     fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>? {
         val faculties = myApplication.returnFaculties()
 

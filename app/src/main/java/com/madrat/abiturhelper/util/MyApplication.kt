@@ -36,6 +36,8 @@ class MyApplication: Application() {
     private var itemStateArray: SparseBooleanArray? = null
     private var selectedSpecialties: ArrayList<Specialty>? = null
 
+    private var graduationList: ArrayList<Graduation>? = null
+
     //Score
     fun saveFullName(fullName: FullName) {
         this.fullName = fullName
@@ -256,4 +258,9 @@ class MyApplication: Application() {
         this.selectedSpecialties = selectedSpecialties
     }
     fun returnSelectedSpecialties() = selectedSpecialties
+
+    fun saveGraduationList(list: ArrayList<Graduation>) {
+        this.graduationList = list
+    }
+    fun returnGraduationList() = graduationList
 }

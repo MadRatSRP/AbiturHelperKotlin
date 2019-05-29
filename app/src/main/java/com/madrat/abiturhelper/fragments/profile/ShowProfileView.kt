@@ -75,9 +75,9 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         profileApplySelectSpecialtiesForGraduation.setOnClickListener {
             toSpecialties(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
         }
-        /*profileAddToListsCalculatePositions.setOnClickListener {
-            toSpecialties(null, R.id.action_profile_to_calculateUserPlacesView)
-        }*/
+        profileAddToListsCalculatePositions.setOnClickListener {
+            toSpecialties(null, R.id.action_profile_to_show_current_list)
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

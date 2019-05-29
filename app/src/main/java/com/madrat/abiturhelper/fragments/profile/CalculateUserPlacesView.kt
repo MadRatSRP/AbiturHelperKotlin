@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SelectedSpecialtiesAdapter
+import com.madrat.abiturhelper.model.Graduation
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.util.MyApplication
@@ -24,8 +25,11 @@ class CalculateUserPlacesView: Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val selectedSpecialties = myApplication.returnSelectedSpecialties()
-        selectedSpecialties?.let { showSelectedSpecialties(it) }
+        /*val selectedSpecialties = myApplication.returnSelectedSpecialties()
+        selectedSpecialties?.let { showSelectedSpecialties(it) }*/
+
+        val graduationList = myApplication.returnGraduationList()
+        graduationList?.let { showGraduation(it) }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,8 +45,8 @@ class CalculateUserPlacesView: Fragment() {
         return view
     }
 
-    /*override*/ fun showSelectedSpecialties(specialties: ArrayList<Specialty>) {
-        adapter?.updateSpecialtiesList(specialties)
+    /*override*/ fun showGraduation(graduationList: ArrayList<Graduation>) {
+        adapter?.updateGraduationList(graduationList)
         calculateRecyclerView.adapter = adapter
     }
 }

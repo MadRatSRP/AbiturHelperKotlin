@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_profile_to_selectSpecialtiesForCalculating"
             app:destination="@id/select_specialties" />
+        <action
+            android:id="@+id/action_profile_to_show_current_list"
+            app:destination="@id/show_current_list" />
     </fragment>
     <fragment
         android:id="@+id/pickUpSpecialtiesView"
