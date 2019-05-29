@@ -1,9 +1,9 @@
-package com.madrat.abiturhelper.interfaces.fragments
+package com.madrat.abiturhelper.interfaces.fragments.profile
 
 import android.util.SparseBooleanArray
 import com.madrat.abiturhelper.model.Specialty
 
-interface SelectSpecialtiesForGraduationMVP {
+interface GraduationSelectSpecialtiesMVP {
     interface View {
         fun setupMVP()
         fun showSpecialties(specialties: ArrayList<Specialty>?)

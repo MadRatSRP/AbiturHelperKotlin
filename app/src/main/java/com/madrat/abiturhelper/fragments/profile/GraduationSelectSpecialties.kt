@@ -9,24 +9,24 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.CompleteSpecialtiesAdapter
-import com.madrat.abiturhelper.interfaces.fragments.SelectSpecialtiesForGraduationMVP
+import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationSelectSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.presenters.fragments.SelectSpecialtiesForGraduationPresenter
+import com.madrat.abiturhelper.presenters.fragments.profile.GraduationSelectSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_graduation_select_specialties.*
 import kotlinx.android.synthetic.main.fragment_graduation_select_specialties.view.*
 
-class SelectSpecialtiesForGraduation
-    : Fragment(), SelectSpecialtiesForGraduationMVP.View {
+class GraduationSelectSpecialties
+    : Fragment(), GraduationSelectSpecialtiesMVP.View {
     private var adapter: CompleteSpecialtiesAdapter? = null
-    private var selectSpecialtiesForGraduationPresenter
-            : SelectSpecialtiesForGraduationPresenter? = null
+    private var graduationSelectSpecialtiesPresenter
+            : GraduationSelectSpecialtiesPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val faculties = selectSpecialtiesForGraduationPresenter?.returnCompleteListOfSpecilaties()
+        val faculties = graduationSelectSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
 
         val sumOfFaculties = ArrayList<Specialty>()
 
@@ -41,12 +41,11 @@ class SelectSpecialtiesForGraduation
         selectSaveCheckedSpecialties.setOnClickListener {view ->
             val selectedSpecialties = adapter?.returnSelectedSpecialties()
             //showLog("Список: ${array?.size}")
-            selectSpecialtiesForGraduationPresenter?.saveSelectedSpecialties(selectedSpecialties)
+            graduationSelectSpecialtiesPresenter?.saveSelectedSpecialties(selectedSpecialties)
 
             val itemStateArray = adapter?.returnItemStateArray()
-            selectSpecialtiesForGraduationPresenter?.saveItemStateArray(itemStateArray)
+            graduationSelectSpecialtiesPresenter?.saveItemStateArray(itemStateArray)
 
-            view.showSnack(R.string.profileGraduationSelectSpecialtiesMessage)
             toSpecialties(null, R.id.action_select_specialties_to_confirm_choice)
         }
     }
@@ -59,7 +58,7 @@ class SelectSpecialtiesForGraduation
         setupMVP()
 
         adapter = CompleteSpecialtiesAdapter(
-            selectSpecialtiesForGraduationPresenter?.returnItemStateArray()
+            graduationSelectSpecialtiesPresenter?.returnItemStateArray()
         )
         view.selectForRecyclerView.adapter = adapter
         view.selectForRecyclerView.linearManager()
@@ -68,7 +67,7 @@ class SelectSpecialtiesForGraduation
     }
 
     override fun setupMVP() {
-        selectSpecialtiesForGraduationPresenter = SelectSpecialtiesForGraduationPresenter()
+        graduationSelectSpecialtiesPresenter = GraduationSelectSpecialtiesPresenter()
     }
     override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }

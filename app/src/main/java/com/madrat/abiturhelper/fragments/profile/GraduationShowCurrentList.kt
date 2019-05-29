@@ -8,27 +8,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SelectedSpecialtiesAdapter
+import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationShowCurrentListMVP
 import com.madrat.abiturhelper.model.Graduation
-import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.model.Student
-import com.madrat.abiturhelper.util.MyApplication
+import com.madrat.abiturhelper.presenters.fragments.profile.GraduationShowCurrentListPresenter
 import com.madrat.abiturhelper.util.linearManager
-import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_calculate_user_places.*
 import kotlinx.android.synthetic.main.fragment_calculate_user_places.view.*
 
-class CalculateUserPlacesView: Fragment() {
-    var adapter: SelectedSpecialtiesAdapter? = null
-
-    val myApplication = MyApplication.instance
+class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
+    private var adapter: SelectedSpecialtiesAdapter? = null
+    private var graduationShowCurrentListPresenter: GraduationShowCurrentListPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupMVP()
 
-        /*val selectedSpecialties = myApplication.returnSelectedSpecialties()
-        selectedSpecialties?.let { showSelectedSpecialties(it) }*/
-
-        val graduationList = myApplication.returnGraduationList()
+        val graduationList = graduationShowCurrentListPresenter?.returnGraduationList()
         graduationList?.let { showGraduation(it) }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -38,14 +33,21 @@ class CalculateUserPlacesView: Fragment() {
                 container, false)
 
         adapter = SelectedSpecialtiesAdapter()
-
         view.calculateRecyclerView.adapter = adapter
         view.calculateRecyclerView.linearManager()
 
         return view
     }
+    override fun onDestroyView() {
+        graduationShowCurrentListPresenter = null
+        adapter = null
+        super.onDestroyView()
+    }
 
-    /*override*/ fun showGraduation(graduationList: ArrayList<Graduation>) {
+    override fun setupMVP() {
+        graduationShowCurrentListPresenter = GraduationShowCurrentListPresenter()
+    }
+    override fun showGraduation(graduationList: ArrayList<Graduation>) {
         adapter?.updateGraduationList(graduationList)
         calculateRecyclerView.adapter = adapter
     }

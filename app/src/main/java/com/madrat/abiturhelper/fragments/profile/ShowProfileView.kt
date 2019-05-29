@@ -10,13 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
+import com.madrat.abiturhelper.interfaces.fragments.profile.ShowProfileMVP
 import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.presenters.fragments.ShowProfilePresenter
+import com.madrat.abiturhelper.presenters.fragments.profile.ShowProfilePresenter
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ShowProfileView: Fragment(), ProfileMVP.View {
+class ShowProfileView: Fragment(), ShowProfileMVP.View {
     private var showProfilePresenter: ShowProfilePresenter? = null
 
     //private var adapter: SpecialtiesAdapter? = null

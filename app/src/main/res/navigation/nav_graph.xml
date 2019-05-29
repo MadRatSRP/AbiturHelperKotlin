@@ -80,19 +80,17 @@
         android:label="ShowFittingSpecialties" />
     <fragment
         android:id="@+id/select_specialties"
-        android:name="com.madrat.abiturhelper.fragments.profile.SelectSpecialtiesForGraduation" >
+        android:name="com.madrat.abiturhelper.fragments.profile.GraduationSelectSpecialties" >
         <action
             android:id="@+id/action_select_specialties_to_confirm_choice"
             app:destination="@id/confirm_choice" />
     </fragment>
     <fragment
         android:id="@+id/show_current_list"
-        android:name="com.madrat.abiturhelper.fragments.profile.CalculateUserPlacesView"
-        android:label="CalculateUserPlacesView" />
+        android:name="com.madrat.abiturhelper.fragments.profile.GraduationShowCurrentList" />
     <fragment
         android:id="@+id/confirm_choice"
-        android:name="com.madrat.abiturhelper.fragments.profile.GraduationConfirmChoice"
-        android:label="GraduationConfirmChoice" >
+        android:name="com.madrat.abiturhelper.fragments.profile.GraduationConfirmChoice">
         <action
             android:id="@+id/action_confirm_choice_to_show_current_list"
             app:destination="@id/show_current_list" />

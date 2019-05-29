@@ -11,7 +11,6 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.ShowFittingSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.presenters.fragments.ShowFittingSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_show_fitting_specialties.*
@@ -31,7 +30,6 @@ class ShowFittingSpecialties: Fragment(), ShowFittingSpecialtiesMVP.View {
             300 -> showFittingSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
             else -> null
         }
-
         fittingSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -41,8 +39,8 @@ class ShowFittingSpecialties: Fragment(), ShowFittingSpecialtiesMVP.View {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        //val title = arguments?.getString("title")
-        (activity as AppCompatActivity).supportActionBar?.title = "gav-gav"
+        (activity as AppCompatActivity).supportActionBar?.title =
+                context?.getString(R.string.resultShowFittingSpecialties)
         val view = inflater.inflate(R.layout.fragment_show_fitting_specialties,
                 container, false)
 
@@ -50,6 +48,11 @@ class ShowFittingSpecialties: Fragment(), ShowFittingSpecialtiesMVP.View {
         view.fittingRecyclerView.adapter = adapter
         view.fittingRecyclerView.linearManager()
         return view
+    }
+    override fun onDestroyView() {
+        showFittingSpecialtiesPresenter = null
+        adapter = null
+        super.onDestroyView()
     }
 
     override fun setupMVP() {

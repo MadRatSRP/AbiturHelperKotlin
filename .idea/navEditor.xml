@@ -107,6 +107,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_profile_to_show_current_list">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>

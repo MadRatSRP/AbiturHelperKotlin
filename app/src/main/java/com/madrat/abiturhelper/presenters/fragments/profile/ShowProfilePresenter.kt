@@ -1,11 +1,11 @@
-package com.madrat.abiturhelper.presenters.fragments
+package com.madrat.abiturhelper.presenters.fragments.profile
 
 import android.os.Bundle
-import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
+import com.madrat.abiturhelper.interfaces.fragments.profile.ShowProfileMVP
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
 
-class ShowProfilePresenter(private var pv: ProfileMVP.View) : ProfileMVP.Presenter {
+class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP.Presenter {
     var myApplication = MyApplication.instance
 
     override fun updateScores(maths: String, russian: String, physics: String, computerScience: String,
