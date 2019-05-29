@@ -10,7 +10,7 @@
         <item android:id="@+id/currentList"
             android:title="@string/currentListTitle" />
 
-        <item android:id="@+id/selectSpecialtiesForCalculating"
+        <item android:id="@+id/select_specialties"
             android:title="@string/calculateGraduationChancesTitle"/>
     </group>
 </menu>

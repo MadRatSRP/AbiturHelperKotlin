@@ -8,14 +8,23 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="calculateUserPlacesView">
+                  <entry key="confirm_choice">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1238" />
-                            <option name="y" value="-40" />
+                            <option name="x" value="1473" />
+                            <option name="y" value="-366" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_confirm_choice_to_show_current_list">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -88,11 +97,6 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_profile_to_calculateUserPlacesView">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_profile_to_selectSpecialtiesForCalculating">
                               <value>
                                 <LayoutPositions />
@@ -134,7 +138,7 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="selectSpecialtiesForCalculating">
+                  <entry key="select_specialties">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -142,6 +146,15 @@
                             <option name="x" value="1215" />
                             <option name="y" value="-361" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_select_specialties_to_confirm_choice">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -208,6 +221,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="show_current_list">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1761" />
+                            <option name="y" value="-359" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

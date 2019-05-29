@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ShowProfileView">
+    tools:context=".fragments.profile.ShowProfileView">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -289,32 +289,24 @@
                     android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/profileAddToLists"
+                android:id="@+id/profileApply"
                 style="@style/mainLinearLayout">
                 <TextView
-                    android:id="@+id/profileAddToListsTitle"
-                    android:text="@string/profileAddToListsTitle"
+                    android:id="@+id/profileApplyTitle"
+                    android:text="@string/profileApplyTitle"
                     style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
                     style="@style/Divider"
                     android:layout_weight="1"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/profileAddToListsRecyclerView"
+                <Button
+                    android:id="@+id/profileApplySelectSpecialtiesForGraduation"
+                    android:text="@string/profileApplySelectSpecialtiesForGraduation"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-                <ImageButton
-                    android:id="@+id/profileAddToListsAddNewSpecialty"
-                    android:layout_gravity="center"
-                    android:scaleType="fitXY"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/ic_add_circle"
-                    android:layout_marginStart="8dp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp" />
+                    android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/profileAddToListsCalculatePositions"
-                    android:text="@string/profileAddToListsCalculatePositions"
+                    android:text="@string/profileApplyCalculatePositions"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

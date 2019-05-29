@@ -25,17 +25,14 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.madrat.abiturhelper.fragments.ShowProfileView"
+        android:name="com.madrat.abiturhelper.fragments.profile.ShowProfileView"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profile_to_showFittingSpecialties"
             app:destination="@id/showFittingSpecialties" />
         <action
             android:id="@+id/action_profile_to_selectSpecialtiesForCalculating"
-            app:destination="@id/selectSpecialtiesForCalculating" />
-        <action
-            android:id="@+id/action_profile_to_calculateUserPlacesView"
-            app:destination="@id/calculateUserPlacesView" />
+            app:destination="@id/select_specialties" />
     </fragment>
     <fragment
         android:id="@+id/pickUpSpecialtiesView"
@@ -79,11 +76,22 @@
         android:name="com.madrat.abiturhelper.fragments.ShowFittingSpecialties"
         android:label="ShowFittingSpecialties" />
     <fragment
-        android:id="@+id/selectSpecialtiesForCalculating"
-        android:name="com.madrat.abiturhelper.fragments.SelectSpecialtiesForCalculating"
-        android:label="SelectSpecialtiesForCalculating" />
+        android:id="@+id/select_specialties"
+        android:name="com.madrat.abiturhelper.fragments.profile.SelectSpecialtiesForGraduation" >
+        <action
+            android:id="@+id/action_select_specialties_to_confirm_choice"
+            app:destination="@id/confirm_choice" />
+    </fragment>
     <fragment
-        android:id="@+id/calculateUserPlacesView"
+        android:id="@+id/show_current_list"
         android:name="com.madrat.abiturhelper.fragments.profile.CalculateUserPlacesView"
         android:label="CalculateUserPlacesView" />
+    <fragment
+        android:id="@+id/confirm_choice"
+        android:name="com.madrat.abiturhelper.fragments.profile.GraduationConfirmChoice"
+        android:label="GraduationConfirmChoice" >
+        <action
+            android:id="@+id/action_confirm_choice_to_show_current_list"
+            app:destination="@id/show_current_list" />
+    </fragment>
 </navigation>

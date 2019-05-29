@@ -23,8 +23,18 @@
     <string name="profileShowFinalList">Показать список</string>
     <string name="profileFinalListOfSpecialtiesTitle">Подобранный список специальностей</string>
 
-    <string name="profileAddToListsTitle">Добавить в списки</string>
-    <string name="profileAddToListsCalculatePositions">Рассчитать позиции</string>
+    <string name="profileApplyTitle">Добавить в списки</string>
+    <string name="profileApplyCalculatePositions">Рассчитать позиции</string>
+
+    <string name="profileApplySelectSpecialtiesForGraduation">Выбрать специальности для поступления</string>
+    <string name="profileApplySelectSpecialtiesForGraduationTitle">Выберите специальности</string>
+
+    <string name="profileGraduationSelectSpecialtiesMessage">Специальности были успешно сохранены</string>
+
+    <string name="profileGraduationConfirmChoiceTitle">Подтвердить выбор</string>
+    <string name="profileGraduationConfirmChoiceText">Вы выбрали следующие специальности:</string>
+
+    <string name="selectSaveCheckedSpecialties">Сохранить выбор</string>
 
     <string name="profileUpdateScores">Сохранить изменения</string>
     <string name="profileUpdateScoresMessage">Баллы успешно обновлены</string>
@@ -32,8 +42,6 @@
     <string name="profileEditFieldDefaultValue">0</string>
 
     <string name="profileAmountOfSpecialties">Количество специальностей</string>
-
-    <string name="selectSaveCheckedSpecialties">Сохранить выбранные специальности</string>
 
     <string name="calculateUserPlacesTitle">Вычислить позиции пользователя</string>
 

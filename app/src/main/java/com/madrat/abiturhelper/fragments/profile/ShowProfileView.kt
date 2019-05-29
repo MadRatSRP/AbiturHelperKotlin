@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.fragments
+package com.madrat.abiturhelper.fragments.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,19 +10,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.ProfileMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.ShowProfilePresenter
-import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_profile.view.*
 
 class ShowProfileView: Fragment(), ProfileMVP.View {
     private var showProfilePresenter: ShowProfilePresenter? = null
 
-    private var adapter: SpecialtiesAdapter? = null
+    //private var adapter: SpecialtiesAdapter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -75,21 +72,21 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
             val bundle = showProfilePresenter?.returnBundleWithListID(300)
             toSpecialties(bundle, R.id.action_profile_to_showFittingSpecialties)
         }
-        profileAddToListsAddNewSpecialty.setOnClickListener {
+        profileApplySelectSpecialtiesForGraduation.setOnClickListener {
             toSpecialties(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
         }
-        profileAddToListsCalculatePositions.setOnClickListener {
+        /*profileAddToListsCalculatePositions.setOnClickListener {
             toSpecialties(null, R.id.action_profile_to_calculateUserPlacesView)
-        }
+        }*/
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileTitle)
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        adapter = SpecialtiesAdapter(null)
+        /*adapter = SpecialtiesAdapter(null)
         view.profileAddToListsRecyclerView.adapter = adapter
-        view.profileAddToListsRecyclerView.linearManager()
+        view.profileAddToListsRecyclerView.linearManager()*/
 
         return view
     }
@@ -116,8 +113,8 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
         val amountOfFinalSpecialties = showProfilePresenter?.returnAmountOfFinalSpecialties()
         profileFinalListOfSpecialtiesAmountValue.setText(amountOfFinalSpecialties.toString())
 
-        val selectedSpecialties = showProfilePresenter?.returnSelectedSpecialties()
-        showSelectedSpecialties(selectedSpecialties)
+        /*val selectedSpecialties = showProfilePresenter?.returnSelectedSpecialties()
+        showSelectedSpecialties(selectedSpecialties)*/
     }
     override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
@@ -144,7 +141,7 @@ class ShowProfileView: Fragment(), ProfileMVP.View {
     }
 
     override fun showSelectedSpecialties(specialties: ArrayList<Specialty>?) {
-        specialties?.let { adapter?.updateSpecialtiesList(it) }
-        profileAddToListsRecyclerView?.adapter = adapter
+        /*specialties?.let { adapter?.updateSpecialtiesList(it) }
+        profileAddToListsRecyclerView?.adapter = adapter*/
     }
 }
