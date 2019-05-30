@@ -24,7 +24,7 @@
     <string name="profileFinalListOfSpecialtiesTitle">Подобранный список специальностей</string>
 
     <string name="profileApplyTitle">Добавить в списки</string>
-    <string name="profileApplyCalculatePositions">Рассчитать позиции</string>
+    <string name="profileGraduationShowCurrentList">Показать актуальный список</string>
 
     <string name="profileApplySelectSpecialtiesForGraduation">Выбрать специальности для поступления</string>
     <string name="profileApplySelectSpecialtiesForGraduationTitle">Выберите специальности</string>

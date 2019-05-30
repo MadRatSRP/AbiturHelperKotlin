@@ -12,8 +12,8 @@ import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationShowCurren
 import com.madrat.abiturhelper.model.Graduation
 import com.madrat.abiturhelper.presenters.fragments.profile.GraduationShowCurrentListPresenter
 import com.madrat.abiturhelper.util.linearManager
-import kotlinx.android.synthetic.main.fragment_calculate_user_places.*
-import kotlinx.android.synthetic.main.fragment_calculate_user_places.view.*
+import kotlinx.android.synthetic.main.fragment_graduation_show_current_list.*
+import kotlinx.android.synthetic.main.fragment_graduation_show_current_list.view.*
 
 class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
     private var adapter: SelectedSpecialtiesAdapter? = null
@@ -29,7 +29,7 @@ class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.calculateUserPlacesTitle)
-        val view = inflater.inflate(R.layout.fragment_calculate_user_places,
+        val view = inflater.inflate(R.layout.fragment_graduation_show_current_list,
                 container, false)
 
         adapter = SelectedSpecialtiesAdapter()

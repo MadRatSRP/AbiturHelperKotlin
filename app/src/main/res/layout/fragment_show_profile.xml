@@ -38,6 +38,7 @@
                         android:text="@string/setupScoreMathsText" />
                     <EditText
                         android:id="@+id/profileMathsValue"
+                        android:inputType="number"
                         android:text="@string/profileEditFieldDefaultValue"
                         android:enabled="false"
                         android:textColor="@color/BLACK"
@@ -70,6 +71,7 @@
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileRussianValue"
+                        android:inputType="number"
                         android:text="@string/profileEditFieldDefaultValue"
                         android:enabled="false"
                         android:textColor="@color/BLACK"
@@ -102,6 +104,7 @@
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profilePhysicsValue"
+                        android:inputType="number"
                         android:text="@string/profileEditFieldDefaultValue"
                         android:enabled="false"
                         android:textColor="@color/BLACK"
@@ -134,6 +137,7 @@
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileComputerScienceValue"
+                        android:inputType="number"
                         android:text="@string/profileEditFieldDefaultValue"
                         android:enabled="false"
                         android:textColor="@color/BLACK"
@@ -166,6 +170,7 @@
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileSocialScienceValue"
+                        android:inputType="number"
                         android:text="@string/profileEditFieldDefaultValue"
                         android:enabled="false"
                         android:textColor="@color/BLACK"
@@ -306,7 +311,7 @@
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/profileAddToListsCalculatePositions"
-                    android:text="@string/profileApplyCalculatePositions"
+                    android:text="@string/profileGraduationShowCurrentList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

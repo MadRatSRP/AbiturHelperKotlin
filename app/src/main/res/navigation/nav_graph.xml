@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/profile"
         android:name="com.madrat.abiturhelper.fragments.profile.ShowProfileView"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_show_profile" >
         <action
             android:id="@+id/action_profile_to_showFittingSpecialties"
             app:destination="@id/showFittingSpecialties" />

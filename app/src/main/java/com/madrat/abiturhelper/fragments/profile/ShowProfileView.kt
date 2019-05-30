@@ -14,7 +14,7 @@ import com.madrat.abiturhelper.interfaces.fragments.profile.ShowProfileMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.profile.ShowProfilePresenter
 import com.madrat.abiturhelper.util.showSnack
-import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_show_profile.*
 
 class ShowProfileView: Fragment(), ShowProfileMVP.View {
     private var showProfilePresenter: ShowProfilePresenter? = null
@@ -82,7 +82,7 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileTitle)
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        val view = inflater.inflate(R.layout.fragment_show_profile, container, false)
 
         /*adapter = SpecialtiesAdapter(null)
         view.profileAddToListsRecyclerView.adapter = adapter
