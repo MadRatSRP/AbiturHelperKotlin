@@ -68,12 +68,11 @@
     <string name="facultyMathsAndSocialScience">Математика + Обществознание</string>
     <string name="facultyMathsAndComputerScience">Математика + Информатика</string>
 
-    <string name="bachelorFirstName">Имя</string>
-    <string name="bachelorLastName">Фамилия</string>
-    <string name="bachelorPatronymic">Отчество</string>
+    <string name="bachelorFullName">%s %s %s</string>
     <string name="bachelorSpecialtyFirst">Первая специальность</string>
     <string name="bachelorSpecialtySecond">Вторая специальность</string>
     <string name="bachelorSpecialtyThird">Третья специальность</string>
+    <string name="bachelorAdditionalScore">Сумма дополнительных баллов</string>
 
     <string name="titleUNTI">УНТИ</string>
     <string name="titleFEU">ФЭУ</string>

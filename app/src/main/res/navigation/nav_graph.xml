@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_show_current_list_to_profile"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_show_current_list_to_showBachelors"
+            app:destination="@id/showBachelors" />
     </fragment>
     <fragment
         android:id="@+id/confirm_choice"

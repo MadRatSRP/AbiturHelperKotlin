@@ -2,143 +2,128 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="20dp"
+    android:layout_marginBottom="7dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-        android:id="@+id/bachelorFirstLast"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/bachelorLinearLayout"
+        style="@style/mainLinearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
-            android:id="@+id/bachelorFirstName"
+            android:id="@+id/bachelorFullName"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content"/>
+        <View
+            android:id="@+id/bachelorFirstDivider"
+            style="@style/Divider"
             android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/bachelorLastName"
+        <LinearLayout
+            android:id="@+id/bachelorMaths"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/bachelorMathsText"
+                android:text="@string/setupScoreMathsText"
+                style="@style/textDescription"/>
+            <TextView
+                android:id="@+id/bachelorMathsValue"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bachelorRussian"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/bachelorRussianText"
+                android:text="@string/setupScoreRussianText"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/bachelorRussianValue"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:id="@+id/bachelorSecondDivider"
+            style="@style/Divider"
             android:layout_weight="1"/>
+        <LinearLayout
+            android:id="@+id/bachelorPhysics"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/bachelorPhysicsText"
+                android:text="@string/setupScorePhysicsText"
+                style="@style/textDescription"/>
+            <TextView
+                android:id="@+id/bachelorPhysicsValue"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bachelorComputerScience"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/bachelorComputerScienceText"
+                android:text="@string/setupScoreComputerScienceText"
+                style="@style/textDescription"/>
+            <TextView
+                android:id="@+id/bachelorComputerScienceValue"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/bachelorSocialScience"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/bachelorSocialScienceText"
+                android:text="@string/setupScoreSocialScienceText"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/bachelorSocialScienceValue"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:id="@+id/bachelorThirdDivider"
+            style="@style/Divider"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:id="@+id/bachelorAdditionalScore"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/bachelorAdditionalScoreText"
+                android:text="@string/bachelorAdditionalScore"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/bachelorAdditionalScoreValue"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
-    <View
-        android:id="@+id/bachelorDividerFirst"
-        style="@style/Divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorFirstLast"/>
-    <LinearLayout
-        android:id="@+id/bachelorMaths"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorDividerFirst">
-        <TextView
-            android:id="@+id/bachelorMathsText"
-            android:text="@string/setupScoreMathsText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/bachelorMathsValue"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/bachelorRussian"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorMaths">
-        <TextView
-            android:id="@+id/bachelorRussianText"
-            android:text="@string/setupScoreRussianText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/bachelorRussianValue"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <View
-        android:id="@+id/bachelorDividerSecond"
-        style="@style/Divider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorRussian"/>
-    <LinearLayout
-        android:id="@+id/bachelorPhysics"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorDividerSecond">
-        <TextView
-            android:id="@+id/bachelorPhysicsText"
-            android:text="@string/setupScorePhysicsText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/bachelorPhysicsValue"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/bachelorComputerScience"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorPhysics">
-        <TextView
-            android:id="@+id/bachelorComputerScienceText"
-            android:text="@string/setupScoreComputerScienceText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/bachelorComputerScienceValue"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/bachelorSocialScience"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bachelorComputerScience">
-        <TextView
-            android:id="@+id/bachelorSocialScienceText"
-            android:text="@string/setupScoreSocialScienceText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/bachelorSocialScienceValue"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

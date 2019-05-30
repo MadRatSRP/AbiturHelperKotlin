@@ -126,6 +126,8 @@ class GraduationConfirmChoicePresenter
                         ?.sortByDescending {st -> st.maths + st.computerScience + st.additionalScore }
             }
 
+            //currentStudentsList?.let { arr -> saveCurrentListOfStudents(arr) }
+
             val newPosition = currentStudentsList?.indexOf(student)
             showLog("ПОЗИЦИЯ: $newPosition")
 
@@ -169,7 +171,8 @@ class GraduationConfirmChoicePresenter
                                 newPos,
                                 entriesTotal,
                                 oldMinimalScore,
-                                newMinScore
+                                newMinScore,
+                                currentStudentsList
                         )
                     }
                 }
@@ -185,4 +188,7 @@ class GraduationConfirmChoicePresenter
     override fun saveGraduationList(graduationList: ArrayList<Graduation>?) {
         graduationList?.let { myApplication.saveGraduationList(it) }
     }
+    /*override fun saveCurrentListOfStudents(list: ArrayList<Student>) {
+        myApplication.saveCurrentListOfStudents(list)
+    }*/
 }

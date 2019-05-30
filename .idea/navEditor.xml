@@ -246,6 +246,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_show_current_list_to_showBachelors">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>

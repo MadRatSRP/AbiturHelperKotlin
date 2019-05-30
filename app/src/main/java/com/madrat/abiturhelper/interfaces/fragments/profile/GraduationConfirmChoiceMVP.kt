@@ -20,5 +20,6 @@ interface GraduationConfirmChoiceMVP {
         fun returnStudentsOfFacultyByFacultyName(facultyName: String): ArrayList<ArrayList<Student>>?
         fun calculateGraduationData(selectedSpecialties: ArrayList<Specialty>): ArrayList<Graduation>
         fun saveGraduationList(graduationList: ArrayList<Graduation>?)
+        //fun saveCurrentListOfStudents(list: ArrayList<Student>)
     }
 }

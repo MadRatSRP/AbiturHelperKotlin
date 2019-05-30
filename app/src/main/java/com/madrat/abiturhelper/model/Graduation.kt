@@ -7,5 +7,6 @@ data class Graduation(
         val position: Int,
         val entriesTotal: Int,
         val oldMinimalScore: Int,
-        val newMinimalScore: Int
+        val newMinimalScore: Int,
+        val currentStudentsList: ArrayList<Student>
 )
