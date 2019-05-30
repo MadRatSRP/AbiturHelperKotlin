@@ -5,6 +5,7 @@ data class Graduation(
         val facultyName: String,
         val amountOfStudents: Int,
         val position: Int,
+        val entriesTotal: Int,
         val oldMinimalScore: Int,
         val newMinimalScore: Int
 )

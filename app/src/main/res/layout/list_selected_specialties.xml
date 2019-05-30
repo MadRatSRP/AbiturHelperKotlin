@@ -2,111 +2,152 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="15dp"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
+    android:layout_marginTop="7dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:id="@+id/selectedSpecialtyName"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/selectedLinearLayout"
+        style="@style/mainLinearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <TextView
-            android:id="@+id/selectedSpecialtyNameText"
-            android:text="@string/selectedSpecialtyName"
-            style="@style/textDescription" />
-        <TextView
-            android:id="@+id/selectedSpecialtyNameValue"
-            android:textSize="18sp"
+        <LinearLayout
+            android:id="@+id/selectedSpecialtyName"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
-    </LinearLayout>
-    <View
-        android:id="@+id/selectedFirstDivider"
-        style="@style/Divider"
-        android:layout_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectedSpecialtyName"/>
-    <LinearLayout
-        android:id="@+id/selectedAmountOfStudents"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectedFirstDivider">
-        <TextView
-            android:id="@+id/selectedAmountOfStudentsText"
-            android:text="@string/selectedAmountOfStudents"
-            style="@style/textDescription" />
-        <TextView
-            android:id="@+id/selectedAmountOfStudentsValue"
-            android:textSize="18sp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedSpecialtyNameText"
+                android:text="@string/selectedSpecialtyName"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedSpecialtyNameValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/selectedFacultyName"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/selectedPosition"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectedAmountOfStudents">
-        <TextView
-            android:id="@+id/selectedPositionText"
-            android:text="@string/selectedPosition"
-            style="@style/textDescription" />
-        <TextView
-            android:id="@+id/selectedPositionValue"
-            android:textSize="18sp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedFacultyNameText"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:text="@string/selectedFacultyName"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedFacultyNameValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
+        <View
+            android:id="@+id/selectedFirstDivider"
+            style="@style/Divider"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:id="@+id/selectedAmountOfStudents"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/selectedOldMinimalScore"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectedPosition">
-        <TextView
-            android:id="@+id/selectedOldMinimalScoreText"
-            android:text="@string/selectedOldMinimalScore"
-            style="@style/textDescription" />
-        <TextView
-            android:id="@+id/selectedOldMinimalScoreValue"
-            android:textSize="18sp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedAmountOfStudentsText"
+                android:text="@string/selectedAmountOfStudents"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedAmountOfStudentsValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/selectedPosition"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/selectedNewMinimalScore"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectedOldMinimalScore">
-        <TextView
-            android:id="@+id/selectedNewMinimalScoreText"
-            android:text="@string/selectedNewMinimalScore"
-            style="@style/textDescription" />
-        <TextView
-            android:id="@+id/selectedNewMinimalScoreValue"
-            android:textSize="18sp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedPositionText"
+                android:text="@string/selectedPosition"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedPositionValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/selectedEntriesTotal"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedEntriesTotalText"
+                android:layout_gravity="center"
+                android:gravity="center_vertical"
+                android:text="@string/selectedEntriesTotal"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedEntriesTotalValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
+        <View
+            android:id="@+id/selectedSecondDivider"
+            style="@style/Divider"
+            android:layout_weight="1" />
+        <LinearLayout
+            android:id="@+id/selectedOldMinimalScore"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedOldMinimalScoreText"
+                android:text="@string/selectedOldMinimalScore"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedOldMinimalScoreValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/selectedNewMinimalScore"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/selectedNewMinimalScoreText"
+                android:text="@string/selectedNewMinimalScore"
+                style="@style/textDescription" />
+            <TextView
+                android:id="@+id/selectedNewMinimalScoreValue"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

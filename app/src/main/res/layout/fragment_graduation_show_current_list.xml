@@ -2,15 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calculateRecyclerView"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:id="@+id/showCurrentRecyclerView"
+        android:layout_marginBottom="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <Button
+        android:id="@+id/showCurrentToProfile"
+        android:text="@string/profileGraduationShowCurrentListToProfile"
+        android:layout_marginBottom="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/showCurrentRecyclerView"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

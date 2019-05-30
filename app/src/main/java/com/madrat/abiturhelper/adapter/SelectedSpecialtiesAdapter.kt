@@ -39,8 +39,10 @@ class SelectedSpecialtiesAdapter
         fun bind(graduation: Graduation) {
 
             selectedSpecialtyNameValue.text = graduation.specialtyName
+            selectedFacultyNameValue.text = graduation.facultyName
             selectedAmountOfStudentsValue.text = graduation.amountOfStudents.toString()
             selectedPositionValue.text = graduation.position.toString()
+            selectedEntriesTotalValue.text = graduation.entriesTotal.toString()
             selectedOldMinimalScoreValue.text = graduation.oldMinimalScore.toString()
             selectedNewMinimalScoreValue.text = graduation.newMinimalScore.toString()
         }

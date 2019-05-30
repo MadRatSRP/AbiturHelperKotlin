@@ -91,6 +91,7 @@ class GraduationConfirmChoicePresenter
             val facultyName = it.faculty
             val profileTerm = it.profileTerm
             val oldMinimalScore = it.minimalScore
+            val entriesTotal = it.entriesTotal
 
             val facultyNumber = returnFacultyNumberByFacultyName(facultyName)
             val studentsOfFaculty = returnStudentsOfFacultyByFacultyName(facultyName)
@@ -166,6 +167,7 @@ class GraduationConfirmChoicePresenter
                                 facultyName,
                                 amount,
                                 newPos,
+                                entriesTotal,
                                 oldMinimalScore,
                                 newMinScore
                         )

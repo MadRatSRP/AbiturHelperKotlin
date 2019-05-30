@@ -45,9 +45,10 @@ class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP
         val checkedPhysics = checkIntForBeingEmpty(score?.physics)
         val checkedComputerScience = checkIntForBeingEmpty(score?.computerScience)
         val checkedSocialScience = checkIntForBeingEmpty(score?.socialScience)
+        val checkedAdditionalScore = checkIntForBeingEmpty(score?.additionalScore)
 
         return Score(checkedMaths, checkedRussian, checkedPhysics,
-                checkedComputerScience, checkedSocialScience)
+                checkedComputerScience, checkedSocialScience, checkedAdditionalScore)
     }
     override fun returnAdditionalScore() = myApplication.returnAdditionalScore()
     override fun returnBundleWithListID(listId: Int): Bundle {

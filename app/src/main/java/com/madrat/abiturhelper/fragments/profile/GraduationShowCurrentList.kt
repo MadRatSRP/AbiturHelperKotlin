@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SelectedSpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationShowCurrentListMVP
@@ -25,16 +26,20 @@ class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
 
         val graduationList = graduationShowCurrentListPresenter?.returnGraduationList()
         graduationList?.let { showGraduation(it) }
+
+        showCurrentToProfile.setOnClickListener {
+            toSpecialties(null, R.id.action_show_current_list_to_profile)
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.calculateUserPlacesTitle)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileGraduationShowCurrentListTitle)
         val view = inflater.inflate(R.layout.fragment_graduation_show_current_list,
                 container, false)
 
         adapter = SelectedSpecialtiesAdapter()
-        view.calculateRecyclerView.adapter = adapter
-        view.calculateRecyclerView.linearManager()
+        view.showCurrentRecyclerView.adapter = adapter
+        view.showCurrentRecyclerView.linearManager()
 
         return view
     }
@@ -49,6 +54,9 @@ class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
     }
     override fun showGraduation(graduationList: ArrayList<Graduation>) {
         adapter?.updateGraduationList(graduationList)
-        calculateRecyclerView.adapter = adapter
+        showCurrentRecyclerView.adapter = adapter
+    }
+    override fun toSpecialties(bundle: Bundle?, actionId: Int) {
+        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
     }
 }

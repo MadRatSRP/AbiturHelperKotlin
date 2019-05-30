@@ -36,7 +36,8 @@
 
     <string name="selectSaveCheckedSpecialties">Сохранить выбор</string>
 
-    <string name="calculateUserPlacesTitle">Текущий список поступления</string>
+    <string name="profileGraduationShowCurrentListTitle">Текущий список поступления</string>
+    <string name="profileGraduationShowCurrentListToProfile">Вернуться к профилю</string>
 
     <string name="resultShowFittingSpecialties">Подходящие специальности</string>
 
@@ -89,8 +90,10 @@
     <string name="resultSaveAndMoveToProfile">Сохранить и перейти к профилю</string>
 
     <string name="selectedSpecialtyName">Название специальности</string>
+    <string name="selectedFacultyName">Название факультета</string>
     <string name="selectedAmountOfStudents">Подавших документы</string>
     <string name="selectedPosition">Ваша позиция в списке</string>
+    <string name="selectedEntriesTotal">Количество мест</string>
     <string name="selectedOldMinimalScore">Старый минимальный балл</string>
     <string name="selectedNewMinimalScore">Новый минимальный балл</string>
 </resources>

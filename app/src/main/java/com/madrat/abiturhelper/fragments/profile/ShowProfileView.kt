@@ -100,14 +100,13 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
     }
     override fun setupScoreFields() {
         val score = showProfilePresenter?.returnCheckedScore()
-        val additionalScore = showProfilePresenter?.returnAdditionalScore()
 
         profileMathsValue.setText(score?.maths.toString())
         profileRussianValue.setText(score?.russian.toString())
         profilePhysicsValue.setText(score?.physics.toString())
         profileComputerScienceValue.setText(score?.computerScience.toString())
         profileSocialScienceValue.setText(score?.socialScience.toString())
-        profileAdditionalScoreValue.setText(additionalScore.toString())
+        profileAdditionalScoreValue.setText(score?.additionalScore.toString())
     }
     override fun setupSpecialtiesFields() {
         val amountOfFinalSpecialties = showProfilePresenter?.returnAmountOfFinalSpecialties()
