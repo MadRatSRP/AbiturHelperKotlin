@@ -1,6 +1,9 @@
 package com.madrat.abiturhelper.presenters.fragments.profile
 
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageButton
+import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.profile.ShowProfileMVP
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
@@ -8,6 +11,30 @@ import com.madrat.abiturhelper.util.MyApplication
 class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP.Presenter {
     var myApplication = MyApplication.instance
 
+    override fun setFieldEditable(editField: EditText, imageButton: ImageButton) {
+        editField.isEnabled = true
+        editField.requestFocus()
+        editField.text.clear()
+        imageButton.setImageResource(R.drawable.ic_save)
+    }
+    override fun setFieldNonEditable(editField: EditText, imageButton: ImageButton) {
+        editField.isEnabled = false
+        imageButton.setImageResource(R.drawable.ic_edit)
+    }
+    override fun checkFieldForBeingEditable(boolean: Boolean?, editField: EditText,
+                                            imageButton: ImageButton): Boolean {
+        return when(boolean) {
+            true -> {
+                setFieldEditable(editField, imageButton)
+                false
+            }
+            false -> {
+                setFieldNonEditable(editField, imageButton)
+                true
+            }
+            null -> TODO()
+        }
+    }
     override fun updateScores(maths: String, russian: String, physics: String, computerScience: String,
                               socialScience: String, additionalScore: String) {
         val checkedMaths = checkTextForBeingEmpty(maths)
@@ -18,10 +45,8 @@ class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP
         val checkedAdditionalScore = checkTextForBeingEmpty(additionalScore)
 
         val score = Score(checkedMaths, checkedRussian, checkedPhysics,
-                checkedComputerScience, checkedSocialScience)
-
+                checkedComputerScience, checkedSocialScience, checkedAdditionalScore)
         myApplication.saveScore(score)
-        myApplication.saveAdditionalScore(checkedAdditionalScore)
     }
     override fun checkTextForBeingEmpty(text: String?): Int {
         return if (text == null || text == "") {
@@ -36,6 +61,7 @@ class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP
         return specialties?.sumBy { it.size }
     }
 
+    override fun returnFullName() = myApplication.returnFullName()
     override fun returnScore() = myApplication.returnScore()
     override fun returnCheckedScore(): Score {
         val score = returnScore()
@@ -50,7 +76,6 @@ class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP
         return Score(checkedMaths, checkedRussian, checkedPhysics,
                 checkedComputerScience, checkedSocialScience, checkedAdditionalScore)
     }
-    override fun returnAdditionalScore() = myApplication.returnAdditionalScore()
     override fun returnBundleWithListID(listId: Int): Bundle {
         val bundle = Bundle()
         bundle.putInt("listId", listId)

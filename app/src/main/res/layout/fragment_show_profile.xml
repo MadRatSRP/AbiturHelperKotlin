@@ -14,10 +14,114 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
+                android:id="@+id/profileFullName"
+                style="@style/mainLinearLayout">
+                <TextView
+                    android:text="@string/scoreFullName"
+                    style="@style/textTitle"
+                    android:layout_weight="1"/>
+                <View
+                    style="@style/Divider"
+                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:id="@+id/profileLastName"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/profileLastNameText"
+                        android:text="@string/scoreLastName"
+                        android:textSize="18sp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/profileLastNameValue"
+                        android:layout_marginStart="10dp"
+                        android:inputType="text"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" />
+                    <ImageButton
+                        android:id="@+id/profileLastNameEditValue"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_edit"
+                        android:layout_marginStart="7dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/profileFirstName"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/profileFirstNameText"
+                        android:text="@string/scoreFirstName"
+                        android:textSize="18sp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/profileFirstNameValue"
+                        android:layout_marginStart="10dp"
+                        android:inputType="text"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" />
+                    <ImageButton
+                        android:id="@+id/profileFirstNameEditValue"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_edit"
+                        android:layout_marginStart="7dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/profilePatronymic"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="35dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/profilePatronymicText"
+                        android:text="@string/scorePatronymic"
+                        android:textSize="18sp"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"/>
+                    <EditText
+                        android:id="@+id/profilePatronymicValue"
+                        android:layout_marginStart="10dp"
+                        android:inputType="text"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content" />
+                    <ImageButton
+                        android:id="@+id/profilePatronymicEditValue"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_edit"
+                        android:layout_marginStart="7dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
                 android:id="@+id/score"
                 style="@style/mainLinearLayout">
                 <TextView
-                    android:text="@string/setupScoreTitle"
+                    android:text="@string/setupScoreScoreTitle"
                     style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
@@ -35,7 +139,7 @@
                     <TextView
                         android:id="@+id/profileMathsText"
                         style="@style/textDescription"
-                        android:text="@string/setupScoreMathsText" />
+                        android:text="@string/scoreMaths" />
                     <EditText
                         android:id="@+id/profileMathsValue"
                         android:inputType="number"
@@ -67,7 +171,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileRussianText"
-                        android:text="@string/setupScoreRussianText"
+                        android:text="@string/scoreRussian"
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileRussianValue"
@@ -100,7 +204,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profilePhysicsText"
-                        android:text="@string/setupScorePhysicsText"
+                        android:text="@string/scorePhysics"
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profilePhysicsValue"
@@ -133,7 +237,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileComputerScienceText"
-                        android:text="@string/setupScoreComputerScienceText"
+                        android:text="@string/scoreComputerScience"
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileComputerScienceValue"
@@ -166,7 +270,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/profileSocialScienceText"
-                        android:text="@string/setupScoreSocialScienceText"
+                        android:text="@string/scoreSocialScience"
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileSocialScienceValue"

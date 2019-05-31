@@ -19,3 +19,4 @@ data class Specialty(
         var minimalScore: Int = 0,
         var scoreTitle: String? = ""
 ) : Serializable
+

@@ -9,8 +9,6 @@ class MyApplication: Application() {
     // Score
     private var fullName: FullName? = null
     private var scores: Score? = null
-    private var additionalScore: Int? = 0
-
 
     private var bachelors: ArrayList<Student>? = null
     private var scoreTypes: ScoreTypes? = null
@@ -69,15 +67,6 @@ class MyApplication: Application() {
                     "информатика - $computerScience, обществознание - $socialScience")
         }
         return scores
-    }
-    //AdditionalScore
-    fun saveAdditionalScore(additionalScore: Int) {
-        this.additionalScore = additionalScore
-        showLog("Сохранены дополнительные баллы: ${this.additionalScore}")
-    }
-    fun returnAdditionalScore(): Int? {
-        showLog("Возвращёны дополнительные баллы: ${this.additionalScore}")
-        return additionalScore
     }
 
 

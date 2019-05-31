@@ -8,7 +8,7 @@ interface SetupScoreMVP {
     interface Presenter {
         fun saveFullName(lastName: String, firstName: String, patronymic: String)
         fun saveScore(maths: String, russian: String, physics: String, computerScience: String,
-                      socialScience: String, additionalScore: String)
+                      socialScience: String, additionalScore: String?)
         fun checkTextForBeingEmpty(text: String): Int
 
         fun returnIntFromString(text: String): Int

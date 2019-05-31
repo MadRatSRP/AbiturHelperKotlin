@@ -3,19 +3,21 @@
 
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
     <string name="calculateGraduationChancesTitle">Оценить шанс поступления</string>
-    
-    <string name="setupScoreFullName">ФИО</string>
-    <string name="setupScoreLastName">Фамилия</string>
-    <string name="setupScoreFirstName">Имя</string>
-    <string name="setupScorePatronymic">Отчество</string>
-    
-    <string name="setupScoreMathsText">Математика</string>
-    <string name="setupScoreRussianText">Русский язык</string>
-    <string name="setupScorePhysicsText">Физика</string>
-    <string name="setupScoreComputerScienceText">Информатика</string>
-    <string name="setupScoreSocialScienceText">Обществознание</string>
 
-    <string name="setupScoreTitle">Баллы ЕГЭ</string>
+    //FullName
+    <string name="scoreFullName">ФИО</string>
+    <string name="scoreLastName">Фамилия</string>
+    <string name="scoreFirstName">Имя</string>
+    <string name="scorePatronymic">Отчество</string>
+    //Score
+    <string name="scoreMaths">Математика</string>
+    <string name="scoreRussian">Русский язык</string>
+    <string name="scorePhysics">Физика</string>
+    <string name="scoreComputerScience">Информатика</string>
+    <string name="scoreSocialScience">Обществознание</string>
+
+    <string name="setupScoreTitle">Введите свои данные</string>
+    <string name="setupScoreScoreTitle">Баллы ЕГЭ</string>
     <string name="setupScoreAdditionalTitle">Дополнительные баллы</string>
 
     <string name="profileTitle">Профиль</string>

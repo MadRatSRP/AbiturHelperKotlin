@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupScoreMVP
-import com.madrat.abiturhelper.model.FullName
 import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import kotlinx.android.synthetic.main.fragment_setup_score.view.*
@@ -32,17 +31,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         setupMVP()
 
         showSpecialtiesScreen.setOnClickListener { view->
-
-            var additionalScore = ""
-            additionalScoreSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                }
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    additionalScore = parent?.getItemAtPosition(position).toString()
-                }
-
-            }
+            val additionalScore = additionalScoreSpinner.selectedItem.toString()
 
             setupScorePresenter?.saveFullName(setupScoreLastNameValue.text.toString(),
                     setupScoreFirstNameValue.text.toString(),

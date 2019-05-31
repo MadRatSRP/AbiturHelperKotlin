@@ -27,7 +27,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/bachelorMathsText"
-                android:text="@string/setupScoreMathsText"
+                android:text="@string/scoreMaths"
                 style="@style/textDescription"/>
             <TextView
                 android:id="@+id/bachelorMathsValue"
@@ -43,7 +43,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/bachelorRussianText"
-                android:text="@string/setupScoreRussianText"
+                android:text="@string/scoreRussian"
                 style="@style/textDescription" />
             <TextView
                 android:id="@+id/bachelorRussianValue"
@@ -63,7 +63,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/bachelorPhysicsText"
-                android:text="@string/setupScorePhysicsText"
+                android:text="@string/scorePhysics"
                 style="@style/textDescription"/>
             <TextView
                 android:id="@+id/bachelorPhysicsValue"
@@ -79,7 +79,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/bachelorComputerScienceText"
-                android:text="@string/setupScoreComputerScienceText"
+                android:text="@string/scoreComputerScience"
                 style="@style/textDescription"/>
             <TextView
                 android:id="@+id/bachelorComputerScienceValue"
@@ -95,7 +95,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/bachelorSocialScienceText"
-                android:text="@string/setupScoreSocialScienceText"
+                android:text="@string/scoreSocialScience"
                 style="@style/textDescription" />
             <TextView
                 android:id="@+id/bachelorSocialScienceValue"

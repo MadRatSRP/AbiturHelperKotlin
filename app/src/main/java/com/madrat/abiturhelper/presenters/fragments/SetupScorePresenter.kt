@@ -4,7 +4,7 @@ import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupSco
 import com.madrat.abiturhelper.model.FullName
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
-import com.madrat.abiturhelper.util.returnInt
+import com.madrat.abiturhelper.util.showLog
 
 class SetupScorePresenter(private var ssv: SetupScoreMVP.View)
     : SetupScoreMVP.Presenter {
@@ -15,17 +15,22 @@ class SetupScorePresenter(private var ssv: SetupScoreMVP.View)
         myApplication.saveFullName(fullName)
     }
     override fun saveScore(maths: String, russian: String, physics: String, computerScience: String,
-                  socialScience: String, additionalScore: String) {
+                           socialScience: String, additionalScore: String?) {
+        showLog("ADDSCORE$additionalScore")
+
         val scoreMaths = returnIntFromString(maths)
         val scoreRussian = returnIntFromString(russian)
         val scorePhysics = checkTextForBeingEmpty(physics)
         val scoreComputerScience = checkTextForBeingEmpty(computerScience)
         val scoreSocialScience = checkTextForBeingEmpty(socialScience)
-        val scoreAdditionalScore = checkTextForBeingEmpty(additionalScore)
+        val scoreAdditionalScore = additionalScore?.let { checkTextForBeingEmpty(it) }
 
-        val score = Score(scoreMaths, scoreRussian, scorePhysics, scoreComputerScience,
-                scoreSocialScience, scoreAdditionalScore)
-        myApplication.saveScore(score)
+        val score = scoreAdditionalScore?.let {
+            Score(scoreMaths, scoreRussian, scorePhysics, scoreComputerScience,
+                scoreSocialScience, it)
+        }
+        score?.let { myApplication.saveScore(it) }
+        showLog("SAVEDSCORE$score")
     }
     override fun checkTextForBeingEmpty(text: String): Int {
         return if (text.isEmpty()) {

@@ -1,8 +1,8 @@
 package com.madrat.abiturhelper.model
 
 data class Score(
-        var maths: Int = 0,
-        var russian: Int = 0,
+        var maths: Int,
+        var russian: Int,
         var physics: Int,
         var computerScience: Int,
         var socialScience: Int,

@@ -18,7 +18,7 @@
                 android:id="@+id/setupScoreFullName"
                 style="@style/mainLinearLayout">
                 <TextView
-                    android:text="@string/setupScoreFullName"
+                    android:text="@string/scoreFullName"
                     style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
@@ -35,7 +35,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScoreLastNameText"
-                        android:text="@string/setupScoreLastName"
+                        android:text="@string/scoreLastName"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreLastNameValue"
@@ -54,7 +54,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScoreFirstNameText"
-                        android:text="@string/setupScoreFirstName"
+                        android:text="@string/scoreFirstName"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreFirstNameValue"
@@ -73,7 +73,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScorePatronymicText"
-                        android:text="@string/setupScorePatronymic"
+                        android:text="@string/scorePatronymic"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScorePatronymicValue"
@@ -103,7 +103,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScoreMathsText"
-                        android:text="@string/setupScoreMathsText"
+                        android:text="@string/scoreMaths"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreMathsValue"
@@ -122,7 +122,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScoreRussianText"
-                        android:text="@string/setupScoreRussianText"
+                        android:text="@string/scoreRussian"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreRussianValue"
@@ -141,7 +141,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScorePhysicsText"
-                        android:text="@string/setupScorePhysicsText"
+                        android:text="@string/scorePhysics"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScorePhysicsValue"
@@ -160,7 +160,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScoreComputerScienceText"
-                        android:text="@string/setupScoreComputerScienceText"
+                        android:text="@string/scoreComputerScience"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreComputerScienceValue"
@@ -179,7 +179,7 @@
                     android:layout_weight="1">
                     <TextView
                         android:id="@+id/setupScoreSocialScienceText"
-                        android:text="@string/setupScoreSocialScienceText"
+                        android:text="@string/scoreSocialScience"
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreSocialScienceValue"
