@@ -37,17 +37,17 @@ class WorkWithSpecialtiesView
         // Четвёртый шаг
         context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
 
-        workWithSpecialtiesToCurrentList.setOnClickListener {
+        workToCurrentList.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
         }
 
-        workWithSpecialtiesToResultScreen.setOnClickListener {
+        workToResult.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_resultView)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.pickUpSpecialtiesTitle)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.workWithSpecialtiesTitle)
         val view = inflater.inflate(R.layout.fragment_work_with_specialties, container, false)
 
         /*adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onFacultyClicked(faculty, position)}

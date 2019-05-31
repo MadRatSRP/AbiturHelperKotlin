@@ -4,6 +4,8 @@
     <string name="pickUpSpecialtiesTitle">Подобрать специальности</string>
     <string name="calculateGraduationChancesTitle">Оценить шанс поступления</string>
 
+    <string name="showList">Показать список</string>
+
     //FullName
     <string name="scoreFullName">ФИО</string>
     <string name="scoreLastName">Фамилия</string>
@@ -21,9 +23,13 @@
     <string name="setupScoreAdditionalTitle">Дополнительные баллы</string>
     <string name="setupScoreToWorkWithSpecialties">Сохранить данные</string>
 
+    <string name="workWithSpecialtiesTitle">Работа со специальностями</string>
+    <string name="workWithSpecialtiesToCurrentList">К актуальному списку</string>
+    <string name="workWithSpecialtiesToResultScreen">К подбору специальностей</string>
+    <string name="workWithSpecialtiesToResultScreenButton">Показать подобранные специальности</string>
+
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
-    <string name="profileShowFinalList">Показать список</string>
     <string name="profileFinalListOfSpecialtiesTitle">Подобранный список специальностей</string>
 
     <string name="profileApplyTitle">Добавить в списки</string>

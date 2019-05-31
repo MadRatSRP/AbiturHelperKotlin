@@ -47,30 +47,7 @@ class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?)
         val selectedSpecialty = specialties[position]
 
         holder.bind(selectedSpecialty, position)
-        /*holder.setOnClickListener(View.OnClickListener {
-            val adapterPosition = holder.adapterPosition
-            if (!itemStateArray.get(adapterPosition, false)) {
-                mCheckedTextView.setChecked(true);
-                itemStateArray.put(adapterPosition, true);
-            }
-            else  {
-                mCheckedTextView.setChecked(false);
-                itemStateArray.put(adapterPosition, false);
-            }
-
-            /*if (itemStateArray.get(position, true)) {
-                holder.completeCheckbox.isChecked = true
-                itemStateArray.put(position, true)
-                selectedSpecialties.add(specialties[position])
-            }
-            else {
-                holder.completeCheckbox.isChecked = false
-                itemStateArray.put(position, false)
-                selectedSpecialties.remove(specialties[position])
-            }*/
-        })*/
-
-        holder.containerView.setOnClickListener {
+        holder.completeCheckbox.setOnClickListener {
             val adapterPosition = holder.adapterPosition
             if (!itemStateArray.get(adapterPosition, false)) {
                 holder.completeCheckbox.isChecked = true

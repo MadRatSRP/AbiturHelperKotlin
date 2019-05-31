@@ -386,7 +386,7 @@
                 </LinearLayout>
                 <Button
                     android:id="@+id/profileShowFinalList"
-                    android:text="@string/profileShowFinalList"
+                    android:text="@string/showList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>

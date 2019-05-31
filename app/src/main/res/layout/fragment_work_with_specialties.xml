@@ -6,20 +6,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.pick_up_specialties.WorkWithSpecialtiesView">
-    <Button
-        android:id="@+id/workWithSpecialtiesToCurrentList"
-        android:text="К актуальному списку"
+    <LinearLayout
+        android:id="@+id/workLinearLayout"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="450dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <Button
-        android:id="@+id/workWithSpecialtiesToResultScreen"
-        android:text="Подобрать специальности"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <LinearLayout
+            android:id="@+id/workToCurrentListLL"
+            style="@style/mainLinearLayout"
+            android:layout_weight="1">
+            <TextView
+                android:text="@string/workWithSpecialtiesToCurrentList"
+                style="@style/textTitle" />
+            <View
+                style="@style/Divider" />
+            <Button
+                android:id="@+id/workToCurrentList"
+                android:text="@string/showList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/workToResultLL"
+            style="@style/mainLinearLayout"
+            android:layout_weight="1">
+            <TextView
+                android:text="@string/workWithSpecialtiesToResultScreen"
+                style="@style/textTitle" />
+            <View
+                style="@style/Divider" />
+            <Button
+                android:id="@+id/workToResult"
+                android:text="@string/workWithSpecialtiesToResultScreenButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
