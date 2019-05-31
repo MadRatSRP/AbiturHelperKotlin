@@ -86,7 +86,7 @@
                 android:id="@+id/setupScoreScore"
                 style="@style/mainLinearLayout">
                 <TextView
-                    android:text="@string/setupScoreTitle"
+                    android:text="@string/setupScoreScoreTitle"
                     style="@style/textTitle"
                     android:layout_weight="1"/>
                 <View
@@ -225,7 +225,7 @@
             </LinearLayout>
             <Button
                 android:id="@+id/showSpecialtiesScreen"
-                android:text="@string/pickUpSpecialtiesTitle"
+                android:text="@string/setupScoreToWorkWithSpecialties"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

@@ -32,7 +32,7 @@ class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP
                 setFieldNonEditable(editField, imageButton)
                 true
             }
-            null -> TODO()
+            null -> true
         }
     }
     override fun updateScores(maths: String, russian: String, physics: String, computerScience: String,

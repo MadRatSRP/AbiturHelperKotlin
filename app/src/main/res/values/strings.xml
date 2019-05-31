@@ -19,6 +19,7 @@
     <string name="setupScoreTitle">Введите свои данные</string>
     <string name="setupScoreScoreTitle">Баллы ЕГЭ</string>
     <string name="setupScoreAdditionalTitle">Дополнительные баллы</string>
+    <string name="setupScoreToWorkWithSpecialties">Сохранить данные</string>
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
