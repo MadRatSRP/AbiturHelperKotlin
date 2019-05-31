@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -31,20 +30,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         setupMVP()
 
         showSpecialtiesScreen.setOnClickListener { view->
-            val additionalScore = additionalScoreSpinner.selectedItem.toString()
-
-            setupScorePresenter?.saveFullName(setupScoreLastNameValue.text.toString(),
-                    setupScoreFirstNameValue.text.toString(),
-                    setupScorePatronymicValue.text.toString())
-
-            setupScorePresenter?.saveScore(setupScoreMathsValue.text.toString(),
-                    setupScoreRussianValue.text.toString(),
-                    setupScorePhysicsValue.text.toString(),
-                    setupScoreComputerScienceValue.text.toString(),
-                    setupScoreSocialScienceValue.text.toString(),
-                    additionalScore)
-
-            Navigation.findNavController(view).navigate(R.id.action_setupScore_to_pickUpSpecialtiesView)
+            moveToWorkWithSpecialties(view)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -63,5 +49,21 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
     override fun setupMVP() {
         setupScorePresenter = SetupScorePresenter(this)
+    }
+    override fun moveToWorkWithSpecialties(view: View) {
+        val additionalScore = additionalScoreSpinner.selectedItem.toString()
+
+        setupScorePresenter?.saveFullName(setupScoreLastNameValue.text.toString(),
+                setupScoreFirstNameValue.text.toString(),
+                setupScorePatronymicValue.text.toString())
+
+        setupScorePresenter?.saveScore(setupScoreMathsValue.text.toString(),
+                setupScoreRussianValue.text.toString(),
+                setupScorePhysicsValue.text.toString(),
+                setupScoreComputerScienceValue.text.toString(),
+                setupScoreSocialScienceValue.text.toString(),
+                additionalScore)
+
+        Navigation.findNavController(view).navigate(R.id.action_setupScore_to_pickUpSpecialtiesView)
     }
 }

@@ -14,5 +14,6 @@ interface ShowFittingSpecialtiesMVP {
         fun returnListOfSpecialtiesWithZeroMinimalScore(): ArrayList<ArrayList<Specialty>>?
         fun returnListOfFittingSpecialties(): ArrayList<ArrayList<Specialty>>?
         fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
+        fun returnListBasedOnListID(listId: Int): ArrayList<ArrayList<Specialty>>?
     }
 }

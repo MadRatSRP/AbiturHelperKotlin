@@ -24,12 +24,15 @@ class ShowFittingSpecialties: Fragment(), ShowFittingSpecialtiesMVP.View {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        val faculties: ArrayList<ArrayList<Specialty>>? = when(arguments?.getInt("listId")) {
+        /*val faculties = when(arguments?.getInt("listId")) {
             100 -> showFittingSpecialtiesPresenter?.returnListOfSpecialtiesWithZeroMinimalScore()
             200 -> showFittingSpecialtiesPresenter?.returnListOfFittingSpecialties()
             300 -> showFittingSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
             else -> null
-        }
+        }*/
+        val faculties = arguments?.getInt("listId")
+                ?.let { showFittingSpecialtiesPresenter?.returnListBasedOnListID(it) }
+
         fittingSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

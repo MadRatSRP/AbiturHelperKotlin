@@ -3,6 +3,7 @@ package com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties
 interface SetupScoreMVP {
     interface View {
         fun setupMVP()
+        fun moveToWorkWithSpecialties(view: android.view.View)
     }
 
     interface Presenter {
