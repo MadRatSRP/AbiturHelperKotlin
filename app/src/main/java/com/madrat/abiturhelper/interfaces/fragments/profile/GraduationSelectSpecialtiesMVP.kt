@@ -13,5 +13,6 @@ interface GraduationSelectSpecialtiesMVP {
         fun saveItemStateArray(itemStateArray: SparseBooleanArray?)
         fun returnItemStateArray(): SparseBooleanArray?
         fun saveSelectedSpecialties(selectedSpecialties: ArrayList<Specialty>?)
+        fun returnSelectedSpecialties(): ArrayList<Specialty>?
     }
 }

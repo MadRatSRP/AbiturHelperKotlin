@@ -13,7 +13,6 @@ import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationSelectSpec
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.profile.GraduationSelectSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
-import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_graduation_select_specialties.*
 import kotlinx.android.synthetic.main.fragment_graduation_select_specialties.view.*
 
@@ -58,7 +57,8 @@ class GraduationSelectSpecialties
         setupMVP()
 
         adapter = CompleteSpecialtiesAdapter(
-            graduationSelectSpecialtiesPresenter?.returnItemStateArray()
+                graduationSelectSpecialtiesPresenter?.returnItemStateArray(),
+                graduationSelectSpecialtiesPresenter?.returnSelectedSpecialties()
         )
         view.selectForRecyclerView.adapter = adapter
         view.selectForRecyclerView.linearManager()

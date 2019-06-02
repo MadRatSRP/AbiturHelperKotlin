@@ -21,4 +21,6 @@ class GraduationSelectSpecialtiesPresenter
             = myApplication.returnCompleteListOfSpecilaties()
     override fun returnItemStateArray()
             = myApplication.returnItemStateArray()
+    override fun returnSelectedSpecialties()
+            = myApplication.returnSelectedSpecialties()
 }

@@ -15,16 +15,19 @@ import kotlinx.android.synthetic.main.list_specialties.specialtyMinimalScoreText
 import kotlinx.android.synthetic.main.list_specialties.specialtyMinimalScoreValue
 import kotlinx.android.synthetic.main.list_specialties.specialtyName
 
-class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?)
+class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?,
+                                 chosenSpecialties: ArrayList<Specialty>?)
     : RecyclerView.Adapter<CompleteSpecialtiesAdapter.CompleteSpecialtiesHolder>(){
 
     private var specialties = ArrayList<Specialty>()
 
     private var selectedSpecialties = ArrayList<Specialty>()
-
     private var itemStateArray: SparseBooleanArray = SparseBooleanArray()
 
     init {
+        chosenSpecialties?.let {
+            this.selectedSpecialties = chosenSpecialties
+        }
         itemStateArray?.let {
             this.itemStateArray = itemStateArray
         }

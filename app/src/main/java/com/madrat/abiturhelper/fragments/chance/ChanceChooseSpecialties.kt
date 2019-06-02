@@ -50,7 +50,8 @@ class ChanceChooseSpecialties: Fragment() {
                 container, false)
 
         adapter = CompleteSpecialtiesAdapter(
-                myApplication.returnChanceItemStateArray()
+                myApplication.returnChanceItemStateArray(),
+                myApplication.returnChosenSpecialties()
         )
         view.chosenRecyclerView.adapter = adapter
         view.chosenRecyclerView.linearManager()
