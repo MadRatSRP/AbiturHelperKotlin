@@ -36,6 +36,10 @@ class MyApplication: Application() {
 
     private var graduationList: ArrayList<Graduation>? = null
 
+    // Оценить шанс поступления
+    private var chosenSpecialties: ArrayList<Specialty>? = null
+    private var chanceItemStateArray: SparseBooleanArray? = null
+
     //Score
     fun saveFullName(fullName: FullName) {
         this.fullName = fullName
@@ -252,4 +256,15 @@ class MyApplication: Application() {
         this.graduationList = list
     }
     fun returnGraduationList() = graduationList
+
+    // Оценить шанс поступления
+    fun saveChosenSpecialties(chosenSpecialties: ArrayList<Specialty>) {
+        this.chosenSpecialties = chosenSpecialties
+    }
+    fun saveChanceItemStateArray(chanceItemStateArray: SparseBooleanArray) {
+        this.chanceItemStateArray = chanceItemStateArray
+    }
+    fun returnChosenSpecialties() = chosenSpecialties
+    fun returnChanceItemStateArray() = chanceItemStateArray
+
 }

@@ -11,7 +11,7 @@ interface ShowProfileMVP {
     interface View {
         fun setupMVP()
         fun setupScoreFields()
-        fun toSpecialties(bundle: Bundle?, actionId: Int)
+        fun toActionId(bundle: Bundle?, actionId: Int)
         fun setupSpecialtiesFields()
     }
 

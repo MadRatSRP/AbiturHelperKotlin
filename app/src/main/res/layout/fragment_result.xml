@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ShowResultView">
+    tools:context=".fragments.pick_up_specialties.ShowResultView">
     <TextView
         android:id="@+id/resultAmountOfZeroMinimalScoreSpecialtiesText"
         android:gravity="center"

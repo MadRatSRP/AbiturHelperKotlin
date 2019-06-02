@@ -16,7 +16,8 @@ import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_show_fitting_specialties.*
 import kotlinx.android.synthetic.main.fragment_show_fitting_specialties.view.*
 
-class ShowFittingSpecialties: Fragment(), ShowFittingSpecialtiesMVP.View {
+class ShowFittingSpecialtiesView
+    : Fragment(), ShowFittingSpecialtiesMVP.View {
     private var adapter: SpecialtiesAdapter? = null
     private var showFittingSpecialtiesPresenter: ShowFittingSpecialtiesPresenter? = null
 

@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultView"
-        android:name="com.madrat.abiturhelper.fragments.ShowResultView"
+        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.ShowResultView"
         tools:layout="@layout/fragment_result" >
         <action
             android:id="@+id/action_resultView_to_showFittingSpecialties"
@@ -66,7 +66,7 @@
         tools:layout="@layout/fragment_show_bachelors" />
     <fragment
         android:id="@+id/currentList"
-        android:name="com.madrat.abiturhelper.fragments.CurrentListView" >
+        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.CurrentListView" >
         <action
             android:id="@+id/action_currentList_to_showSpecialtiesView"
             app:destination="@id/showSpecialtiesView" />
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/showFittingSpecialties"
-        android:name="com.madrat.abiturhelper.fragments.ShowFittingSpecialties"
+        android:name="com.madrat.abiturhelper.fragments.ShowFittingSpecialtiesView"
         android:label="ShowFittingSpecialties" />
     <fragment
         android:id="@+id/select_specialties"
@@ -102,4 +102,22 @@
             android:id="@+id/action_confirm_choice_to_show_current_list"
             app:destination="@id/show_current_list" />
     </fragment>
+    <fragment
+        android:id="@+id/chooseSpecialties"
+        android:name="com.madrat.abiturhelper.fragments.chance.ChanceChooseSpecialties">
+        <action
+            android:id="@+id/action_chooseSpecialties_to_confirmChoice"
+            app:destination="@id/confirmChoice" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmChoice"
+        android:name="com.madrat.abiturhelper.fragments.chance.ChanceConfirmChoice">
+        <action
+            android:id="@+id/action_confirmChoice_to_showResults"
+            app:destination="@id/showResults" />
+    </fragment>
+    <fragment
+        android:id="@+id/showResults"
+        android:name="com.madrat.abiturhelper.fragments.chance.ChanceShowResults"
+        android:label="ChanceShowResults" />
 </navigation>

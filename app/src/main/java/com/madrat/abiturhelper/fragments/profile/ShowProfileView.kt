@@ -71,13 +71,13 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         }
         profileShowFinalList.setOnClickListener {
             val bundle = showProfilePresenter?.returnBundleWithListID(300)
-            toSpecialties(bundle, R.id.action_profile_to_showFittingSpecialties)
+            toActionId(bundle, R.id.action_profile_to_showFittingSpecialties)
         }
         profileApplySelectSpecialtiesForGraduation.setOnClickListener {
-            toSpecialties(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
+            toActionId(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
         }
         profileAddToListsCalculatePositions.setOnClickListener {
-            toSpecialties(null, R.id.action_profile_to_show_current_list)
+            toActionId(null, R.id.action_profile_to_show_current_list)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -115,7 +115,7 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         val amountOfFinalSpecialties = showProfilePresenter?.returnAmountOfFinalSpecialties()
         profileFinalListOfSpecialtiesAmountValue.setText(amountOfFinalSpecialties.toString())
     }
-    override fun toSpecialties(bundle: Bundle?, actionId: Int) {
+    override fun toActionId(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
     }
 }

@@ -104,4 +104,7 @@
     <string name="selectedEntriesTotal">Количество мест</string>
     <string name="selectedOldMinimalScore">Старый минимальный балл</string>
     <string name="selectedNewMinimalScore">Новый минимальный балл</string>
+
+    <string name="chanceChooseSpecialtiesTitle">Выберите специальности</string>
+    <string name="chanceConfirmChoiceTitle">Подтвердите выбор</string>
 </resources>

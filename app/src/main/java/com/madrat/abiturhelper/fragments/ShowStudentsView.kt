@@ -15,7 +15,8 @@ import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_show_bachelors.view.*
 import kotlinx.android.synthetic.main.fragment_specialties.*
 
-class ShowStudentsView: Fragment(), ShowStudentsMVP.View {
+class ShowStudentsView
+    : Fragment(), ShowStudentsMVP.View {
     private var adapter: StudentsAdapter? = null
     private var showStudentsPresenter: ShowStudentsPresenter? = null
 
@@ -24,7 +25,7 @@ class ShowStudentsView: Fragment(), ShowStudentsMVP.View {
         setupMVP()
 
         val list = showStudentsPresenter?.returnCurrentListOfStudents()
-        list?.let { showSpecialties(it) }
+        list?.let { showStudents(it) }
     }
 
     override fun setupMVP() {
@@ -43,7 +44,7 @@ class ShowStudentsView: Fragment(), ShowStudentsMVP.View {
         return view
     }
 
-    override fun showSpecialties(students: ArrayList<Student>) {
+    override fun showStudents(students: ArrayList<Student>) {
         adapter?.updateBachelorsList(students)
         specialtiesRecyclerView?.adapter = adapter
     }
