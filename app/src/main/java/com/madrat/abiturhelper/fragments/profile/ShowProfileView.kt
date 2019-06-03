@@ -22,6 +22,11 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         setupScoreFields()
         setupSpecialtiesFields()
 
+        // Булевы значения для ФИО
+        var isLastNameEditable: Boolean? = true
+        var isFirstNameEditable: Boolean? = true
+        var isPatronymicEditable: Boolean? = true
+        // Булевы значения для баллов
         var isMathsEditable: Boolean? = true
         var isRussianEditable: Boolean? = true
         var isPhysicsEditable: Boolean? = true
@@ -29,6 +34,24 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         var isSocialScienceEditable: Boolean? = true
         var isAdditionalScoreEditable: Boolean? = true
 
+        profileLastNameEditValue.setOnClickListener {
+            isLastNameEditable = showProfilePresenter?.checkFieldForBeingEditable(
+                    isLastNameEditable, profileLastNameValue,
+                    profileLastNameEditValue
+            )
+        }
+        profileFirstNameEditValue.setOnClickListener {
+            isFirstNameEditable = showProfilePresenter?.checkFieldForBeingEditable(
+                    isFirstNameEditable, profileFirstNameValue,
+                    profileFirstNameEditValue
+            )
+        }
+        profilePatronymicEditValue.setOnClickListener {
+            isPatronymicEditable = showProfilePresenter?.checkFieldForBeingEditable(
+                    isPatronymicEditable, profilePatronymicValue,
+                    profilePatronymicEditValue
+            )
+        }
         profileMathsEditValue.setOnClickListener {
             isMathsEditable = showProfilePresenter?.checkFieldForBeingEditable(
                     isMathsEditable, profileMathsValue,
