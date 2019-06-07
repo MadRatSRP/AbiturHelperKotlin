@@ -16,7 +16,8 @@ import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_graduation_show_current_list.*
 import kotlinx.android.synthetic.main.fragment_graduation_show_current_list.view.*
 
-class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
+class GraduationShowCurrentList
+    : Fragment(), GraduationShowCurrentListMVP.View {
     private var adapter: SelectedSpecialtiesAdapter? = null
     private var graduationShowCurrentListPresenter: GraduationShowCurrentListPresenter? = null
 

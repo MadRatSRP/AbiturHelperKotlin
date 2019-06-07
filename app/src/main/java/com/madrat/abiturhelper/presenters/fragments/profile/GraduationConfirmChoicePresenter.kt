@@ -78,7 +78,8 @@ class GraduationConfirmChoicePresenter
         }
     }
 
-    override fun calculateGraduationData(selectedSpecialties: ArrayList<Specialty>): ArrayList<Graduation> {
+    override fun calculateGraduationData(selectedSpecialties: ArrayList<Specialty>)
+            : ArrayList<Graduation> {
         // Объявляем новый список типа модели Graduation
         val graduationList = ArrayList<Graduation>()
 

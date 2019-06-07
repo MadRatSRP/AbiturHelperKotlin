@@ -10,13 +10,9 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationConfirmChoiceMVP
-import com.madrat.abiturhelper.model.Graduation
 import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.presenters.fragments.profile.GraduationConfirmChoicePresenter
-import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.linearManager
-import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_graduation_confirm_choice.*
 import kotlinx.android.synthetic.main.fragment_graduation_confirm_choice.view.*
 

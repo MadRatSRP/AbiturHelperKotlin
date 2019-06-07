@@ -101,10 +101,15 @@
     <string name="selectedFacultyName">Название факультета</string>
     <string name="selectedAmountOfStudents">Подавших документы</string>
     <string name="selectedPosition">Ваша позиция в списке</string>
-    <string name="selectedEntriesTotal">Количество мест</string>
+
     <string name="selectedOldMinimalScore">Старый минимальный балл</string>
     <string name="selectedNewMinimalScore">Новый минимальный балл</string>
 
     <string name="chanceChooseSpecialtiesTitle">Выберите специальности</string>
     <string name="chanceConfirmChoiceTitle">Подтвердите выбор</string>
+    <string name="chanceSupposedPosition">Предполагаемая позиция</string>
+    <string name="chanceChanceOfGraduation">Шанс поступления</string>
+    <string name="chanceMinimalScore">Минимальный балл</string>
+
+    <string name="totalOfEntries">Количество мест</string>
 </resources>
