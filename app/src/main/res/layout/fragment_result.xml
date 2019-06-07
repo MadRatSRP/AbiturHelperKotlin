@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@id/resultAmountOfZeroMinimalScoreSpecialtiesText"/>
     <Button
         android:id="@+id/resultShowSpecialtiesWithZeroMinimalScore"
-        android:text="@string/resultShowSpecialties"
+        android:text="@string/resultShowSpecialtiesWithoutScore"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/resultAmountOfFittingSpecialtiesText"/>
     <Button
         android:id="@+id/resultShowFittingSpecialties"
-        android:text="@string/resultShowSpecialties"
+        android:text="@string/resultShowSpecialtiesWithFittingSpecialties"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_width="match_parent"

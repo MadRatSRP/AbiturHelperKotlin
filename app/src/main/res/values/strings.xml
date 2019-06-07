@@ -18,6 +18,7 @@
     <string name="scoreComputerScience">Информатика</string>
     <string name="scoreSocialScience">Обществознание</string>
 
+    // ScoreSetupScore
     <string name="setupScoreTitle">Введите свои данные</string>
     <string name="setupScoreScoreTitle">Баллы ЕГЭ</string>
     <string name="setupScoreAdditionalTitle">Дополнительные баллы</string>
@@ -27,6 +28,10 @@
     <string name="workWithSpecialtiesToCurrentList">К актуальному списку</string>
     <string name="workWithSpecialtiesToResultScreen">К подбору специальностей</string>
     <string name="workWithSpecialtiesToResultScreenButton">Показать подобранные специальности</string>
+
+    // ScoreResult
+    <string name="resultShowSpecialtiesWithoutScore">Показать специальности без балла</string>
+    <string name="resultShowSpecialtiesWithFittingSpecialties">Показать специальности под баллы</string>
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
