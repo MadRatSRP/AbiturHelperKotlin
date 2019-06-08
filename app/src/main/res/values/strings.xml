@@ -115,6 +115,7 @@
     <string name="chanceSupposedPosition">Предполагаемая позиция</string>
     <string name="chanceChanceOfGraduation">Шанс поступления</string>
     <string name="chanceMinimalScore">Минимальный балл</string>
+    <string name="chanceShowResultsTitle">Результаты</string>
 
     <string name="totalOfEntries">Количество мест</string>
 </resources>

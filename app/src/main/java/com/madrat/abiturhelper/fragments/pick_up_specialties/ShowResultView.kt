@@ -46,7 +46,6 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
             toSpecialties(null, R.id.action_resultView_to_profile)
         }
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textResult)

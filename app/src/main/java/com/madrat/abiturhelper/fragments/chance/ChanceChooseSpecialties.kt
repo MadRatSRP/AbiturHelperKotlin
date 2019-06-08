@@ -9,35 +9,39 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.CompleteSpecialtiesAdapter
+import com.madrat.abiturhelper.interfaces.fragments.chance.ChanceChooseSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
-import com.madrat.abiturhelper.util.MyApplication
+import com.madrat.abiturhelper.presenters.fragments.chance.ChanceChooseSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
 import kotlinx.android.synthetic.main.fragment_chance_choose_specialties.*
 import kotlinx.android.synthetic.main.fragment_chance_choose_specialties.view.*
 
-class ChanceChooseSpecialties: Fragment() {
+class ChanceChooseSpecialties
+    : Fragment(), ChanceChooseSpecialtiesMVP.View {
     private var adapter: CompleteSpecialtiesAdapter? = null
-    private var myApplication = MyApplication.instance
+    private var chanceChooseSpecialtiesPresenter: ChanceChooseSpecialtiesPresenter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val faculties = myApplication.returnCompleteListOfSpecilaties()
-        val sumOfFaculties = ArrayList<Specialty>()
+        setupMVP()
 
+        val faculties = chanceChooseSpecialtiesPresenter?.returnCompleteListOfSpecialties()
+        val sumOfFaculties = ArrayList<Specialty>()
         faculties?.let {
             for (i in 0 until faculties.size) {
                 sumOfFaculties += faculties[i]
             }
         }
-
         showSpecialties(sumOfFaculties)
 
         chosenSaveCheckedSpecialties.setOnClickListener {view ->
             val selectedSpecialties = adapter?.returnSelectedSpecialties()
-            selectedSpecialties?.let { myApplication.saveChosenSpecialties(it) }
+            selectedSpecialties
+                    ?.let{ chanceChooseSpecialtiesPresenter?.saveChosenSpecialties(it) }
 
             val itemStateArray = adapter?.returnItemStateArray()
-            itemStateArray?.let { myApplication.saveChanceItemStateArray(it) }
+            itemStateArray
+                    ?.let { chanceChooseSpecialtiesPresenter?.saveChanceItemStateArray(it) }
 
             toSpecialties(R.id.action_chooseSpecialties_to_confirmChoice)
         }
@@ -50,20 +54,28 @@ class ChanceChooseSpecialties: Fragment() {
                 container, false)
 
         adapter = CompleteSpecialtiesAdapter(
-                myApplication.returnChanceItemStateArray(),
-                myApplication.returnChosenSpecialties()
+                chanceChooseSpecialtiesPresenter?.returnChanceItemStateArray(),
+                chanceChooseSpecialtiesPresenter?.returnChosenSpecialties()
         )
         view.chosenRecyclerView.adapter = adapter
         view.chosenRecyclerView.linearManager()
 
         return view
     }
+    override fun onDestroyView() {
+        chanceChooseSpecialtiesPresenter = null
+        adapter = null
+        super.onDestroyView()
+    }
 
-    /*override*/ fun showSpecialties(specialties: ArrayList<Specialty>?) {
+    override fun setupMVP() {
+        chanceChooseSpecialtiesPresenter = ChanceChooseSpecialtiesPresenter()
+    }
+    override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }
         chosenRecyclerView?.adapter = adapter
     }
-    /*override*/ fun toSpecialties(actionId: Int) {
+    override fun toSpecialties(actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId) }
     }
 }
