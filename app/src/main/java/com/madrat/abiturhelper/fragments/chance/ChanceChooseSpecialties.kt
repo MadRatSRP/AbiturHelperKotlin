@@ -25,14 +25,10 @@ class ChanceChooseSpecialties
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        val faculties = chanceChooseSpecialtiesPresenter?.returnCompleteListOfSpecialties()
-        val sumOfFaculties = ArrayList<Specialty>()
-        faculties?.let {
-            for (i in 0 until faculties.size) {
-                sumOfFaculties += faculties[i]
-            }
-        }
-        showSpecialties(sumOfFaculties)
+        val listOfAllCompleteSpecialties
+                = chanceChooseSpecialtiesPresenter?.returnListOfAllCompleteSpecialties()
+        listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
+        showSpecialties(listOfAllCompleteSpecialties)
 
         chosenSaveCheckedSpecialties.setOnClickListener {view ->
             val selectedSpecialties = adapter?.returnSelectedSpecialties()

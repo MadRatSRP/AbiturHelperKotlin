@@ -21,6 +21,7 @@ class MyApplication: Application() {
     private var listOfSpecialtiesWithZeroMinimalScore: ArrayList<ArrayList<Specialty>>? = null
     private var listOfFittingSpecialties: ArrayList<ArrayList<Specialty>>? = null
     private var completeListOfSpecialties: ArrayList<ArrayList<Specialty>>? = null
+    private var listOfAllCompleteSpecialties: ArrayList<Specialty>? = null
 
     private var listUNTI: ArrayList<ArrayList<Student>>? = null
     private var listFEU: ArrayList<ArrayList<Student>>? = null
@@ -243,6 +244,13 @@ class MyApplication: Application() {
     fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>? {
         return completeListOfSpecialties
     }
+
+
+    fun saveListOfAllCompleteSpecialties(list: ArrayList<Specialty>) {
+        this.listOfAllCompleteSpecialties = list
+    }
+    fun returnListOfAllCompleteSpecialties(): ArrayList<Specialty>?
+            = listOfAllCompleteSpecialties
 
     fun saveItemStateArray(list: SparseBooleanArray) {
         this.itemStateArray = list

@@ -31,6 +31,15 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         val sizeOfFittingList = showResultPresenter?.returnAmountOfFittingSpecialties()
         resultAmountOfFittingSpecialtiesValue.text = sizeOfFittingList.toString()
 
+        showResultPresenter?.completeAndSaveSummedList()
+
+        // Седьмой шаг
+        val completeList = showResultPresenter?.returnCompleteListOfSpecialties()
+        val listOfAllCompleteSpecialties = completeList
+                ?.let { showResultPresenter?.returnListOfAllCompleteSpecialties(it) }
+        listOfAllCompleteSpecialties
+                ?.let { showResultPresenter?.saveListOfAllCompleteSpecialties(it) }
+
         resultShowSpecialtiesWithZeroMinimalScore.setOnClickListener {
             val bundle = showResultPresenter?.returnBundleWithListID(100)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
@@ -39,9 +48,6 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
             val bundle = showResultPresenter?.returnBundleWithListID(200)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
-
-        showResultPresenter?.completeAndSaveSummedList()
-
         resultSaveAndMoveToProfile.setOnClickListener {
             toSpecialties(null, R.id.action_resultView_to_profile)
         }

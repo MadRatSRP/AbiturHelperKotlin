@@ -7,9 +7,10 @@ interface GraduationSelectSpecialtiesMVP {
     interface View {
         fun setupMVP()
         fun showSpecialties(specialties: ArrayList<Specialty>?)
+        fun toActionId(actionId: Int)
     }
     interface Presenter {
-        fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
+        fun returnListOfAllCompleteSpecialties(): ArrayList<Specialty>?
         fun saveItemStateArray(itemStateArray: SparseBooleanArray?)
         fun returnItemStateArray(): SparseBooleanArray?
         fun saveSelectedSpecialties(selectedSpecialties: ArrayList<Specialty>?)

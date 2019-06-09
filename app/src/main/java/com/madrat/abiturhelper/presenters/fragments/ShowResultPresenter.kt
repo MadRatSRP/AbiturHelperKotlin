@@ -11,7 +11,6 @@ import com.madrat.abiturhelper.util.showLog
 class ShowResultPresenter : ShowResultMVP.Presenter {
     private val myApplication = MyApplication.instance
 
-
     // Пятый этап
     override fun checkForZeroMinimalScore() {
         val scores = myApplication.returnScore()
@@ -29,7 +28,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         //val faculties = Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
         myApplication.saveListOfSpecialtiesWithZeroMinimalScore(collection)
     }
-    override fun checkUNTIForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkUNTIForZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
 
@@ -66,7 +66,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithZeroMinimalScore
     }
-    override fun checkFEUForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkFEUForZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
 
@@ -103,7 +104,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithZeroMinimalScore
     }
-    override fun checkFITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkFITForZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
 
@@ -140,7 +142,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithZeroMinimalScore
     }
-    override fun checkMTFForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkMTFForZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
 
@@ -177,7 +180,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithZeroMinimalScore
     }
-    override fun checkUNITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkUNITForZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
 
@@ -214,7 +218,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithZeroMinimalScore
     }
-    override fun checkFEEForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkFEEForZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithZeroMinimalScore = ArrayList<Specialty>()
 
@@ -251,13 +256,13 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithZeroMinimalScore
     }
-
     // Шестой этап
     override fun checkForFittingSpecialties() {
         val fittingList = returnFittingSpecialties()
         myApplication.saveListOfFittingSpecialties(fittingList)
     }
-    override fun returnFittingSpecialties(): ArrayList<ArrayList<Specialty>> {
+    override fun returnFittingSpecialties()
+            : ArrayList<ArrayList<Specialty>> {
         val scores = myApplication.returnScore()
 
         val listUNTI = checkUNTIForFittingSpecialties(0, scores)
@@ -284,7 +289,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
 
         //val faculties = Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
     }
-    override fun checkUNTIForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkUNTIForFittingSpecialties(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
@@ -343,7 +349,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithFittingSpecialties
     }
-    override fun checkFEUForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkFEUForFittingSpecialties(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
@@ -402,7 +409,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithFittingSpecialties
     }
-    override fun checkFITForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkFITForFittingSpecialties(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
@@ -461,7 +469,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithFittingSpecialties
     }
-    override fun checkMTFForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkMTFForFittingSpecialties(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
@@ -520,7 +529,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithFittingSpecialties
     }
-    override fun checkUNITForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkUNITForFittingSpecialties(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
@@ -579,7 +589,8 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithFittingSpecialties
     }
-    override fun checkFEEForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty> {
+    override fun checkFEEForFittingSpecialties(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
@@ -638,6 +649,22 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         }
         return listWithFittingSpecialties
     }
+
+    // Седьмой шаг
+    fun returnListOfAllCompleteSpecialties(list: ArrayList<ArrayList<Specialty>>)
+                : ArrayList<Specialty> {
+        val sumOfFaculties = ArrayList<Specialty>()
+        list.let {
+            for (i in 0 until list.size) {
+                sumOfFaculties += list[i]
+            }
+        }
+        return sumOfFaculties
+    }
+    fun returnCompleteListOfSpecialties()
+            = myApplication.returnCompleteListOfSpecilaties()
+    fun saveListOfAllCompleteSpecialties(list: ArrayList<Specialty>)
+            = myApplication.saveListOfAllCompleteSpecialties(list)
 
     override fun getSpecialtiesListByPosition(pos: Int)
             : ArrayList<Specialty>? {

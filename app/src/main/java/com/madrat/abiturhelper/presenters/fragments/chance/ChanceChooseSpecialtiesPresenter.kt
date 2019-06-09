@@ -14,8 +14,8 @@ class ChanceChooseSpecialtiesPresenter
     override fun saveChanceItemStateArray(chanceItemStateArray: SparseBooleanArray)
             = myApplication.saveChanceItemStateArray(chanceItemStateArray)
 
-    override fun returnCompleteListOfSpecialties()
-            = myApplication.returnCompleteListOfSpecilaties()
+    override fun returnListOfAllCompleteSpecialties()
+            = myApplication.returnListOfAllCompleteSpecialties()
     override fun returnChanceItemStateArray()
             = myApplication.returnChanceItemStateArray()
     override fun returnChosenSpecialties()

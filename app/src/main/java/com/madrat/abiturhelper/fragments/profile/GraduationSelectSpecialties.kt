@@ -24,28 +24,19 @@ class GraduationSelectSpecialties
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-        val faculties = graduationSelectSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
-
-        val sumOfFaculties = ArrayList<Specialty>()
-
-        faculties?.let {
-            for (i in 0 until faculties.size) {
-                sumOfFaculties += faculties[i]
-            }
-        }
-
-        showSpecialties(sumOfFaculties)
+        val listOfAllCompleteSpecialties
+                = graduationSelectSpecialtiesPresenter?.returnListOfAllCompleteSpecialties()
+        listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
+        showSpecialties(listOfAllCompleteSpecialties)
 
         selectSaveCheckedSpecialties.setOnClickListener {view ->
             val selectedSpecialties = adapter?.returnSelectedSpecialties()
-            //showLog("Список: ${array?.size}")
             graduationSelectSpecialtiesPresenter?.saveSelectedSpecialties(selectedSpecialties)
 
             val itemStateArray = adapter?.returnItemStateArray()
             graduationSelectSpecialtiesPresenter?.saveItemStateArray(itemStateArray)
 
-            toSpecialties(null, R.id.action_select_specialties_to_confirm_choice)
+            toActionId(R.id.action_select_specialties_to_confirm_choice)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +56,11 @@ class GraduationSelectSpecialties
 
         return view
     }
+    override fun onDestroyView() {
+        graduationSelectSpecialtiesPresenter = null
+        adapter = null
+        super.onDestroyView()
+    }
 
     override fun setupMVP() {
         graduationSelectSpecialtiesPresenter = GraduationSelectSpecialtiesPresenter()
@@ -74,7 +70,7 @@ class GraduationSelectSpecialties
         //adapter?.saveNewChecker(position)
         selectForRecyclerView?.adapter = adapter
     }
-    /*override*/ fun toSpecialties(bundle: Bundle?, actionId: Int) {
-        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
+    override fun toActionId(actionId: Int) {
+        view?.let { Navigation.findNavController(it).navigate(actionId) }
     }
 }

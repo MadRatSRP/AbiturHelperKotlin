@@ -12,15 +12,13 @@ class GraduationSelectSpecialtiesPresenter
     override fun saveItemStateArray(itemStateArray: SparseBooleanArray?) {
         itemStateArray?.let { myApplication.saveItemStateArray(it) }
     }
-
     override fun saveSelectedSpecialties(selectedSpecialties: ArrayList<Specialty>?) {
         selectedSpecialties?.let { myApplication.saveSelectedSpecialties(it) }
     }
-
-    override fun returnCompleteListOfSpecilaties(): ArrayList<ArrayList<Specialty>>?
-            = myApplication.returnCompleteListOfSpecilaties()
     override fun returnItemStateArray()
             = myApplication.returnItemStateArray()
     override fun returnSelectedSpecialties()
             = myApplication.returnSelectedSpecialties()
+    override fun returnListOfAllCompleteSpecialties()
+            = myApplication.returnListOfAllCompleteSpecialties()
 }
