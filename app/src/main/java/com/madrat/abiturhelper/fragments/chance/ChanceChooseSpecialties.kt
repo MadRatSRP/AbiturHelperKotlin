@@ -30,7 +30,7 @@ class ChanceChooseSpecialties
         listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
         showSpecialties(listOfAllCompleteSpecialties)
 
-        chosenSaveCheckedSpecialties.setOnClickListener {view ->
+        chosenSaveCheckedSpecialties.setOnClickListener {
             val selectedSpecialties = adapter?.returnSelectedSpecialties()
             selectedSpecialties
                     ?.let{ chanceChooseSpecialtiesPresenter?.saveChosenSpecialties(it) }

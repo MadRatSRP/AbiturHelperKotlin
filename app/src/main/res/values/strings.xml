@@ -30,8 +30,17 @@
     <string name="workWithSpecialtiesToResultScreenButton">Показать подобранные специальности</string>
 
     // ScoreResult
-    <string name="resultShowSpecialtiesWithoutScore">Показать специальности без балла</string>
-    <string name="resultShowSpecialtiesWithFittingSpecialties">Показать специальности под баллы</string>
+    <string name="resultSpecialtiesWithoutScoreTitle">Специальности без балла</string>
+    <string name="resultSpecialtiesWithoutScoreShowSpecialties">Показать специальности без балла</string>
+    <string name="resultFittingSpecialtiesTitle">Специальности под баллы</string>
+    <string name="resultFittingSpecialtiesShowSpecialties">Показать специальности под баллы</string>
+
+    <string name="profileAmountOfSpecialties">Количество специальностей</string>
+
+    <string name="resultAmountOfZeroMinimalScoreSpecialties">Количество специальностей без минимального балла</string>
+    <string name="resultAmountOfFittingSpecialties">Количество специальностей, подходящих под баллы пользователя</string>
+    <string name="resultShowSpecialties">Показать специальности</string>
+    <string name="resultSaveAndMoveToProfile">Сохранить и перейти к профилю</string>
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
@@ -59,8 +68,6 @@
     <string name="profileUpdateScoresMessage">Баллы успешно обновлены</string>
 
     <string name="profileEditFieldDefaultValue">0</string>
-
-    <string name="profileAmountOfSpecialties">Количество специальностей</string>
 
     <string name="additionalScoreHint">Укажите сумму своих дополнительных баллов:</string>
 
@@ -96,11 +103,6 @@
     <string name="titleFEE">"ФЭЭ"</string>
 
     <string name="amountOfSpecialties">Количество специальностей</string>
-
-    <string name="resultAmountOfZeroMinimalScoreSpecialties">Количество специальностей без минимального балла</string>
-    <string name="resultAmountOfFittingSpecialties">Количество специальностей, подходящих под баллы пользователя</string>
-    <string name="resultShowSpecialties">Показать специальности</string>
-    <string name="resultSaveAndMoveToProfile">Сохранить и перейти к профилю</string>
 
     <string name="selectedSpecialtyName">Название специальности</string>
     <string name="selectedFacultyName">Название факультета</string>

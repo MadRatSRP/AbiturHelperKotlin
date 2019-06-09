@@ -25,11 +25,11 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
 
         // Получаем количество специальностей с неустановленным минимальным баллом
         val sizeOfZeroList = showResultPresenter?.returnAmountOfSpecialtiesWithZeroMinimalScore()
-        resultAmountOfZeroMinimalScoreSpecialtiesValue.text = sizeOfZeroList.toString()
+        resultSpecialtiesWithoutScoreAmountValue.text = sizeOfZeroList.toString()
 
         // Получаем количество специальностей с подходящими баллами
         val sizeOfFittingList = showResultPresenter?.returnAmountOfFittingSpecialties()
-        resultAmountOfFittingSpecialtiesValue.text = sizeOfFittingList.toString()
+        resultFittingSpecialtiesAmountValue.text = sizeOfFittingList.toString()
 
         showResultPresenter?.completeAndSaveSummedList()
 
@@ -40,11 +40,11 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         listOfAllCompleteSpecialties
                 ?.let { showResultPresenter?.saveListOfAllCompleteSpecialties(it) }
 
-        resultShowSpecialtiesWithZeroMinimalScore.setOnClickListener {
+        resultSpecialtiesWithoutScoreShowSpecialties.setOnClickListener {
             val bundle = showResultPresenter?.returnBundleWithListID(100)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
-        resultShowFittingSpecialties.setOnClickListener {
+        resultFittingSpecialtiesShowSpecialties.setOnClickListener {
             val bundle = showResultPresenter?.returnBundleWithListID(200)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
