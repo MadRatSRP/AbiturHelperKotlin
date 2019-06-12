@@ -67,7 +67,6 @@ class GraduationSelectSpecialties
     }
     override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }
-        //adapter?.saveNewChecker(position)
         selectForRecyclerView?.adapter = adapter
     }
     override fun toActionId(actionId: Int) {

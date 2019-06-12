@@ -24,7 +24,6 @@ class ChanceChooseSpecialties
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupMVP()
 
         val listOfAllCompleteSpecialties
                 = chanceChooseSpecialtiesPresenter?.returnListOfAllCompleteSpecialties()
@@ -36,12 +35,12 @@ class ChanceChooseSpecialties
             selectedSpecialties
                     ?.let{ chanceChooseSpecialtiesPresenter?.saveChosenSpecialties(it) }
 
-            showLog("CHOHO${selectedSpecialties?.size}")
+            showLog("SELECTED${selectedSpecialties?.size}")
 
             val itemStateArray = adapter?.returnItemStateArray()
             itemStateArray
                     ?.let { chanceChooseSpecialtiesPresenter?.saveChanceItemStateArray(it) }
-            showLog("CHOHO${itemStateArray?.size()}")
+            showLog("ARRAY${itemStateArray?.size()}")
 
             toSpecialties(R.id.action_chooseSpecialties_to_confirmChoice)
         }
@@ -52,6 +51,7 @@ class ChanceChooseSpecialties
                 ?.setTitle(R.string.chanceChooseSpecialtiesTitle)
         val view = inflater.inflate(R.layout.fragment_chance_choose_specialties,
                 container, false)
+        setupMVP()
 
         adapter = CompleteSpecialtiesAdapter(
                 chanceChooseSpecialtiesPresenter?.returnChanceItemStateArray(),

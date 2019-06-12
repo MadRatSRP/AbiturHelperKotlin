@@ -14,12 +14,6 @@ class ChanceConfirmChoicePresenter
     override fun calculateChancesData(chosenSpecialties: ArrayList<Specialty>)
             : ArrayList<Chance>{
 
-        chosenSpecialties.forEach {
-            showLog(it.shortName)
-        }
-
-        showLog("CHOH${chosenSpecialties.size}")
-
         //Объявляем новый список типа Chance
         val listOfChances = ArrayList<Chance>()
 
@@ -49,13 +43,10 @@ class ChanceConfirmChoicePresenter
             val totalOfEntries = specialty.entriesTotal
 
             val facultyNumber = returnFacultyPositionNumberByFacultyName(facultyName)
-            showLog("NUMBERIK$facultyNumber")
 
             val studentsOfFaculty = returnListOfStudentsInFacultyByFacultyName(facultyName)
-            showLog("studentiki${studentsOfFaculty?.size}")
 
             val specialtiesOfFaculty = returnListOfSpecialtiesByPosition(facultyNumber)
-            showLog("specialki${specialtiesOfFaculty?.size}")
 
             val positionOfSpecialty = specialtiesOfFaculty?.indexOf(specialty)
             showLog("ПОЗИЦИЯ СПЕЦИАЛЬНОСТИ: $positionOfSpecialty")
@@ -83,30 +74,52 @@ class ChanceConfirmChoicePresenter
 
             val amountOfStudents = currentStudentsList?.let { currentStudentsList.size }
 
-            var chanceOfGraduation: Int? = null
+            /*var chanceOfGraduation: Int? = null
             if (totalOfEntries == 0)
                 chanceOfGraduation = 0
             else if (supposedPosition != null) {
                 if (supposedPosition <= totalOfEntries - 1)
                     chanceOfGraduation = 100
+            }*/
+
+            /*val chanceOfGraduation = supposedPosition?.let {
+                when (totalOfEntries) {
+                    0 -> 0
+
+                    /*if (supposedPosition <= totalOfEntries - 1)
+                        -> 100*/
+
+                    //in 0..supposedPosition ->
+                    in 0..supposedPosition -> 100
+
+
+
+                    else -> 0
+                }
+            }*/
+            /*var chance:Int = if (totalOfEntries == 0)
+                0 else {
+
+            }*/
+
+            val chanceOfGraduation: Int = if(totalOfEntries == 0) {
+                0
+            } else {
+                when (supposedPosition) {
+                    in 0 until totalOfEntries -> 100
+                    else -> 0
+                }
             }
 
-            /*val chance: Chance = chanceOfGraduation?.let {
-                amountOfStudents?.let {
-                    supposedPosition?.let {
-                        Chance(specialtyName, facultyName, minimalScore,
-                                chanceOfGraduation.toDouble(), totalOfEntries,
-                                amountOfStudents, supposedPosition)
-                    } } }*/
+            /*val chanceOfGraduation: Int = when(supposedPosition) {
+                in 0 until totalOfEntries -> 100
+
+            }*/
 
             val chance:Chance = Chance(specialtyName, facultyName, minimalScore,
                     chanceOfGraduation?.toDouble(), totalOfEntries, amountOfStudents, supposedPosition)
 
             showLog("CHANSIK$chance")
-            //chance?.let { ch -> listOfChances.add(ch) }
-            //chance?.let { return chance }
-            //return chance
-
             return chance
         }
 
