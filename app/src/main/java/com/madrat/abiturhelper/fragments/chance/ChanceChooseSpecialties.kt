@@ -13,6 +13,7 @@ import com.madrat.abiturhelper.interfaces.fragments.chance.ChanceChooseSpecialti
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.chance.ChanceChooseSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
+import com.madrat.abiturhelper.util.showLog
 import kotlinx.android.synthetic.main.fragment_chance_choose_specialties.*
 import kotlinx.android.synthetic.main.fragment_chance_choose_specialties.view.*
 
@@ -35,9 +36,12 @@ class ChanceChooseSpecialties
             selectedSpecialties
                     ?.let{ chanceChooseSpecialtiesPresenter?.saveChosenSpecialties(it) }
 
+            showLog("CHOHO${selectedSpecialties?.size}")
+
             val itemStateArray = adapter?.returnItemStateArray()
             itemStateArray
                     ?.let { chanceChooseSpecialtiesPresenter?.saveChanceItemStateArray(it) }
+            showLog("CHOHO${itemStateArray?.size()}")
 
             toSpecialties(R.id.action_chooseSpecialties_to_confirmChoice)
         }

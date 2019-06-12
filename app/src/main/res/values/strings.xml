@@ -35,10 +35,6 @@
     <string name="resultFittingSpecialtiesTitle">Специальности под баллы</string>
     <string name="resultFittingSpecialtiesShowSpecialties">Показать специальности под баллы</string>
 
-    <string name="profileAmountOfSpecialties">Количество специальностей</string>
-
-    <string name="resultAmountOfZeroMinimalScoreSpecialties">Количество специальностей без минимального балла</string>
-    <string name="resultAmountOfFittingSpecialties">Количество специальностей, подходящих под баллы пользователя</string>
     <string name="resultShowSpecialties">Показать специальности</string>
     <string name="resultSaveAndMoveToProfile">Сохранить и перейти к профилю</string>
 
@@ -102,8 +98,6 @@
     <string name="titleUNIT">УНИТ</string>
     <string name="titleFEE">"ФЭЭ"</string>
 
-    <string name="amountOfSpecialties">Количество специальностей</string>
-
     <string name="selectedSpecialtyName">Название специальности</string>
     <string name="selectedFacultyName">Название факультета</string>
     <string name="selectedAmountOfStudents">Подавших документы</string>
@@ -120,4 +114,7 @@
     <string name="chanceShowResultsTitle">Результаты</string>
 
     <string name="totalOfEntries">Количество мест</string>
+
+    // Общие
+    <string name="amountOfSpecialties">Количество специальностей</string>
 </resources>

@@ -370,7 +370,7 @@
                     <TextView
                         android:gravity="center"
                         android:id="@+id/profileFinalListOfSpecialtiesAmountText"
-                        android:text="@string/profileAmountOfSpecialties"
+                        android:text="@string/amountOfSpecialties"
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileFinalListOfSpecialtiesAmountValue"

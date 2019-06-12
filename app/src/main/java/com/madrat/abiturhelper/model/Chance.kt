@@ -6,9 +6,9 @@ data class Chance(
         val facultyName: String,
         // Шанс поступления и минимальный балл
         val minimalScore: Int,
-        val chance: Double,
+        val chance: Double?,
         // Количество мест, поступающих и предполагаемая позиция
         val totalOfEntries: Int,
-        val amountOfStudents: Int,
-        val supposedPosition: Int
+        val amountOfStudents: Int?,
+        val supposedPosition: Int?
 )

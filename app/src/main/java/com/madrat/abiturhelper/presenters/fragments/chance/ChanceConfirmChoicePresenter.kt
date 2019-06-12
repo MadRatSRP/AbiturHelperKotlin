@@ -13,39 +13,57 @@ class ChanceConfirmChoicePresenter
 
     override fun calculateChancesData(chosenSpecialties: ArrayList<Specialty>)
             : ArrayList<Chance>{
+
+        chosenSpecialties.forEach {
+            showLog(it.shortName)
+        }
+
+        showLog("CHOH${chosenSpecialties.size}")
+
         //Объявляем новый список типа Chance
         val listOfChances = ArrayList<Chance>()
+
         // Получаем ФИО пользователя и его баллы
         val fullName = myApplication.returnFullName()
         val score = myApplication.returnScore()
-        //Для каждой специальности из списка chosenSpecialties
-        chosenSpecialties.forEach {
-            val specialtyName = it.shortName
-            val facultyName = it.faculty
-            val minimalScore = it.minimalScore
-            val profileTerm = it.profileTerm
-            val totalOfEntries = it.entriesTotal
+
+        val student = score?.let {
+            fullName?.let {
+                Student("007", fullName.lastName, fullName.firstName, fullName.patronymic,
+                        "####", "net", "Принято", "", "бак",
+                        "по конкурсу", " ", "", "",
+                        score.russian, score.maths, score.physics, score.computerScience, score.socialScience,
+                        score.additionalScore, true, true, 0)
+            }
+        }
+
+        fun prepareChancesData(specialty: Specialty): Chance {
+            showLog("Размер списка Chance${listOfChances.size}")
+
+            // Название специальности и факультета, минимальный балл,
+            // профильный предмет и количество мест
+            val specialtyName = specialty.shortName
+            val facultyName = specialty.faculty
+            val minimalScore = specialty.minimalScore
+            val profileTerm = specialty.profileTerm
+            val totalOfEntries = specialty.entriesTotal
 
             val facultyNumber = returnFacultyPositionNumberByFacultyName(facultyName)
-            val studentsOfFaculty = returnListOfStudentsInFacultyByFacultyName(facultyName)
-            val specialtiesOfFaculty = returnListOfSpecialtiesByPosition(facultyNumber)
+            showLog("NUMBERIK$facultyNumber")
 
-            val positionOfSpecialty = specialtiesOfFaculty?.indexOf(it)
+            val studentsOfFaculty = returnListOfStudentsInFacultyByFacultyName(facultyName)
+            showLog("studentiki${studentsOfFaculty?.size}")
+
+            val specialtiesOfFaculty = returnListOfSpecialtiesByPosition(facultyNumber)
+            showLog("specialki${specialtiesOfFaculty?.size}")
+
+            val positionOfSpecialty = specialtiesOfFaculty?.indexOf(specialty)
             showLog("ПОЗИЦИЯ СПЕЦИАЛЬНОСТИ: $positionOfSpecialty")
 
 
             val currentStudentsList = positionOfSpecialty?.let{ studentsOfFaculty?.get(positionOfSpecialty) }
             showLog("РАЗМЕР: ${currentStudentsList?.size}")
 
-            val student = score?.let {
-                fullName?.let {
-                    Student("007", fullName.lastName, fullName.firstName, fullName.patronymic,
-                            "####", "net", "Принято", "", "бак",
-                            "по конкурсу", " ", "", "",
-                            score.russian, score.maths, score.physics, score.computerScience, score.socialScience,
-                            score.additionalScore, true, true, 0)
-                }
-            }
             student?.let {std -> currentStudentsList?.add(std) }
             showLog("РАЗМЕР: ${currentStudentsList?.size}")
 
@@ -65,19 +83,6 @@ class ChanceConfirmChoicePresenter
 
             val amountOfStudents = currentStudentsList?.let { currentStudentsList.size }
 
-            /*val chanceOfGraduation = supposedPosition?.let {
-                when(amountOfStudents) {
-                    0 -> 0
-                    in 1..supposedPosition -> 100
-                    else -> 0
-                }
-            }*/
-
-            /*val chanceOfGraduation = when(amountOfStudents) {
-                0 -> 0
-
-            }*/
-
             var chanceOfGraduation: Int? = null
             if (totalOfEntries == 0)
                 chanceOfGraduation = 0
@@ -86,15 +91,39 @@ class ChanceConfirmChoicePresenter
                     chanceOfGraduation = 100
             }
 
-            val chance = chanceOfGraduation?.let {
+            /*val chance: Chance = chanceOfGraduation?.let {
                 amountOfStudents?.let {
                     supposedPosition?.let {
                         Chance(specialtyName, facultyName, minimalScore,
                                 chanceOfGraduation.toDouble(), totalOfEntries,
                                 amountOfStudents, supposedPosition)
-                    } } }
-            chance?.let { it1 -> listOfChances.add(it1) }
+                    } } }*/
+
+            val chance:Chance = Chance(specialtyName, facultyName, minimalScore,
+                    chanceOfGraduation?.toDouble(), totalOfEntries, amountOfStudents, supposedPosition)
+
+            showLog("CHANSIK$chance")
+            //chance?.let { ch -> listOfChances.add(ch) }
+            //chance?.let { return chance }
+            //return chance
+
+            return chance
         }
+
+        //Для каждой специальности из списка chosenSpecialties
+        /*chosenSpecialties.forEach {
+            prepareChancesData(it)?.let { it1 -> listOfChances.add(it1) }
+        }*/
+
+        /*for (i in 0 until chosenSpecialties.size) {
+            listOfChances.add(prepareChancesData(chosenSpecialties[i]))
+        }*/
+
+        for (i in 0 until chosenSpecialties.size) {
+            listOfChances.add(prepareChancesData(chosenSpecialties[i]))
+        }
+
+        showLog("CHOCHOHO${listOfChances.size}")
         return listOfChances
     }
 
