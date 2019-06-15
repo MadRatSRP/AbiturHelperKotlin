@@ -1524,25 +1524,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
                     when(list[i].profileTerm) {
                         "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }
@@ -1563,25 +1566,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
                     when(list[i].profileTerm) {
                         "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }
@@ -1601,25 +1607,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
                     when(list[i].profileTerm) {
                         "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }
@@ -1639,25 +1648,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
                     when(list[i].profileTerm) {
                         "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }
@@ -1677,25 +1689,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
                     when(list[i].profileTerm) {
                         "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
                             list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }
@@ -1715,25 +1730,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
 
                     when(list[i].profileTerm) {
                         "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndPhysics)
+                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.physics }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndSocialScience)
+                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.socialScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience }
+                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
-                            list[i].scoreTitle = context?.getString(R.string.facultyMathsAndComputerScience)
+                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
-                            minimalScore?.let {  r -> list[i].minimalScore = r.maths + r.computerScience }
+                            minimalScore?.let {  r
+                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }

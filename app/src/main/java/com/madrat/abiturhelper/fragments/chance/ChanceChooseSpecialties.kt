@@ -14,6 +14,7 @@ import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.chance.ChanceChooseSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
+import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_chance_choose_specialties.*
 import kotlinx.android.synthetic.main.fragment_chance_choose_specialties.view.*
 
@@ -30,18 +31,22 @@ class ChanceChooseSpecialties
         listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
         showSpecialties(listOfAllCompleteSpecialties)
 
-        chosenSaveCheckedSpecialties.setOnClickListener {
-            val selectedSpecialties = adapter?.returnSelectedSpecialties()
-            selectedSpecialties
-                    ?.let{ chanceChooseSpecialtiesPresenter?.saveChosenSpecialties(it) }
+        chosenSaveCheckedSpecialties.setOnClickListener {view->
+            chosenChecker(view)
+        }
+    }
+    fun chosenChecker(view: View) {
+        val selectedSpecialties = adapter?.returnSelectedSpecialties()
+        selectedSpecialties
+                ?.let{ chanceChooseSpecialtiesPresenter?.saveChosenSpecialties(it) }
 
-            showLog("SELECTED${selectedSpecialties?.size}")
+        val itemStateArray = adapter?.returnItemStateArray()
+        itemStateArray
+                ?.let { chanceChooseSpecialtiesPresenter?.saveChanceItemStateArray(it) }
 
-            val itemStateArray = adapter?.returnItemStateArray()
-            itemStateArray
-                    ?.let { chanceChooseSpecialtiesPresenter?.saveChanceItemStateArray(it) }
-            showLog("ARRAY${itemStateArray?.size()}")
-
+        if (selectedSpecialties?.size == 0) {
+            view.showSnack(R.string.specialtiesNotChosen)
+        } else {
             toSpecialties(R.id.action_chooseSpecialties_to_confirmChoice)
         }
     }

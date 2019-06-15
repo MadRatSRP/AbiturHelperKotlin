@@ -24,10 +24,21 @@
     <string name="setupScoreAdditionalTitle">Дополнительные баллы</string>
     <string name="setupScoreToWorkWithSpecialties">Сохранить данные</string>
 
+    <string name="setupScoreLessThanPassingMaths">Балл по математике меньше проходного</string>
+    <string name="setupScoreLessThanPassingRussian">Балл по русскому языку меньше проходного</string>
+    <string name="setupScoreLessThanPassingPhysics">Балл по физике меньше проходного</string>
+    <string name="setupScoreLessThanPassingComputerScience">Балл по информатике меньше проходного</string>
+    <string name="setupScoreLessThanPassingSocialScience">Балл по обществознанию меньше проходного</string>
+
+    <string name="setupScoreFieldIsEmpty">Поле не может быть пустым</string>
+    <string name="setupScoreLessThanThreeScores">Баллов не может быть меньше трёх</string>
+
     <string name="workWithSpecialtiesTitle">Работа со специальностями</string>
     <string name="workWithSpecialtiesToCurrentList">К актуальному списку</string>
     <string name="workWithSpecialtiesToResultScreen">К подбору специальностей</string>
     <string name="workWithSpecialtiesToResultScreenButton">Показать подобранные специальности</string>
+    <string name="workWithSpecialtiesScoreSavedMessage">Данные корректны и были успешно сохранены</string>
+    <string name="workWithSpecialtiesListsArePrepared">Списки успешно считаны и обработаны</string>
 
     // ScoreResult
     <string name="resultSpecialtiesWithoutScoreTitle">Специальности без балла</string>
@@ -117,4 +128,6 @@
 
     // Общие
     <string name="amountOfSpecialties">Количество специальностей</string>
+
+    <string name="specialtiesNotChosen">Вы не выбрали ни одной специальности</string>
 </resources>

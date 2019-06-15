@@ -12,6 +12,7 @@ import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
 import com.madrat.abiturhelper.repository.PickUpSpecialtiesRepository
+import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
 
 class WorkWithSpecialtiesView
@@ -22,6 +23,8 @@ class WorkWithSpecialtiesView
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
+
+        view?.showSnack(R.string.workWithSpecialtiesScoreSavedMessage)
 
         // Первый шаг - разбить список специальностей по факультетам,
         // выделить из списка студентов тех, кто собирается поступать на бакалавриат
@@ -36,6 +39,8 @@ class WorkWithSpecialtiesView
 
         // Четвёртый шаг
         context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
+
+        view?.showSnack(R.string.workWithSpecialtiesListsArePrepared)
 
         workToCurrentList.setOnClickListener {
             toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)

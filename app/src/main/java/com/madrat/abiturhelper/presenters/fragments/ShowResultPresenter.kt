@@ -295,9 +295,9 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
         scores?.let {
-            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
-            val mathsAndComputerScience = scores.maths + scores.computerScience
-            val mathsAndSocialScience = scores.maths + scores.socialScience
+            val mathsAndPhysics: Int = scores.maths + scores.physics + scores.additionalScore
+            val mathsAndComputerScience = scores.maths + scores.computerScience + scores.additionalScore
+            val mathsAndSocialScience = scores.maths + scores.socialScience + scores.additionalScore
 
             list?.let {
                 // Физика
@@ -355,9 +355,9 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
         scores?.let {
-            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
-            val mathsAndComputerScience = scores.maths + scores.computerScience
-            val mathsAndSocialScience = scores.maths + scores.socialScience
+            val mathsAndPhysics: Int = scores.maths + scores.physics + scores.additionalScore
+            val mathsAndComputerScience = scores.maths + scores.computerScience + scores.additionalScore
+            val mathsAndSocialScience = scores.maths + scores.socialScience + scores.additionalScore
 
             list?.let {
                 // Физика
@@ -415,9 +415,9 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
         scores?.let {
-            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
-            val mathsAndComputerScience = scores.maths + scores.computerScience
-            val mathsAndSocialScience = scores.maths + scores.socialScience
+            val mathsAndPhysics: Int = scores.maths + scores.physics + scores.additionalScore
+            val mathsAndComputerScience = scores.maths + scores.computerScience + scores.additionalScore
+            val mathsAndSocialScience = scores.maths + scores.socialScience + scores.additionalScore
 
             list?.let {
                 // Физика
@@ -475,9 +475,9 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
         scores?.let {
-            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
-            val mathsAndComputerScience = scores.maths + scores.computerScience
-            val mathsAndSocialScience = scores.maths + scores.socialScience
+            val mathsAndPhysics: Int = scores.maths + scores.physics + scores.additionalScore
+            val mathsAndComputerScience = scores.maths + scores.computerScience + scores.additionalScore
+            val mathsAndSocialScience = scores.maths + scores.socialScience + scores.additionalScore
 
             list?.let {
                 // Физика
@@ -535,9 +535,9 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
         scores?.let {
-            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
-            val mathsAndComputerScience = scores.maths + scores.computerScience
-            val mathsAndSocialScience = scores.maths + scores.socialScience
+            val mathsAndPhysics: Int = scores.maths + scores.physics + scores.additionalScore
+            val mathsAndComputerScience = scores.maths + scores.computerScience + scores.additionalScore
+            val mathsAndSocialScience = scores.maths + scores.socialScience + scores.additionalScore
 
             list?.let {
                 // Физика
@@ -595,9 +595,9 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
         var listWithFittingSpecialties = ArrayList<Specialty>()
 
         scores?.let {
-            val mathsAndPhysics: Int = scores.maths + scores.physics//scores?.let { scores.maths + scores.physics }
-            val mathsAndComputerScience = scores.maths + scores.computerScience
-            val mathsAndSocialScience = scores.maths + scores.socialScience
+            val mathsAndPhysics: Int = scores.maths + scores.physics + scores.additionalScore
+            val mathsAndComputerScience = scores.maths + scores.computerScience + scores.additionalScore
+            val mathsAndSocialScience = scores.maths + scores.socialScience + scores.additionalScore
 
             list?.let {
                 // Физика

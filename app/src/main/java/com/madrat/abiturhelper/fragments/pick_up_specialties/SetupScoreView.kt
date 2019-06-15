@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.fragments.pick_up_specialties
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupScoreMVP
 import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
+import com.madrat.abiturhelper.util.showLog
+import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import kotlinx.android.synthetic.main.fragment_setup_score.view.*
 
@@ -18,18 +21,14 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
     private var setupScorePresenter: SetupScorePresenter? = null
 
-    private val passingMaths = 27
-    private val passingRussian = 36
-    private val passingPhysics = 36
-    private val passingComputerScience = 40
-    private val passingSocialScience = 42
-    private val scoreLimit = 100
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
         showSpecialtiesScreen.setOnClickListener { view->
+            //val bool = checkForFIO(view.context)
+            //checkForScore(view.context)
+
             moveToWorkWithSpecialties(view)
         }
     }
@@ -50,6 +49,70 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     override fun setupMVP() {
         setupScorePresenter = SetupScorePresenter(this)
     }
+
+    override fun checkForFIO(context: Context): Boolean {
+        val firstName = setupScoreFirstNameValue.text.toString()
+        val lastName = setupScoreLastNameValue.text.toString()
+        val patronymic = setupScorePatronymicValue.text.toString()
+
+        val errorMessage = context.getString(R.string.setupScoreFieldIsEmpty)
+
+        when {
+            firstName.isEmpty() -> {
+                setupScoreFirstNameValue.error = errorMessage
+                setupScoreFirstNameValue.requestFocus()
+            }
+            lastName.isEmpty() -> {
+                setupScoreLastNameValue.error = errorMessage
+                setupScoreLastNameValue.requestFocus()
+            }
+            patronymic.isEmpty() -> {
+                setupScorePatronymicValue.error = errorMessage
+                setupScorePatronymicValue.requestFocus()
+            }
+        }
+        return firstName.isNotBlank() && lastName.isNotBlank() && patronymic.isNotBlank()
+    }
+    fun checkForScore(context: Context){
+        val maths = setupScoreMathsValue.text.toString()
+        val russian = setupScoreRussianValue.text.toString()
+        val physics = setupScorePhysicsValue.text.toString()
+        val computerScience = setupScoreComputerScienceValue.text.toString()
+        val socialScience = setupScoreSocialScienceValue.text.toString()
+
+        val notPassingMaths = context.getString(R.string.setupScoreLessThanPassingMaths)
+        val notPassingRussian = context.getString(R.string.setupScoreLessThanPassingRussian)
+        val notPassingPhysics = context.getString(R.string.setupScoreLessThanPassingPhysics)
+        val notPassingComputerScience = context.getString(R.string.setupScoreLessThanPassingComputerScience)
+        val notPassingSocialScience = context.getString(R.string.setupScoreLessThanPassingSocialScience)
+
+        val passingMaths = 27
+        val passingRussian = 36
+        val passingPhysics = 36
+        val passingComputerScience = 40
+        val passingSocialScience = 42
+
+        /*if (physics.isEmpty() && computerScience.isEmpty() && socialScience.isEmpty()) {
+            view?.showSnack(R.string.setupScoreLessThanThreeScores)
+        }*/
+
+        when {
+            physics.isEmpty() && computerScience.isEmpty() && socialScience.isEmpty() ->
+                view?.showSnack(R.string.setupScoreLessThanThreeScores)
+
+            maths.toInt() <= passingMaths ->
+                setupScoreMathsValue.error = notPassingMaths
+            russian.toInt() <= passingRussian ->
+                setupScoreRussianValue.error = notPassingRussian
+            physics.toInt() <= passingPhysics ->
+                setupScorePhysicsValue.error = notPassingPhysics
+            computerScience.toInt() <= passingComputerScience ->
+                setupScoreComputerScienceValue.error = notPassingComputerScience
+            socialScience.toInt() <= passingSocialScience ->
+                setupScoreSocialScienceValue.error = notPassingSocialScience
+        }
+    }
+
     override fun moveToWorkWithSpecialties(view: View) {
         val additionalScore = additionalScoreSpinner.selectedItem.toString()
 
