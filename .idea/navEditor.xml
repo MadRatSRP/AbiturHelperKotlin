@@ -149,6 +149,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_profile_to_showResults">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_profile_to_show_current_list">
                               <value>
                                 <LayoutPositions />
@@ -259,6 +264,15 @@
                             <option name="x" value="1724" />
                             <option name="y" value="298" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_showResults_to_profile">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

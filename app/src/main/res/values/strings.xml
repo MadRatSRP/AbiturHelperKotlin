@@ -75,7 +75,7 @@
     <string name="selectSaveCheckedSpecialties">Сохранить выбор</string>
 
     <string name="profileGraduationShowCurrentListTitle">Поданные заявления</string>
-    <string name="profileGraduationShowCurrentListToProfile">Вернуться к профилю</string>
+    <string name="returnToProfile">Вернуться к профилю</string>
 
     <string name="resultShowFittingSpecialties">Подобранные специальности</string>
 

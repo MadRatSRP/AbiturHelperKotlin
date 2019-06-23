@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.ChancesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.chance.ChanceShowResultsMVP
@@ -27,6 +28,10 @@ class ChanceShowResults
 
         val listOfChances = chanceShowResultsPresenter?.returnListOfChances()
         listOfChances?.let { showListOfChances(it) }
+
+        chancesToProfile.setOnClickListener {
+            toActionId(null, R.id.action_showResults_to_profile)
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -51,5 +56,9 @@ class ChanceShowResults
     override fun showListOfChances(listOfChances: ArrayList<Chance>) {
         adapter?.updateListOfChances(listOfChances)
         chancesRecyclerView.adapter = adapter
+    }
+
+    override fun toActionId(bundle: Bundle?, actionId: Int) {
+        view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
     }
 }

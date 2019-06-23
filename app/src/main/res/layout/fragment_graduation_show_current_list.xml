@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
     <Button
         android:id="@+id/showCurrentToProfile"
-        android:text="@string/profileGraduationShowCurrentListToProfile"
+        android:text="@string/returnToProfile"
         android:layout_marginBottom="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -121,5 +121,9 @@
     </fragment>
     <fragment
         android:id="@+id/showResults"
-        android:name="com.madrat.abiturhelper.fragments.chance.ChanceShowResults" />
+        android:name="com.madrat.abiturhelper.fragments.chance.ChanceShowResults" >
+        <action
+            android:id="@+id/action_showResults_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
 </navigation>
