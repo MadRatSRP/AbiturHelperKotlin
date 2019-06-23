@@ -54,7 +54,7 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.textResult)
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.resultTitle)
         return inflater.inflate(R.layout.fragment_result, container, false)
     }
 

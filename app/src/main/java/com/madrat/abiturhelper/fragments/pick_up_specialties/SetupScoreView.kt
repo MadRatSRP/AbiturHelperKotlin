@@ -58,13 +58,13 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         val errorMessage = context.getString(R.string.setupScoreFieldIsEmpty)
 
         when {
-            firstName.isEmpty() -> {
-                setupScoreFirstNameValue.error = errorMessage
-                setupScoreFirstNameValue.requestFocus()
-            }
             lastName.isEmpty() -> {
                 setupScoreLastNameValue.error = errorMessage
                 setupScoreLastNameValue.requestFocus()
+            }
+            firstName.isEmpty() -> {
+                setupScoreFirstNameValue.error = "Имя не может быть пустым"
+                setupScoreFirstNameValue.requestFocus()
             }
             patronymic.isEmpty() -> {
                 setupScorePatronymicValue.error = errorMessage

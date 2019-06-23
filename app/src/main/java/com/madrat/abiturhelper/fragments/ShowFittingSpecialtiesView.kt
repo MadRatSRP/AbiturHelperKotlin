@@ -23,7 +23,6 @@ class ShowFittingSpecialtiesView
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupMVP()
 
         /*val faculties = when(arguments?.getInt("listId")) {
             100 -> showFittingSpecialtiesPresenter?.returnListOfSpecialtiesWithZeroMinimalScore()
@@ -43,8 +42,12 @@ class ShowFittingSpecialtiesView
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.title =
-                context?.getString(R.string.resultShowFittingSpecialties)
+        setupMVP()
+        val title = arguments?.getInt("listId")?.let {listId->
+            context?.let { showFittingSpecialtiesPresenter?.returnTitleBasedOnListID(it, listId) }
+        }
+        (activity as AppCompatActivity).supportActionBar?.title = title
+                //context?.getString(R.string.resultShowFittingSpecialties)
         val view = inflater.inflate(R.layout.fragment_show_fitting_specialties,
                 container, false)
 

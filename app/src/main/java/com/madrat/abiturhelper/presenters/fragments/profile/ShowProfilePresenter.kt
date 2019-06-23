@@ -61,6 +61,16 @@ class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP
         return specialties?.sumBy { it.size }
     }
 
+    fun returnAmountOfSpecialtiesWithChance(): Int? {
+        val specialties = myApplication.returnListOfChances()
+        return specialties?.size
+    }
+
+    fun returnAmountOfGraduatedSpecialties(): Int? {
+        val specialties = myApplication.returnGraduationList()
+        return specialties?.size
+    }
+
     override fun returnFullName() = myApplication.returnFullName()
     override fun returnScore() = myApplication.returnScore()
     override fun returnCheckedScore(): Score {

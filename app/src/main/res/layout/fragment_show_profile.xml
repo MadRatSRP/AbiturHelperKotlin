@@ -118,6 +118,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="25dp"
                 android:id="@+id/score"
                 style="@style/mainLinearLayout">
                 <TextView
@@ -289,6 +290,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="25dp"
                 android:id="@+id/additionalScore"
                 style="@style/mainLinearLayout"
                 app:layout_constraintStart_toStartOf="parent"
@@ -345,6 +347,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/additionalScore"/>
             <LinearLayout
+                android:layout_marginTop="45dp"
                 android:id="@+id/profileFinalListOfSpecialties"
                 style="@style/mainLinearLayout"
                 app:layout_constraintStart_toStartOf="parent"
@@ -370,7 +373,7 @@
                     <TextView
                         android:gravity="center"
                         android:id="@+id/profileFinalListOfSpecialtiesAmountText"
-                        android:text="@string/amountOfSpecialties"
+                        android:text="@string/profileFinalListOfSpecialtiesAmount"
                         style="@style/textDescription" />
                     <EditText
                         android:id="@+id/profileFinalListOfSpecialtiesAmountValue"
@@ -392,6 +395,51 @@
                     android:layout_weight="1"/>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="25dp"
+                android:id="@+id/profileChance"
+                style="@style/mainLinearLayout">
+                <TextView
+                    android:id="@+id/profileChanceTitle"
+                    android:text="@string/profileChanceTitle"
+                    style="@style/textTitle"
+                    android:layout_weight="1"/>
+                <View
+                    style="@style/Divider"
+                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:id="@+id/profileChanceAmount"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/profileChanceAmountText"
+                        android:text="@string/amountOfChosenSpecialties"
+                        style="@style/textDescription" />
+                    <EditText
+                        android:id="@+id/profileChanceAmountValue"
+                        android:text="@string/profileEditFieldDefaultValue"
+                        android:enabled="false"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/BLACK"
+                        android:background="@android:color/transparent"
+                        android:textSize="20sp"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"  />
+                </LinearLayout>
+                <Button
+                    android:id="@+id/profileChanceShowResults"
+                    android:text="@string/showList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="25dp"
                 android:id="@+id/profileApply"
                 style="@style/mainLinearLayout">
                 <TextView
@@ -402,6 +450,32 @@
                 <View
                     style="@style/Divider"
                     android:layout_weight="1"/>
+                <LinearLayout
+                    android:id="@+id/profileApplyAmount"
+                    android:layout_marginStart="75dp"
+                    android:layout_marginEnd="75dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/profileApplyAmountText"
+                        android:text="@string/amountOfChosenSpecialties"
+                        style="@style/textDescription" />
+                    <EditText
+                        android:id="@+id/profileApplyAmountValue"
+                        android:text="@string/profileEditFieldDefaultValue"
+                        android:enabled="false"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/BLACK"
+                        android:background="@android:color/transparent"
+                        android:textSize="20sp"
+                        android:layout_width="55dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"  />
+                </LinearLayout>
                 <Button
                     android:id="@+id/profileApplySelectSpecialtiesForGraduation"
                     android:text="@string/profileApplySelectSpecialtiesForGraduation"

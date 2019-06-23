@@ -34,7 +34,8 @@ class GraduationShowCurrentList
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileGraduationShowCurrentListTitle)
+        (activity as AppCompatActivity).supportActionBar
+                ?.setTitle(R.string.profileGraduationShowCurrentListTitle)
         val view = inflater.inflate(R.layout.fragment_graduation_show_current_list,
                 container, false)
 

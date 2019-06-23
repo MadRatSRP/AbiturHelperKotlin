@@ -102,6 +102,9 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         profileAddToListsCalculatePositions.setOnClickListener {
             toActionId(null, R.id.action_profile_to_show_current_list)
         }
+        profileChanceShowResults.setOnClickListener {
+            toActionId(null, R.id.action_profile_to_showResults)
+        }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -137,6 +140,12 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
     override fun setupSpecialtiesFields() {
         val amountOfFinalSpecialties = showProfilePresenter?.returnAmountOfFinalSpecialties()
         profileFinalListOfSpecialtiesAmountValue.setText(amountOfFinalSpecialties.toString())
+
+        val amountOfSpecialtiesWithChance = showProfilePresenter?.returnAmountOfSpecialtiesWithChance()
+        profileChanceAmountValue.setText(amountOfSpecialtiesWithChance.toString())
+
+        val amountOfGraduatedSpecialties = showProfilePresenter?.returnAmountOfGraduatedSpecialties()
+        profileApplyAmountValue.setText(amountOfGraduatedSpecialties.toString())
     }
     override fun toActionId(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }

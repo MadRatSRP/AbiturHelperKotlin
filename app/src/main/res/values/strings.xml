@@ -41,6 +41,7 @@
     <string name="workWithSpecialtiesListsArePrepared">Списки успешно считаны и обработаны</string>
 
     // ScoreResult
+    <string name="resultTitle">Подобранные специальности</string>
     <string name="resultSpecialtiesWithoutScoreTitle">Специальности без балла</string>
     <string name="resultSpecialtiesWithoutScoreShowSpecialties">Показать специальности без балла</string>
     <string name="resultFittingSpecialtiesTitle">Специальности под баллы</string>
@@ -51,9 +52,16 @@
 
     <string name="profileTitle">Профиль</string>
     <string name="profileAdditionalScoreSum">Сумма баллов</string>
-    <string name="profileFinalListOfSpecialtiesTitle">Подобранный список специальностей</string>
+    <string name="profileFinalListOfSpecialtiesTitle">Подобрать специальности</string>
 
-    <string name="profileApplyTitle">Добавить в списки</string>
+    <string name="profileFinalListOfSpecialtiesAmount">Подобрано специальностей</string>
+
+
+    <string name="amountOfChosenSpecialties">Выбрано специальностей</string>
+
+    <string name="profileChanceTitle">Оценить шанс поступления</string>
+
+    <string name="profileApplyTitle">Подать заявления</string>
     <string name="profileGraduationShowCurrentList">Показать актуальный список</string>
 
     <string name="profileApplySelectSpecialtiesForGraduation">Выбрать специальности для поступления</string>
@@ -66,10 +74,10 @@
 
     <string name="selectSaveCheckedSpecialties">Сохранить выбор</string>
 
-    <string name="profileGraduationShowCurrentListTitle">Текущий список поступления</string>
+    <string name="profileGraduationShowCurrentListTitle">Поданные заявления</string>
     <string name="profileGraduationShowCurrentListToProfile">Вернуться к профилю</string>
 
-    <string name="resultShowFittingSpecialties">Подходящие специальности</string>
+    <string name="resultShowFittingSpecialties">Подобранные специальности</string>
 
     <string name="profileUpdateScores">Сохранить изменения</string>
     <string name="profileUpdateScoresMessage">Баллы успешно обновлены</string>
@@ -122,7 +130,7 @@
     <string name="chanceSupposedPosition">Предполагаемая позиция</string>
     <string name="chanceChanceOfGraduation">Шанс поступления</string>
     <string name="chanceMinimalScore">Минимальный балл</string>
-    <string name="chanceShowResultsTitle">Результаты</string>
+    <string name="chanceShowResultsTitle">Шансы поступления</string>
 
     <string name="totalOfEntries">Количество мест</string>
 
