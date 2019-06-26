@@ -39,6 +39,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreLastNameValue"
+                        android:gravity="center"
                         android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -58,6 +59,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreFirstNameValue"
+                        android:gravity="center"
                         android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -77,6 +79,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScorePatronymicValue"
+                        android:gravity="center"
                         android:inputType="text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -107,6 +110,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreMathsValue"
+                        android:gravity="center"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -126,6 +130,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreRussianValue"
+                        android:gravity="center"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -145,6 +150,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScorePhysicsValue"
+                        android:gravity="center"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -164,6 +170,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreComputerScienceValue"
+                        android:gravity="center"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -183,6 +190,7 @@
                         style="@style/textDescription"/>
                     <EditText
                         android:id="@+id/setupScoreSocialScienceValue"
+                        android:gravity="center"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />

@@ -25,11 +25,17 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         setupMVP()
 
         showSpecialtiesScreen.setOnClickListener { view->
-            val checkedFIO = checkForFIO(view.context)
+            /*val checkedFIO = checkForFIO(view.context)
             val checkedScore = checkForScore(view.context)
 
             if (checkedFIO && checkedScore)
+                moveToWorkWithSpecialties(view)*/
+            val checkedFIO = checkForFIO(view.context)
+            val checkedScore = chkForScore()
+
+            if (checkedFIO)
                 moveToWorkWithSpecialties(view)
+
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,8 +61,6 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         val lastName = setupScoreLastNameValue.text.toString()
         val patronymic = setupScorePatronymicValue.text.toString()
 
-        val errorMessage = context.getString(R.string.setupScoreFieldIsEmpty)
-
         when {
             lastName.isEmpty() -> {
                 setupScoreLastNameValue.error = "Фамилия не может быть пустой"
@@ -67,11 +71,48 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
                 setupScoreFirstNameValue.requestFocus()
             }
             patronymic.isEmpty() -> {
-                setupScorePatronymicValue.error = "Отчество не может быть пустым"
-                setupScorePatronymicValue.requestFocus()
+                /*setupScorePatronymicValue.error = "Отчество не может быть пустым"
+                setupScorePatronymicValue.requestFocus()*/
+                setupScorePatronymicValue.setText("—")
             }
         }
         return firstName.isNotBlank() && lastName.isNotBlank() && patronymic.isNotBlank()
+    }
+    fun chkForScore(): Boolean {
+        val maths = setupScoreMathsValue.text.toString()
+        val russian = setupScoreRussianValue.text.toString()
+        val physics = setupScorePhysicsValue.text.toString()
+        val computerScience = setupScoreComputerScienceValue.text.toString()
+        val socialScience = setupScoreSocialScienceValue.text.toString()
+        when {
+            maths.isEmpty() ->
+                setupScoreMathsValue.setText("0")
+            russian.isEmpty() -> {
+                setupScoreRussianValue.setText("0")
+            }
+            physics.isEmpty() -> {
+                setupScorePhysicsValue.setText("0")
+            }
+            computerScience.isEmpty() -> {
+                setupScoreComputerScienceValue.setText("0")
+            }
+            socialScience.isEmpty() -> {
+                setupScoreSocialScienceValue.setText("0")
+            }
+        }
+    }
+
+    fun checkForScore(context: Context): Boolean{
+        val maths = setupScoreMathsValue.text.toString()
+        val russian = setupScoreRussianValue.text.toString()
+        val physics = setupScorePhysicsValue.text.toString()
+        val computerScience = setupScoreComputerScienceValue.text.toString()
+        val socialScience = setupScoreSocialScienceValue.text.toString()
+
+        return if (maths != "" && russian != "" && (physics != ""
+                        || computerScience != "" || socialScience != ""))
+            threeOrMore()
+        else lessThanThree()
     }
 
     fun mthsError(): Boolean {
@@ -121,9 +162,10 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     }
     fun chkForComputerScience(): Boolean {
         val computerScience = setupScoreComputerScienceValue.text.toString()
+        val checkedComputerScience = checkTextForBeingEmpty(computerScience)
         val passingComputerScience = 40
 
-        return if (computerScience.toInt() <= passingComputerScience)
+        return if (checkedComputerScience <= passingComputerScience)
             cmptrError()
         else true
     }
@@ -134,24 +176,14 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         val physics = chkForPhysics()
         val cs = chkForComputerScience()
 
-        val physCompSoc = physics || cs
-        return maths && russian && physCompSoc
+        /*val physCompSoc = physics || cs
+        return maths && russian && physCompSoc*/
+
+        return maths && russian && (physics || cs)
     }
     fun lessThanThree(): Boolean {
         context.toast("Введено меньше трёх баллов")
         return false
-    }
-    fun checkForScore(context: Context): Boolean{
-        val maths = setupScoreMathsValue.text.toString()
-        val russian = setupScoreRussianValue.text.toString()
-        val physics = setupScorePhysicsValue.text.toString()
-        val computerScience = setupScoreComputerScienceValue.text.toString()
-        val socialScience = setupScoreSocialScienceValue.text.toString()
-
-        return if (maths != "" && russian != "" && (physics != ""
-                        || computerScience != "" || socialScience != ""))
-            threeOrMore()
-        else lessThanThree()
     }
 
     override fun moveToWorkWithSpecialties(view: View) {
@@ -208,4 +240,10 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         socialScience.toInt() <= passingSocialScience ->
             setupScoreSocialScienceValue.error = notPassingSocialScience
     }*/
+     fun checkTextForBeingEmpty(text: String): Int {
+        return if (text.isEmpty()) {
+            0
+        } else text.toInt()
+    }
+
 }
