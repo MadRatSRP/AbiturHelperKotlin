@@ -1,10 +1,12 @@
 package com.madrat.abiturhelper.util
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -52,3 +54,6 @@ fun View.showSnack(@StringRes messageRes: Int, length: Int = Snackbar.LENGTH_LON
     val snack = Snackbar.make(this, messageRes, length)
     snack.show()
 }
+
+fun Context?.toast(text: CharSequence, duration: Int = Toast.LENGTH_LONG)
+        = this?.let { Toast.makeText(it, text, duration).show() }
