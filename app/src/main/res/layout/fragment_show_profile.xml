@@ -26,7 +26,6 @@
                 <LinearLayout
                     android:id="@+id/profileLastName"
                     android:orientation="horizontal"
-                    android:layout_marginStart="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
@@ -57,7 +56,6 @@
                 <LinearLayout
                     android:id="@+id/profileFirstName"
                     android:orientation="horizontal"
-                    android:layout_marginStart="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
@@ -88,7 +86,6 @@
                 <LinearLayout
                     android:id="@+id/profilePatronymic"
                     android:orientation="horizontal"
-                    android:layout_marginStart="30dp"
                     android:layout_marginEnd="25dp"
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
@@ -130,7 +127,7 @@
                     android:layout_weight="1"/>
                 <LinearLayout
                     android:id="@+id/profileMaths"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -162,7 +159,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/profileRussian"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -194,7 +191,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/profilePhysics"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -226,7 +223,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/profileComputerScience"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -258,7 +255,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/profileSocialScience"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -306,7 +303,7 @@
                     android:layout_weight="1"/>
                 <LinearLayout
                     android:id="@+id/profileAdditionalScore"
-                    android:layout_marginStart="55dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="55dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -363,7 +360,7 @@
                     android:layout_weight="1"/>
                 <LinearLayout
                     android:id="@+id/profileFinalListOfSpecialtiesAmount"
-                    android:layout_marginStart="75dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginEnd="75dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -408,7 +405,7 @@
                     android:layout_weight="1"/>
                 <LinearLayout
                     android:id="@+id/profileChanceAmount"
-                    android:layout_marginStart="75dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginEnd="75dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
@@ -452,7 +449,7 @@
                     android:layout_weight="1"/>
                 <LinearLayout
                     android:id="@+id/profileApplyAmount"
-                    android:layout_marginStart="75dp"
+                    android:layout_marginStart="35dp"
                     android:layout_marginEnd="75dp"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
