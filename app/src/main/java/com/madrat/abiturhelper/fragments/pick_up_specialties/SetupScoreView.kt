@@ -29,6 +29,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
             /*val checkedFIO = checkForFIO(view.context)
             val checkedScore = checkForScore(view.context)
 
+
             if (checkedFIO && checkedScore)
                 moveToWorkWithSpecialties(view)*/
             val checkedFIO = checkForFIO(view.context)
