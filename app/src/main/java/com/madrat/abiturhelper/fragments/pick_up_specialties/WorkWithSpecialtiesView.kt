@@ -13,6 +13,7 @@ import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
 import com.madrat.abiturhelper.repository.PickUpSpecialtiesRepository
 import com.madrat.abiturhelper.util.showSnack
+import com.madrat.abiturhelper.util.toast
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
 
 class WorkWithSpecialtiesView
@@ -24,7 +25,8 @@ class WorkWithSpecialtiesView
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        view?.showSnack(R.string.workWithSpecialtiesScoreSavedMessage)
+        //view?.showSnack(R.string.workWithSpecialtiesScoreSavedMessage)
+        //context.toast("Данные корректны и были успешно сохранены")
 
         // Первый шаг - разбить список специальностей по факультетам,
         // выделить из списка студентов тех, кто собирается поступать на бакалавриат

@@ -88,44 +88,48 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         val maths = checkTextForBeingEmpty(setupScoreMathsValue.text.toString())//setupScoreMathsValue.text.toString().toInt()
         val mathsError = "Балл по математике меньше проходного (27)"
 
-        return if (maths == 0)
-             false
-        else if (maths in 1 until passingMaths )
-            showPassingError(setupScoreMathsValue, mathsError)
-        else true
+        return when (maths) {
+            0 -> false
+            in 1 until passingMaths -> showPassingError(setupScoreMathsValue, mathsError)
+            in passingMaths until 101 -> true
+            else -> false
+        }
     }
     fun rssnError(): Boolean {
         val passingRussian = 36
         val russian = checkTextForBeingEmpty(setupScoreRussianValue.text.toString())//setupScoreRussianValue.text.toString().toInt()
         val russianError = "Балл по русскому языку меньше проходного (36)"
 
-        return if (russian == 0)
-             false
-        else if (russian in 1 until passingRussian )
-            showPassingError(setupScoreRussianValue, russianError)
-        else true
+        return when (russian) {
+            0 -> false
+            in 1 until passingRussian -> showPassingError(setupScoreRussianValue, russianError)
+            in passingRussian until 101 -> true
+            else -> false
+        }
     }
     fun phscsError(): Boolean {
         val passingPhysics = 36
         val physics = checkTextForBeingEmpty(setupScorePhysicsValue.text.toString())//setupScorePhysicsValue.text.toString().toInt()
         val physicsError = "Балл по физике меньше проходного (36)"
 
-        return if (physics == 0)
-            true
-        else if (physics in 1 until passingPhysics)
-            showPassingError(setupScorePhysicsValue, physicsError)
-        else true
+        return when (physics) {
+            0 -> true
+            in 1 until passingPhysics -> showPassingError(setupScorePhysicsValue, physicsError)
+            in passingPhysics until 101 -> true
+            else -> false
+        }
     }
     fun cmptrError(): Boolean {
         val passingComputerScience = 40
         val computerScience = checkTextForBeingEmpty(setupScoreComputerScienceValue.text.toString())//.toInt()
         val computerScienceError = "Балл по информатике меньше проходного (40)"
 
-        return if (computerScience == 0)
-             true
-        else if (computerScience in 1 until passingComputerScience)
-            showPassingError(setupScoreComputerScienceValue, computerScienceError)
-        else true
+        return when (computerScience) {
+            0 -> true
+            in 1 until passingComputerScience -> showPassingError(setupScoreComputerScienceValue, computerScienceError)
+            in passingComputerScience until 101 -> true
+            else -> false
+        }
     }
     fun sclError(): Boolean {
         val passingSocialScience = 42
@@ -133,11 +137,20 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         //setupScoreSocialScienceValue.text.toString().toInt()
         val socialScienceError = "Балл по обществознанию меньше проходного (42)"
 
-        return if (socialScience == 0)
-            true
-        else if (socialScience in 1 until passingSocialScience)
-            showPassingError(setupScoreComputerScienceValue, socialScienceError)
-        else true
+        return when (socialScience) {
+            0 -> true
+            in 1 until passingSocialScience -> showPassingError(setupScoreSocialScienceValue, socialScienceError)
+            in passingSocialScience until 101 -> true
+            else -> false
+        }
+    }
+
+    fun tpdScore(): Boolean {
+        val checkedPhysics = phscsError()
+        val checkedComputerScience = cmptrError()
+        val checkedSocialScience = sclError()
+
+        return checkedPhysics && checkedComputerScience && checkedSocialScience
     }
 
     fun checkTypedScore(): Boolean {
@@ -147,16 +160,12 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         return if (physics == 0 && computerScience == 0 && socialScience == 0)
             lessThanThree()
-        else true
+        else tpdScore()
     }
 
     fun checkForPassing(): Boolean {
         val checkedMaths = mthsError()
         val checkedRussian = rssnError()
-
-        val checkedPhysics = phscsError()
-        val checkedComputerScience = cmptrError()
-        val checkedSocialScience = sclError()
 
         val checkedTypedScore = checkTypedScore(/*checkedPhysics, checkedComputerScience, checkedSocialScience*/)
 
