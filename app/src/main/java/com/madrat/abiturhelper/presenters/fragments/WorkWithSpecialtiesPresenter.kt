@@ -18,7 +18,6 @@ import kotlin.system.measureTimeMillis
 class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     : WorkWithSpecialtiesMVP.Presenter{
     private val myApplication = MyApplication.instance
-
     /*Первый этап*/
     override fun generateBachelorsAndSpecialtiesLists(context: Context) {
         showLog("Начат первый этап")
@@ -146,9 +145,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         val bachelors = list.filter { it.admissions == "бак"} as ArrayList<Student>
         myApplication.saveBachelors(bachelors)
     }
-
     // Второй этап
-
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         showLog("Начат второй этап")
         val time = measureTimeMillis {
@@ -223,9 +220,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         val amountOfSpecialties = list?.size
         return Faculty(name, total, free, amountOfSpecialties)
     }
-
     // Третий этап
-
     override fun separateStudentsBySpecialties() {
         checkForUNTI()
         checkForFEU()
@@ -619,12 +614,36 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     override fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>> {
         val listFEU = ArrayList<ArrayList<Student>>()
 
-        val separatedBI = separateBI(feu.bi)
-        val separatedPI = separatePI(feu.pi)
-        val separatedSC = separateSC(feu.sc)
-        val separatedTD = separateTD(feu.td)
-        val separatedEB = separateEB(feu.eb)
-        val separatedEK = separateEK(feu.ek)
+        val arrayOfBISpecialties = arrayOf(
+                "БИ_заочн_плат", "БИ_очн_плат"
+        )
+        val arrayOfPISpecialties = arrayOf(
+                "ПИ(КИС)_очн_бюдж", "ПИ(КИС)_очн_льгот",
+                "ПИ(КИС)_очн_плат", "ПИ(ЦЭ)_очн_бюдж",
+                "ПИ(ЦЭ)_очн_льгот", "ПИ(ЦЭ)_очн_плат"
+        )
+        val arrayOfSCSpecialties = arrayOf(
+                "СЦ_заочн_плат", "СЦ_очн_плат"
+        )
+        val arrayOfTDSpecialties = arrayOf(
+                "ТД_заочн_плат", "ТД_очн_плат"
+        )
+        val arrayOfEBSpecialties = arrayOf(
+                "ЭБ_заоч_плат", "ЭБ_очн_плат"
+        )
+        val arrayOfEKSpecialties = arrayOf(
+                "ЭК(БУА)_заоч_плат", "ЭК(БУА)_очн_плат",
+                "ЭК(ЛОГ)_очн_плат", "ЭК(ОЦ)_очн_плат",
+                "ЭК(Ф)_заоч_плат", "ЭК(Ф)_очн_плат",
+                "ЭК(ЭПО)_очн_плат"
+        )
+
+        val separatedBI = separateSpecialties(feu.bi, arrayOfBISpecialties)
+        val separatedPI = separateSpecialties(feu.pi, arrayOfPISpecialties)
+        val separatedSC = separateSpecialties(feu.sc, arrayOfSCSpecialties)
+        val separatedTD = separateSpecialties(feu.td, arrayOfTDSpecialties)
+        val separatedEB = separateSpecialties(feu.eb, arrayOfEBSpecialties)
+        val separatedEK = separateSpecialties(feu.ek, arrayOfEKSpecialties)
 
         listFEU.addAll(separatedBI)
         listFEU.addAll(separatedPI)
@@ -634,52 +653,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listFEU.addAll(separatedEK)
 
         return listFEU
-    }
-    override fun separateBI(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("БИ_заочн_плат")
-        val ochnPlat = list.filterForSpecialty("БИ_очн_плат")
-
-        return arrayListOf(zaochnPlat, ochnPlat)
-    }
-    override fun separatePI(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val kisOchnBudg = list.filterForSpecialty("ПИ(КИС)_очн_бюдж")
-        val kisOchnLgot = list.filterForSpecialty("ПИ(КИС)_очн_льгот")
-        val kisOchnPlat = list.filterForSpecialty("ПИ(КИС)_очн_плат")
-        val ceOchnBudg = list.filterForSpecialty("ПИ(ЦЭ)_очн_бюдж")
-        val ceOchnLgot = list.filterForSpecialty("ПИ(ЦЭ)_очн_льгот")
-        val ceOchnPlat = list.filterForSpecialty("ПИ(ЦЭ)_очн_плат")
-
-        return arrayListOf(kisOchnBudg, kisOchnLgot, kisOchnPlat, ceOchnBudg, ceOchnLgot, ceOchnPlat)
-    }
-    override fun separateSC(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("СЦ_заочн_плат")
-        val ochnPlat = list.filterForSpecialty("СЦ_очн_плат")
-
-        return arrayListOf(zaochnPlat, ochnPlat)
-    }
-    override fun separateTD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("ТД_заочн_плат")
-        val ochnPlat = list.filterForSpecialty("ТД_очн_плат")
-
-        return arrayListOf(zaochnPlat, ochnPlat)
-    }
-    override fun separateEB(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("ЭБ_заоч_плат")
-        val ochnPlat = list.filterForSpecialty("ЭБ_очн_плат")
-
-        return arrayListOf(zaochnPlat, ochnPlat)
-    }
-    override fun separateEK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val buaZaochnPlat = list.filterForSpecialty("ЭК(БУА)_заоч_плат")
-        val buaOchnPlat = list.filterForSpecialty("ЭК(БУА)_очн_плат")
-        val logOchnPlat = list.filterForSpecialty("ЭК(ЛОГ)_очн_плат")
-        val ocOchnPlat = list.filterForSpecialty("ЭК(ОЦ)_очн_плат")
-        val fZaochnPlat = list.filterForSpecialty("ЭК(Ф)_заоч_плат")
-        val fOchnPlat = list.filterForSpecialty("ЭК(Ф)_очн_плат")
-        val epoOchnPlat = list.filterForSpecialty("ЭК(ЭПО)_очн_плат")
-
-        return arrayListOf(buaZaochnPlat, buaOchnPlat, logOchnPlat, ocOchnPlat,
-                fZaochnPlat, fOchnPlat, epoOchnPlat)
     }
     // ФИТ
     override fun checkForFIT() {

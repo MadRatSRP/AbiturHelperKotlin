@@ -50,12 +50,6 @@ interface WorkWithSpecialtiesMVP {
         // ФЭУ
         fun checkForFEU()
         fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>>
-        fun separateBI(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separatePI(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateSC(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateTD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateEB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateEK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФИТ
         fun checkForFIT()
         fun separateFIT(fit: FIT): ArrayList<ArrayList<Student>>
