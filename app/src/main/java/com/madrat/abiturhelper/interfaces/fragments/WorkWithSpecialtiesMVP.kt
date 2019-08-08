@@ -77,5 +77,7 @@ interface WorkWithSpecialtiesMVP {
         fun returnFEE(): ArrayList<ArrayList<Student>>?
         fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
                 : ArrayList<ArrayList<Student>>
+
+        fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
     }
 }

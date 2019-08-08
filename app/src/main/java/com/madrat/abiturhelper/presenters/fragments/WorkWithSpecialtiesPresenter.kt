@@ -1167,57 +1167,52 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
 
         val arrayOfRADSpecialties = arrayOf(
                 "РАД_очн_бюдж", "РАД_очн_льгот", "РАД_очн_плат", "РАД_очн_целевое")
+        val arrayOfTITSpecialties = arrayOf(
+                "ТиТ(ИСК)_заочн_плат", "ТиТ_очн_бюдж", "ТиТ_очн_льгот", "ТиТ_очн_плат")
+        val arrayOfEINSpecialties = arrayOf(
+                "ЭиН(МТЭ)_очн_бюдж", "ЭиН(МТЭ)_очн_льгот", "ЭиН(МТЭ)_очн_плат",
+                "ЭиН(ПЭ)_очн_бюдж", "ЭиН(ПЭ)_очн_льгот", "ЭиН(ПЭ)_очн_плат")
+        val arrayOfEIESpecialties = arrayOf(
+                "ЭиЭ_заочн_плат", "ЭиЭ_очн_бюдж", "ЭиЭ_очн_льгот",
+                "ЭиЭ_очн_плат", "ЭиЭ_очн_целевое")
+        val arrayOfEMSpecialties = arrayOf(
+                "ЭМ(ДВС)_заочн_бюдж", "ЭМ(ДВС)_заочн_льгот", "ЭМ(ДВС)_заочн_плат",
+                "ЭМ(ДВС)_очн_бюдж", "ЭМ(ДВС)_очн_льгот", "ЭМ(ДВС)_очн_плат",
+                "ЭМ(Т)_очн_бюдж", "ЭМ(Т)_очн_льгот", "ЭМ(Т)_очн_плат",
+                "ЭМ(Т)_очн_целевое", "ЭМ(ЭМКС)_заочн_плат")
 
-        val first = scoreTypes?.physicsStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
-        val second = scoreTypes?.computerScienceStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
-        val third = scoreTypes?.socialScienceStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
-        val fourth = scoreTypes?.partAndAllDataStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
-
-        showLog("KAKAKAKAKAKAKAK" + first?.size + second?.size + third?.size + fourth?.size)
-
-        val fifth = scoreTypes?.physicsStudents?.let { checkForRAD(it) }//)
-        val sixth = scoreTypes?.computerScienceStudents?.let { checkForRAD(it) }//)
-        val seventh = scoreTypes?.socialScienceStudents?.let { checkForRAD(it) }//)
-        val eighth = scoreTypes?.partAndAllDataStudents?.let { checkForRAD(it) }//)
-
-        showLog("NEW_KAKA" + fifth?.size + sixth?.size + seventh?.size + eighth?.size)
-
-        scoreTypes?.physicsStudents?.let { checkForTIT(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForTIT(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForTIT(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForTIT(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForEIN(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForEIN(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForEIN(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForEIN(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForEIE(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForEIE(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForEIE(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForEIE(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForEM(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForEM(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForEM(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForEM(it) }
-
+        scoreTypes?.let {
+            // RAD
+            rad.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfRADSpecialties))
+            rad.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfRADSpecialties))
+            rad.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfRADSpecialties))
+            rad.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfRADSpecialties))
+            // TIT
+            tit.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfTITSpecialties))
+            tit.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfTITSpecialties))
+            tit.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfTITSpecialties))
+            tit.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfTITSpecialties))
+            // EIN
+            ein.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfEINSpecialties))
+            ein.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfEINSpecialties))
+            ein.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfEINSpecialties))
+            ein.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfEINSpecialties))
+            // EIE
+            eie.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfEIESpecialties))
+            eie.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfEIESpecialties))
+            eie.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfEIESpecialties))
+            eie.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfEIESpecialties))
+            // EM
+            em.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfEMSpecialties))
+            em.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfEMSpecialties))
+            em.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfEMSpecialties))
+            em.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfEMSpecialties))
+        }
         val fee = FEE(rad, tit, ein, eie, em)
         val separatedFEE = separateFEE(fee)
         myApplication.saveFEE(separatedFEE)
     }
-    fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student> {
-        val arrayListOfStudents = ArrayList<Student>()
-        arrayOfSpecialties.forEach {specialty->
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == specialty || list[i].specialtySecond == specialty
-                        || list[i].specialtyThird == specialty)
-                    arrayListOfStudents.add(list[i])
-            }
-        }
-        return arrayListOfStudents
-    }
-    fun checkForRAD(list: ArrayList<Student>): ArrayList<Student> {
+    /*fun checkForRAD(list: ArrayList<Student>): ArrayList<Student> {
         val rad = ArrayList<Student>()
         for (i in 0 until list.size) {
             if ((list[i].specialtyFirst == "РАД_очн_бюдж" || list[i].specialtyFirst == "РАД_очн_льгот"
@@ -1302,7 +1297,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             }
         }
         return em
-    }
+    }*/
     override fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>> {
         val listFEE = ArrayList<ArrayList<Student>>()
 
@@ -1334,6 +1329,18 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listFEE.addAll(separatedEIE)
         listFEE.addAll(separatedEM)
         return listFEE
+    }
+    override fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>)
+            : ArrayList<Student> {
+        val arrayListOfStudents = ArrayList<Student>()
+        arrayOfSpecialties.forEach {specialty->
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == specialty || list[i].specialtySecond == specialty
+                        || list[i].specialtyThird == specialty)
+                    arrayListOfStudents.add(list[i])
+            }
+        }
+        return arrayListOfStudents
     }
     override fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
             : ArrayList<ArrayList<Student>> {
