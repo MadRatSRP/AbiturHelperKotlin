@@ -114,6 +114,7 @@ interface WorkWithSpecialtiesMVP {
         fun returnMTF(): ArrayList<ArrayList<Student>>?
         fun returnUNIT(): ArrayList<ArrayList<Student>>?
         fun returnFEE(): ArrayList<ArrayList<Student>>?
+        fun separateSpecialties(listOfStudents: ArrayList<Student>, vararg namesOfSpecialties: String): ArrayList<ArrayList<Student>>
     }
     interface Repository {
 

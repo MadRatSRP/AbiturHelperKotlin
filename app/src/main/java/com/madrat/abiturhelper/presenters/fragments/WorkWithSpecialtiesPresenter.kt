@@ -1322,10 +1322,10 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         val em = ArrayList<Student>()
 
         
-        rad.addAll(scoreTypes?.physicsStudents?.let { checkForRAD(it) })
-        rad.addAll(scoreTypes?.computerScienceStudents?.let { checkForRAD(it) })
-        rad.addAll(scoreTypes?.socialScienceStudents?.let { checkForRAD(it) })
-        rad.addAll(scoreTypes?.partAndAllDataStudents?.let { checkForRAD(it) })
+        /*rad.addAll(*/scoreTypes?.physicsStudents?.let { checkForRAD(it) }//)
+        /*rad.addAll(*/scoreTypes?.computerScienceStudents?.let { checkForRAD(it) }//)
+        /*rad.addAll(*/scoreTypes?.socialScienceStudents?.let { checkForRAD(it) }//)
+        /*rad.addAll(*/scoreTypes?.partAndAllDataStudents?.let { checkForRAD(it) }//)
 
         scoreTypes?.physicsStudents?.let { checkForTIT(it) }
         scoreTypes?.computerScienceStudents?.let { checkForTIT(it) }
@@ -1453,6 +1453,15 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
         listFEE.addAll(separatedEM)
 
         return listFEE
+    }
+    override fun separateSpecialties(listOfStudents: ArrayList<Student>, vararg namesOfSpecialties: String)
+            : ArrayList<ArrayList<Student>> {
+        val arrayListOfListsWithStudents = ArrayList<ArrayList<Student>>()
+        for (name in namesOfSpecialties) {
+            val sortedList = listOfStudents.filterForSpecialty(name)
+            arrayListOfListsWithStudents.add(sortedList)
+        }
+        return arrayListOfListsWithStudents
     }
     override fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val ochnBudg = list.filterForSpecialty("РАД_очн_бюдж")

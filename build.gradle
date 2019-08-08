@@ -4,7 +4,7 @@ buildscript {
     //Navigation Architecture Component Wiki
     ext.nav_version = "2.0.0-rc02"
 
-    ext.gradle_version = '3.4.1'
+    ext.gradle_version = '3.4.2'
     ext.kotlin_version = '1.3.30'
 
     repositories {
