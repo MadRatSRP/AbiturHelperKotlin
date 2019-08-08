@@ -866,15 +866,55 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     override fun separateFIT(fit: FIT): ArrayList<ArrayList<Student>> {
         val listFIT = ArrayList<ArrayList<Student>>()
 
-        val separatedIASB = separateIASB(fit.iasb)
-        val separatedIB = separateIB(fit.ib)
-        val separatedIBAS = separateIBAS(fit.ibas)
-        val separatedIVT = separateIVT(fit.ivt)
-        val separatedINN = separateINN(fit.inn)
-        val separatedIST = separateIST(fit.ist)
-        val separatedMOA = separateMOA(fit.moa)
-        val separatedPRI = separatePRI(fit.pri)
-        val separatedPRO = separatePRO(fit.pro)
+        val arrayOfIASBSpecialties = arrayOf(
+                "ИАСБ_очн_бюдж", "ИАСБ_очн_льгот", "ИАСБ_очн_плат"
+        )
+        val arrayOfIBSpecialties = arrayOf(
+                "ИБ_веч_платн", "ИБ_очн_бюдж",
+                "ИБ_очн_льгот", "ИБ_очн_плат"
+        )
+        val arrayOfIBASSpecialties = arrayOf(
+                "ИБАС_очн_бюдж", "ИБАС_очн_льгот", "ИБАС_очн_плат"
+        )
+        val arrayOfIVTSpecialties = arrayOf(
+                "ИиВТ(ПО)_заочн_плат", "ИиВТ(ПО)_очн_бюдж",
+                "ИиВТ(ПО)_очн_льгот", "ИиВТ(ПО)_очн_плат",
+                "ИиВТ(ПО)_очн_целевое", "ИиВТ(САПР)_очн_бюдж",
+                "ИиВТ(САПР)_очн_льгот", "ИиВТ(САПР)_очн_плат"
+        )
+        val arrayOfINNSpecialties = arrayOf(
+                "ИНН_заочн_плат", "ИНН_очн_бюдж",
+                "ИНН_очн_льгот", "ИНН_очн_плат"
+        )
+        val arrayOfISTSpecialties = arrayOf(
+                "ИСТ(ИСиТД)_очн_бюдж", "ИСТ(ИСиТД)_очн_льгот",
+                "ИСТ(ИСиТД)_очн_плат", "ИСТ(ИТиПК)_очн_бюдж",
+                "ИСТ(ИТиПК)_очн_льгот", "ИСТ(ИТиПК)_очн_плат",
+                "ИСТ_заочн_плат"
+        )
+        val arrayOfMOASpecialties = arrayOf(
+                "МОА_очн_бюдж", "МОА_очн_льгот",
+                "МОА_очн_плат", "МОА_очн_целевое"
+        )
+        val arrayOfPRISpecialties = arrayOf(
+                "ПРИ_очн_бюдж", "ПРИ_очн_льгот",
+                "ПРИ_очн_плат", "ПРИ_очн_целевое"
+        )
+        val arrayOfPROSpecialties = arrayOf(
+                "ПРО(ГД)_очн_бюдж", "ПРО(ГД)_очн_льгот",
+                "ПРО(ГД)_очн_плат", "ПРО(ИВТ)_заочн_плат",
+                "ПРО(ЭК)_заочн_плат"
+        )
+
+        val separatedIASB = separateSpecialties(fit.iasb, arrayOfIASBSpecialties)
+        val separatedIB = separateSpecialties(fit.ib, arrayOfIBSpecialties)
+        val separatedIBAS = separateSpecialties(fit.ibas, arrayOfIBASSpecialties)
+        val separatedIVT = separateSpecialties(fit.ivt, arrayOfIVTSpecialties)
+        val separatedINN = separateSpecialties(fit.inn, arrayOfINNSpecialties)
+        val separatedIST = separateSpecialties(fit.ist, arrayOfISTSpecialties)
+        val separatedMOA = separateSpecialties(fit.moa, arrayOfMOASpecialties)
+        val separatedPRI = separateSpecialties(fit.pri, arrayOfPRISpecialties)
+        val separatedPRO = separateSpecialties(fit.pro, arrayOfPROSpecialties)
 
         listFIT.addAll(separatedIASB)
         listFIT.addAll(separatedIB)
@@ -887,86 +927,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listFIT.addAll(separatedPRO)
 
         return listFIT
-    }
-    override fun separateIASB(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val ochnBudg = list.filterForSpecialty("ИАСБ_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ИАСБ_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ИАСБ_очн_плат")
-
-        return arrayListOf(ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateIB(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val vechPlat = list.filterForSpecialty("ИБ_веч_платн")
-        val ochnBudg = list.filterForSpecialty("ИБ_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ИБ_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ИБ_очн_плат")
-
-        return arrayListOf(vechPlat, ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateIBAS(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val ochnBudg = list.filterForSpecialty("ИБАС_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ИБАС_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ИБАС_очн_плат")
-
-        return arrayListOf(ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateIVT(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val poZaochnPlat = list.filterForSpecialty("ИиВТ(ПО)_заочн_плат")
-        val poOchnBudg = list.filterForSpecialty("ИиВТ(ПО)_очн_бюдж")
-        val poOchnLgot = list.filterForSpecialty("ИиВТ(ПО)_очн_льгот")
-        val poOchnPlat = list.filterForSpecialty("ИиВТ(ПО)_очн_плат")
-        val poOchnCelevoe = list.filterForSpecialty("ИиВТ(ПО)_очн_целевое")
-        val saprOchnBudg = list.filterForSpecialty("ИиВТ(САПР)_очн_бюдж")
-        val saprOchnLgot = list.filterForSpecialty("ИиВТ(САПР)_очн_льгот")
-        val saprOchnPlat = list.filterForSpecialty("ИиВТ(САПР)_очн_плат")
-
-        return arrayListOf(poZaochnPlat, poOchnBudg, poOchnLgot, poOchnPlat, poOchnCelevoe,
-                saprOchnBudg, saprOchnLgot, saprOchnPlat)
-    }
-    override fun separateINN(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("ИНН_заочн_плат")
-        val ochnBudg = list.filterForSpecialty("ИНН_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ИНН_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ИНН_очн_плат")
-
-        return arrayListOf(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateIST(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val isitdOchnBudg = list.filterForSpecialty("ИСТ(ИСиТД)_очн_бюдж")
-        val isitdOchnLgot = list.filterForSpecialty("ИСТ(ИСиТД)_очн_льгот")
-        val isitdOchnPlat = list.filterForSpecialty("ИСТ(ИСиТД)_очн_плат")
-        val itipkOchnBudg = list.filterForSpecialty("ИСТ(ИТиПК)_очн_бюдж")
-        val itipkOchnLgot = list.filterForSpecialty("ИСТ(ИТиПК)_очн_льгот")
-        val itipkOchnPlat = list.filterForSpecialty("ИСТ(ИТиПК)_очн_плат")
-        val zaochnPlat = list.filterForSpecialty("ИСТ_заочн_плат")
-
-        return arrayListOf(isitdOchnBudg, isitdOchnLgot, isitdOchnPlat, itipkOchnBudg,
-                itipkOchnLgot, itipkOchnPlat, zaochnPlat)
-    }
-    override fun separateMOA(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val ochnBudg = list.filterForSpecialty("МОА_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("МОА_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("МОА_очн_плат")
-        val ochnCelevoe = list.filterForSpecialty("МОА_очн_целевое")
-
-        return arrayListOf(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
-    }
-    override fun separatePRI(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val ochnBudg = list.filterForSpecialty("ПРИ_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ПРИ_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ПРИ_очн_плат")
-        val ochnCelevoe = list.filterForSpecialty("ПРИ_очн_целевое")
-
-        return arrayListOf(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
-    }
-    override fun separatePRO(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val gdOchnBudg = list.filterForSpecialty("ПРО(ГД)_очн_бюдж")
-        val gdOchnLgot = list.filterForSpecialty("ПРО(ГД)_очн_льгот")
-        val gdOchnPlat = list.filterForSpecialty("ПРО(ГД)_очн_плат")
-        val ivtZaochnPlat = list.filterForSpecialty("ПРО(ИВТ)_заочн_плат")
-        val ekZaochnPlat = list.filterForSpecialty("ПРО(ЭК)_заочн_плат")
-
-        return arrayListOf(gdOchnBudg, gdOchnLgot, gdOchnPlat, ivtZaochnPlat, ekZaochnPlat)
     }
     // МТФ
     override fun checkForMTF() {

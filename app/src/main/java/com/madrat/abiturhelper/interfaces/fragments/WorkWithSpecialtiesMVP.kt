@@ -59,15 +59,6 @@ interface WorkWithSpecialtiesMVP {
         // ФИТ
         fun checkForFIT()
         fun separateFIT(fit: FIT): ArrayList<ArrayList<Student>>
-        fun separateIASB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateIB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateIBAS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateIVT(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateINN(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateIST(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateMOA(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separatePRI(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separatePRO(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // МТФ
         fun checkForMTF()
         fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>>

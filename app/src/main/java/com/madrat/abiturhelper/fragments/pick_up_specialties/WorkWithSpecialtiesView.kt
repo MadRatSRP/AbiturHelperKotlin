@@ -11,8 +11,11 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
+import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
+import kotlin.system.measureNanoTime
+import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesView
     : Fragment(), WorkWithSpecialtiesMVP.View{
@@ -26,19 +29,22 @@ class WorkWithSpecialtiesView
         //view?.showSnack(R.string.workWithSpecialtiesScoreSavedMessage)
         //context.toast("Данные корректны и были успешно сохранены")
 
-        // Первый шаг - разбить список специальностей по факультетам,
-        // выделить из списка студентов тех, кто собирается поступать на бакалавриат
-        context?.let { workWithSpecialtiesPresenter?.generateBachelorsAndSpecialtiesLists(it) }
+        val time = measureTimeMillis {
+            // Первый шаг - разбить список специальностей по факультетам,
+            // выделить из списка студентов тех, кто собирается поступать на бакалавриат
+            context?.let { workWithSpecialtiesPresenter?.generateBachelorsAndSpecialtiesLists(it) }
 
-        // Второй шаг - разбить список поступающих по типу баллов
-        // и высчитать свободные баллы для факультетов
-        workWithSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+            // Второй шаг - разбить список поступающих по типу баллов
+            // и высчитать свободные баллы для факультетов
+            workWithSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
-        // Третий шаг
-        workWithSpecialtiesPresenter?.separateStudentsBySpecialties()
+            // Третий шаг
+            workWithSpecialtiesPresenter?.separateStudentsBySpecialties()
 
-        // Четвёртый шаг
-        context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
+            // Четвёртый шаг
+            context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
+        }
+        showLog("Затраченное время: $time")
 
         view?.showSnack(R.string.workWithSpecialtiesListsArePrepared)
 
