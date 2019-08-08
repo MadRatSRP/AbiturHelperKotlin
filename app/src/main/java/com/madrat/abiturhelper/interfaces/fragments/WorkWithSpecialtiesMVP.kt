@@ -71,10 +71,6 @@ interface WorkWithSpecialtiesMVP {
         // МТФ
         fun checkForMTF()
         fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>>
-        fun separateMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateSIM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateTB(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateUK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // УНИТ
         fun checkForUNIT()
         fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>>

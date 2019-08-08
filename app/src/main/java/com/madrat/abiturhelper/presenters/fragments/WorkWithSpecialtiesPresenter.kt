@@ -1062,10 +1062,28 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     override fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>> {
         val listMTF = ArrayList<ArrayList<Student>>()
 
-        val separatedMASH = separateMASH(mtf.mash)
-        val separatedSIM = separateSIM(mtf.sim)
-        val separatedTB = separateTB(mtf.tb)
-        val separatedUK = separateUK(mtf.uk)
+        val arrayOfMASHSpecialties = arrayOf(
+                "МАШ(Л)_заочн_бюдж", "МАШ(Л)_заочн_льгот", "МАШ(Л)_заочн_плат",
+                "МАШ(Л)_очн_бюдж", "МАШ(Л)_очн_льгот", "МАШ(Л)_очн_плат",
+                "МАШ(С)_заочн_бюдж", "МАШ(С)_заочн_льгот", "МАШ(С)_заочн_плат",
+                "МАШ(С)_очн_бюдж", "МАШ(С)_очн_льгот", "МАШ(С)_очн_плат", "МАШ(С)_очн_целевое"
+        )
+        val arrayOfSIMSpecialties = arrayOf(
+                "СиМ_заочн_плат", "СиМ_очн_бюдж",
+                "СиМ_очн_льгот", "СиМ_очн_плат"
+        )
+        val arrayOfTBSpecialties = arrayOf(
+                "ТБ(БТПиП)_заочн_плат", "ТБ(БТПиП)_очн_бюдж",
+                "ТБ(БТПиП)_очн_льгот", "ТБ(БТПиП)_очн_плат"
+        )
+        val arrayOfUKSpecialties = arrayOf(
+                "УК_заочн_плат"
+        )
+
+        val separatedMASH = separateSpecialties(mtf.mash, arrayOfMASHSpecialties)
+        val separatedSIM = separateSpecialties(mtf.sim, arrayOfSIMSpecialties)
+        val separatedTB = separateSpecialties(mtf.tb, arrayOfTBSpecialties)
+        val separatedUK = separateSpecialties(mtf.uk, arrayOfUKSpecialties)
 
         listMTF.addAll(separatedMASH)
         listMTF.addAll(separatedSIM)
@@ -1073,45 +1091,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listMTF.addAll(separatedUK)
 
         return listMTF
-    }
-    override fun separateMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val lZaochnBudg = list.filterForSpecialty("МАШ(Л)_заочн_бюдж")
-        val lZaochnLgot = list.filterForSpecialty("МАШ(Л)_заочн_льгот")
-        val lZaochnPlat = list.filterForSpecialty("МАШ(Л)_заочн_плат")
-        val lOchnBudg = list.filterForSpecialty("МАШ(Л)_очн_бюдж")
-        val lOchnLgot = list.filterForSpecialty("МАШ(Л)_очн_льгот")
-        val lOchnPlat = list.filterForSpecialty("МАШ(Л)_очн_плат")
-        val sZaochnBudg = list.filterForSpecialty("МАШ(С)_заочн_бюдж")
-        val sZaochnLgot = list.filterForSpecialty("МАШ(С)_заочн_льгот")
-        val sZaochnPlat = list.filterForSpecialty("МАШ(С)_заочн_плат")
-        val sOchnBudg = list.filterForSpecialty("МАШ(С)_очн_бюдж")
-        val sOchnLgot = list.filterForSpecialty("МАШ(С)_очн_льгот")
-        val sOchnPlat = list.filterForSpecialty("МАШ(С)_очн_плат")
-        val sOchnCelevoe = list.filterForSpecialty("МАШ(С)_очн_целевое")
-
-        return arrayListOf(lZaochnBudg, lZaochnLgot, lZaochnPlat,lOchnBudg, lOchnLgot, lOchnPlat,
-                sZaochnBudg, sZaochnLgot, sZaochnPlat, sOchnBudg, sOchnLgot, sOchnPlat, sOchnCelevoe)
-    }
-    override fun separateSIM(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("СиМ_заочн_плат")
-        val ochnBudg = list.filterForSpecialty("СиМ_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("СиМ_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("СиМ_очн_плат")
-
-        return arrayListOf(zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateTB(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val btpipZaochnPlat = list.filterForSpecialty("ТБ(БТПиП)_заочн_плат")
-        val btpipOchnBudg = list.filterForSpecialty("ТБ(БТПиП)_очн_бюдж")
-        val btpipOchnLgot = list.filterForSpecialty("ТБ(БТПиП)_очн_льгот")
-        val btpipOchnPlat = list.filterForSpecialty("ТБ(БТПиП)_очн_плат")
-
-        return arrayListOf(btpipZaochnPlat, btpipOchnBudg, btpipOchnLgot, btpipOchnPlat)
-    }
-    override fun separateUK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("УК_заочн_плат")
-
-        return arrayListOf(zaochnPlat)
     }
     // УНИТ
     override fun checkForUNIT() {
@@ -1288,7 +1267,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         val eie = ArrayList<Student>()
         val em = ArrayList<Student>()
 
-        
         /*rad.addAll(*/scoreTypes?.physicsStudents?.let { checkForRAD(it) }//)
         /*rad.addAll(*/scoreTypes?.computerScienceStudents?.let { checkForRAD(it) }//)
         /*rad.addAll(*/scoreTypes?.socialScienceStudents?.let { checkForRAD(it) }//)
