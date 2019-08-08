@@ -1165,10 +1165,22 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         val eie = ArrayList<Student>()
         val em = ArrayList<Student>()
 
-        /*rad.addAll(*/scoreTypes?.physicsStudents?.let { checkForRAD(it) }//)
-        /*rad.addAll(*/scoreTypes?.computerScienceStudents?.let { checkForRAD(it) }//)
-        /*rad.addAll(*/scoreTypes?.socialScienceStudents?.let { checkForRAD(it) }//)
-        /*rad.addAll(*/scoreTypes?.partAndAllDataStudents?.let { checkForRAD(it) }//)
+        val arrayOfRADSpecialties = arrayOf(
+                "РАД_очн_бюдж", "РАД_очн_льгот", "РАД_очн_плат", "РАД_очн_целевое")
+
+        val first = scoreTypes?.physicsStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
+        val second = scoreTypes?.computerScienceStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
+        val third = scoreTypes?.socialScienceStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
+        val fourth = scoreTypes?.partAndAllDataStudents?.let { checkForSpecialties(it, arrayOfRADSpecialties) }//)
+
+        showLog("KAKAKAKAKAKAKAK" + first?.size + second?.size + third?.size + fourth?.size)
+
+        val fifth = scoreTypes?.physicsStudents?.let { checkForRAD(it) }//)
+        val sixth = scoreTypes?.computerScienceStudents?.let { checkForRAD(it) }//)
+        val seventh = scoreTypes?.socialScienceStudents?.let { checkForRAD(it) }//)
+        val eighth = scoreTypes?.partAndAllDataStudents?.let { checkForRAD(it) }//)
+
+        showLog("NEW_KAKA" + fifth?.size + sixth?.size + seventh?.size + eighth?.size)
 
         scoreTypes?.physicsStudents?.let { checkForTIT(it) }
         scoreTypes?.computerScienceStudents?.let { checkForTIT(it) }
@@ -1193,6 +1205,17 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         val fee = FEE(rad, tit, ein, eie, em)
         val separatedFEE = separateFEE(fee)
         myApplication.saveFEE(separatedFEE)
+    }
+    fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student> {
+        val arrayListOfStudents = ArrayList<Student>()
+        arrayOfSpecialties.forEach {specialty->
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == specialty || list[i].specialtySecond == specialty
+                        || list[i].specialtyThird == specialty)
+                    arrayListOfStudents.add(list[i])
+            }
+        }
+        return arrayListOfStudents
     }
     fun checkForRAD(list: ArrayList<Student>): ArrayList<Student> {
         val rad = ArrayList<Student>()
