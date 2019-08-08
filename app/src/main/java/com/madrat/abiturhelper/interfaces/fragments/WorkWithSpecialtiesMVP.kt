@@ -39,14 +39,6 @@ interface WorkWithSpecialtiesMVP {
         // УНТИ
         fun checkForUNTI()
         fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
-        fun separateForATP(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForKTO(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForMASH(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForMiTM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForMHT(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForPTMK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForTMO(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateForUTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФЭУ
         fun checkForFEU()
         fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>>
