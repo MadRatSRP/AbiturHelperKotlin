@@ -11,9 +11,7 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
-import com.madrat.abiturhelper.repository.PickUpSpecialtiesRepository
 import com.madrat.abiturhelper.util.showSnack
-import com.madrat.abiturhelper.util.toast
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
 
 class WorkWithSpecialtiesView
@@ -64,8 +62,7 @@ class WorkWithSpecialtiesView
     }
 
     override fun setupMVP() {
-        workWithSpecialtiesPresenter = WorkWithSpecialtiesPresenter(this,
-                PickUpSpecialtiesRepository())
+        workWithSpecialtiesPresenter = WorkWithSpecialtiesPresenter(this)
     }
     /*override fun showFaculties(faculties: ArrayList<Faculty>) {
         pickUpSpecialtiesRecyclerView.post {

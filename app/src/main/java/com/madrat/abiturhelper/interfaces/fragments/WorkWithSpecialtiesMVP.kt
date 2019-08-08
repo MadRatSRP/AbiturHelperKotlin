@@ -87,12 +87,6 @@ interface WorkWithSpecialtiesMVP {
         // ФЭЭ
         fun checkForFEE()
         fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>
-        fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateTIT(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateEIN(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateEIE(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateEM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-
         // Четвёртый этап
         // Нахождение минимального балла для каждой из специальностей
 
@@ -114,9 +108,7 @@ interface WorkWithSpecialtiesMVP {
         fun returnMTF(): ArrayList<ArrayList<Student>>?
         fun returnUNIT(): ArrayList<ArrayList<Student>>?
         fun returnFEE(): ArrayList<ArrayList<Student>>?
-        fun separateSpecialties(listOfStudents: ArrayList<Student>, vararg namesOfSpecialties: String): ArrayList<ArrayList<Student>>
-    }
-    interface Repository {
-
+        fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
+                : ArrayList<ArrayList<Student>>
     }
 }

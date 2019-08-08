@@ -15,8 +15,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import kotlin.system.measureTimeMillis
 
-class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
-                                   private var pr: WorkWithSpecialtiesMVP.Repository)
+class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     : WorkWithSpecialtiesMVP.Presenter{
     private val myApplication = MyApplication.instance
 
@@ -1440,83 +1439,45 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View,
     override fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>> {
         val listFEE = ArrayList<ArrayList<Student>>()
 
-        val separatedRAD = separateRAD(fee.rad)
-        val separatedTIT = separateTIT(fee.tit)
-        val separatedEIN = separateEIN(fee.ein)
-        val separatedEIE = separateEIE(fee.eie)
-        val separatedEM = separateEM(fee.em)
+        val arrayOfRADSpecialties = arrayOf(
+                "РАД_очн_бюдж", "РАД_очн_льгот", "РАД_очн_плат", "РАД_очн_целевое")
+        val arrayOfTITSpecialties = arrayOf(
+                "ТиТ(ИСК)_заочн_плат", "ТиТ_очн_бюдж", "ТиТ_очн_льгот", "ТиТ_очн_плат")
+        val arrayOfEINSpecialties = arrayOf(
+                "ЭиН(МТЭ)_очн_бюдж", "ЭиН(МТЭ)_очн_льгот", "ЭиН(МТЭ)_очн_плат",
+                "ЭиН(ПЭ)_очн_бюдж", "ЭиН(ПЭ)_очн_льгот", "ЭиН(ПЭ)_очн_плат")
+        val arrayOfEIESpecialties = arrayOf(
+                "ЭиЭ_заочн_плат", "ЭиЭ_очн_бюдж", "ЭиЭ_очн_льгот",
+                "ЭиЭ_очн_плат", "ЭиЭ_очн_целевое")
+        val arrayOfEMSpecialties = arrayOf(
+                "ЭМ(ДВС)_заочн_бюдж", "ЭМ(ДВС)_заочн_льгот", "ЭМ(ДВС)_заочн_плат",
+                "ЭМ(ДВС)_очн_бюдж", "ЭМ(ДВС)_очн_льгот", "ЭМ(ДВС)_очн_плат",
+                "ЭМ(Т)_очн_бюдж", "ЭМ(Т)_очн_льгот", "ЭМ(Т)_очн_плат",
+                "ЭМ(Т)_очн_целевое", "ЭМ(ЭМКС)_заочн_плат")
+
+        val separatedRAD = separateSpecialties(fee.rad, arrayOfRADSpecialties)
+        val separatedTIT = separateSpecialties(fee.tit, arrayOfTITSpecialties)
+        val separatedEIN = separateSpecialties(fee.ein, arrayOfEINSpecialties)
+        val separatedEIE = separateSpecialties(fee.eie, arrayOfEIESpecialties)
+        val separatedEM = separateSpecialties(fee.em, arrayOfEMSpecialties)
 
         listFEE.addAll(separatedRAD)
         listFEE.addAll(separatedTIT)
         listFEE.addAll(separatedEIN)
         listFEE.addAll(separatedEIE)
         listFEE.addAll(separatedEM)
-
         return listFEE
     }
-    override fun separateSpecialties(listOfStudents: ArrayList<Student>, vararg namesOfSpecialties: String)
+    override fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
             : ArrayList<ArrayList<Student>> {
         val arrayListOfListsWithStudents = ArrayList<ArrayList<Student>>()
-        for (name in namesOfSpecialties) {
-            val sortedList = listOfStudents.filterForSpecialty(name)
+        arrayOfSpecialties.forEach {
+            val sortedList = listOfStudents.filterForSpecialty(it)
             arrayListOfListsWithStudents.add(sortedList)
         }
         return arrayListOfListsWithStudents
     }
-    override fun separateRAD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val ochnBudg = list.filterForSpecialty("РАД_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("РАД_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("РАД_очн_плат")
-        val ochnCelevoe = list.filterForSpecialty("РАД_очн_целевое")
-
-        return arrayListOf(ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
-    }
-    override fun separateTIT(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val iskZaochnPlat = list.filterForSpecialty("ТиТ(ИСК)_заочн_плат")
-        val ochnBudg = list.filterForSpecialty("ТиТ_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ТиТ_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ТиТ_очн_плат")
-
-        return arrayListOf(iskZaochnPlat, ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateEIN(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val mteOchnBudg = list.filterForSpecialty("ЭиН(МТЭ)_очн_бюдж")
-        val mteOchnLgot = list.filterForSpecialty("ЭиН(МТЭ)_очн_льгот")
-        val mteOchnPlat = list.filterForSpecialty("ЭиН(МТЭ)_очн_плат")
-        val peOchnBudg = list.filterForSpecialty("ЭиН(ПЭ)_очн_бюдж")
-        val peOchnLgot = list.filterForSpecialty("ЭиН(ПЭ)_очн_льгот")
-        val peOchnPlat = list.filterForSpecialty("ЭиН(ПЭ)_очн_плат")
-
-        return arrayListOf(mteOchnBudg, mteOchnLgot, mteOchnPlat, peOchnBudg, peOchnLgot, peOchnPlat)
-    }
-    override fun separateEIE(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnPlat = list.filterForSpecialty("ЭиЭ_заочн_плат")
-        val ochnBudg = list.filterForSpecialty("ЭиЭ_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ЭиЭ_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ЭиЭ_очн_плат")
-        val ochnCelevoe = list.filterForSpecialty("ЭиЭ_очн_целевое")
-
-        return arrayListOf(zaochnPlat, ochnBudg, ochnLgot, ochnPlat, ochnCelevoe)
-    }
-    override fun separateEM(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val dvsZaochnBudg = list.filterForSpecialty("ЭМ(ДВС)_заочн_бюдж")
-        val dvsZaochnLgot = list.filterForSpecialty("ЭМ(ДВС)_заочн_льгот")
-        val dvsZaochnPlat = list.filterForSpecialty("ЭМ(ДВС)_заочн_плат")
-        val dvsOchnBudg = list.filterForSpecialty("ЭМ(ДВС)_очн_бюдж")
-        val dvsOchnLgot = list.filterForSpecialty("ЭМ(ДВС)_очн_льгот")
-        val dvsOchnPlat = list.filterForSpecialty("ЭМ(ДВС)_очн_плат")
-        val tOchnBudg = list.filterForSpecialty("ЭМ(Т)_очн_бюдж")
-        val tOchnLgot = list.filterForSpecialty("ЭМ(Т)_очн_льгот")
-        val tOchnPlat = list.filterForSpecialty("ЭМ(Т)_очн_плат")
-        val tOchnCelevoe = list.filterForSpecialty("ЭМ(Т)_очн_целевое")
-        val emksZaochnPlat = list.filterForSpecialty("ЭМ(ЭМКС)_заочн_плат")
-
-        return arrayListOf(dvsZaochnBudg, dvsZaochnLgot, dvsZaochnPlat, dvsOchnBudg, dvsOchnLgot,
-                dvsOchnPlat, tOchnBudg, tOchnLgot, tOchnPlat, tOchnCelevoe, emksZaochnPlat)
-    }
-
     // Четвертый этап
-
     override fun checkSpecialtiesForMinimalScore(context: Context) {
         val listUNTI = checkUNTIForMinimalScore(context, 0)
         val listFEU = checkFEUForMinimalScore(context, 1)
