@@ -78,12 +78,6 @@ interface WorkWithSpecialtiesMVP {
         // УНИТ
         fun checkForUNIT()
         fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>>
-        fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateNTTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separatePM(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separatePSJD(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateTTP(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
-        fun separateETTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>>
         // ФЭЭ
         fun checkForFEE()
         fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>

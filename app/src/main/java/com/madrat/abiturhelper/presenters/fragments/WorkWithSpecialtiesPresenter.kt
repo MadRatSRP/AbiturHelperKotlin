@@ -1241,12 +1241,35 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     override fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>> {
         val listUNIT = ArrayList<ArrayList<Student>>()
 
-        val separatedNTTK = separateNTTK(unit.nttk)
-        val separatedNTTS = separateNTTS(unit.ntts)
-        val separatedPM = separatePM(unit.pm)
-        val separatedPSJD = separatePSJD(unit.psjd)
-        val separatedTTP = separateTTP(unit.ttp)
-        val separatedETTK = separateETTK(unit.ettk)
+        val arrayOfNTTKSpecialties = arrayOf(
+                "НТТК_заочн_бюдж", "НТТК_заочн_льгот", "НТТК_заочн_плат"
+        )
+        val arrayOfNTTSSpecialties = arrayOf(
+                "НТТС_очн_бюдж", "НТТС_очн_льгот", "НТТС_очн_плат"
+        )
+        val arrayOfPMSpecialties = arrayOf(
+                "ПМ(БМ)_очн_бюдж", "ПМ(БМ)_очн_льгот", "ПМ(БМ)_очн_плат",
+                "ПМ(ДПМ)_очн_бюдж", "ПМ(ДПМ)_очн_льгот", "ПМ(ДПМ)_очн_плат"
+        )
+        val arrayOfPSJDSpecialties = arrayOf(
+                "ПСЖД(В)_очн_плат", "ПСЖД(Л)_очн_плат", "ПСЖД_заочн_плат"
+        )
+        val arrayOfTTPSpecialties = arrayOf(
+                "ТТП_заочн_бюдж", "ТТП_заочн_льгот", "ТТП_заочн_плат",
+                "ТТП_очн_бюдж", "ТТП_очн_льгот", "ТТП_очн_плат"
+        )
+        val arrayOfETTKSpecialties = arrayOf(
+                "ЭТТК(АиАХ)_очн_бюдж", "ЭТТК(АиАХ)_очн_льгот", "ЭТТК(АиАХ)_очн_плат",
+                "ЭТТК(АиАХ)_очн_целевое", "ЭТТК(ПСЖД)_очн_бюдж", "ЭТТК(ПСЖД)_очн_льгот",
+                "ЭТТК(ПСЖД)_очн_плат"
+        )
+
+        val separatedNTTK = separateSpecialties(unit.nttk, arrayOfNTTKSpecialties)
+        val separatedNTTS = separateSpecialties(unit.ntts, arrayOfNTTSSpecialties)
+        val separatedPM = separateSpecialties(unit.pm, arrayOfPMSpecialties)
+        val separatedPSJD = separateSpecialties(unit.psjd, arrayOfPSJDSpecialties)
+        val separatedTTP = separateSpecialties(unit.ttp, arrayOfTTPSpecialties)
+        val separatedETTK = separateSpecialties(unit.ettk, arrayOfETTKSpecialties)
 
         listUNIT.addAll(separatedNTTK)
         listUNIT.addAll(separatedNTTS)
@@ -1254,62 +1277,7 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listUNIT.addAll(separatedPSJD)
         listUNIT.addAll(separatedTTP)
         listUNIT.addAll(separatedETTK)
-
         return listUNIT
-    }
-    override fun separateNTTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnBudg = list.filterForSpecialty("НТТК_заочн_бюдж")
-        val zaochnLgot = list.filterForSpecialty("НТТК_заочн_льгот")
-        val zaochnPlat = list.filterForSpecialty("НТТК_заочн_плат")
-
-        return arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat)
-    }
-    override fun separateNTTS(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val ochnBudg = list.filterForSpecialty("НТТС_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("НТТС_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("НТТС_очн_плат")
-
-        return arrayListOf(ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separatePM(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val bmOchnBudg = list.filterForSpecialty("ПМ(БМ)_очн_бюдж")
-        val bmOchnLgot = list.filterForSpecialty("ПМ(БМ)_очн_льгот")
-        val bmOchnPlat = list.filterForSpecialty("ПМ(БМ)_очн_плат")
-        val dpmOchnBudg = list.filterForSpecialty("ПМ(ДПМ)_очн_бюдж")
-        val dpmOchnLgot = list.filterForSpecialty("ПМ(ДПМ)_очн_льгот")
-        val dpmOchnPlat = list.filterForSpecialty("ПМ(ДПМ)_очн_плат")
-
-        return arrayListOf(bmOchnBudg, bmOchnLgot, bmOchnPlat,
-                dpmOchnBudg, dpmOchnLgot, dpmOchnPlat)
-    }
-    override fun separatePSJD(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val vOchnPlat = list.filterForSpecialty("ПСЖД(В)_очн_плат")
-        val lOchnPlat = list.filterForSpecialty("ПСЖД(Л)_очн_плат")
-        val zaochnPlat = list.filterForSpecialty("ПСЖД_заочн_плат")
-
-        return arrayListOf(vOchnPlat, lOchnPlat, zaochnPlat)
-    }
-    override fun separateTTP(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val zaochnBudg = list.filterForSpecialty("ТТП_заочн_бюдж")
-        val zaochnLgot = list.filterForSpecialty("ТТП_заочн_льгот")
-        val zaochnPlat = list.filterForSpecialty("ТТП_заочн_плат")
-        val ochnBudg = list.filterForSpecialty("ТТП_очн_бюдж")
-        val ochnLgot = list.filterForSpecialty("ТТП_очн_льгот")
-        val ochnPlat = list.filterForSpecialty("ТТП_очн_плат")
-
-        return arrayListOf(zaochnBudg, zaochnLgot, zaochnPlat, ochnBudg, ochnLgot, ochnPlat)
-    }
-    override fun separateETTK(list: ArrayList<Student>): ArrayList<ArrayList<Student>> {
-        val aiahOchnBudg = list.filterForSpecialty("ЭТТК(АиАХ)_очн_бюдж")
-        val aiahOchnLgot = list.filterForSpecialty("ЭТТК(АиАХ)_очн_льгот")
-        val aiahOchnPlat = list.filterForSpecialty("ЭТТК(АиАХ)_очн_плат")
-        val aiahOchnCelevoe = list.filterForSpecialty("ЭТТК(АиАХ)_очн_целевое")
-        val psjdOchnBudg = list.filterForSpecialty("ЭТТК(ПСЖД)_очн_бюдж")
-        val psjdOchnLgot = list.filterForSpecialty("ЭТТК(ПСЖД)_очн_льгот")
-        val psjdOchnPlat = list.filterForSpecialty("ЭТТК(ПСЖД)_очн_плат")
-
-        return arrayListOf(aiahOchnBudg, aiahOchnLgot, aiahOchnPlat, aiahOchnCelevoe,
-                psjdOchnBudg, psjdOchnLgot, psjdOchnPlat)
     }
     // ФЭЭ
     override fun checkForFEE() {
