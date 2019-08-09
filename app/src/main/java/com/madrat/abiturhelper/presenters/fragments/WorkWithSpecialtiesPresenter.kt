@@ -1159,11 +1159,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     // ФЭЭ
     override fun checkForFEE() {
         val scoreTypes = myApplication.returnScoreTypes()
-        val rad = ArrayList<Student>()
-        val tit = ArrayList<Student>()
-        val ein = ArrayList<Student>()
-        val eie = ArrayList<Student>()
-        val em = ArrayList<Student>()
 
         val arrayOfRADSpecialties = arrayOf(
                 "РАД_очн_бюдж", "РАД_очн_льгот", "РАД_очн_плат", "РАД_очн_целевое")
@@ -1183,34 +1178,20 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
 
         scoreTypes?.let {
             // RAD
-            rad.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfRADSpecialties))
-            rad.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfRADSpecialties))
-            rad.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfRADSpecialties))
-            rad.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfRADSpecialties))
+            val rad = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfRADSpecialties)
             // TIT
-            tit.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfTITSpecialties))
-            tit.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfTITSpecialties))
-            tit.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfTITSpecialties))
-            tit.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfTITSpecialties))
+            val tit = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfTITSpecialties)
             // EIN
-            ein.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfEINSpecialties))
-            ein.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfEINSpecialties))
-            ein.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfEINSpecialties))
-            ein.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfEINSpecialties))
+            val ein = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfEINSpecialties)
             // EIE
-            eie.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfEIESpecialties))
-            eie.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfEIESpecialties))
-            eie.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfEIESpecialties))
-            eie.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfEIESpecialties))
+            val eie = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfEIESpecialties)
             // EM
-            em.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfEMSpecialties))
-            em.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfEMSpecialties))
-            em.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfEMSpecialties))
-            em.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfEMSpecialties))
+            val em = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfEMSpecialties)
+
+            val fee = FEE(rad, tit, ein, eie, em)
+            val separatedFEE = separateFEE(fee)
+            myApplication.saveFEE(separatedFEE)
         }
-        val fee = FEE(rad, tit, ein, eie, em)
-        val separatedFEE = separateFEE(fee)
-        myApplication.saveFEE(separatedFEE)
     }
     /*fun checkForRAD(list: ArrayList<Student>): ArrayList<Student> {
         val rad = ArrayList<Student>()
@@ -1329,6 +1310,15 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listFEE.addAll(separatedEIE)
         listFEE.addAll(separatedEM)
         return listFEE
+    }
+    override fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes,
+                                                        arrayOfSpecialties: Array<String>): ArrayList<Student> {
+        val arrayListOfStudents = ArrayList<Student>()
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfSpecialties))
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfSpecialties))
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfSpecialties))
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfSpecialties))
+        return arrayListOfStudents
     }
     override fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>)
             : ArrayList<Student> {

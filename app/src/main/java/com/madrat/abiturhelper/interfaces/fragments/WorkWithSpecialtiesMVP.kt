@@ -79,5 +79,6 @@ interface WorkWithSpecialtiesMVP {
                 : ArrayList<ArrayList<Student>>
 
         fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
+        fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>): ArrayList<Student>
     }
 }
