@@ -869,93 +869,39 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     // МТФ
     override fun checkForMTF() {
         val scoreTypes = myApplication.returnScoreTypes()
-        val mash = ArrayList<Student>()
-        val sim = ArrayList<Student>()
-        val tb = ArrayList<Student>()
-        val uk = ArrayList<Student>()
 
-        fun checkForMASH(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "МАШ(Л)_заочн_бюдж" || list[i].specialtyFirst == "МАШ(Л)_заочн_льгот"
-                                || list[i].specialtyFirst == "МАШ(Л)_заочн_плат" || list[i].specialtyFirst == "МАШ(Л)_очн_бюдж"
-                                || list[i].specialtyFirst == "МАШ(Л)_очн_льгот" || list[i].specialtyFirst == "МАШ(Л)_очн_плат"
-                                || list[i].specialtyFirst == "МАШ(С)_заочн_бюдж" || list[i].specialtyFirst == "МАШ(С)_заочн_льгот"
-                                || list[i].specialtyFirst == "МАШ(С)_заочн_плат" || list[i].specialtyFirst == "МАШ(С)_очн_бюдж"
-                                || list[i].specialtyFirst == "МАШ(С)_очн_льгот" || list[i].specialtyFirst == "МАШ(С)_очн_плат"
-                                || list[i].specialtyFirst == "МАШ(С)_очн_целевое") || (list[i].specialtySecond == "МАШ(Л)_заочн_бюдж"
-                                || list[i].specialtySecond == "МАШ(Л)_заочн_льгот" || list[i].specialtySecond == "МАШ(Л)_заочн_плат"
-                                || list[i].specialtySecond == "МАШ(Л)_очн_бюдж" || list[i].specialtySecond == "МАШ(Л)_очн_льгот"
-                                || list[i].specialtySecond == "МАШ(Л)_очн_плат" || list[i].specialtySecond == "МАШ(С)_заочн_бюдж"
-                                || list[i].specialtySecond == "МАШ(С)_заочн_льгот" || list[i].specialtySecond == "МАШ(С)_заочн_плат"
-                                || list[i].specialtySecond == "МАШ(С)_очн_бюдж" || list[i].specialtySecond == "МАШ(С)_очн_льгот"
-                                || list[i].specialtySecond == "МАШ(С)_очн_плат" || list[i].specialtySecond == "МАШ(С)_очн_целевое")
-                        || (list[i].specialtyThird == "МАШ(Л)_заочн_бюдж" || list[i].specialtyThird == "МАШ(Л)_заочн_льгот"
-                                || list[i].specialtyThird == "МАШ(Л)_заочн_плат" || list[i].specialtyThird == "МАШ(Л)_очн_бюдж"
-                                || list[i].specialtyThird == "МАШ(Л)_очн_льгот" || list[i].specialtyThird == "МАШ(Л)_очн_плат"
-                                || list[i].specialtyThird == "МАШ(С)_заочн_бюдж" || list[i].specialtyThird == "МАШ(С)_заочн_льгот"
-                                || list[i].specialtyThird == "МАШ(С)_заочн_плат" || list[i].specialtyThird == "МАШ(С)_очн_бюдж"
-                                || list[i].specialtyThird == "МАШ(С)_очн_льгот" || list[i].specialtyThird == "МАШ(С)_очн_плат"
-                                || list[i].specialtyThird == "МАШ(С)_очн_целевое")) {
-                    mash.add(list[i])
-                }
-            }
+        val arrayOfMASHSpecialties = arrayOf(
+                "МАШ(Л)_заочн_бюдж", "МАШ(Л)_заочн_льгот", "МАШ(Л)_заочн_плат",
+                "МАШ(Л)_очн_бюдж", "МАШ(Л)_очн_льгот", "МАШ(Л)_очн_плат",
+                "МАШ(С)_заочн_бюдж", "МАШ(С)_заочн_льгот", "МАШ(С)_заочн_плат",
+                "МАШ(С)_очн_бюдж", "МАШ(С)_очн_льгот", "МАШ(С)_очн_плат", "МАШ(С)_очн_целевое"
+        )
+        val arrayOfSIMSpecialties = arrayOf(
+                "СиМ_заочн_плат", "СиМ_очн_бюдж",
+                "СиМ_очн_льгот", "СиМ_очн_плат"
+        )
+        val arrayOfTBSpecialties = arrayOf(
+                "ТБ(БТПиП)_заочн_плат", "ТБ(БТПиП)_очн_бюдж",
+                "ТБ(БТПиП)_очн_льгот", "ТБ(БТПиП)_очн_плат"
+        )
+        val arrayOfUKSpecialties = arrayOf(
+                "УК_заочн_плат"
+        )
+
+        scoreTypes?.let {
+            // MASH
+            val mash = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfMASHSpecialties)
+            // SIM
+            val sim = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfSIMSpecialties)
+            // TB
+            val tb = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfTBSpecialties)
+            // UK
+            val uk = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfUKSpecialties)
+
+            val mtf = MTF(mash, sim, tb, uk)
+            val separatedMTF = separateMTF(mtf)
+            myApplication.saveMTF(separatedMTF)
         }
-        fun checkForSIM(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "СиМ_заочн_плат" || list[i].specialtyFirst == "СиМ_очн_бюдж"
-                                || list[i].specialtyFirst == "СиМ_очн_льгот" || list[i].specialtyFirst == "СиМ_очн_плат")
-                        || (list[i].specialtySecond == "СиМ_заочн_плат" || list[i].specialtySecond == "СиМ_очн_бюдж"
-                                || list[i].specialtySecond == "СиМ_очн_льгот" || list[i].specialtySecond == "СиМ_очн_плат")
-                        || (list[i].specialtyThird == "СиМ_заочн_плат" || list[i].specialtyThird == "СиМ_очн_бюдж"
-                                || list[i].specialtyThird == "СиМ_очн_льгот" || list[i].specialtyThird == "СиМ_очн_плат")) {
-                    sim.add(list[i])
-                }
-            }
-        }
-        fun checkForTB(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ТБ(БТПиП)_заочн_плат" || list[i].specialtyFirst == "ТБ(БТПиП)_очн_бюдж"
-                                || list[i].specialtyFirst == "ТБ(БТПиП)_очн_льгот" || list[i].specialtyFirst == "ТБ(БТПиП)_очн_плат")
-                        || (list[i].specialtySecond == "ТБ(БТПиП)_заочн_плат" || list[i].specialtySecond == "ТБ(БТПиП)_очн_бюдж"
-                                || list[i].specialtySecond == "ТБ(БТПиП)_очн_льгот" || list[i].specialtySecond == "ТБ(БТПиП)_очн_плат")
-                        || (list[i].specialtyThird == "ТБ(БТПиП)_заочн_плат" || list[i].specialtyThird == "ТБ(БТПиП)_очн_бюдж"
-                                || list[i].specialtyThird == "ТБ(БТПиП)_очн_льгот" || list[i].specialtyThird == "ТБ(БТПиП)_очн_плат")) {
-                    tb.add(list[i])
-                }
-            }
-        }
-        fun checkForUK(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == "УК_заочн_плат" || list[i].specialtySecond == "УК_заочн_плат"
-                        || list[i].specialtyThird == "УК_заочн_плат") {
-                    uk.add(list[i])
-                }
-            }
-        }
-
-        scoreTypes?.physicsStudents?.let { checkForMASH(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForMASH(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForMASH(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForMASH(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForSIM(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForSIM(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForSIM(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForSIM(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForTB(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForTB(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForTB(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForTB(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForUK(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForUK(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForUK(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForUK(it) }
-
-        val mtf = MTF(mash, sim, tb, uk)
-        val separatedMTF = separateMTF(mtf)
-        myApplication.saveMTF(separatedMTF)
     }
     override fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>> {
         val listMTF = ArrayList<ArrayList<Student>>()
@@ -1146,8 +1092,8 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         listFEE.addAll(separatedEM)
         return listFEE
     }
-    override fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes,
-                                                        arrayOfSpecialties: Array<String>): ArrayList<Student> {
+    override fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>)
+            : ArrayList<Student> {
         val arrayListOfStudents = ArrayList<Student>()
         arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfSpecialties))
         arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfSpecialties))
