@@ -466,115 +466,49 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     // ФЭУ
     override fun checkForFEU() {
         val scoreTypes = myApplication.returnScoreTypes()
-        val bi = ArrayList<Student>()
-        val pi = ArrayList<Student>()
-        val sc = ArrayList<Student>()
-        val td = ArrayList<Student>()
-        val eb = ArrayList<Student>()
-        val ek = ArrayList<Student>()
 
-        fun checkForBI(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "БИ_заочн_плат" || list[i].specialtyFirst == "БИ_очн_плат")
-                        || (list[i].specialtySecond == "БИ_заочн_плат" || list[i].specialtySecond == "БИ_очн_плат")
-                        || (list[i].specialtyThird == "БИ_заочн_плат" || list[i].specialtyThird == "БИ_очн_плат")) {
-                    bi.add(list[i])
-                }
-            }
+        val arrayOfBISpecialties = arrayOf(
+                "БИ_заочн_плат", "БИ_очн_плат"
+        )
+        val arrayOfPISpecialties = arrayOf(
+                "ПИ(КИС)_очн_бюдж", "ПИ(КИС)_очн_льгот",
+                "ПИ(КИС)_очн_плат", "ПИ(ЦЭ)_очн_бюдж",
+                "ПИ(ЦЭ)_очн_льгот", "ПИ(ЦЭ)_очн_плат"
+        )
+        val arrayOfSCSpecialties = arrayOf(
+                "СЦ_заочн_плат", "СЦ_очн_плат"
+        )
+        val arrayOfTDSpecialties = arrayOf(
+                "ТД_заочн_плат", "ТД_очн_плат"
+        )
+        val arrayOfEBSpecialties = arrayOf(
+                "ЭБ_заоч_плат", "ЭБ_очн_плат"
+        )
+        val arrayOfEKSpecialties = arrayOf(
+                "ЭК(БУА)_заоч_плат", "ЭК(БУА)_очн_плат",
+                "ЭК(ЛОГ)_очн_плат", "ЭК(ОЦ)_очн_плат",
+                "ЭК(Ф)_заоч_плат", "ЭК(Ф)_очн_плат",
+                "ЭК(ЭПО)_очн_плат"
+        )
+
+        scoreTypes?.let {
+            // BI
+            val bi = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfBISpecialties)
+            // PI
+            val pi = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfPISpecialties)
+            // SC
+            val sc = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfSCSpecialties)
+            // TD
+            val td = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfTDSpecialties)
+            // EB
+            val eb = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfEBSpecialties)
+            // EK
+            val ek = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfEKSpecialties)
+
+            val feu = FEU(bi, pi, sc, td, eb, ek)
+            val separatedFEU = separateFEU(feu)
+            myApplication.saveFeu(separatedFEU)
         }
-        fun checkForPI(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ПИ(КИС)_очн_бюдж" || list[i].specialtyFirst == "ПИ(КИС)_очн_льгот"
-                                || list[i].specialtyFirst == "ПИ(КИС)_очн_плат" || list[i].specialtyFirst == "ПИ(ЦЭ)_очн_бюдж"
-                                || list[i].specialtyFirst == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtyFirst == "ПИ(ЦЭ)_очн_плат")
-                        || (list[i].specialtySecond == "ПИ(КИС)_очн_бюдж" || list[i].specialtySecond == "ПИ(КИС)_очн_льгот"
-                                || list[i].specialtySecond == "ПИ(КИС)_очн_плат" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_бюдж"
-                                || list[i].specialtySecond == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtySecond == "ПИ(ЦЭ)_очн_плат")
-                        || (list[i].specialtyThird == "ПИ(КИС)_очн_бюдж" || list[i].specialtyThird == "ПИ(КИС)_очн_льгот"
-                                || list[i].specialtyThird == "ПИ(КИС)_очн_плат" || list[i].specialtyThird == "ПИ(ЦЭ)_очн_бюдж"
-                                || list[i].specialtyThird == "ПИ(ЦЭ)_очн_льгот" || list[i].specialtyThird == "ПИ(ЦЭ)_очн_плат")) {
-                    pi.add(list[i])
-                }
-            }
-        }
-        fun checkForSC(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "СЦ_заочн_плат" || list[i].specialtyFirst == "СЦ_очн_плат")
-                        || (list[i].specialtySecond == "СЦ_заочн_плат" || list[i].specialtySecond == "СЦ_очн_плат")
-                        || (list[i].specialtyThird == "СЦ_заочн_плат" || list[i].specialtyThird == "СЦ_очн_плат")) {
-                    sc.add(list[i])
-                }
-            }
-        }
-        fun checkForTD(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ТД_заочн_плат" || list[i].specialtyFirst == "ТД_очн_плат")
-                        || (list[i].specialtySecond == "ТД_заочн_плат" || list[i].specialtySecond == "ТД_очн_плат")
-                        || (list[i].specialtyThird == "ТД_заочн_плат" || list[i].specialtyThird == "ТД_очн_плат")) {
-                    td.add(list[i])
-                }
-            }
-        }
-        fun checkForEB(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ЭБ_заоч_плат" || list[i].specialtyFirst == "ЭБ_очн_плат")
-                        || (list[i].specialtySecond == "ЭБ_заоч_плат" || list[i].specialtySecond == "ЭБ_очн_плат")
-                        || (list[i].specialtyThird == "ЭБ_заоч_плат" || list[i].specialtyThird == "ЭБ_очн_плат")) {
-                    eb.add(list[i])
-                }
-            }
-        }
-        fun checkForEK(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ЭК(БУА)_заоч_плат" || list[i].specialtyFirst == "ЭК(БУА)_очн_плат"
-                                || list[i].specialtyFirst == "ЭК(ЛОГ)_очн_плат" || list[i].specialtyFirst == "ЭК(ОЦ)_очн_плат"
-                                || list[i].specialtyFirst == "ЭК(Ф)_заоч_плат" || list[i].specialtyFirst == "ЭК(Ф)_очн_плат"
-                                || list[i].specialtyFirst == "ЭК(ЭПО)_очн_плат") || (list[i].specialtySecond == "ЭК(БУА)_заоч_плат"
-                                || list[i].specialtySecond == "ЭК(БУА)_очн_плат" || list[i].specialtySecond == "ЭК(ЛОГ)_очн_плат"
-                                || list[i].specialtySecond == "ЭК(ОЦ)_очн_плат" || list[i].specialtySecond == "ЭК(Ф)_заоч_плат"
-                                || list[i].specialtySecond == "ЭК(Ф)_очн_плат" || list[i].specialtySecond == "ЭК(ЭПО)_очн_плат")
-                        || (list[i].specialtyThird == "ЭК(БУА)_заоч_плат" || list[i].specialtyThird == "ЭК(БУА)_очн_плат"
-                                || list[i].specialtyThird == "ЭК(ЛОГ)_очн_плат" || list[i].specialtyThird == "ЭК(ОЦ)_очн_плат"
-                                || list[i].specialtyThird == "ЭК(Ф)_заоч_плат" || list[i].specialtyThird == "ЭК(Ф)_очн_плат"
-                                || list[i].specialtyThird == "ЭК(ЭПО)_очн_плат")) {
-                    ek.add(list[i])
-                }
-            }
-        }
-
-        scoreTypes?.physicsStudents?.let { checkForBI(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForBI(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForBI(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForBI(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForPI(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForPI(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForPI(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForPI(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForSC(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForSC(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForSC(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForSC(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForTD(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForTD(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForTD(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForTD(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForEB(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForEB(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForEB(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForEB(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForEK(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForEK(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForEK(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForEK(it) }
-
-        val feu = FEU(bi, pi, sc, td, eb, ek)
-        val separatedFEU = separateFEU(feu)
-        myApplication.saveFeu(separatedFEU)
     }
     override fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>> {
         val listFEU = ArrayList<ArrayList<Student>>()
