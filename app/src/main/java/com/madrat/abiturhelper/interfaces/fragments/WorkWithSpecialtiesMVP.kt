@@ -37,22 +37,22 @@ interface WorkWithSpecialtiesMVP {
 
         fun separateStudentsBySpecialties()
         // УНТИ
-        fun checkForUNTI()
+        fun checkForUNTI(scoreTypes: ScoreTypes)
         fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
         // ФЭУ
-        fun checkForFEU()
+        fun checkForFEU(scoreTypes: ScoreTypes)
         fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>>
         // ФИТ
-        fun checkForFIT()
+        fun checkForFIT(scoreTypes: ScoreTypes)
         fun separateFIT(fit: FIT): ArrayList<ArrayList<Student>>
         // МТФ
-        fun checkForMTF()
+        fun checkForMTF(scoreTypes: ScoreTypes)
         fun separateMTF(mtf: MTF): ArrayList<ArrayList<Student>>
         // УНИТ
-        fun checkForUNIT()
+        fun checkForUNIT(scoreTypes: ScoreTypes)
         fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>>
         // ФЭЭ
-        fun checkForFEE()
+        fun checkForFEE(scoreTypes: ScoreTypes)
         fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>
         // Четвёртый этап
         // Нахождение минимального балла для каждой из специальностей
