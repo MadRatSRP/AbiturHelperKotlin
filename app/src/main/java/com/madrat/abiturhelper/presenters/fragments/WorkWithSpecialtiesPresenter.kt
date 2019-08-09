@@ -173,13 +173,18 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             (it.maths == 0 && it.russian == 0) || it.maths == 0 || it.russian == 0
                     || (it.physics == 0 && it.computerScience == 0 && it.socialScience == 0)} as ArrayList<Student>
 
-        return ScoreTypes(
-                withdrawPhysicsStudents(studentsWithEnoughData),
-                withdrawComputerScienceStudents(studentsWithEnoughData),
-                withdrawSocialScienceStudents(studentsWithEnoughData),
+        val scoreType =  ScoreTypes(
+                //withdrawStudentsWithSpecificScore(studentsWithEnoughData, )
+
+                        withdrawStudentsWithSpecificScore(studentsWithEnoughData, 0),
+                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 1),
+                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 2),
                 studentsWithoutEnoughData,
-                withdrawStudentsWithPartAndFullData(studentsWithEnoughData)
+                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 3)
         )
+        showLog("MAMAMA\n${scoreType.physicsStudents.size}\n${scoreType.computerScienceStudents.size}" +
+                "\n${scoreType.socialScienceStudents.size}\n${scoreType.partAndAllDataStudents.size}")
+        return scoreType
     }
     override fun returnListOfFaculties(): ArrayList<Faculty> {
         val facultyList = ArrayList<Faculty>()
@@ -198,21 +203,25 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         facultyList.addAll(collection)
         return facultyList
     }
-    // Физика
-    override fun withdrawPhysicsStudents(bachelors: ArrayList<Student>)
-            = bachelors.filter { it.physics != 0 && it.computerScience == 0 && it.socialScience == 0 } as ArrayList<Student>
-    // Информатика
-    override fun withdrawComputerScienceStudents(bachelors: ArrayList<Student>)
-            = bachelors.filter { it.physics == 0 && it.computerScience != 0 && it.socialScience == 0 } as ArrayList<Student>
-    // Обществознание
-    override fun withdrawSocialScienceStudents(bachelors: ArrayList<Student>)
-            = bachelors.filter { it.physics == 0 && it.computerScience == 0 && it.socialScience != 0 } as ArrayList<Student>
-    // Баллы по двум/трем предметам
-    override fun withdrawStudentsWithPartAndFullData(bachelors: ArrayList<Student>)
-            = bachelors.filter { (it.physics != 0 && it.computerScience != 0 && it.socialScience != 0)
-            || (it.physics != 0 && it.computerScience != 0 && it.socialScience == 0)
-            || (it.physics != 0 && it.computerScience == 0 && it.socialScience != 0)
-            || (it.physics == 0 && it.computerScience != 0 && it.socialScience != 0) } as ArrayList<Student>
+
+    override fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student> {
+        return when(typeOfScoreId) {
+            // Физика
+            0 -> bachelors.filter { it.physics != 0 && it.computerScience == 0 && it.socialScience == 0 } as ArrayList<Student>
+            // Информатика
+            1 -> bachelors.filter { it.computerScience != 0 && it.physics == 0 && it.socialScience == 0 } as ArrayList<Student>
+            // Обществознание
+            2 -> bachelors.filter { it.socialScience != 0 && it.physics == 0 && it.computerScience == 0 } as ArrayList<Student>
+            // Баллы по двум/трем предметам
+            3 -> bachelors.filter { (it.physics != 0 && it.computerScience != 0 && it.socialScience != 0)
+                    || (it.physics != 0 && it.computerScience != 0 && it.socialScience == 0)
+                    || (it.physics != 0 && it.computerScience == 0 && it.socialScience != 0)
+                    || (it.physics == 0 && it.computerScience != 0 && it.socialScience != 0) } as ArrayList<Student>
+            else -> bachelors
+        }
+    }
+            //= bachelors.filter { firstSubject != 0 && secondSubject == 0 && thirdSubject == 0 } as ArrayList<Student>
+
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
             : Faculty {
         val total = list?.sumBy { it.entriesTotal }
@@ -1103,7 +1112,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             else -> null
         }
     }
-
 
     override fun returnFacultyList(): ArrayList<Faculty>?
             = myApplication.returnFacultyList()
