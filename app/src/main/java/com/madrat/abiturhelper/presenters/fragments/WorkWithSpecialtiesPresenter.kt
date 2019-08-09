@@ -233,174 +233,73 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     // УНТИ
     override fun checkForUNTI() {
         val scoreTypes = myApplication.returnScoreTypes()
-        val atp = ArrayList<Student>()
-        val kto = ArrayList<Student>()
-        val mash = ArrayList<Student>()
-        val mitm = ArrayList<Student>()
-        val mht = ArrayList<Student>()
-        val ptmk = ArrayList<Student>()
-        val tmo = ArrayList<Student>()
-        val uts = ArrayList<Student>()
 
-        fun checkForATP(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "АТП_заочн_бюдж" || list[i].specialtyFirst == "АТП_заочн_льгот"
-                                || list[i].specialtyFirst == "АТП_заочн_плат" || list[i].specialtyFirst == "АТП_очн_бюдж"
-                                || list[i].specialtyFirst == "АТП_очн_льгот" || list[i].specialtyFirst == "АТП_очн_плат"
-                                || list[i].specialtyFirst == "АТП_очн_целевое") || (list[i].specialtySecond == "АТП_заочн_бюдж"
-                                || list[i].specialtySecond == "АТП_заочн_льгот" || list[i].specialtySecond == "АТП_заочн_плат"
-                                || list[i].specialtySecond == "АТП_очн_бюдж" || list[i].specialtySecond == "АТП_очн_льгот"
-                                || list[i].specialtySecond == "АТП_очн_плат" || list[i].specialtySecond == "АТП_очн_целевое")
-                        || (list[i].specialtyThird == "АТП_заочн_бюдж" || list[i].specialtyThird == "АТП_заочн_льгот"
-                                || list[i].specialtyThird == "АТП_заочн_плат" || list[i].specialtyThird == "АТП_очн_бюдж"
-                                || list[i].specialtyThird == "АТП_очн_льгот" || list[i].specialtyThird == "АТП_очн_плат"
-                                || list[i].specialtyThird == "АТП_очн_целевое")) {
-                    atp.add(list[i])
-                }
-            }
+        val arrayOfATPSpecialties = arrayOf(
+                "АТП_заочн_бюдж", "АТП_заочн_льгот",
+                "АТП_заочн_плат", "АТП_очн_бюдж",
+                "АТП_очн_льгот", "АТП_очн_плат",
+                "АТП_очн_целевое"
+        )
+        val arrayOfKTOSpecialties = arrayOf(
+                "КТО(АТиКМ)_очн_бюдж", "КТО(АТиКМ)_очн_льгот",
+                "КТО(АТиКМ)_очн_плат", "КТО(ТМ)_очн_бюдж",
+                "КТО(ТМ)_очн_льгот", "КТО(ТМ)_очн_плат",
+                "КТО(ТМ)_очн_целевое", "КТО_веч_бюдж",
+                "КТО_веч_льгот", "КТО_веч_плат"
+        )
+        val arrayOfMASHSpecialties = arrayOf(
+                "МАШ(ТМ)_заочн_бюдж", "МАШ(ТМ)_заочн_льгот",
+                "МАШ(ТМ)_заочн_плат"
+        )
+        val arrayOfMITMSpecialties = arrayOf(
+                "МиТМ_очн_бюдж", "МиТМ_очн_льгот",
+                "МиТМ_очн_плат"
+        )
+        val arrayOfMHTSpecialties = arrayOf(
+                "МХТ_очн_бюдж", "МХТ_очн_льгот",
+                "МХТ_очн_плат"
+        )
+        val arrayOfPTMKSpecialties = arrayOf(
+                "ПТМК_заочн_плат", "ПТМК_очн_бюдж",
+                "ПТМК_очн_льгот", "ПТМК_очн_плат"
+        )
+        val arrayOfTMOSpecialties = arrayOf(
+                "ТМО(ОИиПМ)_заочн_бюдж", "ТМО(ОИиПМ)_заочн_льгот",
+                "ТМО(ОИиПМ)_заочн_плат", "ТМО_очн_бюдж",
+                "ТМО_очн_льгот", "ТМО_очн_плат",
+                "ТМО_очн_целевое"
+        )
+        val arrayOfUTSSpecialties = arrayOf(
+                "УТС_очн_бюдж", "УТС_очн_льгот",
+                "УТС_очн_плат", "УТС_очн_целевое"
+        )
+
+        scoreTypes?.let {
+            // ATP
+            val atp = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfATPSpecialties)
+            // KTO
+            val kto = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfKTOSpecialties)
+            // MASH
+            val mash = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfMASHSpecialties)
+            // MITM
+            val mitm = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfMITMSpecialties)
+            // MHT
+            val mht = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfMHTSpecialties)
+            // PTMK
+            val ptmk = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfPTMKSpecialties)
+            // TMO
+            val tmo = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfTMOSpecialties)
+            // UTS
+            val uts = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfUTSSpecialties)
+
+            // Получаем список списков студентов специальности УНТИ и сохраняем его
+            val unti = UNTI(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
+            val separatedUNTI = separateUNTI(unti)
+            myApplication.saveUnti(separatedUNTI)
         }
-        fun checkForKTO(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtyFirst == "КТО(АТиКМ)_очн_льгот"
-                                || list[i].specialtyFirst == "КТО(АТиКМ)_очн_плат" || list[i].specialtyFirst == "КТО(ТМ)_очн_бюдж"
-                                || list[i].specialtyFirst == "КТО(ТМ)_очн_льгот" || list[i].specialtyFirst == "КТО(ТМ)_очн_плат"
-                                || list[i].specialtyFirst == "КТО(ТМ)_очн_целевое" || list[i].specialtyFirst == "КТО_веч_бюдж"
-                                || list[i].specialtyFirst == "КТО_веч_льгот" || list[i].specialtyFirst == "КТО_веч_плат")
-                        || (list[i].specialtySecond == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtySecond == "КТО(АТиКМ)_очн_льгот"
-                                || list[i].specialtySecond == "КТО(АТиКМ)_очн_плат" || list[i].specialtySecond == "КТО(ТМ)_очн_бюдж"
-                                || list[i].specialtySecond == "КТО(ТМ)_очн_льгот" || list[i].specialtySecond == "КТО(ТМ)_очн_плат"
-                                || list[i].specialtySecond == "КТО(ТМ)_очн_целевое" || list[i].specialtySecond == "КТО_веч_бюдж"
-                                || list[i].specialtySecond == "КТО_веч_льгот" || list[i].specialtySecond == "КТО_веч_плат")
-                        || (list[i].specialtyThird == "КТО(АТиКМ)_очн_бюдж" || list[i].specialtyThird == "КТО(АТиКМ)_очн_льгот"
-                                || list[i].specialtyThird == "КТО(АТиКМ)_очн_плат" || list[i].specialtyThird == "КТО(ТМ)_очн_бюдж"
-                                || list[i].specialtyThird == "КТО(ТМ)_очн_льгот" || list[i].specialtyThird == "КТО(ТМ)_очн_плат"
-                                || list[i].specialtyThird == "КТО(ТМ)_очн_целевое" || list[i].specialtyThird == "КТО_веч_бюдж"
-                                || list[i].specialtyThird == "КТО_веч_льгот" || list[i].specialtyThird == "КТО_веч_плат")) {
-                    kto.add(list[i])
-                }
-            }
-        }
-        fun checkForMASH(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "МАШ(ТМ)_заочн_бюдж" || list[i].specialtyFirst == "МАШ(ТМ)_заочн_льгот"
-                                || list[i].specialtyFirst == "МАШ(ТМ)_заочн_плат") || (list[i].specialtySecond == "МАШ(ТМ)_заочн_бюдж"
-                                || list[i].specialtySecond == "МАШ(ТМ)_заочн_льгот" || list[i].specialtySecond == "МАШ(ТМ)_заочн_плат")
-                        || (list[i].specialtyThird == "МАШ(ТМ)_заочн_бюдж" || list[i].specialtyThird == "МАШ(ТМ)_заочн_льгот"
-                                || list[i].specialtyThird == "МАШ(ТМ)_заочн_плат")) {
-                    mash.add(list[i])
-                }
-            }
-        }
-        fun checkForMiTM(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "МиТМ_очн_бюдж" || list[i].specialtyFirst == "МиТМ_очн_льгот"
-                                || list[i].specialtyFirst == "МиТМ_очн_плат") || (list[i].specialtySecond == "МиТМ_очн_бюдж"
-                                || list[i].specialtySecond == "МиТМ_очн_льгот" || list[i].specialtySecond == "МиТМ_очн_плат")
-                        || (list[i].specialtyThird == "МиТМ_очн_бюдж" || list[i].specialtyThird == "МиТМ_очн_льгот"
-                                || list[i].specialtyThird == "МиТМ_очн_плат")) {
-                    mitm.add(list[i])
-                }
-            }
-        }
-        fun checkForMHT(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "МХТ_очн_бюдж" || list[i].specialtyFirst == "МХТ_очн_льгот"
-                                || list[i].specialtyFirst == "МХТ_очн_плат") || (list[i].specialtySecond == "МХТ_очн_бюдж"
-                                || list[i].specialtySecond == "МХТ_очн_льгот" || list[i].specialtySecond == "МХТ_очн_плат")
-                        || (list[i].specialtyThird == "МХТ_очн_бюдж" || list[i].specialtyThird == "МХТ_очн_льгот"
-                                || list[i].specialtyThird == "МХТ_очн_плат")) {
-                    mht.add(list[i])
-                }
-            }
-        }
-        fun checkForPTMK(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ПТМК_заочн_плат" || list[i].specialtyFirst == "ПТМК_очн_бюдж"
-                                || list[i].specialtyFirst == "ПТМК_очн_льгот" || list[i].specialtyFirst == "ПТМК_очн_плат")
-                        || (list[i].specialtySecond == "ПТМК_заочн_плат" || list[i].specialtySecond == "ПТМК_очн_бюдж"
-                                || list[i].specialtySecond == "ПТМК_очн_льгот" || list[i].specialtySecond == "ПТМК_очн_плат")
-                        || (list[i].specialtyThird == "ПТМК_заочн_плат" || list[i].specialtyThird == "ПТМК_очн_бюдж"
-                                || list[i].specialtyThird == "ПТМК_очн_льгот" || list[i].specialtyThird == "ПТМК_очн_плат")) {
-                    ptmk.add(list[i])
-                }
-            }
-        }
-        fun checkFotTMO(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_бюдж" || list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_льгот"
-                                || list[i].specialtyFirst == "ТМО(ОИиПМ)_заочн_плат" || list[i].specialtyFirst == "ТМО_очн_бюдж"
-                                || list[i].specialtyFirst == "ТМО_очн_льгот" || list[i].specialtyFirst == "ТМО_очн_плат"
-                                || list[i].specialtyFirst == "ТМО_очн_целевое") || (list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_бюдж"
-                                || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_льгот" || list[i].specialtySecond == "ТМО(ОИиПМ)_заочн_плат"
-                                || list[i].specialtySecond == "ТМО_очн_бюдж" || list[i].specialtySecond == "ТМО_очн_льгот"
-                                || list[i].specialtySecond == "ТМО_очн_плат" || list[i].specialtySecond == "ТМО_очн_целевое")
-                        || (list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_бюдж" || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_льгот"
-                                || list[i].specialtyThird == "ТМО(ОИиПМ)_заочн_плат" || list[i].specialtyThird == "ТМО_очн_бюдж"
-                                || list[i].specialtyThird == "ТМО_очн_льгот" || list[i].specialtyThird == "ТМО_очн_плат"
-                                || list[i].specialtyThird == "ТМО_очн_целевое")) {
-                    tmo.add(list[i])
-                }
-            }
-        }
-        fun checkForUTS(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "УТС_очн_бюдж" || list[i].specialtyFirst == "УТС_очн_льгот"
-                                || list[i].specialtyFirst == "УТС_очн_плат" || list[i].specialtyFirst == "УТС_очн_целевое")
-                        || (list[i].specialtySecond == "УТС_очн_бюдж" || list[i].specialtySecond == "УТС_очн_льгот"
-                                || list[i].specialtySecond == "УТС_очн_плат" || list[i].specialtySecond == "УТС_очн_целевое")
-                        || (list[i].specialtyThird == "УТС_очн_бюдж" || list[i].specialtyThird == "УТС_очн_льгот"
-                                || list[i].specialtyThird == "УТС_очн_плат" || list[i].specialtyThird == "УТС_очн_целевое")) {
-                    uts.add(list[i])
-                }
-            }
-        }
-
-        scoreTypes?.physicsStudents?.let { checkForATP(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForATP(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForATP(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForATP(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForKTO(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForKTO(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForKTO(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForKTO(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForMASH(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForMASH(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForMASH(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForMASH(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForMiTM(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForMiTM(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForMiTM(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForMiTM(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForMHT(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForMHT(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForMHT(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForMHT(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForPTMK(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForPTMK(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForPTMK(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForPTMK(it) }
-
-        scoreTypes?.physicsStudents?.let { checkFotTMO(it) }
-        scoreTypes?.computerScienceStudents?.let { checkFotTMO(it) }
-        scoreTypes?.socialScienceStudents?.let { checkFotTMO(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkFotTMO(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForUTS(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForUTS(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForUTS(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForUTS(it) }
-
-        // Получаем список списков студентов специальности УНТИ и сохраняем его
-        val unti = UNTI(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
-        val separatedUNTI = separateUNTI(unti)
-        myApplication.saveUnti(separatedUNTI)
     }
-    override fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>> {
+    override fun separateUNTI(unti: UNTI)
+            : ArrayList<ArrayList<Student>> {
         val listUNTI = ArrayList<ArrayList<Student>>()
 
         val arrayOfATPSpecialties = arrayOf(
