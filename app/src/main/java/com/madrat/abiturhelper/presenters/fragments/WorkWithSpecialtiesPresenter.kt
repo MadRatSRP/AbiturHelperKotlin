@@ -993,127 +993,48 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     // УНИТ
     override fun checkForUNIT() {
         val scoreTypes = myApplication.returnScoreTypes()
-        val nttk = ArrayList<Student>()
-        val ntts = ArrayList<Student>()
-        val pm = ArrayList<Student>()
-        val psjd = ArrayList<Student>()
-        val ttp = ArrayList<Student>()
-        val ettk = ArrayList<Student>()
 
-        fun checkForNTTK(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "НТТК_заочн_бюдж" || list[i].specialtyFirst == "НТТК_заочн_льгот"
-                                || list[i].specialtyFirst == "НТТК_заочн_плат") || (list[i].specialtySecond == "НТТК_заочн_бюдж"
-                                || list[i].specialtySecond == "НТТК_заочн_льгот" || list[i].specialtySecond == "НТТК_заочн_плат")
-                        || (list[i].specialtyThird == "НТТК_заочн_бюдж" || list[i].specialtyThird == "НТТК_заочн_льгот"
-                                || list[i].specialtyThird == "НТТК_заочн_плат")) {
-                    nttk.add(list[i])
-                }
-            }
+        val arrayOfNTTKSpecialties = arrayOf(
+                "НТТК_заочн_бюдж", "НТТК_заочн_льгот", "НТТК_заочн_плат"
+        )
+        val arrayOfNTTSSpecialties = arrayOf(
+                "НТТС_очн_бюдж", "НТТС_очн_льгот", "НТТС_очн_плат"
+        )
+        val arrayOfPMSpecialties = arrayOf(
+                "ПМ(БМ)_очн_бюдж", "ПМ(БМ)_очн_льгот", "ПМ(БМ)_очн_плат",
+                "ПМ(ДПМ)_очн_бюдж", "ПМ(ДПМ)_очн_льгот", "ПМ(ДПМ)_очн_плат"
+        )
+        val arrayOfPSJDSpecialties = arrayOf(
+                "ПСЖД(В)_очн_плат", "ПСЖД(Л)_очн_плат", "ПСЖД_заочн_плат"
+        )
+        val arrayOfTTPSpecialties = arrayOf(
+                "ТТП_заочн_бюдж", "ТТП_заочн_льгот", "ТТП_заочн_плат",
+                "ТТП_очн_бюдж", "ТТП_очн_льгот", "ТТП_очн_плат"
+        )
+        val arrayOfETTKSpecialties = arrayOf(
+                "ЭТТК(АиАХ)_очн_бюдж", "ЭТТК(АиАХ)_очн_льгот", "ЭТТК(АиАХ)_очн_плат",
+                "ЭТТК(АиАХ)_очн_целевое", "ЭТТК(ПСЖД)_очн_бюдж", "ЭТТК(ПСЖД)_очн_льгот",
+                "ЭТТК(ПСЖД)_очн_плат"
+        )
+
+        scoreTypes?.let {
+            // NTTK
+            val nttk = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfNTTKSpecialties)
+            // NTTS
+            val ntts = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfNTTSSpecialties)
+            // PM
+            val pm = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfPMSpecialties)
+            // PSJD
+            val psjd = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfPSJDSpecialties)
+            // TTP
+            val ttp = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfTTPSpecialties)
+            // ETTK
+            val ettk = returnListOfStudentsForChosenSpecialty(scoreTypes, arrayOfETTKSpecialties)
+
+            val unit = UNIT(nttk, ntts, pm, psjd, ttp, ettk)
+            val separatedUNIT = separateUNIT(unit)
+            myApplication.saveUNIT(separatedUNIT)
         }
-        fun checkForNTTS(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "НТТС_очн_бюдж" || list[i].specialtyFirst == "НТТС_очн_льгот"
-                                || list[i].specialtyFirst == "НТТС_очн_плат") || (list[i].specialtySecond == "НТТС_очн_бюдж"
-                                || list[i].specialtySecond == "НТТС_очн_льгот" || list[i].specialtySecond == "НТТС_очн_плат")
-                        || (list[i].specialtyThird == "НТТС_очн_бюдж" || list[i].specialtyThird == "НТТС_очн_льгот"
-                                || list[i].specialtyThird == "НТТС_очн_плат")) {
-                    ntts.add(list[i])
-                }
-            }
-        }
-        fun checkForPM(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ПМ(БМ)_очн_бюдж" || list[i].specialtyFirst == "ПМ(БМ)_очн_льгот"
-                                || list[i].specialtyFirst == "ПМ(БМ)_очн_плат" || list[i].specialtyFirst == "ПМ(ДПМ)_очн_бюдж"
-                                || list[i].specialtyFirst == "ПМ(ДПМ)_очн_льгот" || list[i].specialtyFirst == "ПМ(ДПМ)_очн_плат")
-                        || (list[i].specialtySecond == "ПМ(БМ)_очн_бюдж" || list[i].specialtySecond == "ПМ(БМ)_очн_льгот"
-                                || list[i].specialtySecond == "ПМ(БМ)_очн_плат" || list[i].specialtySecond == "ПМ(ДПМ)_очн_бюдж"
-                                || list[i].specialtySecond == "ПМ(ДПМ)_очн_льгот" || list[i].specialtySecond == "ПМ(ДПМ)_очн_плат")
-                        || (list[i].specialtyThird == "ПМ(БМ)_очн_бюдж" || list[i].specialtyThird == "ПМ(БМ)_очн_льгот"
-                                || list[i].specialtyThird == "ПМ(БМ)_очн_плат" || list[i].specialtyThird == "ПМ(ДПМ)_очн_бюдж"
-                                || list[i].specialtyThird == "ПМ(ДПМ)_очн_льгот" || list[i].specialtyThird == "ПМ(ДПМ)_очн_плат")) {
-                    pm.add(list[i])
-                }
-            }
-        }
-        fun checkForPSJD(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ПСЖД(В)_очн_плат" || list[i].specialtyFirst == "ПСЖД(Л)_очн_плат"
-                                || list[i].specialtyFirst == "ПСЖД_заочн_плат") || (list[i].specialtySecond == "ПСЖД(В)_очн_плат"
-                                || list[i].specialtySecond == "ПСЖД(Л)_очн_плат" || list[i].specialtySecond == "ПСЖД_заочн_плат")
-                        || (list[i].specialtyThird == "ПСЖД(В)_очн_плат" || list[i].specialtyThird == "ПСЖД(Л)_очн_плат"
-                                || list[i].specialtyThird == "ПСЖД_заочн_плат")) {
-                    psjd.add(list[i])
-                }
-            }
-        }
-        fun checkForTTP(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ТТП_заочн_бюдж" || list[i].specialtyFirst == "ТТП_заочн_льгот"
-                                || list[i].specialtyFirst == "ТТП_заочн_плат" || list[i].specialtyFirst == "ТТП_очн_бюдж"
-                                || list[i].specialtyFirst == "ТТП_очн_льгот" || list[i].specialtyFirst == "ТТП_очн_плат")
-                        || (list[i].specialtySecond == "ТТП_заочн_бюдж" || list[i].specialtySecond == "ТТП_заочн_льгот"
-                                || list[i].specialtySecond == "ТТП_заочн_плат" || list[i].specialtySecond == "ТТП_очн_бюдж"
-                                || list[i].specialtySecond == "ТТП_очн_льгот" || list[i].specialtySecond == "ТТП_очн_плат")
-                        || (list[i].specialtyThird == "ТТП_заочн_бюдж" || list[i].specialtyThird == "ТТП_заочн_льгот"
-                                || list[i].specialtyThird == "ТТП_заочн_плат" || list[i].specialtyThird == "ТТП_очн_бюдж"
-                                || list[i].specialtyThird == "ТТП_очн_льгот" || list[i].specialtyThird == "ТТП_очн_плат")) {
-                    ttp.add(list[i])
-                }
-            }
-        }
-        fun checkForETTK(list: ArrayList<Student>) {
-            for (i in 0 until list.size) {
-                if ((list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_бюдж" || list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_льгот"
-                                || list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_плат" || list[i].specialtyFirst == "ЭТТК(АиАХ)_очн_целевое"
-                                || list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_бюдж" || list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_льгот"
-                                || list[i].specialtyFirst == "ЭТТК(ПСЖД)_очн_плат") || (list[i].specialtySecond == "ЭТТК(АиАХ)_очн_бюдж"
-                                || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_льгот" || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_плат"
-                                || list[i].specialtySecond == "ЭТТК(АиАХ)_очн_целевое" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_бюдж"
-                                || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_льгот" || list[i].specialtySecond == "ЭТТК(ПСЖД)_очн_плат")
-                        || (list[i].specialtyThird == "ЭТТК(АиАХ)_очн_бюдж" || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_льгот"
-                                || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_плат" || list[i].specialtyThird == "ЭТТК(АиАХ)_очн_целевое"
-                                || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_бюдж" || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_льгот"
-                                || list[i].specialtyThird == "ЭТТК(ПСЖД)_очн_плат")) {
-                    ettk.add(list[i])
-                }
-            }
-        }
-
-        scoreTypes?.physicsStudents?.let { checkForNTTK(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForNTTK(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForNTTK(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForNTTK(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForNTTS(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForNTTS(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForNTTS(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForNTTS(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForPM(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForPM(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForPM(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForPM(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForPSJD(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForPSJD(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForPSJD(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForPSJD(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForTTP(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForTTP(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForTTP(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForTTP(it) }
-
-        scoreTypes?.physicsStudents?.let { checkForETTK(it) }
-        scoreTypes?.computerScienceStudents?.let { checkForETTK(it) }
-        scoreTypes?.socialScienceStudents?.let { checkForETTK(it) }
-        scoreTypes?.partAndAllDataStudents?.let { checkForETTK(it) }
-
-        val unit = UNIT(nttk, ntts, pm, psjd, ttp, ettk)
-        val separatedUNIT = separateUNIT(unit)
-        myApplication.saveUNIT(separatedUNIT)
     }
     override fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>> {
         val listUNIT = ArrayList<ArrayList<Student>>()
@@ -1193,92 +1114,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             myApplication.saveFEE(separatedFEE)
         }
     }
-    /*fun checkForRAD(list: ArrayList<Student>): ArrayList<Student> {
-        val rad = ArrayList<Student>()
-        for (i in 0 until list.size) {
-            if ((list[i].specialtyFirst == "РАД_очн_бюдж" || list[i].specialtyFirst == "РАД_очн_льгот"
-                            || list[i].specialtyFirst == "РАД_очн_плат" || list[i].specialtyFirst == "РАД_очн_целевое")
-                    || (list[i].specialtySecond == "РАД_очн_бюдж" || list[i].specialtySecond == "РАД_очн_льгот"
-                            || list[i].specialtySecond == "РАД_очн_плат" || list[i].specialtySecond == "РАД_очн_целевое")
-                    || (list[i].specialtyThird == "РАД_очн_бюдж" || list[i].specialtyThird == "РАД_очн_льгот"
-                            || list[i].specialtyThird == "РАД_очн_плат" || list[i].specialtyThird == "РАД_очн_целевое")) {
-                rad.add(list[i])
-            }
-        }
-        return rad
-    }
-    fun checkForTIT(list: ArrayList<Student>): ArrayList<Student> {
-        val tit = ArrayList<Student>()
-        for (i in 0 until list.size) {
-            if ((list[i].specialtyFirst == "ТиТ(ИСК)_заочн_плат" || list[i].specialtyFirst == "ТиТ_очн_бюдж"
-                            || list[i].specialtyFirst == "ТиТ_очн_льгот" || list[i].specialtyFirst == "ТиТ_очн_плат")
-                    || (list[i].specialtySecond == "ТиТ(ИСК)_заочн_плат" || list[i].specialtySecond == "ТиТ_очн_бюдж"
-                            || list[i].specialtySecond == "ТиТ_очн_льгот" || list[i].specialtySecond == "ТиТ_очн_плат")
-                    || (list[i].specialtyThird == "ТиТ(ИСК)_заочн_плат" || list[i].specialtyThird == "ТиТ_очн_бюдж"
-                            || list[i].specialtyThird == "ТиТ_очн_льгот" || list[i].specialtyThird == "ТиТ_очн_плат")) {
-                tit.add(list[i])
-            }
-        }
-        return tit
-    }
-    fun checkForEIN(list: ArrayList<Student>): ArrayList<Student> {
-        val ein = ArrayList<Student>()
-        for (i in 0 until list.size) {
-            if ((list[i].specialtyFirst == "ЭиН(МТЭ)_очн_бюдж" || list[i].specialtyFirst == "ЭиН(МТЭ)_очн_льгот"
-                            || list[i].specialtyFirst == "ЭиН(МТЭ)_очн_плат" || list[i].specialtyFirst == "ЭиН(ПЭ)_очн_бюдж"
-                            || list[i].specialtyFirst == "ЭиН(ПЭ)_очн_льгот" || list[i].specialtyFirst == "ЭиН(ПЭ)_очн_плат")
-                    || (list[i].specialtySecond == "ЭиН(МТЭ)_очн_бюдж" || list[i].specialtySecond == "ЭиН(МТЭ)_очн_льгот"
-                            || list[i].specialtySecond == "ЭиН(МТЭ)_очн_плат" || list[i].specialtySecond == "ЭиН(ПЭ)_очн_бюдж"
-                            || list[i].specialtySecond == "ЭиН(ПЭ)_очн_льгот" || list[i].specialtySecond == "ЭиН(ПЭ)_очн_плат")
-                    || (list[i].specialtyThird == "ЭиН(МТЭ)_очн_бюдж" || list[i].specialtyThird == "ЭиН(МТЭ)_очн_льгот"
-                            || list[i].specialtyThird == "ЭиН(МТЭ)_очн_плат" || list[i].specialtyThird == "ЭиН(ПЭ)_очн_бюдж"
-                            || list[i].specialtyThird == "ЭиН(ПЭ)_очн_льгот" || list[i].specialtyThird == "ЭиН(ПЭ)_очн_плат")) {
-                ein.add(list[i])
-            }
-        }
-        return ein
-    }
-    fun checkForEIE(list: ArrayList<Student>): ArrayList<Student> {
-        val eie = ArrayList<Student>()
-        for (i in 0 until list.size) {
-            if ((list[i].specialtyFirst == "ЭиЭ_заочн_плат" || list[i].specialtyFirst == "ЭиЭ_очн_бюдж"
-                            || list[i].specialtyFirst == "ЭиЭ_очн_льгот" || list[i].specialtyFirst == "ЭиЭ_очн_плат"
-                            || list[i].specialtyFirst == "ЭиЭ_очн_целевое") || (list[i].specialtySecond == "ЭиЭ_заочн_плат"
-                            || list[i].specialtySecond == "ЭиЭ_очн_бюдж" || list[i].specialtySecond == "ЭиЭ_очн_льгот"
-                            || list[i].specialtySecond == "ЭиЭ_очн_плат" || list[i].specialtySecond == "ЭиЭ_очн_целевое")
-                    || (list[i].specialtyThird == "ЭиЭ_заочн_плат" || list[i].specialtyThird == "ЭиЭ_очн_бюдж"
-                            || list[i].specialtyThird == "ЭиЭ_очн_льгот" || list[i].specialtyThird == "ЭиЭ_очн_плат"
-                            || list[i].specialtyThird == "ЭиЭ_очн_целевое")) {
-                eie.add(list[i])
-            }
-        }
-        return eie
-    }
-    fun checkForEM(list: ArrayList<Student>): ArrayList<Student> {
-        val em = ArrayList<Student>()
-        for (i in 0 until list.size) {
-            if ((list[i].specialtyFirst == "ЭМ(ДВС)_заочн_бюдж" || list[i].specialtyFirst == "ЭМ(ДВС)_заочн_льгот"
-                            || list[i].specialtyFirst == "ЭМ(ДВС)_заочн_плат" || list[i].specialtyFirst == "ЭМ(ДВС)_очн_бюдж"
-                            || list[i].specialtyFirst == "ЭМ(ДВС)_очн_льгот" || list[i].specialtyFirst == "ЭМ(ДВС)_очн_плат"
-                            || list[i].specialtyFirst == "ЭМ(Т)_очн_бюдж" || list[i].specialtyFirst == "ЭМ(Т)_очн_льгот"
-                            || list[i].specialtyFirst == "ЭМ(Т)_очн_плат" || list[i].specialtyFirst == "ЭМ(Т)_очн_целевое"
-                            || list[i].specialtyFirst == "ЭМ(ЭМКС)_заочн_плат") || (list[i].specialtySecond == "ЭМ(ДВС)_заочн_бюдж"
-                            || list[i].specialtySecond == "ЭМ(ДВС)_заочн_льгот" || list[i].specialtySecond == "ЭМ(ДВС)_заочн_плат"
-                            || list[i].specialtySecond == "ЭМ(ДВС)_очн_бюдж" || list[i].specialtySecond == "ЭМ(ДВС)_очн_льгот"
-                            || list[i].specialtySecond == "ЭМ(ДВС)_очн_плат" || list[i].specialtySecond == "ЭМ(Т)_очн_бюдж"
-                            || list[i].specialtySecond == "ЭМ(Т)_очн_льгот" || list[i].specialtySecond == "ЭМ(Т)_очн_плат"
-                            || list[i].specialtySecond == "ЭМ(Т)_очн_целевое" || list[i].specialtySecond == "ЭМ(ЭМКС)_заочн_плат")
-                    || (list[i].specialtyThird == "ЭМ(ДВС)_заочн_бюдж" || list[i].specialtyThird == "ЭМ(ДВС)_заочн_льгот"
-                            || list[i].specialtyThird == "ЭМ(ДВС)_заочн_плат" || list[i].specialtyThird == "ЭМ(ДВС)_очн_бюдж"
-                            || list[i].specialtyThird == "ЭМ(ДВС)_очн_льгот" || list[i].specialtyThird == "ЭМ(ДВС)_очн_плат"
-                            || list[i].specialtyThird == "ЭМ(Т)_очн_бюдж" || list[i].specialtyThird == "ЭМ(Т)_очн_льгот"
-                            || list[i].specialtyThird == "ЭМ(Т)_очн_плат" || list[i].specialtyThird == "ЭМ(Т)_очн_целевое"
-                            || list[i].specialtyThird == "ЭМ(ЭМКС)_заочн_плат")) {
-                em.add(list[i])
-            }
-        }
-        return em
-    }*/
     override fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>> {
         val listFEE = ArrayList<ArrayList<Student>>()
 
