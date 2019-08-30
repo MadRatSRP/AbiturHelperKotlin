@@ -8,11 +8,13 @@ import com.madrat.abiturhelper.model.faculties.*
 interface WorkWithSpecialtiesMVP {
     interface View {
         fun setupMVP()
-        fun toActionId(actionId: Int)
 
         /*fun showFaculties(faculties: ArrayList<Faculty>)
         fun onFacultyClicked(faculty: Faculty, position: Int)
         fun moveToSpecialties(position: Int, titleId: Int)*/
+        fun onToCurrentListClicked()
+
+        fun onToResultClicked()
     }
     interface Presenter {
         //Первый этап

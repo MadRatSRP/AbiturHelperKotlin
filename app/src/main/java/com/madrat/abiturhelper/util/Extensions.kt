@@ -10,12 +10,17 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.madrat.abiturhelper.BuildConfig
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
+
+fun Fragment.moveToSelectedFragment(fragmentId: Int) {
+    this.view?.let { Navigation.findNavController(it).navigate(fragmentId) }
+}
 
 fun Any.showLog(message: String){
     if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, message)

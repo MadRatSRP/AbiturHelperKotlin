@@ -6,106 +6,63 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.adapter.FacultiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
+import com.madrat.abiturhelper.util.moveToSelectedFragment
 import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
-import kotlin.system.measureNanoTime
 import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesView
     : Fragment(), WorkWithSpecialtiesMVP.View{
-    private var adapter: FacultiesAdapter? = null
-    private var workWithSpecialtiesPresenter: WorkWithSpecialtiesPresenter? = null
+    private var presenter: WorkWithSpecialtiesPresenter? = null
+
+    override fun setupMVP() {
+        presenter = WorkWithSpecialtiesPresenter(this)
+    }
+    override fun onToCurrentListClicked() {
+        moveToSelectedFragment(R.id.action_pickUpSpecialtiesView_to_currentList)
+    }
+    override fun onToResultClicked() {
+        moveToSelectedFragment(R.id.action_pickUpSpecialtiesView_to_resultView)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        //view?.showSnack(R.string.workWithSpecialtiesScoreSavedMessage)
-        //context.toast("Данные корректны и были успешно сохранены")
-
         val time = measureTimeMillis {
             // Первый шаг - разбить список специальностей по факультетам,
             // выделить из списка студентов тех, кто собирается поступать на бакалавриат
-            context?.let { workWithSpecialtiesPresenter?.generateBachelorsAndSpecialtiesLists(it) }
-
+            context?.let { presenter?.generateBachelorsAndSpecialtiesLists(it) }
             // Второй шаг - разбить список поступающих по типу баллов
             // и высчитать свободные баллы для факультетов
-            workWithSpecialtiesPresenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
-
+            presenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
             // Третий шаг
-            workWithSpecialtiesPresenter?.separateStudentsBySpecialties()
-
+            presenter?.separateStudentsBySpecialties()
             // Четвёртый шаг
-            context?.let { workWithSpecialtiesPresenter?.checkSpecialtiesForMinimalScore(it) }
+            context?.let { presenter?.checkSpecialtiesForMinimalScore(it) }
         }
         showLog("Затраченное время: $time")
 
         view?.showSnack(R.string.workWithSpecialtiesListsArePrepared)
 
         workToCurrentList.setOnClickListener {
-            toActionId(R.id.action_pickUpSpecialtiesView_to_currentList)
+            onToCurrentListClicked()
         }
-
         workToResult.setOnClickListener {
-            toActionId(R.id.action_pickUpSpecialtiesView_to_resultView)
+            onToResultClicked()
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.workWithSpecialtiesTitle)
-        val view = inflater.inflate(R.layout.fragment_work_with_specialties, container, false)
-
-        /*adapter = FacultiesAdapter{ faculty: Faculty, position: Int -> onFacultyClicked(faculty, position)}
-        view.pickUpSpecialtiesRecyclerView.adapter = adapter*/
-
-        return view
+        return inflater.inflate(R.layout.fragment_work_with_specialties, container, false)
     }
-
-    override fun setupMVP() {
-        workWithSpecialtiesPresenter = WorkWithSpecialtiesPresenter(this)
+    override fun onDestroyView() {
+        presenter = null
+        super.onDestroyView()
     }
-    /*override fun showFaculties(faculties: ArrayList<Faculty>) {
-        pickUpSpecialtiesRecyclerView.post {
-            adapter?.updateFacultiesList(faculties)
-            pickUpSpecialtiesRecyclerView.adapter = adapter
-        }
-
-        /*activity?.runOnUiThread {
-            adapter?.updateFacultiesList(faculties)
-            pickUpSpecialtiesRecyclerView.adapter = adapter
-        }*/
-    }*/
-    /*override fun onFacultyClicked(faculty: Faculty, position: Int) {
-        showLog("Выбран: ${faculty.name}")
-        when (position) {
-            //УНТИ
-            0 -> moveToSpecialties(position, R.string.titleUNTI)
-            //ФЭУ
-            1 -> moveToSpecialties(position, R.string.titleFEU)
-            //ФИТ
-            2 -> moveToSpecialties(position, R.string.titleFIT)
-            //МТФ
-            3 -> moveToSpecialties(position, R.string.titleMTF)
-            //УНИТ
-            4 -> moveToSpecialties(position, R.string.titleUNIT)
-            //ФЭЭ
-            5 -> moveToSpecialties(position, R.string.titleFEE)
-        }
-    }*/
-    override fun toActionId(actionId: Int) {
-        view?.let {
-            Navigation.findNavController(it)
-                .navigate(/*R.id.action_pickUpSpecialtiesView_to_showSpecialtiesView*/actionId)
-        }
-    }
-    /*override fun moveToSpecialties(position: Int, titleId: Int) {
-        val bundle = context?.let { workWithSpecialtiesPresenter?.returnFacultyBundle(it, position, titleId) }
-        bundle?.let { toActionId(it) }
-    }*/
 }
