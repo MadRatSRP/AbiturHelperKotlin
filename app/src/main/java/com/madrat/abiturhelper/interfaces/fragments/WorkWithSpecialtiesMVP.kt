@@ -54,13 +54,10 @@ interface WorkWithSpecialtiesMVP {
         // Нахождение минимального балла для каждой из специальностей
 
         fun checkSpecialtiesForMinimalScore(context: Context)
-        fun checkUNTIForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
-        fun checkFEUForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
-        fun checkFITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
-        fun checkMTFForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
-        fun checkUNITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
-        fun checkFEEForMinimalScore(context: Context, position: Int): ArrayList<Specialty>?
-        fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
+        fun checkFacultyForMinimalScore(context: Context, facultyId: Int)
+                : ArrayList<Specialty>?
+        fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
+                : ArrayList<Specialty>?
 
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?

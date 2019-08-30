@@ -17,6 +17,21 @@ import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     : WorkWithSpecialtiesMVP.Presenter{
+    companion object {
+        //УНТИ
+        const val FACULTY_UNTY = 100
+        //ФЭУ
+        const val FACULTY_FEU = 200
+        //ФИТ
+        const val FACULTY_FIT = 300
+        //МТФ
+        const val FACULTY_MTF = 400
+        //УНИТ
+        const val FACULTY_UNIT = 500
+        //ФЭЭ
+        const val FACULTY_FEE = 600
+    }
+
     private val myApplication = MyApplication.instance
     /*Первый этап*/
     override fun generateBachelorsAndSpecialtiesLists(context: Context) {
@@ -832,12 +847,12 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     }
     // Четвертый этап
     override fun checkSpecialtiesForMinimalScore(context: Context) {
-        val listUNTI = checkUNTIForMinimalScore(context, 0)
-        val listFEU = checkFEUForMinimalScore(context, 1)
-        val listFIT = checkFITForMinimalScore(context, 2)
-        val listMTF = checkMTFForMinimalScore(context, 3)
-        val listUNIT = checkUNITForMinimalScore(context, 4)
-        val listFEE = checkFEEForMinimalScore(context, 5)
+        val listUNTI = checkFacultyForMinimalScore(context, FACULTY_UNTY)
+        val listFEU = checkFacultyForMinimalScore(context, FACULTY_FEU)
+        val listFIT = checkFacultyForMinimalScore(context, FACULTY_FIT)
+        val listMTF = checkFacultyForMinimalScore(context, FACULTY_MTF)
+        val listUNIT = checkFacultyForMinimalScore(context, FACULTY_UNIT)
+        val listFEE = checkFacultyForMinimalScore(context, FACULTY_FEE)
 
         val faculties = listUNTI?.let { listFEU?.let { it1 ->
             listFIT?.let { it2 -> listMTF?.let { it3 ->
@@ -846,39 +861,55 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             } } } }
         faculties?.let { myApplication.saveFaculties(it) }
     }
-    override fun checkUNTIForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
-        val list = getSpecialtiesListByPosition(position)
-        val listUNTI = returnUNTI()
 
-        list?.let {
-            for (i in 0 until list.size) {
-                listUNTI?.let {
-                    list[i].amountOfStatements = it[i].size
+    override fun checkFacultyForMinimalScore(context: Context, facultyId: Int)
+            : ArrayList<Specialty>? {
+        val listOfFacultySpecialties = getListOfFacultySpecialtiesByFacultyId(facultyId)
+        val listOfFacultyStudents: ArrayList<ArrayList<Student>>? = when(facultyId) {
+            //УНТИ
+            FACULTY_UNTY -> returnUNTI()
+            //ФЭУ
+            FACULTY_FEU -> returnFEU()
+            //ФИТ
+            FACULTY_FIT -> returnFIT()
+            //МТФ
+            FACULTY_MTF -> returnMTF()
+            //УНИТ
+            FACULTY_UNIT -> returnUNIT()
+            //ФЭЭ
+            FACULTY_FEE -> returnFEE()
+            else -> null
+        }
 
-                    when(list[i].profileTerm) {
+        listOfFacultySpecialties?.let {
+            for (i in 0 until listOfFacultySpecialties.size) {
+                listOfFacultyStudents?.let {
+                    listOfFacultySpecialties[i].amountOfStatements = it[i].size
+
+                    when(listOfFacultySpecialties[i].profileTerm) {
                         "Физика" -> {
                             val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
 
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
+                            listOfFacultySpecialties[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
 
                             minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
+                                -> listOfFacultySpecialties[i].minimalScore= r.maths + r.physics + r.additionalScore}
                         }
                         "Обществознание" -> {
                             val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
 
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
+                            listOfFacultySpecialties[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
 
                             minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
+                                -> listOfFacultySpecialties[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
                         }
                         "Информатика и ИКТ" -> {
                             val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
 
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
+                            listOfFacultySpecialties[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
 
                             minimalScore?.let {  r
-                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
+                                -> listOfFacultySpecialties[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
                         }
                         else -> return null
                     }
@@ -886,229 +917,24 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             }
         }
 
-        return list
+        return listOfFacultySpecialties
     }
-    override fun checkFEUForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
-        val list = getSpecialtiesListByPosition(position)
-        val listFEU = returnFEU()
-
-        list?.let {
-            for (i in 0 until list.size) {
-                listFEU?.let {
-                    list[i].amountOfStatements = it[i].size
-
-                    when(list[i].profileTerm) {
-                        "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
-                        }
-                        "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
-                        }
-                        "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
-                        }
-                        else -> return null
-                    }
-                }
-            }
-        }
-        return list
-    }
-    override fun checkFITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
-        val list = getSpecialtiesListByPosition(position)
-        val listFIT = returnFIT()
-
-        list?.let {
-            for (i in 0 until list.size) {
-                listFIT?.let {
-                    list[i].amountOfStatements = it[i].size
-
-                    when(list[i].profileTerm) {
-                        "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
-                        }
-                        "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
-                        }
-                        "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
-                        }
-                        else -> return null
-                    }
-                }
-            }
-        }
-        return list
-    }
-    override fun checkMTFForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
-        val list = getSpecialtiesListByPosition(position)
-        val listMTF = returnMTF()
-
-        list?.let {
-            for (i in 0 until list.size) {
-                listMTF?.let {
-                    list[i].amountOfStatements = it[i].size
-
-                    when(list[i].profileTerm) {
-                        "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
-                        }
-                        "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
-                        }
-                        "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
-                        }
-                        else -> return null
-                    }
-                }
-            }
-        }
-        return list
-    }
-    override fun checkUNITForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
-        val list = getSpecialtiesListByPosition(position)
-        val listUNIT = returnUNIT()
-
-        list?.let {
-            for (i in 0 until list.size) {
-                listUNIT?.let {
-                    list[i].amountOfStatements = it[i].size
-
-                    when(list[i].profileTerm) {
-                        "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
-                        }
-                        "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
-                        }
-                        "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
-                        }
-                        else -> return null
-                    }
-                }
-            }
-        }
-        return list
-    }
-    override fun checkFEEForMinimalScore(context: Context, position: Int): ArrayList<Specialty>? {
-        val list = getSpecialtiesListByPosition(position)
-        val listFEE = returnFEE()
-
-        list?.let {
-            for (i in 0 until list.size) {
-                listFEE?.let {
-                    list[i].amountOfStatements = it[i].size
-
-                    when(list[i].profileTerm) {
-                        "Физика" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.physics + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndPhysics)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.physics + r.additionalScore}
-                        }
-                        "Обществознание" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.socialScience + r.additionalScore }
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndSocialScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore= r.maths + r.socialScience + r.additionalScore}
-                        }
-                        "Информатика и ИКТ" -> {
-                            val minimalScore = it[i].minBy { r -> r.maths + r.computerScience + r.additionalScore}
-
-                            list[i].scoreTitle = context.getString(R.string.facultyMathsAndComputerScience)
-
-                            minimalScore?.let {  r
-                                -> list[i].minimalScore = r.maths + r.computerScience + r.additionalScore}
-                        }
-                        else -> return null
-                    }
-                }
-            }
-        }
-        return list
-    }
-    override fun getSpecialtiesListByPosition(pos: Int)
+    override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
             : ArrayList<Specialty>? {
         val faculties = myApplication.returnFaculties()
-        return when (pos) {
-            //УНТИ
-            0 -> faculties?.listUNTI
-            //ФЭУ
-            1 -> faculties?.listFEU
-            //ФИТ
-            2 -> faculties?.listFIT
-            //МТФ
-            3 -> faculties?.listMTF
-            //УНИТ
-            4 -> faculties?.listUNIT
-            //ФЭЭ
-            5 -> faculties?.listFEE
+        return when (facultyId) {
+            // УНТИ
+            FACULTY_UNTY -> faculties?.listUNTI
+            // ФЭУ
+            FACULTY_FEU -> faculties?.listFEU
+            // ФИТ
+            FACULTY_FIT -> faculties?.listFIT
+            // МТФ
+            FACULTY_MTF -> faculties?.listMTF
+            // УНИТ
+            FACULTY_UNIT -> faculties?.listUNIT
+            // ФЭЭ
+            FACULTY_FEE -> faculties?.listFEE
             else -> null
         }
     }
