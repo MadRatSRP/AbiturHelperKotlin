@@ -62,16 +62,11 @@ interface WorkWithSpecialtiesMVP {
         fun returnFacultyList(): ArrayList<Faculty>?
         fun returnFaculties(): Faculties?
         fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle
-        fun returnUNTI(): ArrayList<ArrayList<Student>>?
-        fun returnFEU(): ArrayList<ArrayList<Student>>?
-        fun returnFIT(): ArrayList<ArrayList<Student>>?
-        fun returnMTF(): ArrayList<ArrayList<Student>>?
-        fun returnUNIT(): ArrayList<ArrayList<Student>>?
-        fun returnFEE(): ArrayList<ArrayList<Student>>?
         fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
                 : ArrayList<ArrayList<Student>>
 
         fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>): ArrayList<Student>
+        fun getListOfFacultyStudentsByFacultyId(facultyId: Int): ArrayList<ArrayList<Student>>?
     }
 }

@@ -865,21 +865,8 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     override fun checkFacultyForMinimalScore(context: Context, facultyId: Int)
             : ArrayList<Specialty>? {
         val listOfFacultySpecialties = getListOfFacultySpecialtiesByFacultyId(facultyId)
-        val listOfFacultyStudents: ArrayList<ArrayList<Student>>? = when(facultyId) {
-            //УНТИ
-            FACULTY_UNTY -> returnUNTI()
-            //ФЭУ
-            FACULTY_FEU -> returnFEU()
-            //ФИТ
-            FACULTY_FIT -> returnFIT()
-            //МТФ
-            FACULTY_MTF -> returnMTF()
-            //УНИТ
-            FACULTY_UNIT -> returnUNIT()
-            //ФЭЭ
-            FACULTY_FEE -> returnFEE()
-            else -> null
-        }
+        val listOfFacultyStudents: ArrayList<ArrayList<Student>>?
+                = getListOfFacultyStudentsByFacultyId(facultyId)
 
         listOfFacultySpecialties?.let {
             for (i in 0 until listOfFacultySpecialties.size) {
@@ -916,7 +903,6 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
                 }
             }
         }
-
         return listOfFacultySpecialties
     }
     override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
@@ -951,16 +937,22 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         bundle.putInt("pos", position)
         return bundle
     }
-    override fun returnUNTI(): ArrayList<ArrayList<Student>>?
-            = myApplication.returnUNTI()
-    override fun returnFEU(): ArrayList<ArrayList<Student>>?
-            = myApplication.returnFEU()
-    override fun returnFIT(): ArrayList<ArrayList<Student>>?
-            = myApplication.returnFIT()
-    override fun returnMTF(): ArrayList<ArrayList<Student>>?
-            = myApplication.returnMTF()
-    override fun returnUNIT(): ArrayList<ArrayList<Student>>?
-            = myApplication.returnUNIT()
-    override fun returnFEE(): ArrayList<ArrayList<Student>>?
-            = myApplication.returnFEE()
+    override fun getListOfFacultyStudentsByFacultyId(facultyId: Int)
+            : ArrayList<ArrayList<Student>>? {
+        return when (facultyId) {
+            //УНТИ
+            FACULTY_UNTY -> myApplication.returnUNTI()
+            //ФЭУ
+            FACULTY_FEU -> myApplication.returnFEU()
+            //ФИТ
+            FACULTY_FIT -> myApplication.returnFIT()
+            //МТФ
+            FACULTY_MTF -> myApplication.returnMTF()
+            //УНИТ
+            FACULTY_UNIT -> myApplication.returnUNIT()
+            //ФЭЭ
+            FACULTY_FEE -> myApplication.returnFEE()
+            else -> null
+        }
+    }
 }
