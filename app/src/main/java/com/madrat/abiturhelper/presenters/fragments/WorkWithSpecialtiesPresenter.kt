@@ -3,6 +3,7 @@ package com.madrat.abiturhelper.presenters.fragments
 import android.content.Context
 import android.os.Bundle
 import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.`object`.FacultiesObject
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.*
@@ -15,48 +16,36 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import kotlin.system.measureTimeMillis
 
-class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
+class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View)
     : WorkWithSpecialtiesMVP.Presenter{
-    companion object {
-        //УНТИ
-        const val FACULTY_UNTY = 100
-        //ФЭУ
-        const val FACULTY_FEU = 200
-        //ФИТ
-        const val FACULTY_FIT = 300
-        //МТФ
-        const val FACULTY_MTF = 400
-        //УНИТ
-        const val FACULTY_UNIT = 500
-        //ФЭЭ
-        const val FACULTY_FEE = 600
-    }
-
     private val myApplication = MyApplication.instance
-    /*Первый этап*/
-    override fun generateBachelorsAndSpecialtiesLists(context: Context) {
-        showLog("Начат первый этап")
-        val time = measureTimeMillis {
-            val specialties = grabSpecialties(context, "specialties.csv")
-            val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
-            divideSpecialtiesByFaculty(bachelorsAndSpecialists)
-
-            val students = grabStudents(context, "abiturs.csv")
-            divideStudentsByAdmissions(students)
-        }
-        showLog("Первый этап завершён за $time ms")
-    }
-    override fun grabSpecialties(context: Context, path: String): ArrayList<Specialty> {
-        val specialtiesList = ArrayList<Specialty>()
+    // Первый этап
+    fun getInstanceOfCSVParser(context: Context, path: String): CSVParser {
         val file = context.assets?.open(path)
         val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
 
-        val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
+        return CSVParser(bufferedReader, CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
                 .withDelimiter(';')
                 .withIgnoreHeaderCase()
                 .withTrim())
+    }
 
+    override fun generateBachelorsAndSpecialtiesLists(context: Context) {
+        val time = measureTimeMillis {
+            val firstParser = getInstanceOfCSVParser(context, "specialties.csv")
+            val specialties = grabSpecialties(firstParser)
+            val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
+            divideSpecialtiesByFaculty(bachelorsAndSpecialists)
+
+            val secondParser = getInstanceOfCSVParser(context, "abiturs.csv")
+            val students = grabStudents(secondParser)
+            divideStudentsByAdmissions(students)
+        }
+        showLog("Первый этап завершён за $time ms")
+    }
+    override fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty> {
+        val specialtiesList = ArrayList<Specialty>()
         for (csvRecord in csvParser) {
             val shortName = csvRecord.get("СокращенноеНаименование")
             val fullName = csvRecord.get("ПолноеНаименование")
@@ -77,17 +66,8 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         showLog("Всего специальностей: ${specialtiesList.size}")
         return specialtiesList
     }
-    override fun grabStudents(context: Context, path: String): ArrayList<Student> {
+    override fun grabStudents(csvParser: CSVParser): ArrayList<Student> {
         val studentsList = ArrayList<Student>()
-        val file = context.assets?.open(path)
-        val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
-
-        val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT
-                .withFirstRecordAsHeader()
-                .withDelimiter(';')
-                .withIgnoreHeaderCase()
-                .withTrim())
-
         for (csvRecord in csvParser) {
             val studentId: String = csvRecord.get("id")
             val lastName: String = csvRecord.get("Фамилия")
@@ -847,12 +827,12 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
     }
     // Четвертый этап
     override fun checkSpecialtiesForMinimalScore(context: Context) {
-        val listUNTI = checkFacultyForMinimalScore(context, FACULTY_UNTY)
-        val listFEU = checkFacultyForMinimalScore(context, FACULTY_FEU)
-        val listFIT = checkFacultyForMinimalScore(context, FACULTY_FIT)
-        val listMTF = checkFacultyForMinimalScore(context, FACULTY_MTF)
-        val listUNIT = checkFacultyForMinimalScore(context, FACULTY_UNIT)
-        val listFEE = checkFacultyForMinimalScore(context, FACULTY_FEE)
+        val listUNTI = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNTY)
+        val listFEU = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FEU)
+        val listFIT = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FIT)
+        val listMTF = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_MTF)
+        val listUNIT = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNIT)
+        val listFEE = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FEE)
 
         val faculties = listUNTI?.let { listFEU?.let { it1 ->
             listFIT?.let { it2 -> listMTF?.let { it3 ->
@@ -910,17 +890,17 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
         val faculties = myApplication.returnFaculties()
         return when (facultyId) {
             // УНТИ
-            FACULTY_UNTY -> faculties?.listUNTI
+            FacultiesObject.FACULTY_UNTY -> faculties?.listUNTI
             // ФЭУ
-            FACULTY_FEU -> faculties?.listFEU
+            FacultiesObject.FACULTY_FEU -> faculties?.listFEU
             // ФИТ
-            FACULTY_FIT -> faculties?.listFIT
+            FacultiesObject.FACULTY_FIT -> faculties?.listFIT
             // МТФ
-            FACULTY_MTF -> faculties?.listMTF
+            FacultiesObject.FACULTY_MTF -> faculties?.listMTF
             // УНИТ
-            FACULTY_UNIT -> faculties?.listUNIT
+            FacultiesObject.FACULTY_UNIT -> faculties?.listUNIT
             // ФЭЭ
-            FACULTY_FEE -> faculties?.listFEE
+            FacultiesObject.FACULTY_FEE -> faculties?.listFEE
             else -> null
         }
     }
@@ -941,17 +921,17 @@ class WorkWithSpecialtiesPresenter(private var pv: WorkWithSpecialtiesMVP.View)
             : ArrayList<ArrayList<Student>>? {
         return when (facultyId) {
             //УНТИ
-            FACULTY_UNTY -> myApplication.returnUNTI()
+            FacultiesObject.FACULTY_UNTY -> myApplication.returnUNTI()
             //ФЭУ
-            FACULTY_FEU -> myApplication.returnFEU()
+            FacultiesObject.FACULTY_FEU -> myApplication.returnFEU()
             //ФИТ
-            FACULTY_FIT -> myApplication.returnFIT()
+            FacultiesObject.FACULTY_FIT -> myApplication.returnFIT()
             //МТФ
-            FACULTY_MTF -> myApplication.returnMTF()
+            FacultiesObject.FACULTY_MTF -> myApplication.returnMTF()
             //УНИТ
-            FACULTY_UNIT -> myApplication.returnUNIT()
+            FacultiesObject.FACULTY_UNIT -> myApplication.returnUNIT()
             //ФЭЭ
-            FACULTY_FEE -> myApplication.returnFEE()
+            FacultiesObject.FACULTY_FEE -> myApplication.returnFEE()
             else -> null
         }
     }

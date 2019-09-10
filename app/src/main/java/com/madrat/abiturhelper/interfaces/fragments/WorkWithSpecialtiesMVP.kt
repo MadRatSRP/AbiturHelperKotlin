@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.*
+import kotlinx.coroutines.Job
+import org.apache.commons.csv.CSVParser
 
 interface WorkWithSpecialtiesMVP {
     interface View {
@@ -18,9 +20,9 @@ interface WorkWithSpecialtiesMVP {
     }
     interface Presenter {
         //Первый этап
-        fun generateBachelorsAndSpecialtiesLists(context: Context)
-        fun grabSpecialties(context: Context, path: String): ArrayList<Specialty>
-        fun grabStudents(context: Context, path: String): ArrayList<Student>
+        fun generateBachelorsAndSpecialtiesLists(context: Context)//: Job
+        fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty>
+        fun grabStudents(csvParser: CSVParser): ArrayList<Student>
         fun checkTextForBeingEmpty(text: String): Int
         fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
         fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>)

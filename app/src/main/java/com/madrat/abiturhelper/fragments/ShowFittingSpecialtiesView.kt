@@ -51,7 +51,7 @@ class ShowFittingSpecialtiesView
         val view = inflater.inflate(R.layout.fragment_show_fitting_specialties,
                 container, false)
 
-        adapter = SpecialtiesAdapter(null)
+        adapter = SpecialtiesAdapter(null,null)
         view.fittingRecyclerView.adapter = adapter
         view.fittingRecyclerView.linearManager()
         return view

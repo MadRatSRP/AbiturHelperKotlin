@@ -1,34 +1,40 @@
 package com.madrat.abiturhelper.presenters.fragments
 
 import android.os.Bundle
+import com.madrat.abiturhelper.`object`.FacultiesObject
 import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.util.MyApplication
 
-class ShowSpecialtiesPresenter: ShowSpecialtiesMVP.Presenter {
+class ShowSpecialtiesPresenter(private val view: ShowSpecialtiesMVP.View)
+    : ShowSpecialtiesMVP.Presenter {
     private val myApplication = MyApplication.instance
 
-    override fun initializeAdapter(example: (Specialty, Int) -> Unit): SpecialtiesAdapter {
-        return SpecialtiesAdapter{specialty: Specialty, position: Int -> example(specialty, position)}
-    }
-    override fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+    override fun initializeViewComponentsAndFillItWithData(facultyId: Int) {
+        val listOfFacultySpecialties = getListOfFacultySpecialtiesByFacultyId(facultyId)
 
-        return when (pos) {
-            //УНТИ
-            0 -> faculties?.listUNTI
-            //ФЭУ
-            1 -> faculties?.listFEU
-            //ФИТ
-            2 -> faculties?.listFIT
-            //МТФ
-            3 -> faculties?.listMTF
-            //УНИТ
-            4 -> faculties?.listUNIT
-            //ФЭЭ
-            5 -> faculties?.listFEE
+        view.initializeAdapterAndSetLayoutManager(facultyId)
+        listOfFacultySpecialties?.let { view.showSpecialties(it) }
+    }
+
+    override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
+            : ArrayList<Specialty>? {
+        val faculties = myApplication.returnFaculties()
+        return when (facultyId) {
+            // УНТИ
+            FacultiesObject.FACULTY_UNTY -> faculties?.listUNTI
+            // ФЭУ
+            FacultiesObject.FACULTY_FEU -> faculties?.listFEU
+            // ФИТ
+            FacultiesObject.FACULTY_FIT -> faculties?.listFIT
+            // МТФ
+            FacultiesObject.FACULTY_MTF -> faculties?.listMTF
+            // УНИТ
+            FacultiesObject.FACULTY_UNIT -> faculties?.listUNIT
+            // ФЭЭ
+            FacultiesObject.FACULTY_FEE -> faculties?.listFEE
             else -> null
         }
     }
@@ -56,4 +62,23 @@ class ShowSpecialtiesPresenter: ShowSpecialtiesMVP.Presenter {
             = myApplication.returnUNIT()
     override fun returnFEE(): ArrayList<ArrayList<Student>>?
             = myApplication.returnFEE()
+
+    override fun getListOfFacultyStudentsByFacultyId(facultyId: Int)
+            : ArrayList<ArrayList<Student>>? {
+        return when (facultyId) {
+            //УНТИ
+            FacultiesObject.FACULTY_UNTY -> myApplication.returnUNTI()
+            //ФЭУ
+            FacultiesObject.FACULTY_FEU -> myApplication.returnFEU()
+            //ФИТ
+            FacultiesObject.FACULTY_FIT -> myApplication.returnFIT()
+            //МТФ
+            FacultiesObject.FACULTY_MTF -> myApplication.returnMTF()
+            //УНИТ
+            FacultiesObject.FACULTY_UNIT -> myApplication.returnUNIT()
+            //ФЭЭ
+            FacultiesObject.FACULTY_FEE -> myApplication.returnFEE()
+            else -> null
+        }
+    }
 }

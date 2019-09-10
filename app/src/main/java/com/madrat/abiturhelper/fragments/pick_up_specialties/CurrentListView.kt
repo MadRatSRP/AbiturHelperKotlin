@@ -80,17 +80,17 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         showLog("Выбран: ${faculty.name}")
         when (position) {
             //УНТИ
-            0 -> moveToSpecialties(position, R.string.titleUNTI)
+            0 -> moveToSpecialties(position, R.string.facultyUNTI)
             //ФЭУ
-            1 -> moveToSpecialties(position, R.string.titleFEU)
+            1 -> moveToSpecialties(position, R.string.facultyFEU)
             //ФИТ
-            2 -> moveToSpecialties(position, R.string.titleFIT)
+            2 -> moveToSpecialties(position, R.string.facultyFIT)
             //МТФ
-            3 -> moveToSpecialties(position, R.string.titleMTF)
+            3 -> moveToSpecialties(position, R.string.facultyMTF)
             //УНИТ
-            4 -> moveToSpecialties(position, R.string.titleUNIT)
+            4 -> moveToSpecialties(position, R.string.facultyUNIT)
             //ФЭЭ
-            5 -> moveToSpecialties(position, R.string.titleFEE)
+            5 -> moveToSpecialties(position, R.string.facultyFEE)
         }
     }
     override fun toSpecialties(bundle: Bundle?, actionId: Int) {

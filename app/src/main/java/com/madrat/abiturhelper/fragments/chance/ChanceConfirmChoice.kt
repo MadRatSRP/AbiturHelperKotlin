@@ -44,7 +44,7 @@ class ChanceConfirmChoice
         val view = inflater.inflate(R.layout.fragment_chance_confirm_choice,
                 container, false)
 
-        adapter = SpecialtiesAdapter(null)
+        adapter = SpecialtiesAdapter(null, null)
         view.chanceConfirmChoiceRecyclerView.adapter = adapter
         view.chanceConfirmChoiceRecyclerView.linearManager()
         return view

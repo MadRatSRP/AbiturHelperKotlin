@@ -110,12 +110,12 @@
     <string name="bachelorSpecialtyThird">Третья специальность</string>
     <string name="bachelorAdditionalScore">Сумма дополнительных баллов</string>
 
-    <string name="titleUNTI">УНТИ</string>
-    <string name="titleFEU">ФЭУ</string>
-    <string name="titleFIT">ФИТ</string>
-    <string name="titleMTF">МТФ</string>
-    <string name="titleUNIT">УНИТ</string>
-    <string name="titleFEE">"ФЭЭ"</string>
+    <string name="facultyUNTI">УНТИ</string>
+    <string name="facultyFEU">ФЭУ</string>
+    <string name="facultyFIT">ФИТ</string>
+    <string name="facultyMTF">МТФ</string>
+    <string name="facultyUNIT">УНИТ</string>
+    <string name="facultyFEE">"ФЭЭ"</string>
 
     <string name="selectedSpecialtyName">Название специальности</string>
     <string name="selectedFacultyName">Название факультета</string>

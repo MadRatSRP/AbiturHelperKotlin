@@ -46,7 +46,7 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
         val view = inflater.inflate(R.layout.fragment_graduation_confirm_choice,
                 container, false)
 
-        adapter = SpecialtiesAdapter(null)
+        adapter = SpecialtiesAdapter(null, null)
         view.confirmChoiceRecyclerView.adapter = adapter
         view.confirmChoiceRecyclerView.linearManager()
         return view

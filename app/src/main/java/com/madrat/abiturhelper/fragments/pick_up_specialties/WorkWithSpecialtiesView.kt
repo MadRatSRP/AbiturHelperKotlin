@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.fragments.pick_up_specialties
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,9 @@ import com.madrat.abiturhelper.util.moveToSelectedFragment
 import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesView
@@ -28,26 +32,28 @@ class WorkWithSpecialtiesView
     override fun onToResultClicked() {
         moveToSelectedFragment(R.id.action_pickUpSpecialtiesView_to_resultView)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupMVP()
-
+    fun doSomething(context: Context) {
         val time = measureTimeMillis {
             // Первый шаг - разбить список специальностей по факультетам,
             // выделить из списка студентов тех, кто собирается поступать на бакалавриат
-            context?.let { presenter?.generateBachelorsAndSpecialtiesLists(it) }
+            presenter?.generateBachelorsAndSpecialtiesLists(context)
             // Второй шаг - разбить список поступающих по типу баллов
             // и высчитать свободные баллы для факультетов
             presenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
             // Третий шаг
             presenter?.separateStudentsBySpecialties()
             // Четвёртый шаг
-            context?.let { presenter?.checkSpecialtiesForMinimalScore(it) }
+            presenter?.checkSpecialtiesForMinimalScore(context)
         }
         showLog("Затраченное время: $time")
 
         view?.showSnack(R.string.workWithSpecialtiesListsArePrepared)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupMVP()
+        context?.let { doSomething(it) }
 
         workToCurrentList.setOnClickListener {
             onToCurrentListClicked()

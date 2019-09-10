@@ -9,7 +9,8 @@ import com.madrat.abiturhelper.util.inflate
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.list_specialties.*
 
-class SpecialtiesAdapter(private val clickListener: ((Specialty, Int) -> Unit)?)
+class SpecialtiesAdapter(private val facultyId: Int?,
+                         private val onSpecialtyClicked: ((Int?, Specialty, Int) -> Unit)?)
     : RecyclerView.Adapter<SpecialtiesAdapter.SpecialtiesHolder>(){
     private var specialties = ArrayList<Specialty>()
 
@@ -23,15 +24,18 @@ class SpecialtiesAdapter(private val clickListener: ((Specialty, Int) -> Unit)?)
             = SpecialtiesHolder(parent.inflate(R.layout.list_specialties))
 
     override fun onBindViewHolder(holder: SpecialtiesHolder, position: Int)
-            = holder.bind(position, specialties[position], clickListener)
+            = holder.bind(position, specialties[position], onSpecialtyClicked)
 
     override fun getItemCount(): Int
             = specialties.size
 
     inner class SpecialtiesHolder internal constructor(override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(position: Int, specialty: Specialty, clickListener: ((Specialty, Int) -> Unit)?) {
-            containerView.setOnClickListener { clickListener?.invoke(specialty, position) }
+        fun bind(position: Int, specialty: Specialty,
+                 onSpecialtyClicked: ((Int?, Specialty, Int) -> Unit)?) {
+            containerView.setOnClickListener {
+                onSpecialtyClicked?.invoke(facultyId, specialty, position)
+            }
 
             specialtyName.text = specialty.shortName
             specialtyEntriesTotalValue.text = specialty.entriesTotal.toString()

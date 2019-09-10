@@ -12,16 +12,19 @@ interface ShowSpecialtiesMVP {
         fun toStudents(bundle: Bundle)
         fun moveToStudents(list: ArrayList<Student>, specialty: Specialty)
 
-        fun onUNTISpecialtyClicked(specialty: Specialty, position: Int)
+        /*fun onUNTISpecialtyClicked(specialty: Specialty, position: Int)
         fun onFEUSpecialtyClicked(specialty: Specialty, position: Int)
         fun onFITSpecialtyClicked(specialty: Specialty, position: Int)
         fun onMTFSpecialtyClicked(specialty: Specialty, position: Int)
         fun onUNITSpecialtyClicked(specialty: Specialty, position: Int)
-        fun onFEESpecialtyClicked(specialty: Specialty, position: Int)
+        fun onFEESpecialtyClicked(specialty: Specialty, position: Int)*/
+        fun onSpecialtyClicked(facultyId: Int, specialty: Specialty, position: Int)
+
+        fun initializeAdapterAndSetLayoutManager(facultyId: Int)
     }
     interface Presenter {
-        fun initializeAdapter(example: (Specialty, Int) -> Unit): SpecialtiesAdapter
-        fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
+        //fun initializeAdapterAndSetLayoutManager(example: (Specialty, Int) -> Unit): SpecialtiesAdapter
+        //fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
 
         fun saveCurrentListOfStudents(list: ArrayList<Student>)
         fun returnSpecialtyBundle(list: ArrayList<Student>, specialty: Specialty): Bundle
@@ -31,5 +34,8 @@ interface ShowSpecialtiesMVP {
         fun returnMTF(): ArrayList<ArrayList<Student>>?
         fun returnUNIT(): ArrayList<ArrayList<Student>>?
         fun returnFEE(): ArrayList<ArrayList<Student>>?
+        fun getListOfFacultyStudentsByFacultyId(facultyId: Int): ArrayList<ArrayList<Student>>?
+        fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int): ArrayList<Specialty>?
+        fun initializeViewComponentsAndFillItWithData(facultyId: Int)
     }
 }
