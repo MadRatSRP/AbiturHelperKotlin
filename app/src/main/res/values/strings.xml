@@ -6,6 +6,12 @@
 
     <string name="showList">Показать список</string>
 
+    <string name="errorMessageMaths">Балл по математике меньше проходного (27)</string>
+    <string name="errorMessageRussian">Балл по русскому языку меньше проходного (36)</string>
+    <string name="errorMessagePhysics">Балл по физике меньше проходного (36)</string>
+    <string name="errorMessageComputerScience">Балл по информатике меньше проходного (40)</string>
+    <string name="errorMessageSocialScience">Балл по обществознанию меньше проходного (42)</string>
+
     //FullName
     <string name="scoreFullName">ФИО</string>
     <string name="scoreLastName">Фамилия</string>
