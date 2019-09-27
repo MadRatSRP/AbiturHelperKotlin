@@ -9,20 +9,21 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
     : SetupScoreMVP.Presenter {
     val myApplication = MyApplication.instance
 
-    override fun saveFullName(lastName: String, firstName: String, patronymic: String) {
+    override fun saveFullNameAndScore(lastName: String, firstName: String, patronymic: String,
+                                      maths: Int, russian: Int, physics: Int?, computerScience: Int?,
+                                      socialScience: Int?, additionalScore: String) {
         val fullName = FullName(lastName, firstName, patronymic)
-        myApplication.saveFullName(fullName)
-    }
-    override fun savePointsAsAScoreModel(maths: Int, russian: Int, physics: Int?,
-                                         computerScience: Int?, socialScience: Int?,
-                                         additionalScore: String) {
+
         val score = Score(
                 maths, russian, checkScoreForBeingEmpty(physics),
                 checkScoreForBeingEmpty(computerScience),
                 checkScoreForBeingEmpty(socialScience), additionalScore.toInt()
         )
 
+        myApplication.saveFullName(fullName)
         myApplication.saveScore(score)
+
+        view.moveToWorkWithSpecialtiesView()
     }
     override fun checkScoreForBeingEmpty(score: Int?): Int {
         return score ?: 0

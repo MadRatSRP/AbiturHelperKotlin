@@ -9,10 +9,10 @@ import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupScoreMVP
 import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
+import com.madrat.abiturhelper.util.moveToSelectedFragment
 import com.madrat.abiturhelper.util.toast
 import kotlinx.android.synthetic.main.fragment_setup_score.*
 import kotlinx.android.synthetic.main.fragment_setup_score.view.*
@@ -32,30 +32,27 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
             if (checkedFIO && checkedScore)
                 moveToWorkWithSpecialties(view)*/
+            val additionalScore = additionalScoreSpinner.selectedItem.toString()
+
             val checkedFIO = checkForFIO(view.context)
             val checkedScore = checkForScore(view.context)
 
             if (checkedFIO && checkedScore)
-                moveToWorkWithSpecialties(view)
-
+                presenter?.saveFullNameAndScore(
+                        setupScoreLastNameValue.text.toString(),
+                        setupScoreFirstNameValue.text.toString(),
+                        setupScorePatronymicValue.text.toString(),
+                        setupScoreMathsValue.text.toString().toInt(),
+                        setupScoreRussianValue.text.toString().toInt(),
+                        setupScorePhysicsValue.text.toString().toIntOrNull(),
+                        setupScoreComputerScienceValue.text.toString().toIntOrNull(),
+                        setupScoreSocialScienceValue.text.toString().toIntOrNull(), additionalScore
+                )
         }
     }
-    override fun moveToWorkWithSpecialties(view: View) {
-        val additionalScore = additionalScoreSpinner.selectedItem.toString()
-
-        presenter?.saveFullName(setupScoreLastNameValue.text.toString(),
-                setupScoreFirstNameValue.text.toString(),
-                setupScorePatronymicValue.text.toString())
-
-        presenter?.savePointsAsAScoreModel(setupScoreMathsValue.text.toString().toInt(),
-                setupScoreRussianValue.text.toString().toInt(),
-                setupScorePhysicsValue.text.toString().toIntOrNull(),
-                setupScoreComputerScienceValue.text.toString().toIntOrNull(),
-                setupScoreSocialScienceValue.text.toString().toIntOrNull(), additionalScore)
-
-        Navigation.findNavController(view).navigate(R.id.action_setupScore_to_workWithSpecialtiesView)
+    override fun moveToWorkWithSpecialtiesView() {
+        moveToSelectedFragment(R.id.action_setupScore_to_workWithSpecialtiesView)
     }
-    fun moveToPickUpSpecialtes
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setupScoreTitle)

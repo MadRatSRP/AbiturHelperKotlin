@@ -5,16 +5,14 @@ import android.content.Context
 interface SetupScoreMVP {
     interface View {
         fun setupMVP()
-        fun moveToWorkWithSpecialties(view: android.view.View)
         fun checkForFIO(context: Context): Boolean
+        fun moveToWorkWithSpecialtiesView()
     }
 
     interface Presenter {
-        fun saveFullName(lastName: String, firstName: String, patronymic: String)
-
-        fun savePointsAsAScoreModel(maths: Int, russian: Int, physics: Int?, computerScience: Int?,
-                                    socialScience: Int?, additionalScore: String)
-
+        fun saveFullNameAndScore(lastName: String, firstName: String, patronymic: String, maths: Int,
+                                 russian: Int, physics: Int?, computerScience: Int?, socialScience: Int?,
+                                 additionalScore: String)
         fun checkScoreForBeingEmpty(score: Int?): Int
     }
 }
