@@ -24,10 +24,10 @@ class WorkWithSpecialtiesView
         presenter = WorkWithSpecialtiesPresenter(this)
     }
     override fun onToCurrentListClicked() {
-        moveToSelectedFragment(R.id.action_pickUpSpecialtiesView_to_currentList)
+        moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_currentList)
     }
     override fun onToResultClicked() {
-        moveToSelectedFragment(R.id.action_pickUpSpecialtiesView_to_resultView)
+        moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_resultView)
     }
     fun doSomething(context: Context) {
         val time = measureTimeMillis {

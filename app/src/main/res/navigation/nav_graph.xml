@@ -9,8 +9,8 @@
         android:name="com.madrat.abiturhelper.fragments.select_specialties.SetupScoreView"
         tools:layout="@layout/fragment_setup_score">
         <action
-            android:id="@+id/action_setupScore_to_pickUpSpecialtiesView"
-            app:destination="@id/pickUpSpecialtiesView" />
+            android:id="@+id/action_setupScore_to_workWithSpecialtiesView"
+            app:destination="@id/workWithSpecialtiesView" />
     </fragment>
     <fragment
         android:id="@+id/resultView"
@@ -41,17 +41,17 @@
             app:destination="@id/showResults" />
     </fragment>
     <fragment
-        android:id="@+id/pickUpSpecialtiesView"
+        android:id="@+id/workWithSpecialtiesView"
         android:name="com.madrat.abiturhelper.fragments.select_specialties.WorkWithSpecialtiesView"
         tools:layout="@layout/fragment_work_with_specialties" >
         <action
-            android:id="@+id/action_pickUpSpecialtiesView_to_resultView"
+            android:id="@+id/action_workWithSpecialtiesView_to_resultView"
             app:destination="@id/resultView" />
         <action
-            android:id="@+id/action_pickUpSpecialtiesView_to_showSpecialtiesView"
+            android:id="@+id/action_workWithSpecialtiesView_to_showSpecialtiesView"
             app:destination="@id/showSpecialtiesView" />
         <action
-            android:id="@+id/action_pickUpSpecialtiesView_to_currentList"
+            android:id="@+id/action_workWithSpecialtiesView_to_currentList"
             app:destination="@id/currentList" />
     </fragment>
     <fragment
@@ -74,7 +74,7 @@
             app:destination="@id/showSpecialtiesView" />
         <action
             android:id="@+id/action_currentList_to_pickUpSpecialtiesView"
-            app:destination="@id/pickUpSpecialtiesView" />
+            app:destination="@id/workWithSpecialtiesView" />
     </fragment>
     <fragment
         android:id="@+id/showFittingSpecialties"

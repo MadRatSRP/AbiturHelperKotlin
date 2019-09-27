@@ -40,6 +40,22 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         }
     }
+    override fun moveToWorkWithSpecialties(view: View) {
+        val additionalScore = additionalScoreSpinner.selectedItem.toString()
+
+        presenter?.saveFullName(setupScoreLastNameValue.text.toString(),
+                setupScoreFirstNameValue.text.toString(),
+                setupScorePatronymicValue.text.toString())
+
+        presenter?.savePointsAsAScoreModel(setupScoreMathsValue.text.toString().toInt(),
+                setupScoreRussianValue.text.toString().toInt(),
+                setupScorePhysicsValue.text.toString().toIntOrNull(),
+                setupScoreComputerScienceValue.text.toString().toIntOrNull(),
+                setupScoreSocialScienceValue.text.toString().toIntOrNull(), additionalScore)
+
+        Navigation.findNavController(view).navigate(R.id.action_setupScore_to_workWithSpecialtiesView)
+    }
+    fun moveToPickUpSpecialtes
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setupScoreTitle)
@@ -247,23 +263,6 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         context.toast("Введено меньше трёх баллов")
         return false
     }
-
-    override fun moveToWorkWithSpecialties(view: View) {
-        val additionalScore = additionalScoreSpinner.selectedItem.toString()
-
-        presenter?.saveFullName(setupScoreLastNameValue.text.toString(),
-                setupScoreFirstNameValue.text.toString(),
-                setupScorePatronymicValue.text.toString())
-
-        presenter?.savePointsAsAScoreModel(setupScoreMathsValue.text.toString().toInt(),
-                setupScoreRussianValue.text.toString().toInt(),
-                setupScorePhysicsValue.text.toString().toIntOrNull(),
-                setupScoreComputerScienceValue.text.toString().toIntOrNull(),
-                setupScoreSocialScienceValue.text.toString().toIntOrNull(), additionalScore)
-
-        Navigation.findNavController(view).navigate(R.id.action_setupScore_to_pickUpSpecialtiesView)
-    }
-
     fun checkTextForBeingEmpty(text: String): Int {
         return if (text.isEmpty()) {
             0
