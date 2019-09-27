@@ -25,12 +25,6 @@ fun Fragment.moveToSelectedFragment(fragmentId: Int) {
 fun Any.showLog(message: String){
     if (BuildConfig.DEBUG) Log.d(this::class.java.simpleName, message)
 }
-fun Any.returnInt(field: String): Int
-        = field.toInt()
-
-fun Any.returnString(value: Int?): String? {
-    return value.toString()
-}
 
 //ViewGroup
 fun ViewGroup.inflate(layoutRes: Int): View {

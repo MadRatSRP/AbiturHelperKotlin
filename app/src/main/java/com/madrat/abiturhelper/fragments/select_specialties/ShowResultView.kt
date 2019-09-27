@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.fragments.pick_up_specialties
+package com.madrat.abiturhelper.fragments.select_specialties
 
 import android.os.Bundle
 import android.view.LayoutInflater

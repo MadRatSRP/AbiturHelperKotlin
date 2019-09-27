@@ -6,7 +6,7 @@
     app:startDestination="@id/setupScore">
     <fragment
         android:id="@+id/setupScore"
-        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.SetupScoreView"
+        android:name="com.madrat.abiturhelper.fragments.select_specialties.SetupScoreView"
         tools:layout="@layout/fragment_setup_score">
         <action
             android:id="@+id/action_setupScore_to_pickUpSpecialtiesView"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultView"
-        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.ShowResultView"
+        android:name="com.madrat.abiturhelper.fragments.select_specialties.ShowResultView"
         tools:layout="@layout/fragment_result" >
         <action
             android:id="@+id/action_resultView_to_showFittingSpecialties"
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/pickUpSpecialtiesView"
-        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.WorkWithSpecialtiesView"
+        android:name="com.madrat.abiturhelper.fragments.select_specialties.WorkWithSpecialtiesView"
         tools:layout="@layout/fragment_work_with_specialties" >
         <action
             android:id="@+id/action_pickUpSpecialtiesView_to_resultView"
@@ -68,7 +68,7 @@
         tools:layout="@layout/fragment_show_bachelors" />
     <fragment
         android:id="@+id/currentList"
-        android:name="com.madrat.abiturhelper.fragments.pick_up_specialties.CurrentListView" >
+        android:name="com.madrat.abiturhelper.fragments.select_specialties.CurrentListView" >
         <action
             android:id="@+id/action_currentList_to_showSpecialtiesView"
             app:destination="@id/showSpecialtiesView" />

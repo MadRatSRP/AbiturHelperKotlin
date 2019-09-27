@@ -1,4 +1,4 @@
-package com.madrat.abiturhelper.fragments.pick_up_specialties
+package com.madrat.abiturhelper.fragments.select_specialties
 
 import android.content.Context
 import android.os.Bundle
@@ -14,9 +14,6 @@ import com.madrat.abiturhelper.util.moveToSelectedFragment
 import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.showSnack
 import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesView

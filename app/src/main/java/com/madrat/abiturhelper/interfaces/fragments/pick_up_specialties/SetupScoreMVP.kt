@@ -11,10 +11,10 @@ interface SetupScoreMVP {
 
     interface Presenter {
         fun saveFullName(lastName: String, firstName: String, patronymic: String)
-        fun saveScore(maths: String, russian: String, physics: String, computerScience: String,
-                      socialScience: String, additionalScore: String?)
-        fun checkTextForBeingEmpty(text: String): Int
 
-        fun returnIntFromString(text: String): Int
+        fun savePointsAsAScoreModel(maths: Int, russian: Int, physics: Int?, computerScience: Int?,
+                                    socialScience: Int?, additionalScore: String)
+
+        fun checkScoreForBeingEmpty(score: Int?): Int
     }
 }

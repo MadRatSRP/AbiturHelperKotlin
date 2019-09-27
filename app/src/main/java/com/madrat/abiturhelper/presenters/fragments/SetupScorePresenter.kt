@@ -4,9 +4,8 @@ import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupSco
 import com.madrat.abiturhelper.model.FullName
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
-import com.madrat.abiturhelper.util.showLog
 
-class SetupScorePresenter(private var ssv: SetupScoreMVP.View)
+class SetupScorePresenter(private var view: SetupScoreMVP.View)
     : SetupScoreMVP.Presenter {
     val myApplication = MyApplication.instance
 
@@ -14,30 +13,18 @@ class SetupScorePresenter(private var ssv: SetupScoreMVP.View)
         val fullName = FullName(lastName, firstName, patronymic)
         myApplication.saveFullName(fullName)
     }
-    override fun saveScore(maths: String, russian: String, physics: String, computerScience: String,
-                           socialScience: String, additionalScore: String?) {
-        showLog("ADDSCORE$additionalScore")
+    override fun savePointsAsAScoreModel(maths: Int, russian: Int, physics: Int?,
+                                         computerScience: Int?, socialScience: Int?,
+                                         additionalScore: String) {
+        val score = Score(
+                maths, russian, checkScoreForBeingEmpty(physics),
+                checkScoreForBeingEmpty(computerScience),
+                checkScoreForBeingEmpty(socialScience), additionalScore.toInt()
+        )
 
-        val scoreMaths = returnIntFromString(maths)
-        val scoreRussian = returnIntFromString(russian)
-        val scorePhysics = checkTextForBeingEmpty(physics)
-        val scoreComputerScience = checkTextForBeingEmpty(computerScience)
-        val scoreSocialScience = checkTextForBeingEmpty(socialScience)
-        val scoreAdditionalScore = additionalScore?.let { checkTextForBeingEmpty(it) }
-
-        val score = scoreAdditionalScore?.let {
-            Score(scoreMaths, scoreRussian, scorePhysics, scoreComputerScience,
-                scoreSocialScience, it)
-        }
-        score?.let { myApplication.saveScore(it) }
-        showLog("SAVEDSCORE$score")
+        myApplication.saveScore(score)
     }
-    override fun checkTextForBeingEmpty(text: String): Int {
-        return if (text.isEmpty()) {
-            0
-        } else text.toInt()
+    override fun checkScoreForBeingEmpty(score: Int?): Int {
+        return score ?: 0
     }
-
-    override fun returnIntFromString(text: String)
-            = text.toInt()
 }
