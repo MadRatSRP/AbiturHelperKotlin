@@ -106,41 +106,28 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
     fun tpdScore(): Boolean {
         val checkedPhysics = scoreError(
-                SCORE_ID_PHYSICS, setupScorePhysicsValue.text.toString().toInt(),
+                SCORE_ID_PHYSICS, setupScorePhysicsValue.text.toString().toIntOrNull(),
                 PASSING_SCORE_PHYSICS
         )
         val checkedComputerScience = scoreError(
-                SCORE_ID_COMPUTER_SCIENCE, setupScoreComputerScienceValue.text.toString().toInt(),
+                SCORE_ID_COMPUTER_SCIENCE, setupScoreComputerScienceValue.text.toString().toIntOrNull(),
                 PASSING_SCORE_COMPUTER_SCIENCE
         )
         val checkedSocialScience = scoreError(
-                SCORE_ID_SOCIAL_SCIENCE, setupScoreSocialScienceValue.text.toString().toInt(),
+                SCORE_ID_SOCIAL_SCIENCE, setupScoreSocialScienceValue.text.toString().toIntOrNull(),
                 PASSING_SCORE_SOCIAL_SCIENCE
         )
 
         return checkedPhysics && checkedComputerScience && checkedSocialScience
     }
-    fun scoreError(scoreId: Int, score: Int, passingScore: Int): Boolean {
-        val checkedScore = checkScoreForBeingEmpty(score)
-
-        return when (checkedScore) {
-            0 -> true
-
-            in 1 until passingScore -> showErrorMessageByScoreId(scoreId)
-
-            in passingScore until 101 -> true
-
-            else -> true
-        }
-    }
 
     fun checkTypedScore(): Boolean {
         val physics = checkScoreForBeingEmpty(
-                setupScorePhysicsValue.text.toString().toInt())
+                setupScorePhysicsValue.text.toString().toIntOrNull())
         val computerScience = checkScoreForBeingEmpty(
-                setupScoreComputerScienceValue.text.toString().toInt())
+                setupScoreComputerScienceValue.text.toString().toIntOrNull())
         val socialScience = checkScoreForBeingEmpty(
-                setupScoreSocialScienceValue.text.toString().toInt())
+                setupScoreSocialScienceValue.text.toString().toIntOrNull())
 
         return if (physics == 0 && computerScience == 0 && socialScience == 0)
             lessThanThree()
@@ -161,8 +148,36 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         return checkedMaths && checkedRussian && checkedTypedScore
     }
+    fun checkForScore(context: Context): Boolean{
+        val maths = setupScoreMathsValue.text.toString()
+        val russian = setupScoreRussianValue.text.toString()
+        val physics = setupScorePhysicsValue.text.toString()
+        val computerScience = setupScoreComputerScienceValue.text.toString()
+        val socialScience = setupScoreSocialScienceValue.text.toString()
 
-    fun showErrorMessageByScoreId(scoreId: Int): Boolean {
+        return if (maths != "" && russian != "" && (physics != ""
+                        || computerScience != "" || socialScience != ""))
+            checkForPassing()
+        else lessThanThree()
+    }
+
+    fun lessThanThree(): Boolean {
+        context.toast("Введено меньше трёх баллов")
+        return false
+    }
+
+    override fun scoreError(scoreId: Int, score: Int?, passingScore: Int): Boolean {
+        return when (checkScoreForBeingEmpty(score)) {
+            0 -> true
+
+            in 1 until passingScore -> showErrorMessageByScoreId(scoreId)
+
+            in passingScore until 101 -> true
+
+            else -> true
+        }
+    }
+    override fun showErrorMessageByScoreId(scoreId: Int): Boolean {
         return when (scoreId) {
             SCORE_ID_MATHS -> {
                 setupScoreMathsValue.error = context?.getString(
@@ -192,53 +207,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
             else -> true
         }
     }
-
-
     override fun checkScoreForBeingEmpty(score: Int?): Int {
         return score ?: 0
-    }
-
-
-    fun checkForNullFields(): Boolean {
-        val maths = setupScoreMathsValue.text.toString()
-        val russian = setupScoreRussianValue.text.toString()
-        val physics = setupScorePhysicsValue.text.toString()
-        val computerScience = setupScoreComputerScienceValue.text.toString()
-        val socialScience = setupScoreSocialScienceValue.text.toString()
-
-        when {
-            maths.isEmpty() ->
-                setupScoreMathsValue.setText("0")
-            russian.isEmpty() ->
-                setupScoreRussianValue.setText("0")
-            physics.isEmpty() ->
-                setupScorePhysicsValue.setText("0")
-            computerScience.isEmpty() ->
-                setupScoreComputerScienceValue.setText("0")
-            socialScience.isEmpty() ->
-                setupScoreSocialScienceValue.setText("0")
-            /*maths < setupScoreLessThanPassingMaths ->
-                setupScoreMathsValue.setText("eqweq")*/
-        }
-        /*return maths.isNotBlank() && russian.isNotBlank() && physics.isNotBlank()
-                && computerScience.isNotBlank() && socialScience.isNotBlank()*/
-        return checkForPassing()
-    }
-    fun checkForScore(context: Context): Boolean{
-        val maths = setupScoreMathsValue.text.toString()
-        val russian = setupScoreRussianValue.text.toString()
-        val physics = setupScorePhysicsValue.text.toString()
-        val computerScience = setupScoreComputerScienceValue.text.toString()
-        val socialScience = setupScoreSocialScienceValue.text.toString()
-
-        return if (maths != "" && russian != "" && (physics != ""
-                        || computerScience != "" || socialScience != ""))
-            checkForNullFields()
-        else lessThanThree()
-    }
-
-    fun lessThanThree(): Boolean {
-        context.toast("Введено меньше трёх баллов")
-        return false
     }
 }

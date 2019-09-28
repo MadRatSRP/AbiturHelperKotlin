@@ -7,6 +7,8 @@ interface SetupScoreMVP {
         fun checkForFIO(context: Context): Boolean
         fun moveToWorkWithSpecialtiesView()
         fun checkScoreForBeingEmpty(score: Int?): Int
+        fun showErrorMessageByScoreId(scoreId: Int): Boolean
+        fun scoreError(scoreId: Int, score: Int?, passingScore: Int): Boolean
     }
 
     interface Presenter {
