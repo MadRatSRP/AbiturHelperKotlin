@@ -11,13 +11,13 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
 
     override fun saveFullNameAndScore(lastName: String, firstName: String, patronymic: String,
                                       maths: Int, russian: Int, physics: Int?, computerScience: Int?,
-                                      socialScience: Int?, additionalScore: String) {
+                                      socialScience: Int?, additionalScore: Int) {
         val fullName = FullName(lastName, firstName, patronymic)
 
         val score = Score(
                 maths, russian, checkScoreForBeingEmpty(physics),
                 checkScoreForBeingEmpty(computerScience),
-                checkScoreForBeingEmpty(socialScience), additionalScore.toInt()
+                checkScoreForBeingEmpty(socialScience), additionalScore
         )
 
         myApplication.saveFullName(fullName)

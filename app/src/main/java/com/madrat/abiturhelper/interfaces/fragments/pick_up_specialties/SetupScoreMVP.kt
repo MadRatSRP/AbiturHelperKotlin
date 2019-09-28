@@ -14,7 +14,7 @@ interface SetupScoreMVP {
     interface Presenter {
         fun saveFullNameAndScore(lastName: String, firstName: String, patronymic: String, maths: Int,
                                  russian: Int, physics: Int?, computerScience: Int?, socialScience: Int?,
-                                 additionalScore: String)
+                                 additionalScore: Int)
         fun checkScoreForBeingEmpty(score: Int?): Int
     }
 }

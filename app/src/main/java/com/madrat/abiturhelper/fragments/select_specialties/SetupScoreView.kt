@@ -42,14 +42,6 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         super.onActivityCreated(savedInstanceState)
 
         showSpecialtiesScreen.setOnClickListener { view->
-            /*val checkedFIO = checkForFIO(view.context)
-            val checkedScore = checkForScore(view.context)
-
-
-            if (checkedFIO && checkedScore)
-                moveToWorkWithSpecialties(view)*/
-            val additionalScore = additionalScoreSpinner.selectedItem.toString()
-
             val checkedFIO = checkForFIO(view.context)
             val checkedScore = checkForScore(view.context)
 
@@ -62,7 +54,8 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
                         setupScoreRussianValue.text.toString().toInt(),
                         setupScorePhysicsValue.text.toString().toIntOrNull(),
                         setupScoreComputerScienceValue.text.toString().toIntOrNull(),
-                        setupScoreSocialScienceValue.text.toString().toIntOrNull(), additionalScore
+                        setupScoreSocialScienceValue.text.toString().toIntOrNull(),
+                        additionalScoreSpinner.selectedItem.toString().toInt()
                 )
         }
     }
