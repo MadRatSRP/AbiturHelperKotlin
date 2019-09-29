@@ -4,7 +4,6 @@ import android.content.Context
 
 interface SetupScoreMVP {
     interface View {
-        fun checkForFIO(context: Context): Boolean
         fun moveToWorkWithSpecialtiesView()
         fun checkScoreForBeingEmpty(score: Int?): Int
         fun showErrorMessageByScoreId(scoreId: Int): Boolean

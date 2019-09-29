@@ -19,11 +19,11 @@ import kotlinx.android.synthetic.main.fragment_setup_score.view.*
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
     companion object {
         // PASSING_SCORE
-        const val PASSING_SCORE_MATHS = 27
-        const val PASSING_SCORE_RUSSIAN = 36
-        const val PASSING_SCORE_PHYSICS = 36
-        const val PASSING_SCORE_COMPUTER_SCIENCE = 40
-        const val PASSING_SCORE_SOCIAL_SCIENCE = 42
+        const val SCORE_PASSING_MATHS = 27
+        const val SCORE_PASSING_RUSSIAN = 36
+        const val SCORE_PASSING_PHYSICS = 36
+        const val SCORE_PASSING_COMPUTER_SCIENCE = 40
+        const val SCORE_PASSING_SOCIAL_SCIENCE = 42
         // SCORE_ID
         const val SCORE_ID_MATHS = 0
         const val SCORE_ID_RUSSIAN = 1
@@ -38,25 +38,33 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         presenter = SetupScorePresenter(this)
     }
 
+    fun onShowSpecialtiesScreenClicked(context: Context)  {
+        val checkedFIO = checkIsFullNameValid(
+                setupScoreLastNameValue.text.toString(),
+                setupScoreFirstNameValue.text.toString(),
+                setupScorePatronymicValue.text.toString()
+        )
+        val checkedScore = checkForScore(context)
+
+        if (checkedFIO && checkedScore)
+            presenter?.saveFullNameAndScore(
+                    setupScoreLastNameValue.text.toString(),
+                    setupScoreFirstNameValue.text.toString(),
+                    setupScorePatronymicValue.text.toString(),
+                    setupScoreMathsValue.text.toString().toInt(),
+                    setupScoreRussianValue.text.toString().toInt(),
+                    setupScorePhysicsValue.text.toString().toIntOrNull(),
+                    setupScoreComputerScienceValue.text.toString().toIntOrNull(),
+                    setupScoreSocialScienceValue.text.toString().toIntOrNull(),
+                    additionalScoreSpinner.selectedItem.toString().toInt()
+            )
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
         showSpecialtiesScreen.setOnClickListener { view->
-            val checkedFIO = checkForFIO(view.context)
-            val checkedScore = checkForScore(view.context)
-
-            if (checkedFIO && checkedScore)
-                presenter?.saveFullNameAndScore(
-                        setupScoreLastNameValue.text.toString(),
-                        setupScoreFirstNameValue.text.toString(),
-                        setupScorePatronymicValue.text.toString(),
-                        setupScoreMathsValue.text.toString().toInt(),
-                        setupScoreRussianValue.text.toString().toInt(),
-                        setupScorePhysicsValue.text.toString().toIntOrNull(),
-                        setupScoreComputerScienceValue.text.toString().toIntOrNull(),
-                        setupScoreSocialScienceValue.text.toString().toIntOrNull(),
-                        additionalScoreSpinner.selectedItem.toString().toInt()
-                )
+            onShowSpecialtiesScreenClicked(view.context)
         }
     }
     override fun moveToWorkWithSpecialtiesView() {
@@ -76,22 +84,28 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         return view
     }
 
-    override fun checkForFIO(context: Context): Boolean {
-        val firstName = setupScoreFirstNameValue.text.toString()
-        val lastName = setupScoreLastNameValue.text.toString()
-        val patronymic = setupScorePatronymicValue.text.toString()
+    fun updateLastNameView() {
+        setupScoreLastNameValue.error = "Фамилия не может быть пустой"
+        setupScoreLastNameValue.requestFocus()
+    }
+    fun updateFirstNameView() {
+        setupScoreFirstNameValue.error = "Имя не может быть пустым"
+        setupScoreFirstNameValue.requestFocus()
+    }
+    fun updatePatronymicView() {
+        setupScorePatronymicValue.setText("—")
+    }
 
+    fun checkIsFullNameValid(lastName: String, firstName: String, patronymic: String): Boolean {
         when {
             lastName.isEmpty() -> {
-                setupScoreLastNameValue.error = "Фамилия не может быть пустой"
-                setupScoreLastNameValue.requestFocus()
+                updateLastNameView()
             }
             firstName.isEmpty() -> {
-                setupScoreFirstNameValue.error = "Имя не может быть пустым"
-                setupScoreFirstNameValue.requestFocus()
+                updateFirstNameView()
             }
             patronymic.isEmpty() -> {
-                setupScorePatronymicValue.setText("—")
+                updatePatronymicView()
             }
         }
         return firstName.isNotBlank() && lastName.isNotBlank() && patronymic.isNotBlank()
@@ -100,15 +114,15 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     fun tpdScore(): Boolean {
         val checkedPhysics = scoreError(
                 SCORE_ID_PHYSICS, setupScorePhysicsValue.text.toString().toIntOrNull(),
-                PASSING_SCORE_PHYSICS
+                SCORE_PASSING_PHYSICS
         )
         val checkedComputerScience = scoreError(
                 SCORE_ID_COMPUTER_SCIENCE, setupScoreComputerScienceValue.text.toString().toIntOrNull(),
-                PASSING_SCORE_COMPUTER_SCIENCE
+                SCORE_PASSING_COMPUTER_SCIENCE
         )
         val checkedSocialScience = scoreError(
                 SCORE_ID_SOCIAL_SCIENCE, setupScoreSocialScienceValue.text.toString().toIntOrNull(),
-                PASSING_SCORE_SOCIAL_SCIENCE
+                SCORE_PASSING_SOCIAL_SCIENCE
         )
 
         return checkedPhysics && checkedComputerScience && checkedSocialScience
@@ -130,11 +144,11 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     fun checkForPassing(): Boolean {
         val checkedMaths = scoreError(
                 SCORE_ID_MATHS, setupScoreMathsValue.text.toString().toInt(),
-                PASSING_SCORE_MATHS
+                SCORE_PASSING_MATHS
         )
         val checkedRussian = scoreError(
                 SCORE_ID_RUSSIAN, setupScoreRussianValue.text.toString().toInt(),
-                PASSING_SCORE_RUSSIAN
+                SCORE_PASSING_RUSSIAN
         )
 
         val checkedTypedScore = checkTypedScore(/*checkedPhysics, checkedComputerScience, checkedSocialScience*/)
