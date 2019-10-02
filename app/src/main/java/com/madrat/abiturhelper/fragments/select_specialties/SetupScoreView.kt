@@ -29,6 +29,12 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         const val SCORE_ID_PHYSICS = 2
         const val SCORE_ID_COMPUTER_SCIENCE = 3
         const val SCORE_ID_SOCIAL_SCIENCE = 4
+        // VIEW_ID
+        const val VIEW_LAST_NAME = 200
+
+        const val VIEW_FIRST_NAME = 300
+
+        const val VIEW_PATRONYMIC = 400
     }
 
     private var presenter: SetupScorePresenter? = null
@@ -37,32 +43,56 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         presenter = SetupScorePresenter(this)
     }
 
-    fun checkIsFullNameAndScoreValid(lastName: String, firstName: String, patronymic: String,
-                                     maths: String, russian: String, physics: String,
-                                     computerScience: String, socialScience: String,
-                                     additionalScore: Int) {
-        val checkedFIO = checkIsFullNameValid(lastName, firstName, patronymic)
-        val checkedScore = checkForScore(maths, russian, physics, computerScience, socialScience)
-
-        if (checkedFIO && checkedScore)
-            presenter?.saveFullNameAndScore(
-                    lastName, firstName, patronymic, maths, russian, physics,
-                    computerScience, socialScience, additionalScore
-            )
-    }
 
     fun onShowSpecialtiesScreenClicked()  {
-        checkIsFullNameAndScoreValid(
+        presenter?.checkIsFullNameAndScoreValid(
+                // FullName
                 setupScoreLastNameValue.text.toString(),
                 setupScoreFirstNameValue.text.toString(),
                 setupScorePatronymicValue.text.toString(),
-                setupScoreMathsValue.text.toString(),
-                setupScoreRussianValue.text.toString(),
-                setupScorePhysicsValue.text.toString(),
-                setupScoreComputerScienceValue.text.toString(),
-                setupScoreSocialScienceValue.text.toString(),
+                // Score
+                setupScoreMathsValue.text.toString().toIntOrNull(),
+                setupScoreRussianValue.text.toString().toIntOrNull(),
+                setupScorePhysicsValue.text.toString().toIntOrNull(),
+                setupScoreComputerScienceValue.text.toString().toIntOrNull(),
+                setupScoreSocialScienceValue.text.toString().toIntOrNull(),
+                // AdditionalScore
                 additionalScoreSpinner.selectedItem.toString().toInt()
         )
+    }
+    override fun checkForPassing(): Boolean {
+        val checkedMaths = scoreError(
+                SCORE_ID_MATHS, setupScoreMathsValue.text.toString().toInt(),
+                SCORE_PASSING_MATHS
+        )
+        val checkedRussian = scoreError(
+                SCORE_ID_RUSSIAN, setupScoreRussianValue.text.toString().toInt(),
+                SCORE_PASSING_RUSSIAN
+        )
+
+        val checkedTypedScore = checkTypedScore(/*checkedPhysics, checkedComputerScience, checkedSocialScience*/)
+
+        return checkedMaths && checkedRussian && checkedTypedScore
+    }
+    override fun lessThanThree(): Boolean {
+        context.toast("Введено меньше трёх баллов")
+        return false
+    }
+
+    override fun showErrorOnView(viewId: Int) {
+        when (viewId) {
+            VIEW_LAST_NAME -> {
+                setupScoreLastNameValue.error = "Фамилия не может быть пустой"
+                setupScoreLastNameValue.requestFocus()
+            }
+            VIEW_FIRST_NAME -> {
+                setupScoreFirstNameValue.error = "Имя не может быть пустым"
+                setupScoreFirstNameValue.requestFocus()
+            }
+            VIEW_PATRONYMIC -> {
+                setupScorePatronymicValue.setText("—")
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -88,34 +118,6 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         return view
     }
-
-    fun updateLastNameView() {
-        setupScoreLastNameValue.error = "Фамилия не может быть пустой"
-        setupScoreLastNameValue.requestFocus()
-    }
-    fun updateFirstNameView() {
-        setupScoreFirstNameValue.error = "Имя не может быть пустым"
-        setupScoreFirstNameValue.requestFocus()
-    }
-    fun updatePatronymicView() {
-        setupScorePatronymicValue.setText("—")
-    }
-
-    fun checkIsFullNameValid(lastName: String, firstName: String, patronymic: String): Boolean {
-        when {
-            lastName.isEmpty() -> {
-                updateLastNameView()
-            }
-            firstName.isEmpty() -> {
-                updateFirstNameView()
-            }
-            patronymic.isEmpty() -> {
-                updatePatronymicView()
-            }
-        }
-        return firstName.isNotBlank() && lastName.isNotBlank() && patronymic.isNotBlank()
-    }
-
     fun tpdScore(): Boolean {
         val checkedPhysics = scoreError(
                 SCORE_ID_PHYSICS, setupScorePhysicsValue.text.toString().toIntOrNull(),
@@ -144,33 +146,6 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         return if (physics == 0 && computerScience == 0 && socialScience == 0)
             lessThanThree()
         else tpdScore()
-    }
-
-    fun checkForPassing(): Boolean {
-        val checkedMaths = scoreError(
-                SCORE_ID_MATHS, setupScoreMathsValue.text.toString().toInt(),
-                SCORE_PASSING_MATHS
-        )
-        val checkedRussian = scoreError(
-                SCORE_ID_RUSSIAN, setupScoreRussianValue.text.toString().toInt(),
-                SCORE_PASSING_RUSSIAN
-        )
-
-        val checkedTypedScore = checkTypedScore(/*checkedPhysics, checkedComputerScience, checkedSocialScience*/)
-
-        return checkedMaths && checkedRussian && checkedTypedScore
-    }
-    fun checkForScore(maths: String, russian: String, physics: String, computerScience: String,
-                      socialScience: String): Boolean{
-        return if (maths != "" && russian != "" && (physics != ""
-                        || computerScience != "" || socialScience != ""))
-            checkForPassing()
-        else lessThanThree()
-    }
-
-    fun lessThanThree(): Boolean {
-        context.toast("Введено меньше трёх баллов")
-        return false
     }
 
     override fun scoreError(scoreId: Int, score: Int?, passingScore: Int): Boolean {

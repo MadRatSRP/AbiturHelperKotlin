@@ -8,6 +8,9 @@ interface SetupScoreMVP {
         fun checkScoreForBeingEmpty(score: Int?): Int
         fun showErrorMessageByScoreId(scoreId: Int): Boolean
         fun scoreError(scoreId: Int, score: Int?, passingScore: Int): Boolean
+        fun showErrorOnView(viewId: Int)
+        fun checkForPassing(): Boolean
+        fun lessThanThree(): Boolean
     }
 
     interface Presenter {
@@ -15,5 +18,8 @@ interface SetupScoreMVP {
                                  russian: Int, physics: Int?, computerScience: Int?, socialScience: Int?,
                                  additionalScore: Int)
         fun checkScoreForBeingEmpty(score: Int?): Int
+        fun checkIsFullNameValid(lastName: String, firstName: String, patronymic: String): Boolean
+        fun checkForScore(maths: Int?, russian: Int?, physics: Int?, computerScience: Int?, socialScience: Int?): Boolean
+        fun checkIsFullNameAndScoreValid(lastName: String, firstName: String, patronymic: String, maths: Int?, russian: Int?, physics: Int?, computerScience: Int?, socialScience: Int?, additionalScore: Int)
     }
 }
