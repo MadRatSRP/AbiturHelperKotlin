@@ -1,6 +1,5 @@
 package com.madrat.abiturhelper.fragments.select_specialties
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_setup_score.view.*
 
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
     companion object {
-        // PASSING_SCORE
+        // SCORE_PASSING
         const val SCORE_PASSING_MATHS = 27
         const val SCORE_PASSING_RUSSIAN = 36
         const val SCORE_PASSING_PHYSICS = 36
@@ -38,33 +37,39 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         presenter = SetupScorePresenter(this)
     }
 
-    fun onShowSpecialtiesScreenClicked(context: Context)  {
-        val checkedFIO = checkIsFullNameValid(
-                setupScoreLastNameValue.text.toString(),
-                setupScoreFirstNameValue.text.toString(),
-                setupScorePatronymicValue.text.toString()
-        )
-        val checkedScore = checkForScore(context)
+    fun checkIsFullNameAndScoreValid(lastName: String, firstName: String, patronymic: String,
+                                     maths: String, russian: String, physics: String,
+                                     computerScience: String, socialScience: String,
+                                     additionalScore: Int) {
+        val checkedFIO = checkIsFullNameValid(lastName, firstName, patronymic)
+        val checkedScore = checkForScore(maths, russian, physics, computerScience, socialScience)
 
         if (checkedFIO && checkedScore)
             presenter?.saveFullNameAndScore(
-                    setupScoreLastNameValue.text.toString(),
-                    setupScoreFirstNameValue.text.toString(),
-                    setupScorePatronymicValue.text.toString(),
-                    setupScoreMathsValue.text.toString().toInt(),
-                    setupScoreRussianValue.text.toString().toInt(),
-                    setupScorePhysicsValue.text.toString().toIntOrNull(),
-                    setupScoreComputerScienceValue.text.toString().toIntOrNull(),
-                    setupScoreSocialScienceValue.text.toString().toIntOrNull(),
-                    additionalScoreSpinner.selectedItem.toString().toInt()
+                    lastName, firstName, patronymic, maths, russian, physics,
+                    computerScience, socialScience, additionalScore
             )
+    }
+
+    fun onShowSpecialtiesScreenClicked()  {
+        checkIsFullNameAndScoreValid(
+                setupScoreLastNameValue.text.toString(),
+                setupScoreFirstNameValue.text.toString(),
+                setupScorePatronymicValue.text.toString(),
+                setupScoreMathsValue.text.toString(),
+                setupScoreRussianValue.text.toString(),
+                setupScorePhysicsValue.text.toString(),
+                setupScoreComputerScienceValue.text.toString(),
+                setupScoreSocialScienceValue.text.toString(),
+                additionalScoreSpinner.selectedItem.toString().toInt()
+        )
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        showSpecialtiesScreen.setOnClickListener { view->
-            onShowSpecialtiesScreenClicked(view.context)
+        showSpecialtiesScreen.setOnClickListener {
+            onShowSpecialtiesScreenClicked()
         }
     }
     override fun moveToWorkWithSpecialtiesView() {
@@ -155,13 +160,8 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         return checkedMaths && checkedRussian && checkedTypedScore
     }
-    fun checkForScore(context: Context): Boolean{
-        val maths = setupScoreMathsValue.text.toString()
-        val russian = setupScoreRussianValue.text.toString()
-        val physics = setupScorePhysicsValue.text.toString()
-        val computerScience = setupScoreComputerScienceValue.text.toString()
-        val socialScience = setupScoreSocialScienceValue.text.toString()
-
+    fun checkForScore(maths: String, russian: String, physics: String, computerScience: String,
+                      socialScience: String): Boolean{
         return if (maths != "" && russian != "" && (physics != ""
                         || computerScience != "" || socialScience != ""))
             checkForPassing()
