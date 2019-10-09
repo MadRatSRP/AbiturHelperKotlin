@@ -56,6 +56,12 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         return view
     }
+    override fun onDestroyView() {
+        presenter?.freeVariables()
+        presenter = null
+
+        super.onDestroyView()
+    }
 
     override fun onShowSpecialtiesScreenClicked()  {
         presenter?.checkIsFullNameAndScoreValid(
