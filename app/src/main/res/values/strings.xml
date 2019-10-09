@@ -6,11 +6,17 @@
 
     <string name="showList">Показать список</string>
 
+    <string name="score_error_message_last_name_is_null">Фамилия не может быть пустой</string>
+    <string name="score_error_message_first_name_is_null">Имя не может быть пустым</string>
+    <string name="score_patronymic_is_null">—</string>
+
     <string name="errorMessageMaths">Балл по математике меньше проходного (27)</string>
     <string name="errorMessageRussian">Балл по русскому языку меньше проходного (36)</string>
     <string name="errorMessagePhysics">Балл по физике меньше проходного (36)</string>
     <string name="errorMessageComputerScience">Балл по информатике меньше проходного (40)</string>
     <string name="errorMessageSocialScience">Балл по обществознанию меньше проходного (42)</string>
+
+    <string name="score_error_message_less_than_three_score">Введено меньше трёх баллов</string>
 
     //FullName
     <string name="scoreFullName">ФИО</string>
