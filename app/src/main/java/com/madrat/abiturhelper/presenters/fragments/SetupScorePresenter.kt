@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.presenters.fragments
 
+import com.madrat.abiturhelper.Constants
 import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupScoreMVP
 import com.madrat.abiturhelper.model.FullName
 import com.madrat.abiturhelper.model.Score
@@ -14,17 +15,6 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
         const val PASSING_SCORE_PHYSICS = 36
         const val PASSING_SCORE_COMPUTER_SCIENCE = 40
         const val PASSING_SCORE_SOCIAL_SCIENCE = 42
-        // ERROR_MESSAGE_ID_FULLNAME
-        const val IS_NULL_LAST_NAME = 200
-        const val IS_NULL_FIRST_NAME = 300
-        const val IS_NULL_PATRONYMIC = 400
-        // ERROR_MESSAGE_ID_SCORE
-        const val LESS_THAN_PASSING_MATHS = 500
-        const val LESS_THAN_PASSING_RUSSIAN = 600
-        const val LESS_THAN_PASSING_PHYSIC = 700
-        const val LESS_THAN_PASSING_COMPUTER_SCIENCE = 800
-        const val LESS_THAN_PASSING_SOCIAL_SCIENCE = 900
-        const val LESS_THAN_THREE = 1000
     }
 
     var myApplication: MyApplication? = null
@@ -66,13 +56,13 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
             : Boolean {
         when {
             lastName.isEmpty() -> {
-                view.showErrorMessageByMessageId(IS_NULL_LAST_NAME)
+                view.showErrorMessageByMessageId(Constants.IS_NULL_LAST_NAME)
             }
             firstName.isEmpty() -> {
-                view.showErrorMessageByMessageId(IS_NULL_FIRST_NAME)
+                view.showErrorMessageByMessageId(Constants.IS_NULL_FIRST_NAME)
             }
             patronymic.isEmpty() -> {
-                view.showErrorMessageByMessageId(IS_NULL_PATRONYMIC)
+                view.showErrorMessageByMessageId(Constants.IS_NULL_PATRONYMIC)
             }
         }
 
@@ -108,15 +98,15 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
         else tpdScore()*/
 
         val checkedPhysics = scoreError(
-                LESS_THAN_PASSING_PHYSIC, physics,
+                Constants.LESS_THAN_PASSING_PHYSIC, physics,
                 PASSING_SCORE_PHYSICS
         )
         val checkedComputerScience = scoreError(
-                LESS_THAN_PASSING_COMPUTER_SCIENCE, computerScience,
+                Constants.LESS_THAN_PASSING_COMPUTER_SCIENCE, computerScience,
                 PASSING_SCORE_COMPUTER_SCIENCE
         )
         val checkedSocialScience = scoreError(
-                LESS_THAN_PASSING_SOCIAL_SCIENCE, socialScience,
+                Constants.LESS_THAN_PASSING_SOCIAL_SCIENCE, socialScience,
                 PASSING_SCORE_SOCIAL_SCIENCE
         )
 
@@ -144,17 +134,17 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
                         || socialScience != null))
             true
         else {
-            view.showErrorMessageByMessageId(LESS_THAN_THREE)
+            view.showErrorMessageByMessageId(Constants.LESS_THAN_THREE)
             false
         }
     }
     override fun checkMathsAndRussianForPassing(maths: Int?, russian: Int?): Boolean {
         val checkedMaths = scoreError(
-                LESS_THAN_PASSING_MATHS, maths,
+                Constants.LESS_THAN_PASSING_MATHS, maths,
                 PASSING_SCORE_MATHS
         )
         val checkedRussian = scoreError(
-                LESS_THAN_PASSING_RUSSIAN, russian,
+                Constants.LESS_THAN_PASSING_RUSSIAN, russian,
                 PASSING_SCORE_RUSSIAN
         )
 

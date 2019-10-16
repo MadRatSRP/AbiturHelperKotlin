@@ -20,37 +20,13 @@ class WorkWithSpecialtiesView
     : Fragment(), WorkWithSpecialtiesMVP.View{
     private var presenter: WorkWithSpecialtiesPresenter? = null
 
-    override fun setupMVP() {
+    init {
         presenter = WorkWithSpecialtiesPresenter(this)
-    }
-    override fun onToCurrentListClicked() {
-        moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_currentList)
-    }
-    override fun onToResultClicked() {
-        moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_resultView)
-    }
-    fun doSomething(context: Context) {
-        val time = measureTimeMillis {
-            // Первый шаг - разбить список специальностей по факультетам,
-            // выделить из списка студентов тех, кто собирается поступать на бакалавриат
-            presenter?.generateBachelorsAndSpecialtiesLists(context)
-            // Второй шаг - разбить список поступающих по типу баллов
-            // и высчитать свободные баллы для факультетов
-            presenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
-            // Третий шаг
-            presenter?.separateStudentsBySpecialties()
-            // Четвёртый шаг
-            presenter?.checkSpecialtiesForMinimalScore(context)
-        }
-        showLog("Затраченное время: $time")
-
-        view?.showSnack(R.string.workWithSpecialtiesListsArePrepared)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupMVP()
-        context?.let { doSomething(it) }
+        context?.let { formListOfStudentsAndMinimalScores(it) }
 
         workToCurrentList.setOnClickListener {
             onToCurrentListClicked()
@@ -67,5 +43,37 @@ class WorkWithSpecialtiesView
     override fun onDestroyView() {
         presenter = null
         super.onDestroyView()
+    }
+
+    override fun onToCurrentListClicked() {
+        moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_currentList)
+    }
+    override fun onToResultClicked() {
+        moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_resultView)
+    }
+    fun formListOfStudentsAndMinimalScores(context: Context) {
+        val time = measureTimeMillis {
+
+            context.assets?.open("specialties.csv")?.let {specialties ->
+                context.assets?.open("abiturs.csv")?.let {abiturs->
+                    presenter?.generateBachelorsAndSpecialtiesLists(
+                            specialties, abiturs)
+                }
+            }
+            // Первый шаг - разбить список специальностей по факультетам,
+            // выделить из списка студентов тех, кто собирается поступать на бакалавриат
+
+            // Второй шаг - разбить список поступающих по типу баллов
+            // и высчитать свободные баллы для факультетов
+            //presenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+
+            // Третий шаг
+            presenter?.separateStudentsBySpecialties()
+            // Четвёртый шаг
+            presenter?.checkSpecialtiesForMinimalScore(context)
+        }
+        showLog("Затраченное время: $time")
+
+        view?.showSnack(R.string.workWithSpecialtiesListsArePrepared)
     }
 }

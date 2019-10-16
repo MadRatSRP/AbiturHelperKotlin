@@ -13,36 +13,38 @@ import com.madrat.abiturhelper.util.showLog
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
+import java.io.InputStream
 import java.io.InputStreamReader
 import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View)
     : WorkWithSpecialtiesMVP.Presenter{
     private val myApplication = MyApplication.instance
+
     // Первый этап
-    fun getInstanceOfCSVParser(context: Context, path: String): CSVParser {
-        val file = context.assets?.open(path)
-        val bufferedReader = BufferedReader(InputStreamReader(file, "Windows-1251"))
+    // Считываем из источника(в данный момент это файлы) специальности и поступающих,
+    // формируем список поступающих и специальностей,
+    // передаем списки в следующую функцию
+    override fun generateBachelorsAndSpecialtiesLists(inputStreamToSpecialties: InputStream,
+                                                      inputStreamToStudents: InputStream) {
+        val specialtiesParser = getInstanceOfCSVParser(inputStreamToSpecialties)
+        val listOfSpecialties = grabSpecialties(specialtiesParser)
+
+        val studentsParser = getInstanceOfCSVParser(inputStreamToStudents)
+        val listOfStudents = grabStudents(studentsParser)
+
+        showLog("Первый этап завершён")
+
+        getOnlyNeededValues(listOfSpecialties, listOfStudents)
+    }
+    override fun getInstanceOfCSVParser(inputStream: InputStream): CSVParser {
+        val bufferedReader = BufferedReader(InputStreamReader(inputStream, "Windows-1251"))
 
         return CSVParser(bufferedReader, CSVFormat.DEFAULT
                 .withFirstRecordAsHeader()
                 .withDelimiter(';')
                 .withIgnoreHeaderCase()
                 .withTrim())
-    }
-
-    override fun generateBachelorsAndSpecialtiesLists(context: Context) {
-        val time = measureTimeMillis {
-            val firstParser = getInstanceOfCSVParser(context, "specialties.csv")
-            val specialties = grabSpecialties(firstParser)
-            val bachelorsAndSpecialists = divideSpecialtiesByEducationLevel(specialties)
-            divideSpecialtiesByFaculty(bachelorsAndSpecialists)
-
-            val secondParser = getInstanceOfCSVParser(context, "abiturs.csv")
-            val students = grabStudents(secondParser)
-            divideStudentsByAdmissions(students)
-        }
-        showLog("Первый этап завершён за $time ms")
     }
     override fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty> {
         val specialtiesList = ArrayList<Specialty>()
@@ -107,14 +109,36 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
             0
         } else text.toInt()
     }
-    override fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty> {
-        val bachelorsAndSpecialists = list.filter {
-            it.educationLevel == "Академический бакалавр" || it.educationLevel == "Специалист" }
-                as ArrayList<Specialty>
-        showLog("Специальностей, ведущих набор на бакалавриат и специалитет: ${bachelorsAndSpecialists.size}")
-        return bachelorsAndSpecialists
+
+    // Второй этап
+    // Оставляем в списке поступающих тех, у кого в графе "приемная комиссия" стоит "бак",
+    // а для списка специальностей оставляем те, у которых уровень подготовки специалист
+    // или бакалавр, а затем делим по факультету и сохраняем в модели Faculties
+    override fun getOnlyNeededValues(listOfSpecialties: ArrayList<Specialty>,
+                            listOfStudents: ArrayList<Student>) {
+        // Оставляем в списке только специльности с выбранным уровнем подготовки
+        // (специалист или бакалавр)
+        val listOfBachelorOrSpecialistSpecialties
+                = filterListOfSpecialtiesByEducationLevel(listOfSpecialties)
+        // Формируем модель Faculties, содержащую в себе
+        // списки специальностей каждого из факультетов
+        val faculties = formFacultiesModelFromListOfSpecialties(listOfBachelorOrSpecialistSpecialties)
+
+        // Оставляем в списке поступающих только тех, у кого
+        // в графе "приемная комиссия" стоит "бак"
+        val listOfBachelors = filterListOfStudentsByAdmissions(listOfStudents)
+
+        // Сохраняем модель Faculties
+        myApplication.saveFaculties(faculties)
+        // Сохраняем новый список студентов
+        myApplication.saveBachelors(listOfBachelors)
     }
-    override fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>) {
+    override fun filterListOfSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty> {
+        return list.filter {
+            it.educationLevel == "Академический бакалавр" || it.educationLevel == "Специалист"
+                    || it.educationLevel == "Прикладной бакалавр"} as ArrayList<Specialty>
+    }
+    override fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties {
         // УНТИ
         val listUNTI = list.filter { it.faculty == "Учебно-научный технологический институт" }
                 as ArrayList<Specialty>
@@ -134,22 +158,22 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         val listFEE = list.filter { it.faculty == "Факультет энергетики и электроники" }
                 as ArrayList<Specialty>
 
-        myApplication.saveFaculties(Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE))
+        return Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
     }
-    override fun divideStudentsByAdmissions(list: ArrayList<Student>) {
-        val bachelors = list.filter { it.admissions == "бак"} as ArrayList<Student>
-        myApplication.saveBachelors(bachelors)
+    override fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student> {
+        return list.filter { it.admissions == "бак"} as ArrayList<Student>
     }
-    // Второй этап
+
+    // Третий этап
     override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
         showLog("Начат второй этап")
         val time = measureTimeMillis {
             // Получить и сохранить списки студентов, разделённые по баллам
             val scoreTypes = returnStudentsSeparatedByScoreType()
-            myApplication.saveScoreTypes(scoreTypes)
-
             // Получаем и сохраняем количество общих и свободных мест для каждого из факультетов
             val listOfFaculties = returnListOfFaculties()
+
+            myApplication.saveScoreTypes(scoreTypes)
             myApplication.saveFacultyList(listOfFaculties)
         }
         showLog("Второй этап завершён за $time ms")

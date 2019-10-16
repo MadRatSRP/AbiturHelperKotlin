@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.madrat.abiturhelper.Constants
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.interfaces.fragments.pick_up_specialties.SetupScoreMVP
 import com.madrat.abiturhelper.presenters.fragments.SetupScorePresenter
@@ -16,20 +17,6 @@ import kotlinx.android.synthetic.main.fragment_setup_score.*
 import kotlinx.android.synthetic.main.fragment_setup_score.view.*
 
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
-    companion object {
-        // ERROR_MESSAGE_ID_FULLNAME
-        const val IS_NULL_LAST_NAME = 200
-        const val IS_NULL_FIRST_NAME = 300
-        const val IS_NULL_PATRONYMIC = 400
-        // ERROR_MESSAGE_ID_SCORE
-        const val LESS_THAN_PASSING_MATHS = 500
-        const val LESS_THAN_PASSING_RUSSIAN = 600
-        const val LESS_THAN_PASSING_PHYSIC = 700
-        const val LESS_THAN_PASSING_COMPUTER_SCIENCE = 800
-        const val LESS_THAN_PASSING_SOCIAL_SCIENCE = 900
-        const val LESS_THAN_THREE = 1000
-    }
-
     private var presenter: SetupScorePresenter? = null
 
     init {
@@ -62,7 +49,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         super.onDestroyView()
     }
-
+    
     override fun onShowSpecialtiesScreenClicked()  {
         presenter?.checkIsFullNameAndScoreValid(
                 // FullName
@@ -81,41 +68,41 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     }
     override fun showErrorMessageByMessageId(messageId: Int) {
         when (messageId) {
-            IS_NULL_LAST_NAME -> {
+            Constants.IS_NULL_LAST_NAME -> {
                 setupScoreLastNameValue.error = context?.getString(
                         R.string.score_error_message_last_name_is_null)
                 setupScoreLastNameValue.requestFocus()
             }
-            IS_NULL_FIRST_NAME -> {
+            Constants.IS_NULL_FIRST_NAME -> {
                 setupScoreFirstNameValue.error = context?.getString(
                         R.string.score_error_message_first_name_is_null)
                 setupScoreFirstNameValue.requestFocus()
             }
-            IS_NULL_PATRONYMIC -> {
+            Constants.IS_NULL_PATRONYMIC -> {
                 setupScorePatronymicValue.setText(context?.getString(
                         R.string.score_patronymic_is_null))
             }
-            LESS_THAN_PASSING_MATHS -> {
+            Constants.LESS_THAN_PASSING_MATHS -> {
                 setupScoreMathsValue.error = context?.getString(
                         R.string.errorMessageMaths)
             }
-            LESS_THAN_PASSING_RUSSIAN -> {
+            Constants.LESS_THAN_PASSING_RUSSIAN -> {
                 setupScoreRussianValue.error = context?.getString(
                         R.string.errorMessageRussian)
             }
-            LESS_THAN_PASSING_PHYSIC -> {
+            Constants.LESS_THAN_PASSING_PHYSIC -> {
                 setupScorePhysicsValue.error = context?.getString(
                         R.string.errorMessagePhysics)
             }
-            LESS_THAN_PASSING_COMPUTER_SCIENCE -> {
+            Constants.LESS_THAN_PASSING_COMPUTER_SCIENCE -> {
                 setupScoreComputerScienceValue.error = context?.getString(
                         R.string.errorMessageComputerScience)
             }
-            LESS_THAN_PASSING_SOCIAL_SCIENCE -> {
+            Constants.LESS_THAN_PASSING_SOCIAL_SCIENCE -> {
                 setupScoreSocialScienceValue.error = context?.getString(
                         R.string.errorMessageSocialScience)
             }
-            LESS_THAN_THREE -> {
+            Constants.LESS_THAN_THREE -> {
                 context?.getText(R.string.score_error_message_less_than_three_score)
                         ?.let { context.toast(it) }
             }

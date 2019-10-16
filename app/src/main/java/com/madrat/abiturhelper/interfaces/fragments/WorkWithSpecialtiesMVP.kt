@@ -6,10 +6,10 @@ import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.*
 import kotlinx.coroutines.Job
 import org.apache.commons.csv.CSVParser
+import java.io.InputStream
 
 interface WorkWithSpecialtiesMVP {
     interface View {
-        fun setupMVP()
 
         /*fun showFaculties(faculties: ArrayList<Faculty>)
         fun onFacultyClicked(faculty: Faculty, position: Int)
@@ -20,13 +20,14 @@ interface WorkWithSpecialtiesMVP {
     }
     interface Presenter {
         //Первый этап
-        fun generateBachelorsAndSpecialtiesLists(context: Context)//: Job
+        fun generateBachelorsAndSpecialtiesLists(inputStreamToSpecialties: InputStream,
+                                                 inputStreamToStudents: InputStream)
         fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty>
         fun grabStudents(csvParser: CSVParser): ArrayList<Student>
         fun checkTextForBeingEmpty(text: String): Int
-        fun divideSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
-        fun divideSpecialtiesByFaculty(list: ArrayList<Specialty>)
-        fun divideStudentsByAdmissions(list: ArrayList<Student>)
+        fun filterListOfSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
+        fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
+        fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student>
         //Второй этап
         fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
         fun returnStudentsSeparatedByScoreType(): ScoreTypes
@@ -72,5 +73,7 @@ interface WorkWithSpecialtiesMVP {
         fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun getListOfFacultyStudentsByFacultyId(facultyId: Int): ArrayList<ArrayList<Student>>?
+        fun getInstanceOfCSVParser(inputStream: InputStream): CSVParser
+        fun getOnlyNeededValues(listOfSpecialties: ArrayList<Specialty>, listOfStudents: ArrayList<Student>)
     }
 }
