@@ -10,7 +10,6 @@ class MyApplication: Application() {
     private var fullName: FullName? = null
     private var scores: Score? = null
 
-    private var bachelors: ArrayList<Student>? = null
     private var scoreTypes: ScoreTypes? = null
     private var faculties: Faculties? = null
 
@@ -75,17 +74,6 @@ class MyApplication: Application() {
                     "информатика - $computerScience, обществознание - $socialScience")
         }
         return scores
-    }
-
-
-    //Bachelors
-    fun saveBachelors(bachelors: ArrayList<Student>?) {
-        this.bachelors = bachelors
-        showLog("Сохранён bachelors, его размер: ${this.bachelors?.size}")
-    }
-    fun returnBachelors(): ArrayList<Student>? {
-        showLog("Возвращён bachelors, его размер: ${this.bachelors?.size}")
-        return bachelors
     }
     //ScoreTypes
     fun saveScoreTypes(scoreTypes: ScoreTypes) {

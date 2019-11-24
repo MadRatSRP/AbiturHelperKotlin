@@ -15,7 +15,6 @@ import org.apache.commons.csv.CSVParser
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
-import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View)
     : WorkWithSpecialtiesMVP.Presenter{
@@ -32,8 +31,6 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
 
         val studentsParser = getInstanceOfCSVParser(inputStreamToStudents)
         val listOfStudents = grabStudents(studentsParser)
-
-        showLog("Первый этап завершён")
 
         getOnlyNeededValues(listOfSpecialties, listOfStudents)
     }
@@ -118,26 +115,59 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
                             listOfStudents: ArrayList<Student>) {
         // Оставляем в списке только специльности с выбранным уровнем подготовки
         // (специалист или бакалавр)
-        val listOfBachelorOrSpecialistSpecialties
-                = filterListOfSpecialtiesByEducationLevel(listOfSpecialties)
-        // Формируем модель Faculties, содержащую в себе
-        // списки специальностей каждого из факультетов
-        val faculties = formFacultiesModelFromListOfSpecialties(listOfBachelorOrSpecialistSpecialties)
+        val filteredListOfSpecialties = filterListOfSpecialtiesByEducationLevel(listOfSpecialties)
 
         // Оставляем в списке поступающих только тех, у кого
         // в графе "приемная комиссия" стоит "бак"
         val listOfBachelors = filterListOfStudentsByAdmissions(listOfStudents)
 
-        // Сохраняем модель Faculties
-        myApplication.saveFaculties(faculties)
-        // Сохраняем новый список студентов
-        myApplication.saveBachelors(listOfBachelors)
+        val filteredListOfStudents = removeValuesWithoutScoreFromListOfStudents(listOfBachelors)
+
+        categorizeValues(filteredListOfSpecialties, filteredListOfStudents)
     }
     override fun filterListOfSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty> {
         return list.filter {
             it.educationLevel == "Академический бакалавр" || it.educationLevel == "Специалист"
                     || it.educationLevel == "Прикладной бакалавр"} as ArrayList<Specialty>
     }
+    override fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student> {
+        return list.filter { it.admissions == "бак"} as ArrayList<Student>
+    }
+    override fun removeValuesWithoutScoreFromListOfStudents(listOfBachelors: ArrayList<Student>): ArrayList<Student> {
+        // Из входного списка выбираем только те значения,
+        // где недостаточно баллов
+        val nullListOfBachelors: ArrayList<Student> = listOfBachelors.filter {
+            (it.maths == 0 && it.russian == 0) || it.maths == 0 || it.russian == 0
+                    || (it.physics == 0 && it.computerScience == 0 && it.socialScience == 0)} as ArrayList<Student>
+        println(nullListOfBachelors.size)
+
+        // Исключаем из списка нулевые значения
+        listOfBachelors.removeAll(nullListOfBachelors)
+
+        // Возвращаем список
+        return listOfBachelors
+    }
+
+    // Третий этап
+    override fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
+                         listOfStudents: ArrayList<Student>) {
+        // Формируем модель Faculties, содержащую в себе
+        // списки специальностей каждого из факультетов
+        val faculties = formFacultiesModelFromListOfSpecialties(listOfSpecialties)
+
+        // Разделяем список поступающих по типу баллов и сохраняем
+        // в модель ScoreTypes
+        val scoreTypes = returnStudentsSeparatedByScoreType(listOfStudents)
+
+        // Сохраняем модель Faculties
+        myApplication.saveFaculties(faculties)
+        // Сохраняем модель ScoreTypes
+        myApplication.saveScoreTypes(scoreTypes)
+
+        generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+    }
+
+
     override fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties {
         // УНТИ
         val listUNTI = list.filter { it.faculty == "Учебно-научный технологический институт" }
@@ -160,67 +190,22 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
 
         return Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
     }
-    override fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student> {
-        return list.filter { it.admissions == "бак"} as ArrayList<Student>
-    }
-
-    // Третий этап
-    override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
-        showLog("Начат второй этап")
-        val time = measureTimeMillis {
-            // Получить и сохранить списки студентов, разделённые по баллам
-            val scoreTypes = returnStudentsSeparatedByScoreType()
-            // Получаем и сохраняем количество общих и свободных мест для каждого из факультетов
-            val listOfFaculties = returnListOfFaculties()
-
-            myApplication.saveScoreTypes(scoreTypes)
-            myApplication.saveFacultyList(listOfFaculties)
-        }
-        showLog("Второй этап завершён за $time ms")
-    }
-    override fun returnStudentsSeparatedByScoreType(): ScoreTypes {
-        val bachelors = myApplication.returnBachelors()
-
+    override fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes {
         // Вычисляем количество студентов, у которых достаточно баллов
-        val studentsWithEnoughData = bachelors?.filter {
+        val studentsWithEnoughData = listOfBachelors.filter {
             it.maths != 0 && it.russian != 0 && (it.physics != 0 || it.computerScience != 0
                     || it.socialScience != 0) } as ArrayList<Student>
         showLog("Студентов, чьих баллов достаточно: ${studentsWithEnoughData.size}")
 
-        // Вычисляем количество студентов, у которых недостаточно баллов по предметам
-        val studentsWithoutEnoughData = bachelors.filter {
-            (it.maths == 0 && it.russian == 0) || it.maths == 0 || it.russian == 0
-                    || (it.physics == 0 && it.computerScience == 0 && it.socialScience == 0)} as ArrayList<Student>
-
         val scoreType =  ScoreTypes(
-                //withdrawStudentsWithSpecificScore(studentsWithEnoughData, )
-
-                        withdrawStudentsWithSpecificScore(studentsWithEnoughData, 0),
+                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 0),
                 withdrawStudentsWithSpecificScore(studentsWithEnoughData, 1),
                 withdrawStudentsWithSpecificScore(studentsWithEnoughData, 2),
-                studentsWithoutEnoughData,
                 withdrawStudentsWithSpecificScore(studentsWithEnoughData, 3)
         )
         showLog("MAMAMA\n${scoreType.physicsStudents.size}\n${scoreType.computerScienceStudents.size}" +
                 "\n${scoreType.socialScienceStudents.size}\n${scoreType.partAndAllDataStudents.size}")
         return scoreType
-    }
-    override fun returnListOfFaculties(): ArrayList<Faculty> {
-        val facultyList = ArrayList<Faculty>()
-        val faculties = myApplication.returnFaculties()
-        //facultyList.clear()
-
-        val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ", faculties?.listUNTI)
-        val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ", faculties?.listFEU)
-        val calculatedPlacesFIT = calculateAvailableFacultyPlaces("ФИТ", faculties?.listFIT)
-        val calculatedPlacesMTF = calculateAvailableFacultyPlaces("МТФ", faculties?.listMTF)
-        val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ", faculties?.listUNIT)
-        val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ", faculties?.listFEE)
-
-        val collection = arrayListOf(calculatedPlacesUNTI, calculatedPlacesFEU, calculatedPlacesFIT,
-                calculatedPlacesMTF, calculatedPlacesUNIT, calculatedPlacesFEE)
-        facultyList.addAll(collection)
-        return facultyList
     }
 
     override fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student> {
@@ -239,8 +224,31 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
             else -> bachelors
         }
     }
-            //= bachelors.filter { firstSubject != 0 && secondSubject == 0 && thirdSubject == 0 } as ArrayList<Student>
 
+    // Третий этап
+    override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
+        // Получаем и сохраняем количество общих и свободных мест для каждого из факультетов
+        val listOfFaculties = returnListOfFaculties()
+
+        myApplication.saveFacultyList(listOfFaculties)
+    }
+    override fun returnListOfFaculties(): ArrayList<Faculty> {
+        val facultyList = ArrayList<Faculty>()
+        val faculties = myApplication.returnFaculties()
+        //facultyList.clear()
+
+        val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ", faculties?.listUNTI)
+        val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ", faculties?.listFEU)
+        val calculatedPlacesFIT = calculateAvailableFacultyPlaces("ФИТ", faculties?.listFIT)
+        val calculatedPlacesMTF = calculateAvailableFacultyPlaces("МТФ", faculties?.listMTF)
+        val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ", faculties?.listUNIT)
+        val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ", faculties?.listFEE)
+
+        val collection = arrayListOf(calculatedPlacesUNTI, calculatedPlacesFEU, calculatedPlacesFIT,
+                calculatedPlacesMTF, calculatedPlacesUNIT, calculatedPlacesFEE)
+        facultyList.addAll(collection)
+        return facultyList
+    }
     override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
             : Faculty {
         val total = list?.sumBy { it.entriesTotal }

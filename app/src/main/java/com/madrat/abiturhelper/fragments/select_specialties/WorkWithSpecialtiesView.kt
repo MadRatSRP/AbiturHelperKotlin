@@ -67,10 +67,12 @@ class WorkWithSpecialtiesView
             // и высчитать свободные баллы для факультетов
             //presenter?.generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
 
+
+
             // Третий шаг
-            presenter?.separateStudentsBySpecialties()
+            //presenter?.separateStudentsBySpecialties()
             // Четвёртый шаг
-            presenter?.checkSpecialtiesForMinimalScore(context)
+            //presenter?.checkSpecialtiesForMinimalScore(context)
         }
         showLog("Затраченное время: $time")
 

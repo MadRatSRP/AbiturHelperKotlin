@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import com.madrat.abiturhelper.model.*
 import com.madrat.abiturhelper.model.faculties.*
-import kotlinx.coroutines.Job
 import org.apache.commons.csv.CSVParser
 import java.io.InputStream
 
@@ -19,18 +18,28 @@ interface WorkWithSpecialtiesMVP {
         fun onToResultClicked()
     }
     interface Presenter {
-        //Первый этап
+        // Первый этап: считывание данных
         fun generateBachelorsAndSpecialtiesLists(inputStreamToSpecialties: InputStream,
                                                  inputStreamToStudents: InputStream)
+        fun getInstanceOfCSVParser(inputStream: InputStream): CSVParser
         fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty>
         fun grabStudents(csvParser: CSVParser): ArrayList<Student>
         fun checkTextForBeingEmpty(text: String): Int
+        // Второй этап: Фильтрация значений
+        fun getOnlyNeededValues(listOfSpecialties: ArrayList<Specialty>, listOfStudents: ArrayList<Student>)
         fun filterListOfSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
-        fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
         fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student>
+        fun removeValuesWithoutScoreFromListOfStudents(listOfBachelors: ArrayList<Student>): ArrayList<Student>
+        // Третий этап: Разбивка данных
+        fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
+                             listOfStudents: ArrayList<Student>)
+
+
+
+        fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
         //Второй этап
         fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
-        fun returnStudentsSeparatedByScoreType(): ScoreTypes
+        fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes
         fun returnListOfFaculties(): ArrayList<Faculty>
         fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?): Faculty
         fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student>
@@ -73,7 +82,5 @@ interface WorkWithSpecialtiesMVP {
         fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun getListOfFacultyStudentsByFacultyId(facultyId: Int): ArrayList<ArrayList<Student>>?
-        fun getInstanceOfCSVParser(inputStream: InputStream): CSVParser
-        fun getOnlyNeededValues(listOfSpecialties: ArrayList<Specialty>, listOfStudents: ArrayList<Student>)
     }
 }
