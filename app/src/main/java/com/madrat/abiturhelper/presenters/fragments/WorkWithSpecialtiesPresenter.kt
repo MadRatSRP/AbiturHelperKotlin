@@ -166,8 +166,6 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         myApplication.saveFaculties(faculties)
         // Сохраняем модель ScoreTypes
         myApplication.saveScoreTypes(scoreTypes)
-
-        generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
     }
     override fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties {
         // УНТИ
@@ -226,37 +224,6 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         }
     }
 
-    // Третий этап
-    override fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces() {
-        // Получаем и сохраняем количество общих и свободных мест для каждого из факультетов
-        val listOfFaculties = returnListOfFaculties()
-
-        myApplication.saveFacultyList(listOfFaculties)
-    }
-    override fun returnListOfFaculties(): ArrayList<Faculty> {
-        val facultyList = ArrayList<Faculty>()
-        val faculties = myApplication.returnFaculties()
-        //facultyList.clear()
-
-        val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ", faculties?.listUNTI)
-        val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ", faculties?.listFEU)
-        val calculatedPlacesFIT = calculateAvailableFacultyPlaces("ФИТ", faculties?.listFIT)
-        val calculatedPlacesMTF = calculateAvailableFacultyPlaces("МТФ", faculties?.listMTF)
-        val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ", faculties?.listUNIT)
-        val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ", faculties?.listFEE)
-
-        val collection = arrayListOf(calculatedPlacesUNTI, calculatedPlacesFEU, calculatedPlacesFIT,
-                calculatedPlacesMTF, calculatedPlacesUNIT, calculatedPlacesFEE)
-        facultyList.addAll(collection)
-        return facultyList
-    }
-    override fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?)
-            : Faculty {
-        val total = list?.sumBy { it.entriesTotal }
-        val free = list?.sumBy { it.entriesFree }
-        val amountOfSpecialties = list?.size
-        return Faculty(name, total, free, amountOfSpecialties)
-    }
     // Третий этап
     override fun separateStudentsBySpecialties() {
         val scoreTypes = myApplication.returnScoreTypes()

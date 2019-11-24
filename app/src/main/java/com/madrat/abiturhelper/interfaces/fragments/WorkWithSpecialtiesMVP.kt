@@ -25,25 +25,22 @@ interface WorkWithSpecialtiesMVP {
         fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty>
         fun grabStudents(csvParser: CSVParser): ArrayList<Student>
         fun checkTextForBeingEmpty(text: String): Int
+
         // Второй этап: Фильтрация значений
         fun getOnlyNeededValues(listOfSpecialties: ArrayList<Specialty>, listOfStudents: ArrayList<Student>)
         fun filterListOfSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
         fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student>
         fun removeValuesWithoutScoreFromListOfStudents(listOfBachelors: ArrayList<Student>): ArrayList<Student>
+
         // Третий этап: Разбивка данных
         fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
                              listOfStudents: ArrayList<Student>)
-
-
-
         fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
-        //Второй этап
-        fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
         fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes
-        fun returnListOfFaculties(): ArrayList<Faculty>
-        fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?): Faculty
         fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student>
-        //Третий этап
+
+        // Четвертый этап
+
 
         fun separateStudentsBySpecialties()
         // УНТИ
