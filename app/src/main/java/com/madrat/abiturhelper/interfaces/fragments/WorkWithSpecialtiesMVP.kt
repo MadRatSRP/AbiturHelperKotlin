@@ -37,14 +37,19 @@ interface WorkWithSpecialtiesMVP {
                              filteredListOfStudents: ArrayList<Student>)
         fun formListOfFacultiesFromListOfSpecialties(listOfSpecialties: ArrayList<Specialty>)
                 : ArrayList<ArrayList<Specialty>>
-        fun returnStudentsSeparatedByScoreType(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        //fun returnStudentsSeparatedByScoreType(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student>
 
         // Четвертый этап
         fun separateStudentsBySpecialties(listOfFacultySpecialties: ArrayList<ArrayList<Specialty>>,
-                                          listOfScoreTypedStudents: ArrayList<ArrayList<Student>>)
+                                          filteredListOfStudents: ArrayList<Student>)
+        fun returnListOfStudentsForChosenSpecialty(listOfStudents: ArrayList<Student>,
+                                                   arrayOfSpecialties: Array<String>)
+                : ArrayList<Student>
+        fun checkForSpecialties(listOfStudents: ArrayList<Student>,
+                                arrayOfSpecialties: Array<String>): ArrayList<Student>
         // УНТИ
-        fun checkForUNTI(listOfScoreTypedStudents: ArrayList<ArrayList<Student>>)
+        fun checkForUNTI(listOfStudents: ArrayList<Student>)
         fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
         // ФЭУ
         fun checkForFEU(scoreTypes: ScoreTypes)
@@ -76,8 +81,6 @@ interface WorkWithSpecialtiesMVP {
         fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
                 : ArrayList<ArrayList<Student>>
 
-        fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
-        fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun getListOfFacultyStudentsByFacultyId(facultyId: Int): ArrayList<ArrayList<Student>>?
     }
 }
