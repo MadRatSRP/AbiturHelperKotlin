@@ -149,6 +149,9 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
 
     // Третий этап
+    // Разбиваем список специальностей и студенто на категории:
+    // список специальностей - по факультету,
+    // а студентов - по типу баллов
     override fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
                          listOfStudents: ArrayList<Student>) {
         // Формируем модель Faculties, содержащую в себе
@@ -166,8 +169,6 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
 
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
     }
-
-
     override fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties {
         // УНТИ
         val listUNTI = list.filter { it.faculty == "Учебно-научный технологический институт" }
