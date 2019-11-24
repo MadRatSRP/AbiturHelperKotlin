@@ -33,18 +33,18 @@ interface WorkWithSpecialtiesMVP {
         fun removeValuesWithoutScoreFromListOfStudents(listOfBachelors: ArrayList<Student>): ArrayList<Student>
 
         // Третий этап: Разбивка данных
-        fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
-                             listOfStudents: ArrayList<Student>)
-        fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
-        fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes
+        fun categorizeValues(filteredListOfSpecialties: ArrayList<Specialty>,
+                             filteredListOfStudents: ArrayList<Student>)
+        fun formListOfFacultiesFromListOfSpecialties(listOfSpecialties: ArrayList<Specialty>)
+                : ArrayList<ArrayList<Specialty>>
+        fun returnStudentsSeparatedByScoreType(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>>
         fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student>
 
         // Четвертый этап
-
-
-        fun separateStudentsBySpecialties()
+        fun separateStudentsBySpecialties(listOfFacultySpecialties: ArrayList<ArrayList<Specialty>>,
+                                          listOfScoreTypedStudents: ArrayList<ArrayList<Student>>)
         // УНТИ
-        fun checkForUNTI(scoreTypes: ScoreTypes)
+        fun checkForUNTI(listOfScoreTypedStudents: ArrayList<ArrayList<Student>>)
         fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
         // ФЭУ
         fun checkForFEU(scoreTypes: ScoreTypes)

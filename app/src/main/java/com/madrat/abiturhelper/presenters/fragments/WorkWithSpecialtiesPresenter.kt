@@ -139,7 +139,6 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         val nullListOfBachelors: ArrayList<Student> = listOfBachelors.filter {
             (it.maths == 0 && it.russian == 0) || it.maths == 0 || it.russian == 0
                     || (it.physics == 0 && it.computerScience == 0 && it.socialScience == 0)} as ArrayList<Student>
-        println(nullListOfBachelors.size)
 
         // Исключаем из списка нулевые значения
         listOfBachelors.removeAll(nullListOfBachelors)
@@ -149,64 +148,61 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
 
     // Третий этап
-    // Разбиваем список специальностей и студенто на категории:
+    // Разбиваем список специальностей и студентов на категории:
     // список специальностей - по факультету,
     // а студентов - по типу баллов
-    override fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
-                         listOfStudents: ArrayList<Student>) {
-        // Формируем модель Faculties, содержащую в себе
-        // списки специальностей каждого из факультетов
-        val faculties = formFacultiesModelFromListOfSpecialties(listOfSpecialties)
+    override fun categorizeValues(filteredListOfSpecialties: ArrayList<Specialty>,
+                                  filteredListOfStudents: ArrayList<Student>) {
+        // Формируем список из специальностей,
+        // разбитый по факультетам (список из 6 списков)
+        val listOfFacultySpecialties = formListOfFacultiesFromListOfSpecialties(filteredListOfSpecialties)
 
         // Разделяем список поступающих по типу баллов и сохраняем
         // в модель ScoreTypes
-        val scoreTypes = returnStudentsSeparatedByScoreType(listOfStudents)
+        val listOfScoreTypedStudents = returnStudentsSeparatedByScoreType(filteredListOfStudents)
 
-        // Сохраняем модель Faculties
-        myApplication.saveFaculties(faculties)
-        // Сохраняем модель ScoreTypes
-        myApplication.saveScoreTypes(scoreTypes)
+        separateStudentsBySpecialties(listOfFacultySpecialties, listOfScoreTypedStudents)
     }
-    override fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties {
+    override fun formListOfFacultiesFromListOfSpecialties(listOfSpecialties: ArrayList<Specialty>)
+            : ArrayList<ArrayList<Specialty>> {
         // УНТИ
-        val listUNTI = list.filter { it.faculty == "Учебно-научный технологический институт" }
+        val listUNTI = listOfSpecialties.filter { it.faculty == "Учебно-научный технологический институт" }
                 as ArrayList<Specialty>
         // ФЭУ
-        val listFEU = list.filter { it.faculty == "Факультет экономики и управления" }
+        val listFEU = listOfSpecialties.filter { it.faculty == "Факультет экономики и управления" }
                 as ArrayList<Specialty>
         // ФИТ
-        val listFIT = list.filter { it.faculty == "Факультет информационных технологий" }
+        val listFIT = listOfSpecialties.filter { it.faculty == "Факультет информационных технологий" }
                 as ArrayList<Specialty>
         // МТФ
-        val listMTF = list.filter { it.faculty == "Механико-технологический факультет" }
+        val listMTF = listOfSpecialties.filter { it.faculty == "Механико-технологический факультет" }
                 as ArrayList<Specialty>
         // УНИТ
-        val listUNIT = list.filter { it.faculty == "Учебно-научный институт транспорта" }
+        val listUNIT = listOfSpecialties.filter { it.faculty == "Учебно-научный институт транспорта" }
                 as ArrayList<Specialty>
         // ФЭЭ
-        val listFEE = list.filter { it.faculty == "Факультет энергетики и электроники" }
+        val listFEE = listOfSpecialties.filter { it.faculty == "Факультет энергетики и электроники" }
                 as ArrayList<Specialty>
 
-        return Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
+        return arrayListOf(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
     }
-    override fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes {
-        // Вычисляем количество студентов, у которых достаточно баллов
-        val studentsWithEnoughData = listOfBachelors.filter {
-            it.maths != 0 && it.russian != 0 && (it.physics != 0 || it.computerScience != 0
-                    || it.socialScience != 0) } as ArrayList<Student>
-        showLog("Студентов, чьих баллов достаточно: ${studentsWithEnoughData.size}")
+    override fun returnStudentsSeparatedByScoreType(listOfStudents: ArrayList<Student>)
+            : ArrayList<ArrayList<Student>> {
+        val listOfStudentsWithPhysics = withdrawStudentsWithSpecificScore(
+                listOfStudents, 0)
+        val listOfStudentsWithComputerScience = withdrawStudentsWithSpecificScore(
+                listOfStudents, 1)
+        val listOfStudentsWithSocialScience = withdrawStudentsWithSpecificScore(
+                listOfStudents, 2)
+        val listOfStudentsWithTwoOrMoreScores = withdrawStudentsWithSpecificScore(
+                listOfStudents, 3)
 
-        val scoreType =  ScoreTypes(
-                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 0),
-                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 1),
-                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 2),
-                withdrawStudentsWithSpecificScore(studentsWithEnoughData, 3)
-        )
-        showLog("MAMAMA\n${scoreType.physicsStudents.size}\n${scoreType.computerScienceStudents.size}" +
-                "\n${scoreType.socialScienceStudents.size}\n${scoreType.partAndAllDataStudents.size}")
-        return scoreType
+        showLog("MAMAMA\n${listOfStudentsWithPhysics.size}\n${listOfStudentsWithComputerScience.size}" +
+                "\n${listOfStudentsWithSocialScience.size}\n${listOfStudentsWithTwoOrMoreScores.size}")
+
+        return arrayListOf(listOfStudentsWithPhysics, listOfStudentsWithComputerScience,
+                listOfStudentsWithSocialScience, listOfStudentsWithTwoOrMoreScores)
     }
-
     override fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student> {
         return when(typeOfScoreId) {
             // Физика
@@ -224,60 +220,49 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         }
     }
 
-    // Третий этап
-    override fun separateStudentsBySpecialties() {
-        val scoreTypes = myApplication.returnScoreTypes()
-
-        scoreTypes?.let {
-            checkForUNTI(scoreTypes)
-            checkForFEU(scoreTypes)
-            checkForFIT(scoreTypes)
-            checkForMTF(scoreTypes)
-            checkForUNIT(scoreTypes)
-            checkForFEE(scoreTypes)
-        }
-        println("Третий этап завершён")
+    // Четвертый этап
+    // Выделяем студентов для списков,
+    // в которые они хотят подать документы
+    override fun separateStudentsBySpecialties(listOfFacultySpecialties: ArrayList<ArrayList<Specialty>>,
+                                               listOfScoreTypedStudents: ArrayList<ArrayList<Student>>) {
+        checkForUNTI(listOfScoreTypedStudents)
+        /*checkForFEU(scoreTypes)
+        checkForFIT(scoreTypes)
+        checkForMTF(scoreTypes)
+        checkForUNIT(scoreTypes)
+        checkForFEE(scoreTypes)*/
+        println("Четвертый этап завершён")
     }
     // УНТИ
-    override fun checkForUNTI(scoreTypes: ScoreTypes) {
+    override fun checkForUNTI(listOfScoreTypedStudents: ArrayList<ArrayList<Student>>) {
         val arrayOfATPSpecialties = arrayOf(
-                "АТП_заочн_бюдж", "АТП_заочн_льгот",
-                "АТП_заочн_плат", "АТП_очн_бюдж",
-                "АТП_очн_льгот", "АТП_очн_плат",
-                "АТП_очн_целевое"
+                "АТП_заочн_бюдж", "АТП_заочн_плат",
+                "АТП_очн_бюдж", "АТП_очн_плат"
         )
         val arrayOfKTOSpecialties = arrayOf(
-                "КТО(АТиКМ)_очн_бюдж", "КТО(АТиКМ)_очн_льгот",
-                "КТО(АТиКМ)_очн_плат", "КТО(ТМ)_очн_бюдж",
-                "КТО(ТМ)_очн_льгот", "КТО(ТМ)_очн_плат",
-                "КТО(ТМ)_очн_целевое", "КТО_веч_бюдж",
-                "КТО_веч_льгот", "КТО_веч_плат"
+                "КТО(АТиКМ)_очн_бюдж", "КТО(АТиКМ)_очн_плат",
+                "КТО(ТМ)_очн_бюдж", "КТО(ТМ)_очн_плат",
+                "КТО_веч_бюдж", "КТО_веч_плат"
         )
         val arrayOfMASHSpecialties = arrayOf(
-                "МАШ(ТМ)_заочн_бюдж", "МАШ(ТМ)_заочн_льгот",
-                "МАШ(ТМ)_заочн_плат"
+                "МАШ(ТМ)_заочн_бюдж", "МАШ(ТМ)_заочн_плат"
         )
         val arrayOfMITMSpecialties = arrayOf(
-                "МиТМ_очн_бюдж", "МиТМ_очн_льгот",
-                "МиТМ_очн_плат"
+                "МиТМ_очн_бюдж", "МиТМ_очн_плат"
         )
         val arrayOfMHTSpecialties = arrayOf(
-                "МХТ_очн_бюдж", "МХТ_очн_льгот",
-                "МХТ_очн_плат"
+                "МХТ_очн_бюдж", "МХТ_очн_плат"
         )
         val arrayOfPTMKSpecialties = arrayOf(
                 "ПТМК_заочн_плат", "ПТМК_очн_бюдж",
-                "ПТМК_очн_льгот", "ПТМК_очн_плат"
+                "ПТМК_очн_плат"
         )
         val arrayOfTMOSpecialties = arrayOf(
-                "ТМО(ОИиПМ)_заочн_бюдж", "ТМО(ОИиПМ)_заочн_льгот",
-                "ТМО(ОИиПМ)_заочн_плат", "ТМО_очн_бюдж",
-                "ТМО_очн_льгот", "ТМО_очн_плат",
-                "ТМО_очн_целевое"
+                "ТМО(ОИиПМ)_заочн_бюдж", "ТМО(ОИиПМ)_заочн_плат",
+                "ТМО_очн_бюдж", "ТМО_очн_плат"
         )
         val arrayOfUTSSpecialties = arrayOf(
-                "УТС_очн_бюдж", "УТС_очн_льгот",
-                "УТС_очн_плат", "УТС_очн_целевое"
+                "УТС_очн_бюдж", "УТС_очн_плат"
         )
 
         // ATP
@@ -299,8 +284,31 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
 
         // Получаем список списков студентов специальности УНТИ и сохраняем его
         val unti = UNTI(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
+
+
         val separatedUNTI = separateUNTI(unti)
         myApplication.saveUnti(separatedUNTI)
+    }
+    override fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>)
+            : ArrayList<Student> {
+        val arrayListOfStudents = ArrayList<Student>()
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfSpecialties))
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfSpecialties))
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfSpecialties))
+        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfSpecialties))
+        return arrayListOfStudents
+    }
+    override fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>)
+            : ArrayList<Student> {
+        val arrayListOfStudents = ArrayList<Student>()
+        arrayOfSpecialties.forEach {specialty->
+            for (i in 0 until list.size) {
+                if (list[i].specialtyFirst == specialty || list[i].specialtySecond == specialty
+                        || list[i].specialtyThird == specialty)
+                    arrayListOfStudents.add(list[i])
+            }
+        }
+        return arrayListOfStudents
     }
     override fun separateUNTI(unti: UNTI)
             : ArrayList<ArrayList<Student>> {
@@ -366,8 +374,10 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
 
         return listUNTI
     }
+
+
     // ФЭУ
-    override fun checkForFEU(scoreTypes: ScoreTypes) {
+    /*override fun checkForFEU(scoreTypes: ScoreTypes) {
         val arrayOfBISpecialties = arrayOf(
                 "БИ_заочн_плат", "БИ_очн_плат"
         )
@@ -451,9 +461,10 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         listFEU.addAll(separatedEK)
 
         return listFEU
-    }
+    }*/
+
     // ФИТ
-    override fun checkForFIT(scoreTypes: ScoreTypes) {
+    /*override fun checkForFIT(scoreTypes: ScoreTypes) {
         val arrayOfIASBSpecialties = arrayOf(
                 "ИАСБ_очн_бюдж", "ИАСБ_очн_льгот", "ИАСБ_очн_плат"
         )
@@ -581,9 +592,10 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         listFIT.addAll(separatedPRO)
 
         return listFIT
-    }
+    }*/
+
     // МТФ
-    override fun checkForMTF(scoreTypes: ScoreTypes) {
+    /*override fun checkForMTF(scoreTypes: ScoreTypes) {
         val arrayOfMASHSpecialties = arrayOf(
                 "МАШ(Л)_заочн_бюдж", "МАШ(Л)_заочн_льгот", "МАШ(Л)_заочн_плат",
                 "МАШ(Л)_очн_бюдж", "МАШ(Л)_очн_льгот", "МАШ(Л)_очн_плат",
@@ -646,9 +658,10 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         listMTF.addAll(separatedUK)
 
         return listMTF
-    }
+    }*/
+
     // УНИТ
-    override fun checkForUNIT(scoreTypes: ScoreTypes) {
+    /*override fun checkForUNIT(scoreTypes: ScoreTypes) {
         val arrayOfNTTKSpecialties = arrayOf(
                 "НТТК_заочн_бюдж", "НТТК_заочн_льгот", "НТТК_заочн_плат"
         )
@@ -729,9 +742,10 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         listUNIT.addAll(separatedTTP)
         listUNIT.addAll(separatedETTK)
         return listUNIT
-    }
+    }*/
+
     // ФЭЭ
-    override fun checkForFEE(scoreTypes: ScoreTypes) {
+    /*override fun checkForFEE(scoreTypes: ScoreTypes) {
         val arrayOfRADSpecialties = arrayOf(
                 "РАД_очн_бюдж", "РАД_очн_льгот", "РАД_очн_плат", "РАД_очн_целевое")
         val arrayOfTITSpecialties = arrayOf(
@@ -794,28 +808,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         listFEE.addAll(separatedEIE)
         listFEE.addAll(separatedEM)
         return listFEE
-    }
-    override fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>)
-            : ArrayList<Student> {
-        val arrayListOfStudents = ArrayList<Student>()
-        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.physicsStudents, arrayOfSpecialties))
-        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.computerScienceStudents, arrayOfSpecialties))
-        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.socialScienceStudents, arrayOfSpecialties))
-        arrayListOfStudents.addAll(checkForSpecialties(scoreTypes.partAndAllDataStudents, arrayOfSpecialties))
-        return arrayListOfStudents
-    }
-    override fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>)
-            : ArrayList<Student> {
-        val arrayListOfStudents = ArrayList<Student>()
-        arrayOfSpecialties.forEach {specialty->
-            for (i in 0 until list.size) {
-                if (list[i].specialtyFirst == specialty || list[i].specialtySecond == specialty
-                        || list[i].specialtyThird == specialty)
-                    arrayListOfStudents.add(list[i])
-            }
-        }
-        return arrayListOfStudents
-    }
+    }*/
     override fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
             : ArrayList<ArrayList<Student>> {
         val arrayListOfListsWithStudents = ArrayList<ArrayList<Student>>()
@@ -825,6 +818,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         }
         return arrayListOfListsWithStudents
     }
+    
     // Четвертый этап
     override fun checkSpecialtiesForMinimalScore(context: Context) {
         val listUNTI = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNTY)

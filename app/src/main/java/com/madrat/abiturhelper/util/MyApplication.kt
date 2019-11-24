@@ -79,15 +79,13 @@ class MyApplication: Application() {
     fun saveScoreTypes(scoreTypes: ScoreTypes) {
         this.scoreTypes = scoreTypes
         this.scoreTypes?.let {
-            val physics = it.physicsStudents?.size
-            val computerScience = it.computerScienceStudents?.size
-            val socialScience = it.socialScienceStudents?.size
-            val partAndAllData = it.partAndAllDataStudents?.size
-            val noOrNotEnoughData = it.noOrNotEnoughDataStudents?.size
+            val physics = it.physicsStudents.size
+            val computerScience = it.computerScienceStudents.size
+            val socialScience = it.socialScienceStudents.size
+            val partAndAllData = it.partAndAllDataStudents.size
 
             showLog("Сохранён ScoreTypes: физика - $physics, информатика - $computerScience, " +
-                    "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData, " +
-                    "недостаточно данных - $noOrNotEnoughData")
+                    "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData")
         }
     }
     fun returnScoreTypes(): ScoreTypes? {
@@ -96,11 +94,9 @@ class MyApplication: Application() {
             val computerScience = it.computerScienceStudents?.size
             val socialScience = it.socialScienceStudents?.size
             val partAndAllData = it.partAndAllDataStudents?.size
-            val noOrNotEnoughData = it.noOrNotEnoughDataStudents?.size
 
             showLog("Возвращён ScoreTypes: физика - $physics, информатика - $computerScience, " +
-                    "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData, " +
-                    "недостаточно данных - $noOrNotEnoughData")
+                    "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData")
         }
         return scoreTypes
     }
