@@ -19,7 +19,10 @@ import kotlinx.android.synthetic.main.fragment_setup_score.view.*
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
     private var presenter: SetupScorePresenter? = null
 
+    //private var mBinding: SetupScoreViewBinding? = null
+
     init {
+        // Инициализируем презентер
         presenter = SetupScorePresenter(this)
     }
 
