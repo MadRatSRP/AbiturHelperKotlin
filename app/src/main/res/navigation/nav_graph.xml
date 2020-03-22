@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/resultView"
         android:name="com.madrat.abiturhelper.fragments.select_specialties.ShowResultView"
-        tools:layout="@layout/fragment_result" >
+        tools:layout="@layout/fragment_show_result" >
         <action
             android:id="@+id/action_resultView_to_showFittingSpecialties"
             app:destination="@id/showFittingSpecialties" />

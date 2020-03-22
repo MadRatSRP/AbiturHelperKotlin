@@ -10,6 +10,7 @@ interface ShowResultMVP {
     interface View {
         fun setupMVP()
         fun toSpecialties(bundle: Bundle?, actionId: Int)
+        fun updateAmountOfFittingSpecialtiesAndSpecialtiesWithZeroMinimalScore(amountOfFittingSpecialties: Int, amountOfSpecialtiesWithZeroMinimalScore: Int)
     }
 
     interface Presenter {
@@ -32,8 +33,7 @@ interface ShowResultMVP {
         fun checkFEEForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
 
         fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
-        fun returnAmountOfSpecialtiesWithZeroMinimalScore(): Int?
-        fun returnAmountOfFittingSpecialties(): Int?
+
         fun returnFittingSpecialties(): ArrayList<ArrayList<Specialty>>
         fun completeAndSaveSummedList()
         fun returnBundleWithListID(listId: Int): Bundle

@@ -8,58 +8,66 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
-import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
+import com.madrat.abiturhelper.databinding.FragmentShowResultBinding
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
-import kotlinx.android.synthetic.main.fragment_result.*
+import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
 
 class ShowResultView : Fragment(), ShowResultMVP.View {
-    private var showResultPresenter: ShowResultPresenter? = null
+    private var presenter: ShowResultPresenter? = null
+
+    private var mBinding: FragmentShowResultBinding? = null
+    private val binding get() = mBinding!!
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
         // Пятый шаг
-        showResultPresenter?.checkForZeroMinimalScore()
+        presenter?.checkForZeroMinimalScore()
         // Шестой шаг
-        showResultPresenter?.checkForFittingSpecialties()
+        presenter?.checkForFittingSpecialties()
 
         // Получаем количество специальностей с неустановленным минимальным баллом
-        val sizeOfZeroList = showResultPresenter?.returnAmountOfSpecialtiesWithZeroMinimalScore()
-        resultSpecialtiesWithoutScoreAmountValue.text = sizeOfZeroList.toString()
-
         // Получаем количество специальностей с подходящими баллами
-        val sizeOfFittingList = showResultPresenter?.returnAmountOfFittingSpecialties()
-        resultFittingSpecialtiesAmountValue.text = sizeOfFittingList.toString()
+        presenter?.getAmountOfFittingSpecialtiesAndSpecialtiesWithZeroMinimalScore()
 
-        showResultPresenter?.completeAndSaveSummedList()
+        presenter?.completeAndSaveSummedList()
 
         // Седьмой шаг
-        val completeList = showResultPresenter?.returnCompleteListOfSpecialties()
+        val completeList = presenter?.returnCompleteListOfSpecialties()
         val listOfAllCompleteSpecialties = completeList
-                ?.let { showResultPresenter?.returnListOfAllCompleteSpecialties(it) }
+                ?.let { presenter?.returnListOfAllCompleteSpecialties(it) }
         listOfAllCompleteSpecialties
-                ?.let { showResultPresenter?.saveListOfAllCompleteSpecialties(it) }
+                ?.let { presenter?.saveListOfAllCompleteSpecialties(it) }
 
-        resultSpecialtiesWithoutScoreShowSpecialties.setOnClickListener {
-            val bundle = showResultPresenter?.returnBundleWithListID(100)
+        binding.specialtiesWithoutScoreShowSpecialties.setOnClickListener {
+            val bundle = presenter?.returnBundleWithListID(100)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
-        resultFittingSpecialtiesShowSpecialties.setOnClickListener {
-            val bundle = showResultPresenter?.returnBundleWithListID(200)
+        binding.fittingSpecialtiesShowSpecialties.setOnClickListener {
+            val bundle = presenter?.returnBundleWithListID(200)
             toSpecialties(bundle, R.id.action_resultView_to_showFittingSpecialties)
         }
-        resultSaveAndMoveToProfile.setOnClickListener {
+        binding.moveToProfile.setOnClickListener {
             toSpecialties(null, R.id.action_resultView_to_profile)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.resultTitle)
-        return inflater.inflate(R.layout.fragment_result, container, false)
+        // Инициализируем mBinding
+        mBinding = FragmentShowResultBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun setupMVP() {
-        showResultPresenter = ShowResultPresenter()
+        presenter = ShowResultPresenter(this)
+    }
+    override fun updateAmountOfFittingSpecialtiesAndSpecialtiesWithZeroMinimalScore(
+            amountOfFittingSpecialties: Int, amountOfSpecialtiesWithZeroMinimalScore: Int) {
+
+        binding.specialtiesWithoutScoreAmountValue.text = amountOfSpecialtiesWithZeroMinimalScore.toString()
+
+        binding.fittingSpecialtiesAmountValue.text = amountOfFittingSpecialties.toString()
     }
     override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }

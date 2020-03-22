@@ -2,13 +2,13 @@ package com.madrat.abiturhelper.presenters.fragments
 
 import android.os.Bundle
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
-import com.madrat.abiturhelper.model.Faculties
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.showLog
 
-class ShowResultPresenter : ShowResultMVP.Presenter {
+class ShowResultPresenter(val view: ShowResultMVP.View)
+    : ShowResultMVP.Presenter {
     private val myApplication = MyApplication.instance
 
     // Пятый этап
@@ -685,13 +685,16 @@ class ShowResultPresenter : ShowResultMVP.Presenter {
             else -> null
         }
     }
-    override fun returnAmountOfSpecialtiesWithZeroMinimalScore(): Int? {
-        val zeroList = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
-        return zeroList?.sumBy { it.size }
-    }
-    override fun returnAmountOfFittingSpecialties(): Int? {
-        val fittingList = myApplication.returnListOfFittingSpecialties()
-        return fittingList?.sumBy { it.size }
+
+    fun getAmountOfFittingSpecialtiesAndSpecialtiesWithZeroMinimalScore() {
+        val listOfSpecialtiesWithZeroMinimalScore = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()
+        val listOfFittingSpecialties = myApplication.returnListOfFittingSpecialties()
+
+        listOfSpecialtiesWithZeroMinimalScore?.sumBy { it.size }?.let {
+            listOfFittingSpecialties?.sumBy { it.size }?.let { it1 ->
+                view.updateAmountOfFittingSpecialtiesAndSpecialtiesWithZeroMinimalScore(it, it1)
+            }
+        }
     }
     override fun completeAndSaveSummedList() {
         val zeroList = myApplication.returnListOfSpecialtiesWithZeroMinimalScore()

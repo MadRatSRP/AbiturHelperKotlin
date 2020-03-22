@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.select_specialties.ShowResultView">
     <LinearLayout
-        android:id="@+id/resultLinearLayout"
         android:orientation="vertical"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -15,9 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/resultSaveAndMoveToProfile">
+        app:layout_constraintBottom_toTopOf="@id/moveToProfile">
         <LinearLayout
-            android:id="@+id/resultSpecialtiesWithoutScoreLL"
             style="@style/mainLinearLayout"
             android:layout_weight="1">
             <TextView
@@ -26,20 +24,19 @@
             <View
                 style="@style/Divider" />
             <LinearLayout
-                android:id="@+id/resultSpecialtiesWithoutScoreAmount"
                 android:orientation="horizontal"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/resultSpecialtiesWithoutScoreAmountText"
+                    android:id="@+id/specialtiesWithoutScoreAmountText"
                     android:text="@string/amountOfSpecialties"
                     android:textSize="17sp"
                     android:layout_width="175dp"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/resultSpecialtiesWithoutScoreAmountValue"
+                    android:id="@+id/specialtiesWithoutScoreAmountValue"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textSize="18sp"
@@ -47,14 +44,13 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <Button
-                android:id="@+id/resultSpecialtiesWithoutScoreShowSpecialties"
+                android:id="@+id/specialtiesWithoutScoreShowSpecialties"
                 android:text="@string/resultSpecialtiesWithoutScoreShowSpecialties"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/resultFittingSpecialtiesLL"
             style="@style/mainLinearLayout"
             android:layout_weight="1">
             <TextView
@@ -63,20 +59,19 @@
             <View
                 style="@style/Divider" />
             <LinearLayout
-                android:id="@+id/resultFittingSpecialtiesAmount"
                 android:orientation="horizontal"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/resultFittingSpecialtiesAmountText"
+                    android:id="@+id/fittingSpecialtiesAmountText"
                     android:textSize="17sp"
                     android:text="@string/amountOfSpecialties"
                     android:layout_width="175dp"
                     android:layout_height="wrap_content" />
                 <TextView
-                    android:id="@+id/resultFittingSpecialtiesAmountValue"
+                    android:id="@+id/fittingSpecialtiesAmountValue"
                     android:textSize="18sp"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -84,7 +79,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <Button
-                android:id="@+id/resultFittingSpecialtiesShowSpecialties"
+                android:id="@+id/fittingSpecialtiesShowSpecialties"
                 android:text="@string/resultFittingSpecialtiesShowSpecialties"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
@@ -92,7 +87,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/resultSaveAndMoveToProfile"
+        android:id="@+id/moveToProfile"
         android:text="@string/resultSaveAndMoveToProfile"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
