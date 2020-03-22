@@ -232,7 +232,7 @@
                     android:layout_weight="1"/>
             </LinearLayout>
             <Button
-                android:id="@+id/showSpecialtiesScreen"
+                android:id="@+id/moveToSpecialtiesScreen"
                 android:text="@string/setupScoreToWorkWithSpecialties"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"

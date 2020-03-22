@@ -14,7 +14,6 @@ import com.madrat.abiturhelper.presenters.activities.AppPresenter
 
 class AppActivity : AppCompatActivity(), AppActivityMVP.View {
     private lateinit var appPresenter: AppPresenter
-
     private lateinit var binding: ActivityAppBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

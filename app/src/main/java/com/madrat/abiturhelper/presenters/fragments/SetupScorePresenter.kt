@@ -17,11 +17,7 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
         const val PASSING_SCORE_SOCIAL_SCIENCE = 42
     }
 
-    var myApplication: MyApplication? = null
-
-    init {
-        myApplication = MyApplication.instance
-    }
+    var myApplication: MyApplication = MyApplication.instance
 
     override fun checkIsFullNameAndScoreValid(lastName: String, firstName: String, patronymic: String,
                                               maths: Int?, russian: Int?, physics: Int?,
@@ -47,8 +43,8 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
                 checkScoreForBeingEmpty(socialScience), additionalScore
         )
 
-        myApplication?.saveFullName(fullName)
-        myApplication?.saveScore(score)
+        myApplication.saveFullName(fullName)
+        myApplication.saveScore(score)
 
         view.moveToWorkWithSpecialtiesView()
     }
@@ -164,8 +160,5 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
 
             else -> true
         }
-    }
-    fun freeVariables() {
-        myApplication = null
     }
 }
