@@ -225,7 +225,14 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     // в которые они хотят подать документы
     override fun separateStudentsBySpecialties(listOfFacultySpecialties: ArrayList<ArrayList<Specialty>>,
                                                filteredListOfStudents: ArrayList<Student>) {
-        checkForUNTI(listOfScoreTypedStudents)
+        val listOfUNTIStudents = checkForUNTI(filteredListOfStudents)
+
+        listOfUNTIStudents.forEach {
+            filteredListOfStudents.removeAll(it)
+        }
+
+        println("${filteredListOfStudents.size}, ${filteredListOfStudents.size}")
+
         /*checkForFEU(scoreTypes)
         checkForFIT(scoreTypes)
         checkForMTF(scoreTypes)
@@ -234,7 +241,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         println("Четвертый этап завершён")
     }
     // УНТИ
-    override fun checkForUNTI(listOfStudents: ArrayList<Student>) {
+    override fun checkForUNTI(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>> {
         val arrayOfATPSpecialties = arrayOf(
                 "АТП_заочн_бюдж", "АТП_заочн_плат",
                 "АТП_очн_бюдж", "АТП_очн_плат"
@@ -266,50 +273,47 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         )
 
         // ATP
-        val atp = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfATPSpecialties)
-        listOfStudents.removeAll(atp)
-
+        val studentsATP = checkForSpecialties(listOfStudents, arrayOfATPSpecialties)
         // KTO
-        val kto = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfKTOSpecialties)
+        val studentsKTO = checkForSpecialties(listOfStudents, arrayOfKTOSpecialties)
         // MASH
-        val mash = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfMASHSpecialties)
+        val studentsMASH = checkForSpecialties(listOfStudents, arrayOfMASHSpecialties)
         // MITM
-        val mitm = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfMITMSpecialties)
+        val studentsMITM = checkForSpecialties(listOfStudents, arrayOfMITMSpecialties)
         // MHT
-        val mht = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfMHTSpecialties)
+        val studentsMHT = checkForSpecialties(listOfStudents, arrayOfMHTSpecialties)
         // PTMK
-        val ptmk = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfPTMKSpecialties)
+        val studentsPTMK = checkForSpecialties(listOfStudents, arrayOfPTMKSpecialties)
         // TMO
-        val tmo = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfTMOSpecialties)
+        val studentsTMO = checkForSpecialties(listOfStudents, arrayOfTMOSpecialties)
         // UTS
-        val uts = returnListOfStudentsForChosenSpecialty(listOfStudents, arrayOfUTSSpecialties)
+        val studentsUTS = checkForSpecialties(listOfStudents, arrayOfUTSSpecialties)
 
-        // Получаем список списков студентов специальности УНТИ и сохраняем его
-        val unti = UNTI(atp, kto, mash, mitm, mht, ptmk, tmo, uts)
-
-
-        val separatedUNTI = separateUNTI(unti)
-        myApplication.saveUnti(separatedUNTI)
-    }
-    override fun returnListOfStudentsForChosenSpecialty(listOfStudents: ArrayList<Student>,
-                                                        arrayOfSpecialties: Array<String>)
-            : ArrayList<Student> {
-        val arrayListOfStudents = ArrayList<Student>()
-        arrayListOfStudents.addAll(checkForSpecialties(listOfStudents, arrayOfSpecialties))
-        return arrayListOfStudents
+        return arrayListOf(studentsATP, studentsKTO, studentsMASH, studentsMITM, studentsMHT,
+                studentsPTMK, studentsTMO, studentsUTS)
     }
     override fun checkForSpecialties(listOfStudents: ArrayList<Student>,
                                      arrayOfSpecialties: Array<String>): ArrayList<Student> {
         val arrayListOfStudents = ArrayList<Student>()
         arrayOfSpecialties.forEach {specialty->
             for (i in 0 until listOfStudents.size) {
-                if (listOfStudents[i].specialtyFirst == specialty || listOfStudents[i].specialtySecond == specialty
-                        || listOfStudents[i].specialtyThird == specialty)
+                if (listOfStudents[i].specialtyFirst == specialty)
                     arrayListOfStudents.add(listOfStudents[i])
             }
         }
         return arrayListOfStudents
     }
+    fun locOn() {
+        /*val separatedUNTI = separateUNTI(unti)
+        myApplication.saveUnti(separatedUNTI)*/
+    }
+    /*override fun returnListOfStudentsForChosenSpecialty(listOfStudents: ArrayList<Student>,
+                                                        arrayOfSpecialties: Array<String>)
+            : ArrayList<Student> {
+        val arrayListOfStudents = ArrayList<Student>()
+        arrayListOfStudents.addAll(checkForSpecialties(listOfStudents, arrayOfSpecialties))
+        return arrayListOfStudents
+    }*/
     override fun separateUNTI(unti: UNTI)
             : ArrayList<ArrayList<Student>> {
         val listUNTI = ArrayList<ArrayList<Student>>()

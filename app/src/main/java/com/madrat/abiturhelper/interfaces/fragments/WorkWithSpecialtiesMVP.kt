@@ -43,16 +43,17 @@ interface WorkWithSpecialtiesMVP {
         // Четвертый этап
         fun separateStudentsBySpecialties(listOfFacultySpecialties: ArrayList<ArrayList<Specialty>>,
                                           filteredListOfStudents: ArrayList<Student>)
-        fun returnListOfStudentsForChosenSpecialty(listOfStudents: ArrayList<Student>,
-                                                   arrayOfSpecialties: Array<String>)
-                : ArrayList<Student>
+
         fun checkForSpecialties(listOfStudents: ArrayList<Student>,
                                 arrayOfSpecialties: Array<String>): ArrayList<Student>
+        /*fun returnListOfStudentsForChosenSpecialty(listOfStudents: ArrayList<Student>,
+                                                   arrayOfSpecialties: Array<String>): ArrayList<Student>*/
         // УНТИ
-        fun checkForUNTI(listOfStudents: ArrayList<Student>)
+        fun checkForUNTI(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>>
+
         fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
         // ФЭУ
-        fun checkForFEU(scoreTypes: ScoreTypes)
+        /*fun checkForFEU(scoreTypes: ScoreTypes)
         fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>>
         // ФИТ
         fun checkForFIT(scoreTypes: ScoreTypes)
@@ -65,7 +66,7 @@ interface WorkWithSpecialtiesMVP {
         fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>>
         // ФЭЭ
         fun checkForFEE(scoreTypes: ScoreTypes)
-        fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>
+        fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>*/
         // Четвёртый этап
         // Нахождение минимального балла для каждой из специальностей
 
