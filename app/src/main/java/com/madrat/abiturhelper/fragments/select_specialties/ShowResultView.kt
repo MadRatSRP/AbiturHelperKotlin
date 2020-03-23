@@ -63,7 +63,8 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
         presenter = ShowResultPresenter(this)
     }
     override fun updateAmountOfFittingSpecialtiesAndSpecialtiesWithZeroMinimalScore(
-            amountOfFittingSpecialties: Int, amountOfSpecialtiesWithZeroMinimalScore: Int) {
+            amountOfSpecialtiesWithZeroMinimalScore: Int,
+            amountOfFittingSpecialties : Int) {
 
         binding.specialtiesWithoutScoreAmountValue.text = amountOfSpecialtiesWithZeroMinimalScore.toString()
 
