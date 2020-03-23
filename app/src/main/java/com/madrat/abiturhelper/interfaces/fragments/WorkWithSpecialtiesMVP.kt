@@ -25,35 +25,32 @@ interface WorkWithSpecialtiesMVP {
         fun grabSpecialties(csvParser: CSVParser): ArrayList<Specialty>
         fun grabStudents(csvParser: CSVParser): ArrayList<Student>
         fun checkTextForBeingEmpty(text: String): Int
-
         // Второй этап: Фильтрация значений
         fun getOnlyNeededValues(listOfSpecialties: ArrayList<Specialty>, listOfStudents: ArrayList<Student>)
         fun filterListOfSpecialtiesByEducationLevel(list: ArrayList<Specialty>): ArrayList<Specialty>?
         fun filterListOfStudentsByAdmissions(list: ArrayList<Student>): ArrayList<Student>
         fun removeValuesWithoutScoreFromListOfStudents(listOfBachelors: ArrayList<Student>): ArrayList<Student>
-
         // Третий этап: Разбивка данных
-        fun categorizeValues(filteredListOfSpecialties: ArrayList<Specialty>,
-                             filteredListOfStudents: ArrayList<Student>)
-        fun formListOfFacultiesFromListOfSpecialties(listOfSpecialties: ArrayList<Specialty>)
-                : ArrayList<ArrayList<Specialty>>
-        //fun returnStudentsSeparatedByScoreType(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>>
+        fun categorizeValues(listOfSpecialties: ArrayList<Specialty>,
+                             listOfStudents: ArrayList<Student>)
+
+
+
+        fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
+        //Второй этап
+        fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
+        fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes
+        fun returnListOfFaculties(): ArrayList<Faculty>
+        fun calculateAvailableFacultyPlaces(name: String, list: ArrayList<Specialty>?): Faculty
         fun withdrawStudentsWithSpecificScore(bachelors: ArrayList<Student>, typeOfScoreId: Int): ArrayList<Student>
+        //Третий этап
 
-        // Четвертый этап
-        fun separateStudentsBySpecialties(listOfFacultySpecialties: ArrayList<ArrayList<Specialty>>,
-                                          filteredListOfStudents: ArrayList<Student>)
-
-        fun checkForSpecialties(listOfStudents: ArrayList<Student>,
-                                arrayOfSpecialties: Array<String>): ArrayList<Student>
-        /*fun returnListOfStudentsForChosenSpecialty(listOfStudents: ArrayList<Student>,
-                                                   arrayOfSpecialties: Array<String>): ArrayList<Student>*/
+        fun separateStudentsBySpecialties()
         // УНТИ
-        fun checkForUNTI(listOfStudents: ArrayList<Student>): ArrayList<ArrayList<Student>>
-
+        fun checkForUNTI(scoreTypes: ScoreTypes)
         fun separateUNTI(unti: UNTI): ArrayList<ArrayList<Student>>
         // ФЭУ
-        /*fun checkForFEU(scoreTypes: ScoreTypes)
+        fun checkForFEU(scoreTypes: ScoreTypes)
         fun separateFEU(feu: FEU): ArrayList<ArrayList<Student>>
         // ФИТ
         fun checkForFIT(scoreTypes: ScoreTypes)
@@ -66,7 +63,7 @@ interface WorkWithSpecialtiesMVP {
         fun separateUNIT(unit: UNIT): ArrayList<ArrayList<Student>>
         // ФЭЭ
         fun checkForFEE(scoreTypes: ScoreTypes)
-        fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>*/
+        fun separateFEE(fee: FEE): ArrayList<ArrayList<Student>>
         // Четвёртый этап
         // Нахождение минимального балла для каждой из специальностей
 
@@ -82,6 +79,8 @@ interface WorkWithSpecialtiesMVP {
         fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
                 : ArrayList<ArrayList<Student>>
 
+        fun checkForSpecialties(list: ArrayList<Student>, arrayOfSpecialties: Array<String>): ArrayList<Student>
+        fun returnListOfStudentsForChosenSpecialty(scoreTypes: ScoreTypes, arrayOfSpecialties: Array<String>): ArrayList<Student>
         fun getListOfFacultyStudentsByFacultyId(facultyId: Int): ArrayList<ArrayList<Student>>?
     }
 }
