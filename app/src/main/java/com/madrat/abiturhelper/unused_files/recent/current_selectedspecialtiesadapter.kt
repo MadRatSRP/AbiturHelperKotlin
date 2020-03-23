@@ -141,7 +141,7 @@ class SelectedSpecialtiesAdapter
         }
     }
     fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+        val faculties = myApplication.returnSpecialtiesOfFaculties()
 
         return when (pos) {
             //УНТИ

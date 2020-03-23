@@ -144,7 +144,7 @@ class ChanceConfirmChoicePresenter
             = myApplication.saveListOfChances(listOfChances)
     override fun returnListOfSpecialtiesByPosition(pos: Int?)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+        val faculties = myApplication.returnSpecialtiesOfFaculties()
 
         return when (pos) {
             //УНТИ

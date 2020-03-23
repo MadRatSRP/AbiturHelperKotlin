@@ -12,7 +12,7 @@ class GraduationConfirmChoicePresenter
     val myApplication = MyApplication.instance
 
     override fun getSpecialtiesListByPosition(pos: Int?): ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+        val faculties = myApplication.returnSpecialtiesOfFaculties()
 
         return when (pos) {
             //УНТИ

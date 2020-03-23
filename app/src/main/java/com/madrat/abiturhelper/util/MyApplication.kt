@@ -11,7 +11,8 @@ class MyApplication: Application() {
     private var scores: Score? = null
 
     private var scoreTypes: ScoreTypes? = null
-    private var faculties: Faculties? = null
+    // Список списков специальностей для каждого из факультетов
+    lateinit var specialtiesOfFaculties: ArrayList<ArrayList<Specialty>>
 
     private var facultyList: ArrayList<Faculty>? = null
 
@@ -100,10 +101,11 @@ class MyApplication: Application() {
         }
         return scoreTypes
     }
-    //Faculties
-    fun saveFaculties(faculties: Faculties) {
-        this.faculties = faculties
-        this.faculties?.let {
+
+    // Specialties of Faculties
+    fun saveSpecialtiesOfFaculties(specialtiesOfFaculties: ArrayList<ArrayList<Specialty>>) {
+        this.specialtiesOfFaculties = specialtiesOfFaculties
+        /*this.faculties?.let {
             val unti = it.listUNTI.size
             val feu = it.listFEU.size
             val fit = it.listFIT.size
@@ -113,10 +115,10 @@ class MyApplication: Application() {
 
             showLog("Сохранён Faculties: УНТИ - $unti, ФЭУ - $feu, ФИТ - $fit,\n МТФ - $mtf, " +
                     "УНИТ - $unit, ФЭЭ - $fee")
-        }
+        }*/
     }
-    fun returnFaculties(): Faculties? {
-        this.faculties?.let {
+    fun returnSpecialtiesOfFaculties(): ArrayList<ArrayList<Specialty>> {
+        /*this.faculties?.let {
             val unti = it.listUNTI.size
             val feu = it.listFEU.size
             val fit = it.listFIT.size
@@ -126,9 +128,10 @@ class MyApplication: Application() {
 
             showLog("Возвращён Faculties: УНТИ - $unti, ФЭУ - $feu, ФИТ - $fit,\n МТФ - $mtf, " +
                     "УНИТ - $unit, ФЭЭ - $fee")
-        }
-        return faculties
+        }*/
+        return specialtiesOfFaculties
     }
+
     // listUNTI
     fun saveUnti(list: ArrayList<ArrayList<Student>>) {
         this.listUNTI = list

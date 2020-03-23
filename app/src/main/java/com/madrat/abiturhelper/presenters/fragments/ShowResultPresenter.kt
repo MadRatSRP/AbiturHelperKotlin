@@ -184,7 +184,7 @@ class ShowResultPresenter(val view: ShowResultMVP.View)
 
     override fun getSpecialtiesListByPosition(pos: Int)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+        val faculties = myApplication.returnSpecialtiesOfFaculties()
         return when (pos) {
             //УНТИ
             0 -> faculties?.listUNTI

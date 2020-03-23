@@ -2,7 +2,7 @@ package com.madrat.abiturhelper.`object`
 
 object FacultiesObject {
     //УНТИ
-    const val FACULTY_UNTY = 0
+    const val FACULTY_UNTI = 0
     //ФЭУ
     const val FACULTY_FEU = 1
     //ФИТ

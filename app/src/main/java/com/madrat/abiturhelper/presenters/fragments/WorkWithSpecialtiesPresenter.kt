@@ -156,20 +156,23 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
                          listOfStudents: ArrayList<Student>) {
         // Формируем модель Faculties, содержащую в себе
         // списки специальностей каждого из факультетов
-        val faculties = formFacultiesModelFromListOfSpecialties(listOfSpecialties)
+        val specialtiesOfFaculties = formListOfSpecialtiesOfFacultiesFromListOfSpecialties(listOfSpecialties)
 
         // Разделяем список поступающих по типу баллов и сохраняем
         // в модель ScoreTypes
         val scoreTypes = returnStudentsSeparatedByScoreType(listOfStudents)
 
         // Сохраняем модель Faculties
-        myApplication.saveFaculties(faculties)
+        myApplication.saveSpecialtiesOfFaculties(specialtiesOfFaculties)
         // Сохраняем модель ScoreTypes
         myApplication.saveScoreTypes(scoreTypes)
 
         generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
     }
-    override fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties {
+    override fun formListOfSpecialtiesOfFacultiesFromListOfSpecialties(list: ArrayList<Specialty>)
+            : ArrayList<ArrayList<Specialty>> {
+        val listOfSpecialties = ArrayList<ArrayList<Specialty>>()
+
         // УНТИ
         val listUNTI = list.filter { it.faculty == "Учебно-научный технологический институт" }
                 as ArrayList<Specialty>
@@ -189,7 +192,14 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
         val listFEE = list.filter { it.faculty == "Факультет энергетики и электроники" }
                 as ArrayList<Specialty>
 
-        return Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
+        listOfSpecialties.add(listUNTI)
+        listOfSpecialties.add(listFEU)
+        listOfSpecialties.add(listFIT)
+        listOfSpecialties.add(listMTF)
+        listOfSpecialties.add(listUNIT)
+        listOfSpecialties.add(listFEE)
+
+        return listOfSpecialties
     }
     override fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes {
         // Вычисляем количество студентов, у которых достаточно баллов
@@ -235,15 +245,27 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
     override fun returnListOfFaculties(): ArrayList<Faculty> {
         val facultyList = ArrayList<Faculty>()
-        val faculties = myApplication.returnFaculties()
+        val specialtiesOfFaculties = myApplication.returnSpecialtiesOfFaculties()
         //facultyList.clear()
 
-        val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ", faculties?.listUNTI)
-        val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ", faculties?.listFEU)
-        val calculatedPlacesFIT = calculateAvailableFacultyPlaces("ФИТ", faculties?.listFIT)
-        val calculatedPlacesMTF = calculateAvailableFacultyPlaces("МТФ", faculties?.listMTF)
-        val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ", faculties?.listUNIT)
-        val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ", faculties?.listFEE)
+        // УНТИ
+        val calculatedPlacesUNTI = calculateAvailableFacultyPlaces("УНТИ",
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNTI])
+        // ФЭУ
+        val calculatedPlacesFEU = calculateAvailableFacultyPlaces("ФЭУ",
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEU])
+        // ФИТ
+        val calculatedPlacesFIT = calculateAvailableFacultyPlaces("ФИТ",
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FIT])
+        // МТФ
+        val calculatedPlacesMTF = calculateAvailableFacultyPlaces("МТФ",
+                specialtiesOfFaculties[FacultiesObject.FACULTY_MTF])
+        // УНИТ
+        val calculatedPlacesUNIT = calculateAvailableFacultyPlaces("УНИТ",
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNIT])
+        // ФЭЭ
+        val calculatedPlacesFEE = calculateAvailableFacultyPlaces("ФЭЭ",
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEE])
 
         val collection = arrayListOf(calculatedPlacesUNTI, calculatedPlacesFEU, calculatedPlacesFIT,
                 calculatedPlacesMTF, calculatedPlacesUNIT, calculatedPlacesFEE)
@@ -860,7 +882,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
     // Четвертый этап
     override fun checkSpecialtiesForMinimalScore(context: Context) {
-        val listUNTI = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNTY)
+        val listUNTI = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNTI)
         val listFEU = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FEU)
         val listFIT = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FIT)
         val listMTF = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_MTF)
@@ -872,7 +894,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
                 listUNIT?.let { it4 ->
                     listFEE?.let { it5 -> Faculties(it, it1, it2, it3, it4, it5) } }
             } } } }
-        faculties?.let { myApplication.saveFaculties(it) }
+        faculties?.let { myApplication.saveSpecialtiesOfFaculties(it) }
     }
 
     override fun checkFacultyForMinimalScore(context: Context, facultyId: Int)
@@ -920,10 +942,10 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
     override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+        val faculties = myApplication.returnSpecialtiesOfFaculties()
         return when (facultyId) {
             // УНТИ
-            FacultiesObject.FACULTY_UNTY -> faculties?.listUNTI
+            FacultiesObject.FACULTY_UNTI -> faculties?.listUNTI
             // ФЭУ
             FacultiesObject.FACULTY_FEU -> faculties?.listFEU
             // ФИТ
@@ -941,7 +963,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     override fun returnFacultyList(): ArrayList<Faculty>?
             = myApplication.returnFacultyList()
     override fun returnFaculties(): Faculties?
-            = myApplication.returnFaculties()
+            = myApplication.returnSpecialtiesOfFaculties()
     override fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle {
         val bundle = Bundle()
         val title = context.getString(titleId)
@@ -954,7 +976,7 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
             : ArrayList<ArrayList<Student>>? {
         return when (facultyId) {
             //УНТИ
-            FacultiesObject.FACULTY_UNTY -> myApplication.returnUNTI()
+            FacultiesObject.FACULTY_UNTI -> myApplication.returnUNTI()
             //ФЭУ
             FacultiesObject.FACULTY_FEU -> myApplication.returnFEU()
             //ФИТ

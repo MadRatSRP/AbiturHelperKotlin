@@ -2,7 +2,6 @@ package com.madrat.abiturhelper.presenters.fragments
 
 import android.os.Bundle
 import com.madrat.abiturhelper.`object`.FacultiesObject
-import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
 import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
@@ -21,10 +20,10 @@ class ShowSpecialtiesPresenter(private val view: ShowSpecialtiesMVP.View)
 
     override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnFaculties()
+        val faculties = myApplication.returnSpecialtiesOfFaculties()
         return when (facultyId) {
             // УНТИ
-            FacultiesObject.FACULTY_UNTY -> faculties?.listUNTI
+            FacultiesObject.FACULTY_UNTI -> faculties?.listUNTI
             // ФЭУ
             FacultiesObject.FACULTY_FEU -> faculties?.listFEU
             // ФИТ
@@ -67,7 +66,7 @@ class ShowSpecialtiesPresenter(private val view: ShowSpecialtiesMVP.View)
             : ArrayList<ArrayList<Student>>? {
         return when (facultyId) {
             //УНТИ
-            FacultiesObject.FACULTY_UNTY -> myApplication.returnUNTI()
+            FacultiesObject.FACULTY_UNTI -> myApplication.returnUNTI()
             //ФЭУ
             FacultiesObject.FACULTY_FEU -> myApplication.returnFEU()
             //ФИТ

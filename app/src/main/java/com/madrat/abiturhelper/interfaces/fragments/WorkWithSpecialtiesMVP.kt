@@ -36,7 +36,7 @@ interface WorkWithSpecialtiesMVP {
 
 
 
-        fun formFacultiesModelFromListOfSpecialties(list: ArrayList<Specialty>): Faculties
+        fun formListOfSpecialtiesOfFacultiesFromListOfSpecialties(list: ArrayList<Specialty>): ArrayList<ArrayList<Specialty>>
         //Второй этап
         fun generateScoreTypedListsAndCalculateAvailableFacultyPlaces()
         fun returnStudentsSeparatedByScoreType(listOfBachelors: ArrayList<Student>): ScoreTypes
