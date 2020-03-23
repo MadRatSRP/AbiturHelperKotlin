@@ -34,10 +34,10 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
 
         // Седьмой шаг
         val completeList = presenter?.returnCompleteListOfSpecialties()
-        val listOfAllCompleteSpecialties = completeList
-                ?.let { presenter?.returnListOfAllCompleteSpecialties(it) }
-        listOfAllCompleteSpecialties
-                ?.let { presenter?.saveListOfAllCompleteSpecialties(it) }
+
+        val listOfAllCompleteSpecialties = completeList?.let { presenter?.returnListOfAllCompleteSpecialties(it) }
+
+        listOfAllCompleteSpecialties?.let { presenter?.saveListOfAllCompleteSpecialties(it) }
 
         binding.specialtiesWithoutScoreShowSpecialties.setOnClickListener {
             val bundle = presenter?.returnBundleWithListID(100)

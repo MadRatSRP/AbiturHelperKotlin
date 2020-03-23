@@ -22,12 +22,15 @@ interface ShowResultMVP {
 
         // Шестой этап
         fun checkForFittingSpecialties()
+        fun returnFittingSpecialties(): ArrayList<ArrayList<Specialty>>
+        fun checkFacultyForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
 
+        // Седьмой шаг
         fun getSpecialtiesListByPosition(pos: Int): ArrayList<Specialty>?
 
-        fun returnFittingSpecialties(): ArrayList<ArrayList<Specialty>>
+
         fun completeAndSaveSummedList()
         fun returnBundleWithListID(listId: Int): Bundle
-        fun checkFacultyForFittingSpecialties(position: Int, scores: Score?): ArrayList<Specialty>
+
     }
 }
