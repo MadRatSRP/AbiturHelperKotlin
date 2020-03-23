@@ -23,11 +23,18 @@ class ShowResultPresenter(val view: ShowResultMVP.View)
         val listUNIT = checkUNITForZeroMinimalScore(4, scores)
         val listFEE = checkFEEForZeroMinimalScore(5, scores)
 
+        showLog("ZERO MINIMAL SCORE: ${listUNTI.size}, ${listFEU.size}, ${listFIT.size}, " +
+                "${listMTF.size}, ${listUNIT.size}, $listFEE")
+
         val collection = arrayListOf(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
 
         //val faculties = Faculties(listUNTI, listFEU, listFIT, listMTF, listUNIT, listFEE)
         myApplication.saveListOfSpecialtiesWithZeroMinimalScore(collection)
     }
+    /*fun checkFacultyForSpecialtiesWithZeroMinimalScore(position: Int, scores: Score?)
+            : ArrayList<Specialty> {
+
+    }*/
     override fun checkUNTIForZeroMinimalScore(position: Int, scores: Score?)
             : ArrayList<Specialty> {
         val list = getSpecialtiesListByPosition(position)
