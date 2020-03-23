@@ -16,12 +16,7 @@ interface ShowResultMVP {
     interface Presenter {
         // Пятый этап
         fun checkForZeroMinimalScore()
-        fun checkUNTIForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
-        fun checkFEUForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
-        fun checkFITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
-        fun checkMTFForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
-        fun checkUNITForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
-        fun checkFEEForZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
+        fun checkFacultyForSpecialtiesWithZeroMinimalScore(position: Int, scores: Score?): ArrayList<Specialty>
 
         // Шестой этап
         fun checkForFittingSpecialties()
