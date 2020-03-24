@@ -73,8 +73,6 @@ interface WorkWithSpecialtiesMVP {
         fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
                 : ArrayList<Specialty>?
 
-        fun returnFacultyList(): ArrayList<Faculty>?
-        fun returnFaculties(): Faculties?
         fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle
         fun separateSpecialties(listOfStudents: ArrayList<Student>, arrayOfSpecialties: Array<String>)
                 : ArrayList<ArrayList<Student>>

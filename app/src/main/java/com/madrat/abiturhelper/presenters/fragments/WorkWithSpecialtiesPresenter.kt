@@ -5,7 +5,10 @@ import android.os.Bundle
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.`object`.FacultiesObject
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
-import com.madrat.abiturhelper.model.*
+import com.madrat.abiturhelper.model.Faculty
+import com.madrat.abiturhelper.model.ScoreTypes
+import com.madrat.abiturhelper.model.Specialty
+import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.model.faculties.*
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.filterForSpecialty
@@ -882,19 +885,35 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
     // Четвертый этап
     override fun checkSpecialtiesForMinimalScore(context: Context) {
+        val speciltiesOfFaculties = ArrayList<ArrayList<Specialty>>()
+
+        // УНТИ
         val listUNTI = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNTI)
+        // ФЭУ
         val listFEU = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FEU)
+        // ФИТ
         val listFIT = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FIT)
+        // МТФ
         val listMTF = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_MTF)
+        // УНИТ
         val listUNIT = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_UNIT)
+        // ФЭЭ
         val listFEE = checkFacultyForMinimalScore(context, FacultiesObject.FACULTY_FEE)
 
-        val faculties = listUNTI?.let { listFEU?.let { it1 ->
-            listFIT?.let { it2 -> listMTF?.let { it3 ->
-                listUNIT?.let { it4 ->
-                    listFEE?.let { it5 -> Faculties(it, it1, it2, it3, it4, it5) } }
-            } } } }
-        faculties?.let { myApplication.saveSpecialtiesOfFaculties(it) }
+        // УНТИ
+        listUNTI?.let { speciltiesOfFaculties.add(it) }
+        // ФЭУ
+        listFEU?.let { speciltiesOfFaculties.add(it) }
+        // ФИТ
+        listFIT?.let { speciltiesOfFaculties.add(it) }
+        // МТФ
+        listMTF?.let { speciltiesOfFaculties.add(it) }
+        // УНИТ
+        listUNIT?.let { speciltiesOfFaculties.add(it) }
+        // ФЭЭ
+        listFEE?.let { speciltiesOfFaculties.add(it) }
+
+        myApplication.saveSpecialtiesOfFaculties(speciltiesOfFaculties)
     }
 
     override fun checkFacultyForMinimalScore(context: Context, facultyId: Int)
@@ -942,28 +961,30 @@ class WorkWithSpecialtiesPresenter(private val view: WorkWithSpecialtiesMVP.View
     }
     override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnSpecialtiesOfFaculties()
+        val specialtiesOfFaculties = myApplication.returnSpecialtiesOfFaculties()
         return when (facultyId) {
             // УНТИ
-            FacultiesObject.FACULTY_UNTI -> faculties?.listUNTI
+            FacultiesObject.FACULTY_UNTI ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNTI]
             // ФЭУ
-            FacultiesObject.FACULTY_FEU -> faculties?.listFEU
+            FacultiesObject.FACULTY_FEU ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEU]
             // ФИТ
-            FacultiesObject.FACULTY_FIT -> faculties?.listFIT
+            FacultiesObject.FACULTY_FIT ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FIT]
             // МТФ
-            FacultiesObject.FACULTY_MTF -> faculties?.listMTF
+            FacultiesObject.FACULTY_MTF ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_MTF]
             // УНИТ
-            FacultiesObject.FACULTY_UNIT -> faculties?.listUNIT
+            FacultiesObject.FACULTY_UNIT ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNIT]
             // ФЭЭ
-            FacultiesObject.FACULTY_FEE -> faculties?.listFEE
+            FacultiesObject.FACULTY_FEE ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEE]
             else -> null
         }
     }
 
-    override fun returnFacultyList(): ArrayList<Faculty>?
-            = myApplication.returnFacultyList()
-    override fun returnFaculties(): Faculties?
-            = myApplication.returnSpecialtiesOfFaculties()
     override fun returnFacultyBundle(context: Context, position: Int, titleId: Int): Bundle {
         val bundle = Bundle()
         val title = context.getString(titleId)
