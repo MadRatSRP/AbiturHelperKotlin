@@ -1,6 +1,7 @@
 package com.madrat.abiturhelper.presenters.fragments
 
 import android.os.Bundle
+import com.madrat.abiturhelper.`object`.FacultiesObject
 import com.madrat.abiturhelper.interfaces.fragments.ShowResultMVP
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.model.Specialty
@@ -184,20 +185,20 @@ class ShowResultPresenter(val view: ShowResultMVP.View)
 
     override fun getSpecialtiesListByPosition(pos: Int)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnSpecialtiesOfFaculties()
+        val specialtiesOfFaculties = myApplication.returnSpecialtiesOfFaculties()
         return when (pos) {
             //УНТИ
-            0 -> faculties?.listUNTI
+            FacultiesObject.FACULTY_UNTI -> specialtiesOfFaculties[FacultiesObject.FACULTY_UNTI]
             //ФЭУ
-            1 -> faculties?.listFEU
+            FacultiesObject.FACULTY_FEU -> specialtiesOfFaculties[FacultiesObject.FACULTY_FEU]
             //ФИТ
-            2 -> faculties?.listFIT
+            FacultiesObject.FACULTY_FIT -> specialtiesOfFaculties[FacultiesObject.FACULTY_FIT]
             //МТФ
-            3 -> faculties?.listMTF
+            FacultiesObject.FACULTY_MTF -> specialtiesOfFaculties[FacultiesObject.FACULTY_MTF]
             //УНИТ
-            4 -> faculties?.listUNIT
+            FacultiesObject.FACULTY_UNIT -> specialtiesOfFaculties[FacultiesObject.FACULTY_UNIT]
             //ФЭЭ
-            5 -> faculties?.listFEE
+            FacultiesObject.FACULTY_FEE -> specialtiesOfFaculties[FacultiesObject.FACULTY_FEE]
             else -> null
         }
     }
