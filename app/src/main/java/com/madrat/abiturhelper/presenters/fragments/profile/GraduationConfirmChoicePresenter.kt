@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.presenters.fragments.profile
 
+import com.madrat.abiturhelper.`object`.FacultiesObject
 import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationConfirmChoiceMVP
 import com.madrat.abiturhelper.model.Graduation
 import com.madrat.abiturhelper.model.Specialty
@@ -12,21 +13,27 @@ class GraduationConfirmChoicePresenter
     val myApplication = MyApplication.instance
 
     override fun getSpecialtiesListByPosition(pos: Int?): ArrayList<Specialty>? {
-        val faculties = myApplication.returnSpecialtiesOfFaculties()
+        val specialtiesOfFaculties = myApplication.returnSpecialtiesOfFaculties()
 
         return when (pos) {
-            //УНТИ
-            0 -> faculties?.listUNTI
-            //ФЭУ
-            1 -> faculties?.listFEU
-            //ФИТ
-            2 -> faculties?.listFIT
-            //МТФ
-            3 -> faculties?.listMTF
-            //УНИТ
-            4 -> faculties?.listUNIT
-            //ФЭЭ
-            5 -> faculties?.listFEE
+            // УНТИ
+            FacultiesObject.FACULTY_UNTI ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNTI]
+            // ФЭУ
+            FacultiesObject.FACULTY_FEU ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEU]
+            // ФИТ
+            FacultiesObject.FACULTY_FIT ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FIT]
+            // МТФ
+            FacultiesObject.FACULTY_MTF ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_MTF]
+            // УНИТ
+            FacultiesObject.FACULTY_UNIT ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNIT]
+            // ФЭЭ
+            FacultiesObject.FACULTY_FEE ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEE]
             else -> null
         }
     }
