@@ -1,5 +1,6 @@
 package com.madrat.abiturhelper.presenters.fragments.chance
 
+import com.madrat.abiturhelper.`object`.FacultiesObject
 import com.madrat.abiturhelper.interfaces.fragments.chance.ChanceConfirmChoiceMVP
 import com.madrat.abiturhelper.model.Chance
 import com.madrat.abiturhelper.model.Specialty
@@ -144,21 +145,27 @@ class ChanceConfirmChoicePresenter
             = myApplication.saveListOfChances(listOfChances)
     override fun returnListOfSpecialtiesByPosition(pos: Int?)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnSpecialtiesOfFaculties()
+        val specialtiesOfFaculty = myApplication.returnSpecialtiesOfFaculties()
 
         return when (pos) {
-            //УНТИ
-            0 -> faculties?.listUNTI
-            //ФЭУ
-            1 -> faculties?.listFEU
-            //ФИТ
-            2 -> faculties?.listFIT
-            //МТФ
-            3 -> faculties?.listMTF
-            //УНИТ
-            4 -> faculties?.listUNIT
-            //ФЭЭ
-            5 -> faculties?.listFEE
+            // УНТИ
+            FacultiesObject.FACULTY_UNTI ->
+                specialtiesOfFaculty[FacultiesObject.FACULTY_UNTI]
+            // ФЭУ
+            FacultiesObject.FACULTY_FEU ->
+                specialtiesOfFaculty[FacultiesObject.FACULTY_FEU]
+            // ФИТ
+            FacultiesObject.FACULTY_FIT ->
+                specialtiesOfFaculty[FacultiesObject.FACULTY_FIT]
+            // МТФ
+            FacultiesObject.FACULTY_MTF ->
+                specialtiesOfFaculty[FacultiesObject.FACULTY_MTF]
+            // УНИТ
+            FacultiesObject.FACULTY_UNIT ->
+                specialtiesOfFaculty[FacultiesObject.FACULTY_UNIT]
+            // ФЭЭ
+            FacultiesObject.FACULTY_FEE ->
+                specialtiesOfFaculty[FacultiesObject.FACULTY_FEE]
             else -> null
         }
     }

@@ -20,20 +20,26 @@ class ShowSpecialtiesPresenter(private val view: ShowSpecialtiesMVP.View)
 
     override fun getListOfFacultySpecialtiesByFacultyId(facultyId: Int)
             : ArrayList<Specialty>? {
-        val faculties = myApplication.returnSpecialtiesOfFaculties()
+        val specialtiesOfFaculties = myApplication.returnSpecialtiesOfFaculties()
         return when (facultyId) {
             // УНТИ
-            FacultiesObject.FACULTY_UNTI -> faculties?.listUNTI
+            FacultiesObject.FACULTY_UNTI ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNTI]
             // ФЭУ
-            FacultiesObject.FACULTY_FEU -> faculties?.listFEU
+            FacultiesObject.FACULTY_FEU ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEU]
             // ФИТ
-            FacultiesObject.FACULTY_FIT -> faculties?.listFIT
+            FacultiesObject.FACULTY_FIT ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FIT]
             // МТФ
-            FacultiesObject.FACULTY_MTF -> faculties?.listMTF
+            FacultiesObject.FACULTY_MTF ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_MTF]
             // УНИТ
-            FacultiesObject.FACULTY_UNIT -> faculties?.listUNIT
+            FacultiesObject.FACULTY_UNIT ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_UNIT]
             // ФЭЭ
-            FacultiesObject.FACULTY_FEE -> faculties?.listFEE
+            FacultiesObject.FACULTY_FEE ->
+                specialtiesOfFaculties[FacultiesObject.FACULTY_FEE]
             else -> null
         }
     }
