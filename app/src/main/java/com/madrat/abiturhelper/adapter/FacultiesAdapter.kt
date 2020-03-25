@@ -4,10 +4,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.databinding.ListFacultiesBinding
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.util.inflate
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.list_faculties.*
 
 class FacultiesAdapter(private val clickListener: (Faculty, Int) -> Unit)
     : RecyclerView.Adapter<FacultiesAdapter.FacultiesHolder>(){
@@ -28,15 +27,20 @@ class FacultiesAdapter(private val clickListener: (Faculty, Int) -> Unit)
     override fun getItemCount(): Int
             = faculties.size
 
-    inner class FacultiesHolder internal constructor(override val containerView: View)
-        : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(position: Int, faculty: Faculty, clickListener: (Faculty, Int) -> Unit) {
-            containerView.setOnClickListener { clickListener(faculty, position) }
+    inner class FacultiesHolder (private val holderView: View): RecyclerView.ViewHolder(holderView) {
+        private val binding = ListFacultiesBinding.bind(holderView)
 
-            facultyName.text = faculty.name
-            specialtyEntriesTotalValue.text = faculty.entriesTotalAmount.toString()
-            specialtyEntriesFreeValue.text = faculty.entriesFreeAmount.toString()
-            facultyAmountOfSpecialtiesValue.text = faculty.amountOfSpecialties.toString()
+        fun bind(position: Int, faculty: Faculty, clickListener: (Faculty, Int) -> Unit) {
+            with(binding) {
+                holderView.setOnClickListener {
+                    clickListener(faculty, position)
+                }
+
+                facultyName.text = faculty.name
+                specialtyEntriesTotalValue.text = faculty.entriesTotalAmount.toString()
+                specialtyEntriesFreeValue.text = faculty.entriesFreeAmount.toString()
+                facultyAmountOfSpecialtiesValue.text = faculty.amountOfSpecialties.toString()
+            }
         }
     }
 }

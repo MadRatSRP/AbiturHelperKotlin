@@ -4,6 +4,7 @@ import android.util.SparseBooleanArray
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.madrat.abiturhelper.databinding.ListCompleteSpecialtiesBinding
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.util.inflate
 import kotlinx.android.extensions.LayoutContainer
@@ -18,7 +19,6 @@ import kotlinx.android.synthetic.main.list_specialties.specialtyName
 class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?,
                                  chosenSpecialties: ArrayList<Specialty>?)
     : RecyclerView.Adapter<CompleteSpecialtiesAdapter.CompleteSpecialtiesHolder>(){
-
     private var specialties = ArrayList<Specialty>()
 
     private var selectedSpecialties = ArrayList<Specialty>()
@@ -68,8 +68,9 @@ class CompleteSpecialtiesAdapter(itemStateArray: SparseBooleanArray?,
     override fun getItemCount(): Int
             = specialties.size
 
-    inner class CompleteSpecialtiesHolder internal constructor(override val containerView: View)
+    inner class CompleteSpecialtiesHolder (override val containerView: View)
         : RecyclerView.ViewHolder(containerView), LayoutContainer {
+        private val binding = ListCompleteSpecialtiesBinding.bind(containerView)
 
         fun bind(specialty: Specialty, position: Int) {
             specialtyName.text = specialty.shortName

@@ -4,10 +4,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.databinding.ListBachelorsBinding
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.util.inflate
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.list_bachelors.*
 
 class StudentsAdapter
     : RecyclerView.Adapter<StudentsAdapter.BachelorsHolder>(){
@@ -28,18 +27,23 @@ class StudentsAdapter
     override fun getItemCount(): Int
             = bachelors.size
 
-    inner class BachelorsHolder internal constructor(override val containerView: View)
-        : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(student: Student) {
-            bachelorFullName.text = containerView.context.getString(R.string.bachelorFullName,
-                    student.lastName, student.firstName, student.patronymic)
+    inner class BachelorsHolder (private val holderView: View)
+        : RecyclerView.ViewHolder(holderView) {
+        private val binding = ListBachelorsBinding.bind(holderView)
 
-            bachelorMathsValue.text = student.maths.toString()
-            bachelorRussianValue.text = student.russian.toString()
-            bachelorPhysicsValue.text = student.physics.toString()
-            bachelorComputerScienceValue.text = student.computerScience.toString()
-            bachelorSocialScienceValue.text = student.socialScience.toString()
-            bachelorAdditionalScoreValue.text = student.additionalScore.toString()
+        fun bind(student: Student) {
+            with(binding) {
+                bachelorFullName.text = holderView.context.getString(
+                        R.string.bachelorFullName, student.lastName,
+                        student.firstName, student.patronymic)
+
+                bachelorMathsValue.text = student.maths.toString()
+                bachelorRussianValue.text = student.russian.toString()
+                bachelorPhysicsValue.text = student.physics.toString()
+                bachelorComputerScienceValue.text = student.computerScience.toString()
+                bachelorSocialScienceValue.text = student.socialScience.toString()
+                bachelorAdditionalScoreValue.text = student.additionalScore.toString()
+            }
         }
     }
 }
