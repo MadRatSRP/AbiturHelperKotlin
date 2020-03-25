@@ -36,38 +36,75 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    //Junit
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    
-    //Espresso
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     //Navigation Architecture Component
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
 
-    //Navigation Drawer
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'com.google.android.material:material:1.1.0-alpha10'
+    // SwipeRefreshLayout
+    def swipe_refresh_layout = "1.0.0"
 
-    //ConstraintLayout
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    // AppCompat
+    def app_compat = "1.1.0"
 
-    //Apache Common CSV
-    implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.7'
+    // MaterialDesign
+    def material_design = '1.2.0-alpha05'
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    // ConstraintLayout
+    def constraint_layout = "1.1.3"
 
-    //Kotlin Coroutines
-    implementation group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-android', version: '1.3.1'
+    // Retrofit
+    def retrofit = '2.8.1'
+
+    // Kotlin Coroutines
+    def kotlin_coroutines = "1.3.5"
+
+    // Testing
+    // Junit
+    def junit = '4.13'
+    // Junit Runner
+    def junit_runner = "1.1.1"
+
+    // Espresso
+    def espresso = "3.2.0"
+
+    // SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout"
+
+    // AppCompat
+    implementation "androidx.appcompat:appcompat:$app_compat"
+
+    // MaterialDesign
+    implementation "com.google.android.material:material:$material_design"
+
+    // ConstraintLayout
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+
+    // Apache Common CSV
+    implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.8'
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit"
+
+    // Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines"
+
+    // Testing
+    // Junit
+    testImplementation "junit:junit:$junit"
+    // Junit Runner
+    androidTestImplementation "androidx.test.ext:junit:$junit_runner"
+
+    // Espresso
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 }
 repositories {
+    // Kotlin Coroutines
     jcenter()
+
     mavenCentral()
 }
