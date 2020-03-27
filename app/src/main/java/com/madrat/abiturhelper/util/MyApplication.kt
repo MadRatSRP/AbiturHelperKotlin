@@ -8,6 +8,7 @@ class MyApplication: Application() {
     companion object { val instance = MyApplication() }
     // Score
     private var fullName: FullName? = null
+
     private var scores: Score? = null
 
     private var scoreTypes: ScoreTypes? = null

@@ -105,21 +105,21 @@
     </fragment>
     <fragment
         android:id="@+id/chooseSpecialties"
-        android:name="com.madrat.abiturhelper.fragments.chance.ChanceChooseSpecialties">
+        android:name="com.madrat.abiturhelper.fragments.calculate_chance.ChanceChooseSpecialties">
         <action
             android:id="@+id/action_chooseSpecialties_to_confirmChoice"
             app:destination="@id/confirmChoice" />
     </fragment>
     <fragment
         android:id="@+id/confirmChoice"
-        android:name="com.madrat.abiturhelper.fragments.chance.ChanceConfirmChoice">
+        android:name="com.madrat.abiturhelper.fragments.calculate_chance.ChanceConfirmChoice">
         <action
             android:id="@+id/action_confirmChoice_to_showResults"
             app:destination="@id/showResults" />
     </fragment>
     <fragment
         android:id="@+id/showResults"
-        android:name="com.madrat.abiturhelper.fragments.chance.ChanceShowResults" >
+        android:name="com.madrat.abiturhelper.fragments.calculate_chance.ChanceShowResults" >
         <action
             android:id="@+id/action_showResults_to_profile"
             app:destination="@id/profile" />
