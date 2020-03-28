@@ -8,7 +8,7 @@ import com.madrat.abiturhelper.interfaces.fragments.profile.ShowProfileMVP
 import com.madrat.abiturhelper.model.Score
 import com.madrat.abiturhelper.util.MyApplication
 
-class ShowProfilePresenter(private var pv: ShowProfileMVP.View) : ShowProfileMVP.Presenter {
+class ShowProfilePresenter(private var view: ShowProfileMVP.View) : ShowProfileMVP.Presenter {
     var myApplication = MyApplication.instance
 
     override fun setFieldEditable(editField: EditText, imageButton: ImageButton) {

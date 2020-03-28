@@ -8,14 +8,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.databinding.FragmentShowProfileBinding
 import com.madrat.abiturhelper.interfaces.fragments.profile.ShowProfileMVP
 import com.madrat.abiturhelper.presenters.fragments.profile.ShowProfilePresenter
 import com.madrat.abiturhelper.util.showSnack
-import kotlinx.android.synthetic.main.fragment_show_profile.*
 
 class ShowProfileView: Fragment(), ShowProfileMVP.View {
     private var showProfilePresenter: ShowProfilePresenter? = null
 
+    private var mBinding: FragmentShowProfileBinding? = null
+    private val binding get() = mBinding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileTitle)
+
+        // Инициализируем mBinding
+        mBinding = FragmentShowProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
@@ -34,83 +45,89 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         var isSocialScienceEditable: Boolean? = true
         var isAdditionalScoreEditable: Boolean? = true
 
-        profileLastNameEditValue.setOnClickListener {
+        binding.profileLastNameEditValue.setOnClickListener {
             isLastNameEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isLastNameEditable, profileLastNameValue,
-                    profileLastNameEditValue
+                    isLastNameEditable,
+                    binding.profileLastNameValue,
+                    binding.profileLastNameEditValue
             )
         }
-        profileFirstNameEditValue.setOnClickListener {
+        binding.profileFirstNameEditValue.setOnClickListener {
             isFirstNameEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isFirstNameEditable, profileFirstNameValue,
-                    profileFirstNameEditValue
+                    isFirstNameEditable,
+                    binding.profileFirstNameValue,
+                    binding.profileFirstNameEditValue
             )
         }
-        profilePatronymicEditValue.setOnClickListener {
+        binding.profilePatronymicEditValue.setOnClickListener {
             isPatronymicEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isPatronymicEditable, profilePatronymicValue,
-                    profilePatronymicEditValue
+                    isPatronymicEditable,
+                    binding.profilePatronymicValue,
+                    binding.profilePatronymicEditValue
             )
         }
-        profileMathsEditValue.setOnClickListener {
+        binding.profileMathsEditValue.setOnClickListener {
             isMathsEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isMathsEditable, profileMathsValue,
-                    profileMathsEditValue)
+                    isMathsEditable,
+                    binding.profileMathsValue,
+                    binding.profileMathsEditValue)
         }
-        profileRussianEditValue.setOnClickListener {
+        binding.profileRussianEditValue.setOnClickListener {
             isRussianEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isRussianEditable, profileRussianValue,
-                    profileRussianEditValue)
+                    isRussianEditable,
+                    binding.profileRussianValue,
+                    binding.profileRussianEditValue)
         }
-        profilePhysicsEditValue.setOnClickListener {
+        binding.profilePhysicsEditValue.setOnClickListener {
             isPhysicsEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isPhysicsEditable, profilePhysicsValue,
-                    profilePhysicsEditValue)
+                    isPhysicsEditable,
+                    binding.profilePhysicsValue,
+                    binding.profilePhysicsEditValue)
         }
-        profileComputerScienceEditValue.setOnClickListener {
+        binding.profileComputerScienceEditValue.setOnClickListener {
             isComputerScienceEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isComputerScienceEditable, profileComputerScienceValue,
-                    profileComputerScienceEditValue)
+                    isComputerScienceEditable,
+                    binding.profileComputerScienceValue,
+                    binding.profileComputerScienceEditValue)
         }
-        profileSocialScienceEditValue.setOnClickListener {
+        binding.profileSocialScienceEditValue.setOnClickListener {
             isSocialScienceEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isSocialScienceEditable, profileSocialScienceValue,
-                    profileSocialScienceEditValue)
+                    isSocialScienceEditable,
+                    binding.profileSocialScienceValue,
+                    binding.profileSocialScienceEditValue)
         }
-        profileAdditionalScoreEditValue.setOnClickListener {
+        binding.profileAdditionalScoreEditValue.setOnClickListener {
             isAdditionalScoreEditable = showProfilePresenter?.checkFieldForBeingEditable(
-                    isAdditionalScoreEditable, profileAdditionalScoreValue,
-                    profileAdditionalScoreEditValue)
+                    isAdditionalScoreEditable,
+                    binding.profileAdditionalScoreValue,
+                    binding.profileAdditionalScoreEditValue)
         }
 
-        profileUpdateScores.setOnClickListener {v->
-            showProfilePresenter?.updateScores(profileMathsValue.text.toString(),
-                    profileRussianValue.text.toString(),
-                    profilePhysicsValue.text.toString(),
-                    profileComputerScienceValue.text.toString(),
-                    profileSocialScienceValue.text.toString(),
-                    profileAdditionalScoreValue.text.toString())
+        binding.profileUpdateScores.setOnClickListener {v->
+            showProfilePresenter?.updateScores(
+                    binding.profileMathsValue.text.toString(),
+                    binding.profileRussianValue.text.toString(),
+                    binding.profilePhysicsValue.text.toString(),
+                    binding.profileComputerScienceValue.text.toString(),
+                    binding.profileSocialScienceValue.text.toString(),
+                    binding.profileAdditionalScoreValue.text.toString())
             v.showSnack(R.string.profileUpdateScoresMessage)
         }
-        profileShowFinalList.setOnClickListener {
+        binding.profileShowFinalList.setOnClickListener {
             val bundle = showProfilePresenter?.returnBundleWithListID(300)
             toActionId(bundle, R.id.action_profile_to_showFittingSpecialties)
         }
-        profileApplySelectSpecialtiesForGraduation.setOnClickListener {
+        binding.profileApplySelectSpecialtiesForGraduation.setOnClickListener {
             toActionId(null, R.id.action_profile_to_selectSpecialtiesForCalculating)
         }
-        profileAddToListsCalculatePositions.setOnClickListener {
+        binding.profileAddToListsCalculatePositions.setOnClickListener {
             toActionId(null, R.id.action_profile_to_show_current_list)
         }
-        profileChanceShowResults.setOnClickListener {
+        binding.profileChanceShowResults.setOnClickListener {
             toActionId(null, R.id.action_profile_to_showResults)
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.profileTitle)
-        return inflater.inflate(R.layout.fragment_show_profile, container, false)
-    }
+
     override fun onDestroyView() {
         showProfilePresenter = null
         super.onDestroyView()
@@ -124,28 +141,28 @@ class ShowProfileView: Fragment(), ShowProfileMVP.View {
         val score = showProfilePresenter?.returnCheckedScore()
 
         fullName?.let {
-            profileLastNameValue.setText(fullName.lastName)
-            profileFirstNameValue.setText(fullName.firstName)
-            profilePatronymicValue.setText(fullName.patronymic)
+            binding.profileLastNameValue.setText(fullName.lastName)
+            binding.profileFirstNameValue.setText(fullName.firstName)
+            binding.profilePatronymicValue.setText(fullName.patronymic)
         }
         score?.let {
-            profileMathsValue.setText(score.maths.toString())
-            profileRussianValue.setText(score.russian.toString())
-            profilePhysicsValue.setText(score.physics.toString())
-            profileComputerScienceValue.setText(score.computerScience.toString())
-            profileSocialScienceValue.setText(score.socialScience.toString())
-            profileAdditionalScoreValue.setText(score.additionalScore.toString())
+            binding.profileMathsValue.setText(score.maths.toString())
+            binding.profileRussianValue.setText(score.russian.toString())
+            binding.profilePhysicsValue.setText(score.physics.toString())
+            binding.profileComputerScienceValue.setText(score.computerScience.toString())
+            binding.profileSocialScienceValue.setText(score.socialScience.toString())
+            binding.profileAdditionalScoreValue.setText(score.additionalScore.toString())
         }
     }
     override fun setupSpecialtiesFields() {
         val amountOfFinalSpecialties = showProfilePresenter?.returnAmountOfFinalSpecialties()
-        profileFinalListOfSpecialtiesAmountValue.setText(amountOfFinalSpecialties.toString())
+        binding.profileFinalListOfSpecialtiesAmountValue.setText(amountOfFinalSpecialties.toString())
 
         val amountOfSpecialtiesWithChance = showProfilePresenter?.returnAmountOfSpecialtiesWithChance()
-        profileChanceAmountValue.setText(amountOfSpecialtiesWithChance.toString())
+        binding.profileChanceAmountValue.setText(amountOfSpecialtiesWithChance.toString())
 
         val amountOfGraduatedSpecialties = showProfilePresenter?.returnAmountOfGraduatedSpecialties()
-        profileApplyAmountValue.setText(amountOfGraduatedSpecialties.toString())
+        binding.profileApplyAmountValue.setText(amountOfGraduatedSpecialties.toString())
     }
     override fun toActionId(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }

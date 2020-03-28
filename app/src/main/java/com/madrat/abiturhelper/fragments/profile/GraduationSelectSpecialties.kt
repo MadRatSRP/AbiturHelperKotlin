@@ -9,65 +9,69 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.CompleteSpecialtiesAdapter
+import com.madrat.abiturhelper.databinding.FragmentGraduationSelectSpecialtiesBinding
 import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationSelectSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.profile.GraduationSelectSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
-import kotlinx.android.synthetic.main.fragment_graduation_select_specialties.*
-import kotlinx.android.synthetic.main.fragment_graduation_select_specialties.view.*
 
 class GraduationSelectSpecialties
     : Fragment(), GraduationSelectSpecialtiesMVP.View {
     private var adapter: CompleteSpecialtiesAdapter? = null
-    private var graduationSelectSpecialtiesPresenter
-            : GraduationSelectSpecialtiesPresenter? = null
+    private var presenter: GraduationSelectSpecialtiesPresenter? = null
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        val listOfAllCompleteSpecialties
-                = graduationSelectSpecialtiesPresenter?.returnListOfAllCompleteSpecialties()
-        listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
-        showSpecialties(listOfAllCompleteSpecialties)
+    private var mBinding: FragmentGraduationSelectSpecialtiesBinding? = null
+    private val binding get() = mBinding!!
 
-        selectSaveCheckedSpecialties.setOnClickListener {view ->
-            val selectedSpecialties = adapter?.returnSelectedSpecialties()
-            graduationSelectSpecialtiesPresenter?.saveSelectedSpecialties(selectedSpecialties)
-
-            val itemStateArray = adapter?.returnItemStateArray()
-            graduationSelectSpecialtiesPresenter?.saveItemStateArray(itemStateArray)
-
-            toActionId(R.id.action_select_specialties_to_confirm_choice)
-        }
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity)
                 .supportActionBar?.setTitle(R.string.profileApplySelectSpecialtiesForGraduationTitle)
-        val view = inflater.inflate(R.layout.fragment_graduation_select_specialties,
-                container, false)
+
+        // Инициализируем mBinding
+        mBinding = FragmentGraduationSelectSpecialtiesBinding.inflate(inflater, container, false)
+        val view = binding.root
+
         setupMVP()
 
         adapter = CompleteSpecialtiesAdapter(
-                graduationSelectSpecialtiesPresenter?.returnItemStateArray(),
-                graduationSelectSpecialtiesPresenter?.returnSelectedSpecialties()
+                presenter?.returnItemStateArray(),
+                presenter?.returnSelectedSpecialties()
         )
-        view.selectForRecyclerView.adapter = adapter
-        view.selectForRecyclerView.linearManager()
+        binding.selectForRecyclerView.adapter = adapter
+        binding.selectForRecyclerView.linearManager()
 
         return view
     }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val listOfAllCompleteSpecialties
+                = presenter?.returnListOfAllCompleteSpecialties()
+        listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
+        showSpecialties(listOfAllCompleteSpecialties)
+
+        binding.selectSaveCheckedSpecialties.setOnClickListener {view ->
+            val selectedSpecialties = adapter?.returnSelectedSpecialties()
+            presenter?.saveSelectedSpecialties(selectedSpecialties)
+
+            val itemStateArray = adapter?.returnItemStateArray()
+            presenter?.saveItemStateArray(itemStateArray)
+
+            toActionId(R.id.action_select_specialties_to_confirm_choice)
+        }
+    }
     override fun onDestroyView() {
-        graduationSelectSpecialtiesPresenter = null
+        presenter = null
         adapter = null
         super.onDestroyView()
     }
 
     override fun setupMVP() {
-        graduationSelectSpecialtiesPresenter = GraduationSelectSpecialtiesPresenter()
+        presenter = GraduationSelectSpecialtiesPresenter()
     }
     override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }
-        selectForRecyclerView?.adapter = adapter
+        binding.selectForRecyclerView.adapter = adapter
     }
     override fun toActionId(actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId) }

@@ -9,26 +9,27 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SelectedSpecialtiesAdapter
+import com.madrat.abiturhelper.databinding.FragmentGraduationShowCurrentListBinding
 import com.madrat.abiturhelper.interfaces.fragments.profile.GraduationShowCurrentListMVP
 import com.madrat.abiturhelper.model.Graduation
 import com.madrat.abiturhelper.presenters.fragments.profile.GraduationShowCurrentListPresenter
 import com.madrat.abiturhelper.util.linearManager
-import kotlinx.android.synthetic.main.fragment_graduation_show_current_list.*
-import kotlinx.android.synthetic.main.fragment_graduation_show_current_list.view.*
 
-class GraduationShowCurrentList
-    : Fragment(), GraduationShowCurrentListMVP.View {
+class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
     private var adapter: SelectedSpecialtiesAdapter? = null
-    private var graduationShowCurrentListPresenter: GraduationShowCurrentListPresenter? = null
+    private var presenter: GraduationShowCurrentListPresenter? = null
+
+    private var mBinding: FragmentGraduationShowCurrentListBinding? = null
+    private val binding get() = mBinding!!
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
-        val graduationList = graduationShowCurrentListPresenter?.returnGraduationList()
+        val graduationList = presenter?.returnGraduationList()
         graduationList?.let { showGraduation(it) }
 
-        showCurrentToProfile.setOnClickListener {
+        binding.showCurrentToProfile.setOnClickListener {
             toSpecialties(null, R.id.action_show_current_list_to_profile)
         }
     }
@@ -36,27 +37,30 @@ class GraduationShowCurrentList
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar
                 ?.setTitle(R.string.profileGraduationShowCurrentListTitle)
-        val view = inflater.inflate(R.layout.fragment_graduation_show_current_list,
+
+        // Инициализируем mBinding
+        mBinding = FragmentGraduationShowCurrentListBinding.inflate(inflater,
                 container, false)
+        val view = binding.root
 
         adapter = SelectedSpecialtiesAdapter()
-        view.showCurrentRecyclerView.adapter = adapter
-        view.showCurrentRecyclerView.linearManager()
+        binding.showCurrentRecyclerView.adapter = adapter
+        binding.showCurrentRecyclerView.linearManager()
 
         return view
     }
     override fun onDestroyView() {
-        graduationShowCurrentListPresenter = null
+        presenter = null
         adapter = null
         super.onDestroyView()
     }
 
     override fun setupMVP() {
-        graduationShowCurrentListPresenter = GraduationShowCurrentListPresenter()
+        presenter = GraduationShowCurrentListPresenter()
     }
     override fun showGraduation(graduationList: ArrayList<Graduation>) {
         adapter?.updateGraduationList(graduationList)
-        showCurrentRecyclerView.adapter = adapter
+        binding.showCurrentRecyclerView.adapter = adapter
     }
     override fun toSpecialties(bundle: Bundle?, actionId: Int) {
         view?.let { Navigation.findNavController(it).navigate(actionId, bundle) }
