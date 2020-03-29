@@ -9,26 +9,31 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
+import com.madrat.abiturhelper.databinding.FragmentSpecialtiesBinding
 import com.madrat.abiturhelper.interfaces.fragments.ShowSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.model.Student
 import com.madrat.abiturhelper.presenters.fragments.ShowSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
-import kotlinx.android.synthetic.main.fragment_specialties.*
 
 class ShowSpecialtiesView
     : Fragment(), ShowSpecialtiesMVP.View {
     private var adapter: SpecialtiesAdapter? = null
     private var presenter: ShowSpecialtiesPresenter? = null
 
-    override fun initializeAdapterAndSetLayoutManager(facultyId: Int) {
-        adapter = SpecialtiesAdapter(facultyId) { facultyID, specialty: Specialty, position: Int ->
-            facultyID?.let { onSpecialtyClicked(it, specialty, position) }
-        }
-        specialtiesRecyclerView.adapter = adapter
-        specialtiesRecyclerView.linearManager()
-    }
+    private var mBinding: FragmentSpecialtiesBinding? = null
+    private val binding get() = mBinding!!
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val title = arguments?.getString("title")
+        (activity as AppCompatActivity).supportActionBar?.title = title
+
+        // Инициализируем mBinding
+        mBinding = FragmentSpecialtiesBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
@@ -37,20 +42,23 @@ class ShowSpecialtiesView
             presenter?.initializeViewComponentsAndFillItWithData(it)
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val title = arguments?.getString("title")
-        (activity as AppCompatActivity).supportActionBar?.title = title
-
-        return inflater.inflate(R.layout.fragment_specialties, container, false)
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 
+    override fun initializeAdapterAndSetLayoutManager(facultyId: Int) {
+        adapter = SpecialtiesAdapter(facultyId) { facultyID, specialty: Specialty, position: Int ->
+            facultyID?.let { onSpecialtyClicked(it, specialty, position) }
+        }
+        binding.specialtiesRecyclerView.adapter = adapter
+        binding.specialtiesRecyclerView.linearManager()
+    }
     override fun setupMVP() {
         presenter = ShowSpecialtiesPresenter(this)
     }
     override fun showSpecialties(specialties: ArrayList<Specialty>) {
         adapter?.updateSpecialtiesList(specialties)
-        specialtiesRecyclerView?.adapter = adapter
+        binding.specialtiesRecyclerView.adapter = adapter
     }
     override fun toStudents(bundle: Bundle) {
         view?.let {

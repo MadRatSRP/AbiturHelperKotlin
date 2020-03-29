@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ShowStudentsView">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bachelorsRecyclerView"
+        android:id="@+id/studentsRecyclerView"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_width="match_parent"

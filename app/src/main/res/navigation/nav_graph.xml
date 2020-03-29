@@ -65,7 +65,7 @@
     <fragment
         android:id="@+id/showBachelors"
         android:name="com.madrat.abiturhelper.fragments.ShowStudentsView"
-        tools:layout="@layout/fragment_show_bachelors" />
+        tools:layout="@layout/fragment_show_students" />
     <fragment
         android:id="@+id/currentList"
         android:name="com.madrat.abiturhelper.fragments.select_specialties.CurrentListView" >

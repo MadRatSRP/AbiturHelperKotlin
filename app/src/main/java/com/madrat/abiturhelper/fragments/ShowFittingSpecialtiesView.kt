@@ -7,19 +7,20 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.SpecialtiesAdapter
+import com.madrat.abiturhelper.databinding.FragmentShowFittingSpecialtiesBinding
 import com.madrat.abiturhelper.interfaces.fragments.ShowFittingSpecialtiesMVP
 import com.madrat.abiturhelper.model.Specialty
 import com.madrat.abiturhelper.presenters.fragments.ShowFittingSpecialtiesPresenter
 import com.madrat.abiturhelper.util.linearManager
-import kotlinx.android.synthetic.main.fragment_show_fitting_specialties.*
-import kotlinx.android.synthetic.main.fragment_show_fitting_specialties.view.*
 
 class ShowFittingSpecialtiesView
     : Fragment(), ShowFittingSpecialtiesMVP.View {
     private var adapter: SpecialtiesAdapter? = null
     private var showFittingSpecialtiesPresenter: ShowFittingSpecialtiesPresenter? = null
+
+    private var mBinding: FragmentShowFittingSpecialtiesBinding? = null
+    private val binding get() = mBinding!!
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -33,7 +34,7 @@ class ShowFittingSpecialtiesView
         val faculties = arguments?.getInt("listId")
                 ?.let { showFittingSpecialtiesPresenter?.returnListBasedOnListID(it) }
 
-        fittingSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        binding.fittingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {}
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 showSpecialties(faculties?.get(position))
@@ -48,12 +49,14 @@ class ShowFittingSpecialtiesView
         }
         (activity as AppCompatActivity).supportActionBar?.title = title
                 //context?.getString(R.string.resultShowFittingSpecialties)
-        val view = inflater.inflate(R.layout.fragment_show_fitting_specialties,
-                container, false)
+
+        // Инициализируем mBinding
+        mBinding = FragmentShowFittingSpecialtiesBinding.inflate(inflater, container, false)
+        val view = binding.root
 
         adapter = SpecialtiesAdapter(null,null)
-        view.fittingRecyclerView.adapter = adapter
-        view.fittingRecyclerView.linearManager()
+        binding.fittingRecyclerView.adapter = adapter
+        binding.fittingRecyclerView.linearManager()
         return view
     }
     override fun onDestroyView() {
@@ -67,6 +70,6 @@ class ShowFittingSpecialtiesView
     }
     override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }
-        fittingRecyclerView?.adapter = adapter
+        binding.fittingRecyclerView.adapter = adapter
     }
 }
