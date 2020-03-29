@@ -11,37 +11,57 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.adapter.FacultiesAdapter
+import com.madrat.abiturhelper.databinding.FragmentCurrentListBinding
 import com.madrat.abiturhelper.interfaces.fragments.CurrentListMVP
 import com.madrat.abiturhelper.model.Faculty
 import com.madrat.abiturhelper.presenters.fragments.CurrentListPresenter
 import com.madrat.abiturhelper.util.linearManager
 import com.madrat.abiturhelper.util.showLog
-import kotlinx.android.synthetic.main.fragment_current_list.*
-import kotlinx.android.synthetic.main.fragment_current_list.view.*
 
 class CurrentListView: Fragment(), CurrentListMVP.View {
     private var adapter: FacultiesAdapter? = null
-    private var currentListPresenter: CurrentListPresenter? = null
+    private var presenter: CurrentListPresenter? = null
 
+    private var mBinding: FragmentCurrentListBinding? = null
+    private val binding get() = mBinding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.currentListTitle)
+
+        // Инициализируем mBinding
+        mBinding = FragmentCurrentListBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        adapter = FacultiesAdapter{ faculty: Faculty, position: Int ->
+            onFacultyClicked(faculty, position)}
+        binding.currentListRecyclerView.linearManager()
+        binding.currentListRecyclerView.adapter = adapter
+        return view
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupMVP()
 
         checkFacultyListSize()
 
-        currentListSwipeRefresh?.setOnRefreshListener {
+        binding.currentListSwipeRefresh.setOnRefreshListener {
             Handler().postDelayed({
                 checkFacultyListSize()
-                currentListSwipeRefresh?.isRefreshing = false
+                binding.currentListSwipeRefresh.isRefreshing = false
             }, 1500)
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
     private fun checkFacultyListSize() {
-        val facultyList = currentListPresenter?.returnFacultyList()
+        val facultyList = presenter?.returnFacultyList()
 
         showLog(facultyList?.size.toString())
         if (facultyList?.size == null) showMoveToWorkWithSpecialtiesAlertDialog()
-        else facultyList.let { showFaculties(it) }
+        else showFaculties(facultyList)
     }
 
     private fun showMoveToWorkWithSpecialtiesAlertDialog() {
@@ -57,24 +77,14 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         builder?.setNeutralButton("Отмена") {_, _ ->}
         builder?.show()
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.currentListTitle)
-        val view = inflater.inflate(R.layout.fragment_current_list, container, false)
 
-        adapter = FacultiesAdapter{ faculty: Faculty, position: Int ->
-            onFacultyClicked(faculty, position)}
-        view.currentListRecyclerView.linearManager()
-        view.currentListRecyclerView.adapter = adapter
-        return view
-    }
 
     override fun setupMVP() {
-        currentListPresenter = CurrentListPresenter()
+        presenter = CurrentListPresenter()
     }
     override fun showFaculties(faculties: ArrayList<Faculty>) {
         adapter?.updateFacultiesList(faculties)
-        currentListRecyclerView.adapter = adapter
+        binding.currentListRecyclerView.adapter = adapter
     }
     override fun onFacultyClicked(faculty: Faculty, position: Int) {
         showLog("Выбран: ${faculty.name}")
@@ -100,7 +110,7 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         }
     }
     override fun moveToSpecialties(position: Int, titleId: Int) {
-        val bundle = context?.let { currentListPresenter?.returnFacultyBundle(it, position, titleId) }
+        val bundle = context?.let { presenter?.returnFacultyBundle(it, position, titleId) }
         bundle?.let { toSpecialties(it, R.id.action_currentList_to_showSpecialtiesView) }
     }
 }

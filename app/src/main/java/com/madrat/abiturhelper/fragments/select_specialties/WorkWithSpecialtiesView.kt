@@ -8,37 +8,44 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.madrat.abiturhelper.R
+import com.madrat.abiturhelper.databinding.FragmentWorkWithSpecialtiesBinding
 import com.madrat.abiturhelper.interfaces.fragments.WorkWithSpecialtiesMVP
 import com.madrat.abiturhelper.presenters.fragments.WorkWithSpecialtiesPresenter
 import com.madrat.abiturhelper.util.moveToSelectedFragment
 import com.madrat.abiturhelper.util.showLog
 import com.madrat.abiturhelper.util.showSnack
-import kotlinx.android.synthetic.main.fragment_work_with_specialties.*
 import kotlin.system.measureTimeMillis
 
 class WorkWithSpecialtiesView
     : Fragment(), WorkWithSpecialtiesMVP.View{
     private var presenter: WorkWithSpecialtiesPresenter? = null
 
+    private var mBinding: FragmentWorkWithSpecialtiesBinding? = null
+    private val binding get() = mBinding!!
+
     init {
         presenter = WorkWithSpecialtiesPresenter(this)
     }
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.workWithSpecialtiesTitle)
+
+        // Инициализируем mBinding
+        mBinding = FragmentWorkWithSpecialtiesBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         context?.let { formListOfStudentsAndMinimalScores(it) }
 
-        workToCurrentList.setOnClickListener {
+        binding.workToCurrentList.setOnClickListener {
             onToCurrentListClicked()
         }
-        workToResult.setOnClickListener {
+        binding.workToResult.setOnClickListener {
             onToResultClicked()
         }
-    }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.workWithSpecialtiesTitle)
-        return inflater.inflate(R.layout.fragment_work_with_specialties, container, false)
     }
     override fun onDestroyView() {
         presenter = null
