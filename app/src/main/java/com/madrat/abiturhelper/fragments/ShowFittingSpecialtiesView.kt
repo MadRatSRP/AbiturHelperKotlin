@@ -17,38 +17,19 @@ import com.madrat.abiturhelper.util.linearManager
 class ShowFittingSpecialtiesView
     : Fragment(), ShowFittingSpecialtiesMVP.View {
     private var adapter: SpecialtiesAdapter? = null
-    private var showFittingSpecialtiesPresenter: ShowFittingSpecialtiesPresenter? = null
+    private var presenter: ShowFittingSpecialtiesPresenter? = null
 
     private var mBinding: FragmentShowFittingSpecialtiesBinding? = null
     private val binding get() = mBinding!!
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        /*val faculties = when(arguments?.getInt("listId")) {
-            100 -> showFittingSpecialtiesPresenter?.returnListOfSpecialtiesWithZeroMinimalScore()
-            200 -> showFittingSpecialtiesPresenter?.returnListOfFittingSpecialties()
-            300 -> showFittingSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
-            else -> null
-        }*/
-        val faculties = arguments?.getInt("listId")
-                ?.let { showFittingSpecialtiesPresenter?.returnListBasedOnListID(it) }
-
-        binding.fittingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                showSpecialties(faculties?.get(position))
-            }
-        }
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setupMVP()
         val title = arguments?.getInt("listId")?.let {listId->
-            context?.let { showFittingSpecialtiesPresenter?.returnTitleBasedOnListID(it, listId) }
+            context?.let { presenter?.returnTitleBasedOnListID(it, listId) }
         }
         (activity as AppCompatActivity).supportActionBar?.title = title
-                //context?.getString(R.string.resultShowFittingSpecialties)
+        //context?.getString(R.string.resultShowFittingSpecialties)
 
         // Инициализируем mBinding
         mBinding = FragmentShowFittingSpecialtiesBinding.inflate(inflater, container, false)
@@ -59,14 +40,35 @@ class ShowFittingSpecialtiesView
         binding.fittingRecyclerView.linearManager()
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        /*val faculties = when(arguments?.getInt("listId")) {
+        100 -> showFittingSpecialtiesPresenter?.returnListOfSpecialtiesWithZeroMinimalScore()
+        200 -> showFittingSpecialtiesPresenter?.returnListOfFittingSpecialties()
+        300 -> showFittingSpecialtiesPresenter?.returnCompleteListOfSpecilaties()
+        else -> null
+        }*/
+        val faculties = arguments?.getInt("listId")
+                ?.let { presenter?.returnListBasedOnListID(it) }
+
+        binding.fittingSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                showSpecialties(faculties?.get(position))
+            }
+        }
+    }
     override fun onDestroyView() {
-        showFittingSpecialtiesPresenter = null
-        adapter = null
         super.onDestroyView()
+        adapter = null
+
+        mBinding = null
+
+        presenter = null
     }
 
     override fun setupMVP() {
-        showFittingSpecialtiesPresenter = ShowFittingSpecialtiesPresenter()
+        presenter = ShowFittingSpecialtiesPresenter()
     }
     override fun showSpecialties(specialties: ArrayList<Specialty>?) {
         specialties?.let { adapter?.updateSpecialtiesList(it) }

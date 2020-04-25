@@ -21,6 +21,7 @@ class ChanceChooseSpecialties
     private var adapter: CompleteSpecialtiesAdapter? = null
     private var presenter: ChanceChooseSpecialtiesPresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentChanceChooseSpecialtiesBinding? = null
     private val binding get() = mBinding!!
 
@@ -29,7 +30,7 @@ class ChanceChooseSpecialties
         (activity as AppCompatActivity).supportActionBar
                 ?.setTitle(R.string.chanceChooseSpecialtiesTitle)
 
-        // Инициализируем mBinding
+        // ViewBinding initialization
         mBinding = FragmentChanceChooseSpecialtiesBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -45,22 +46,24 @@ class ChanceChooseSpecialties
 
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val listOfAllCompleteSpecialties
                 = presenter?.returnListOfAllCompleteSpecialties()
         listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
         showSpecialties(listOfAllCompleteSpecialties)
 
-        binding.chosenSaveCheckedSpecialties.setOnClickListener {view->
+        binding.chosenSaveCheckedSpecialties.setOnClickListener {
             chosenChecker(view)
         }
     }
     override fun onDestroyView() {
-        presenter = null
-        adapter = null
         super.onDestroyView()
+        adapter = null
+
+        presenter = null
+
+        mBinding = null
     }
 
     private fun chosenChecker(view: View) {

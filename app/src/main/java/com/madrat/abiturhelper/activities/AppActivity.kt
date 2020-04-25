@@ -13,12 +13,13 @@ import com.madrat.abiturhelper.interfaces.activities.AppActivityMVP
 import com.madrat.abiturhelper.presenters.activities.AppPresenter
 
 class AppActivity : AppCompatActivity(), AppActivityMVP.View {
-    private lateinit var appPresenter: AppPresenter
+    private lateinit var presenter: AppPresenter
+    // ViewBinding variable
     private lateinit var binding: ActivityAppBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Инициализируем binding
+        // ViewBinding initialization
         binding = ActivityAppBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -28,9 +29,8 @@ class AppActivity : AppCompatActivity(), AppActivityMVP.View {
     }
 
     override fun setupMVP() {
-        appPresenter = AppPresenter(this)
+        presenter = AppPresenter(this)
     }
-
     override fun setupActivity() {
         val actionBar: ActionBar? = supportActionBar
         val navController = Navigation.findNavController(this, R.id.navHostFragment)
@@ -45,7 +45,6 @@ class AppActivity : AppCompatActivity(), AppActivityMVP.View {
         NavigationUI.setupWithNavController(binding.navigationView, navController)
         NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {

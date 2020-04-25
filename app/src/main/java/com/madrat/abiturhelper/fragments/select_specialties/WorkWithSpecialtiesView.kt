@@ -20,6 +20,7 @@ class WorkWithSpecialtiesView
     : Fragment(), WorkWithSpecialtiesMVP.View{
     private var presenter: WorkWithSpecialtiesPresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentWorkWithSpecialtiesBinding? = null
     private val binding get() = mBinding!!
 
@@ -36,9 +37,9 @@ class WorkWithSpecialtiesView
 
         return binding.root
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        context?.let { formListOfStudentsAndMinimalScores(it) }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        formListOfStudentsAndMinimalScores(view.context)
 
         binding.workToCurrentList.setOnClickListener {
             onToCurrentListClicked()
@@ -48,8 +49,10 @@ class WorkWithSpecialtiesView
         }
     }
     override fun onDestroyView() {
-        presenter = null
         super.onDestroyView()
+        presenter = null
+
+        mBinding = null
     }
 
     override fun onToCurrentListClicked() {
@@ -58,7 +61,7 @@ class WorkWithSpecialtiesView
     override fun onToResultClicked() {
         moveToSelectedFragment(R.id.action_workWithSpecialtiesView_to_resultView)
     }
-    fun formListOfStudentsAndMinimalScores(context: Context) {
+    private fun formListOfStudentsAndMinimalScores(context: Context) {
         val time = measureTimeMillis {
 
             context.assets?.open("specialties.csv")?.let {specialties ->

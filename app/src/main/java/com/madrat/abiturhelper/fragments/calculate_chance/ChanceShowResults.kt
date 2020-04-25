@@ -18,8 +18,9 @@ import com.madrat.abiturhelper.util.linearManager
 class ChanceShowResults
     : Fragment(), ChanceShowResultsMVP.View {
     private var adapter: ChancesAdapter? = null
-    private var chanceShowResultsPresenter: ChanceShowResultsPresenter? = null
+    private var presenter: ChanceShowResultsPresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentChanceShowResultsBinding? = null
     private val binding get() = mBinding!!
 
@@ -27,7 +28,7 @@ class ChanceShowResults
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.chanceShowResultsTitle)
 
-        // Инициализируем mBinding
+        // ViewBinding Initialization
         mBinding = FragmentChanceShowResultsBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -36,11 +37,11 @@ class ChanceShowResults
         binding.chancesRecyclerView.adapter = adapter
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupMVP()
 
-        val listOfChances = chanceShowResultsPresenter?.returnListOfChances()
+        val listOfChances = presenter?.returnListOfChances()
         listOfChances?.let { showListOfChances(it) }
 
         binding.chancesToProfile.setOnClickListener {
@@ -48,13 +49,16 @@ class ChanceShowResults
         }
     }
     override fun onDestroyView() {
-        chanceShowResultsPresenter = null
-        adapter = null
         super.onDestroyView()
+        presenter = null
+
+        adapter = null
+
+        mBinding = null
     }
 
     override fun setupMVP() {
-        chanceShowResultsPresenter = ChanceShowResultsPresenter()
+        presenter = ChanceShowResultsPresenter()
     }
     override fun showListOfChances(listOfChances: ArrayList<Chance>) {
         adapter?.updateListOfChances(listOfChances)

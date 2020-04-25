@@ -34,8 +34,8 @@ class ShowSpecialtiesView
 
         return binding.root
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupMVP()
 
         arguments?.getInt("pos")?.let {
@@ -44,6 +44,11 @@ class ShowSpecialtiesView
     }
     override fun onDestroyView() {
         super.onDestroyView()
+        adapter = null
+
+        presenter = null
+
+        mBinding = null
     }
 
     override fun initializeAdapterAndSetLayoutManager(facultyId: Int) {

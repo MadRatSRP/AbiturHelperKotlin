@@ -18,8 +18,9 @@ import com.madrat.abiturhelper.util.linearManager
 class ChanceConfirmChoice
     : Fragment(), ChanceConfirmChoiceMVP.View {
     private var adapter: SpecialtiesAdapter? = null
-    private var chanceConfirmChoicePresenter: ChanceConfirmChoicePresenter? = null
+    private var presenter: ChanceConfirmChoicePresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentChanceConfirmChoiceBinding? = null
     private val binding get() = mBinding!!
 
@@ -28,7 +29,7 @@ class ChanceConfirmChoice
         (activity as AppCompatActivity).supportActionBar
                 ?.setTitle(R.string.chanceConfirmChoiceTitle)
 
-        // Инициализируем mBinding
+        // ViewBinding initialization
         mBinding = FragmentChanceConfirmChoiceBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -37,30 +38,33 @@ class ChanceConfirmChoice
         binding.chanceConfirmChoiceRecyclerView.linearManager()
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupMVP()
         // Получаем выбранный пользователем список специальностей для проверки
         // и показываем его
-        val chosenSpecialties = chanceConfirmChoicePresenter?.returnChosenSpecialties()
+        val chosenSpecialties = presenter?.returnChosenSpecialties()
         chosenSpecialties?.let { showSelectedSpecialties(it) }
 
         val listOfChances = chosenSpecialties
-                ?.let { chanceConfirmChoicePresenter?.calculateChancesData(it) }
-        listOfChances?.let { chanceConfirmChoicePresenter?.saveListOfChances(it) }
+                ?.let { presenter?.calculateChancesData(it) }
+        listOfChances?.let { presenter?.saveListOfChances(it) }
 
         binding.chanceConfirmChoiceShowGraduationList.setOnClickListener {
             toSpecialties(R.id.action_confirmChoice_to_showResults)
         }
     }
     override fun onDestroyView() {
-        chanceConfirmChoicePresenter = null
-        adapter = null
         super.onDestroyView()
+        presenter = null
+
+        adapter = null
+
+        mBinding = null
     }
 
     override fun setupMVP() {
-        chanceConfirmChoicePresenter = ChanceConfirmChoicePresenter()
+        presenter = ChanceConfirmChoicePresenter()
     }
     override fun showSelectedSpecialties(specialties: ArrayList<Specialty>) {
         adapter?.updateSpecialtiesList(specialties)

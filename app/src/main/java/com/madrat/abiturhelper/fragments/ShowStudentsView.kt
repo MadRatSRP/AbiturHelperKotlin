@@ -21,18 +21,6 @@ class ShowStudentsView
     private var mBinding: FragmentShowStudentsBinding? = null
     private val binding get() = mBinding!!
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupMVP()
-
-        val list = presenter?.returnCurrentListOfStudents()
-        list?.let { showStudents(it) }
-    }
-
-    override fun setupMVP() {
-        presenter = ShowStudentsPresenter()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val title = arguments?.getString("title")
@@ -47,7 +35,25 @@ class ShowStudentsView
         binding.studentsRecyclerView.adapter = adapter
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupMVP()
 
+        val list = presenter?.returnCurrentListOfStudents()
+        list?.let { showStudents(it) }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter = null
+
+        adapter = null
+
+        mBinding = null
+    }
+
+    override fun setupMVP() {
+        presenter = ShowStudentsPresenter()
+    }
     override fun showStudents(students: ArrayList<Student>) {
         adapter?.updateBachelorsList(students)
         binding.studentsRecyclerView.adapter = adapter

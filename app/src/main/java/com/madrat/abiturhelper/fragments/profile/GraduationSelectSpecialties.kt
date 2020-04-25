@@ -20,6 +20,7 @@ class GraduationSelectSpecialties
     private var adapter: CompleteSpecialtiesAdapter? = null
     private var presenter: GraduationSelectSpecialtiesPresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentGraduationSelectSpecialtiesBinding? = null
     private val binding get() = mBinding!!
 
@@ -28,7 +29,7 @@ class GraduationSelectSpecialties
         (activity as AppCompatActivity)
                 .supportActionBar?.setTitle(R.string.profileApplySelectSpecialtiesForGraduationTitle)
 
-        // Инициализируем mBinding
+        // ViewBinding initialization
         mBinding = FragmentGraduationSelectSpecialtiesBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -43,14 +44,14 @@ class GraduationSelectSpecialties
 
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val listOfAllCompleteSpecialties
                 = presenter?.returnListOfAllCompleteSpecialties()
         listOfAllCompleteSpecialties?.sortByDescending { it.amountOfStatements }
         showSpecialties(listOfAllCompleteSpecialties)
 
-        binding.selectSaveCheckedSpecialties.setOnClickListener {view ->
+        binding.selectSaveCheckedSpecialties.setOnClickListener {
             val selectedSpecialties = adapter?.returnSelectedSpecialties()
             presenter?.saveSelectedSpecialties(selectedSpecialties)
 
@@ -61,9 +62,12 @@ class GraduationSelectSpecialties
         }
     }
     override fun onDestroyView() {
-        presenter = null
-        adapter = null
         super.onDestroyView()
+        adapter = null
+
+        presenter = null
+
+        mBinding = null
     }
 
     override fun setupMVP() {

@@ -22,6 +22,7 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
     private var adapter: FacultiesAdapter? = null
     private var presenter: CurrentListPresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentCurrentListBinding? = null
     private val binding get() = mBinding!!
 
@@ -29,7 +30,7 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.currentListTitle)
 
-        // Инициализируем mBinding
+        // ViewBinding initialization
         mBinding = FragmentCurrentListBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -39,8 +40,8 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         binding.currentListRecyclerView.adapter = adapter
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupMVP()
 
         checkFacultyListSize()
@@ -54,8 +55,16 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
     }
     override fun onDestroyView() {
         super.onDestroyView()
+        presenter = null
+
+        adapter = null
+
+        mBinding = null
     }
 
+    override fun setupMVP() {
+        presenter = CurrentListPresenter()
+    }
     private fun checkFacultyListSize() {
         val facultyList = presenter?.returnFacultyList()
 
@@ -63,7 +72,6 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         if (facultyList?.size == null) showMoveToWorkWithSpecialtiesAlertDialog()
         else showFaculties(facultyList)
     }
-
     private fun showMoveToWorkWithSpecialtiesAlertDialog() {
         val builder = context?.let { AlertDialog.Builder(it) }
         builder?.setCancelable(true)
@@ -76,11 +84,6 @@ class CurrentListView: Fragment(), CurrentListMVP.View {
         }
         builder?.setNeutralButton("Отмена") {_, _ ->}
         builder?.show()
-    }
-
-
-    override fun setupMVP() {
-        presenter = CurrentListPresenter()
     }
     override fun showFaculties(faculties: ArrayList<Faculty>) {
         adapter?.updateFacultiesList(faculties)

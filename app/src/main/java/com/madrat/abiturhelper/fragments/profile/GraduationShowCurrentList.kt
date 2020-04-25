@@ -19,20 +19,10 @@ class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
     private var adapter: SelectedSpecialtiesAdapter? = null
     private var presenter: GraduationShowCurrentListPresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentGraduationShowCurrentListBinding? = null
     private val binding get() = mBinding!!
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupMVP()
-
-        val graduationList = presenter?.returnGraduationList()
-        graduationList?.let { showGraduation(it) }
-
-        binding.showCurrentToProfile.setOnClickListener {
-            toSpecialties(null, R.id.action_show_current_list_to_profile)
-        }
-    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar
@@ -49,10 +39,24 @@ class GraduationShowCurrentList: Fragment(), GraduationShowCurrentListMVP.View {
 
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupMVP()
+
+        val graduationList = presenter?.returnGraduationList()
+        graduationList?.let { showGraduation(it) }
+
+        binding.showCurrentToProfile.setOnClickListener {
+            toSpecialties(null, R.id.action_show_current_list_to_profile)
+        }
+    }
     override fun onDestroyView() {
-        presenter = null
-        adapter = null
         super.onDestroyView()
+        presenter = null
+
+        adapter = null
+
+        mBinding = null
     }
 
     override fun setupMVP() {

@@ -19,6 +19,7 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
     private var adapter: SpecialtiesAdapter? = null
     private var presenter: GraduationConfirmChoicePresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentGraduationConfirmChoiceBinding? = null
     private val binding get() = mBinding!!
 
@@ -36,8 +37,8 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
         binding.confirmChoiceRecyclerView.linearManager()
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupMVP()
 
         // Получаем выбранный пользователем список специальностей для проверки
@@ -56,6 +57,15 @@ class GraduationConfirmChoice : Fragment(), GraduationConfirmChoiceMVP.View {
             toSpecialties(null, R.id.action_confirm_choice_to_show_current_list)
         }
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter = null
+
+        adapter = null
+
+        mBinding = null
+    }
+
     override fun setupMVP() {
         presenter = GraduationConfirmChoicePresenter()
     }

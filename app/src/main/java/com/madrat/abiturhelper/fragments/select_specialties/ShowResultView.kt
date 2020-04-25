@@ -15,11 +15,21 @@ import com.madrat.abiturhelper.presenters.fragments.ShowResultPresenter
 class ShowResultView : Fragment(), ShowResultMVP.View {
     private var presenter: ShowResultPresenter? = null
 
+    // ViewBinding varibles
     private var mBinding: FragmentShowResultBinding? = null
     private val binding get() = mBinding!!
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.resultTitle)
+
+        // ViewBinding initialization
+        mBinding = FragmentShowResultBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupMVP()
         // Пятый шаг
         presenter?.checkForZeroMinimalScore()
@@ -51,12 +61,11 @@ class ShowResultView : Fragment(), ShowResultMVP.View {
             toSpecialties(null, R.id.action_resultView_to_profile)
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.resultTitle)
-        // Инициализируем mBinding
-        mBinding = FragmentShowResultBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter = null
+
+        mBinding = null
     }
 
     override fun setupMVP() {

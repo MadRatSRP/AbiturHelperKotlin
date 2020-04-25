@@ -18,19 +18,15 @@ import com.madrat.abiturhelper.util.toast
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
     private var presenter: SetupScorePresenter? = null
 
+    // ViewBinding variables
     private var mBinding: FragmentSetupScoreBinding? = null
-    // Valid only between onCreateView and onDestroyView
     private val binding get() = mBinding!!
-
-    init {
-        // Инициализируем презентер
-        presenter = SetupScorePresenter(this)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.setupScoreTitle)
-        // Инициализируем mBinding
+
+        // ViewBinding initialization
         mBinding = FragmentSetupScoreBinding.inflate(inflater, container, false)
         val view = binding.root
 
@@ -42,19 +38,20 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
 
         return view
     }
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        // Инициализируем презентер
+        presenter = SetupScorePresenter(this)
 
         binding.moveToSpecialtiesScreen.setOnClickListener {
             onShowSpecialtiesScreenClicked()
         }
     }
     override fun onDestroyView() {
-        mBinding = null
-
+        super.onDestroyView()
         presenter = null
 
-        super.onDestroyView()
+        mBinding = null
     }
     
     override fun onShowSpecialtiesScreenClicked()  {
@@ -110,8 +107,7 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
                         R.string.errorMessageSocialScience)
             }
             Constants.LESS_THAN_THREE -> {
-                context?.getText(R.string.score_error_message_less_than_three_score)
-                        ?.let { context.toast(it) }
+                context?.getText(R.string.score_error_message_less_than_three_score)?.let { context.toast(it) }
             }
         }
     }
