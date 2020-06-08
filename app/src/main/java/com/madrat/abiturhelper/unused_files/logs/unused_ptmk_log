@@ -1,3 +1,0 @@
-   showLog("ПТМК с размером ${list.size} был разбит на ЗаочноеБюджет - ${zaochnBudg.size}, " +
-                    "ОчноеБюджет - ${ochnBudg.size}, ОчноеЛьготное - ${ochnLgot.size}, " +
-                    "ОчноеПлатное - ${ochnPlat.size}")

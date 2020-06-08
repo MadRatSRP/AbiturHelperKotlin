@@ -1,6 +1,0 @@
-       showLog("КТО с размером ${list.size} был разбит на АТиКМ_ОчноеБюджет - ${atkmOchnBudg.size}, " +
-                    "АТиКМ_ОчноеЛьготное - ${atkmOchnLgot.size}, АТиКМ_ОчноеПлатное - ${atkmOchnPlat.size}," +
-                    "\nТМ_ОчноеБюджет - ${tmOchnBudg.size}, ТМ_ОчноеЛьготное -  ${tmOchnLgot.size}, " +
-                    "ТМ_ОчноеПлатное - ${tmOchnPlat.size}, ТМ_ОчноеЦелевое -  ${tmOchnCelevoe.size}, " +
-                    "ВечернееБюджет - ${vechBudg.size}, ВечернееЛьготное - ${vechLgot.size}, " +
-                    "ВечернееПлатное - ${vechPlat.size}")
