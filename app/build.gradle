@@ -50,35 +50,35 @@ ext {
     // Apache Common CSV
     apacheCommonCSVVersion = "1.8"
     // Retrofit
-    retrofitVersion = '2.8.1'
+    retrofitVersion = '2.9.0'
     // Dagger 2
-    dagger2Version = '2.27'
+    dagger2Version = '2.29.1'
 
     // Jetpack
     // ConstraintLayout
-    constraintLayoutVersion = "1.1.3"
+    constraintLayoutVersion = '2.0.1'
     // Fragment
-    fragmentVersion = "1.3.0-alpha03"
+    fragmentVersion = '1.3.0-alpha08'
     // SwipeRefreshLayout
-    swipeRefreshLayoutVersion = "1.0.0"
+    swipeRefreshLayoutVersion = '1.1.0'
     // Room / Room KTX
     roomVersion = "2.2.5"
     // Material Design Components
-    materialDesignComponentsVersion = '1.2.0-alpha06'
+    materialDesignComponentsVersion = '1.3.0-alpha02'
     // AppCompat
-    appCompatVersion = "1.1.0"
+    appCompatVersion = '1.2.0'
 
     // Kotlin
     // Kotlin Coroutines
-    kotlinCoroutinesVersion = "1.3.5"
+    kotlinCoroutinesVersion = '1.3.9'
 
     // Testing
     // Junit
     junitVersion = '4.13'
     // Junit Runner
-    junitRunnerVersion = "1.1.1"
+    junitRunnerVersion = '1.1.2'
     // Espresso
-    espressoVersion = "3.2.0"
+    espressoVersion = '3.3.0'
 }
 
 dependencies {
@@ -121,7 +121,7 @@ dependencies {
     // JDK
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
     // Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
 
     // Testing
     // Junit

@@ -1,15 +1,15 @@
-# directories
+# Directories
 # project directory
 .PVS-Studio
 .idea
 .gradle
-build
 gradle
-
+build
+buildCacheDir
 # app module directory
 app/build
 
-
-# files
+# Files
 *.iml
 *local.properties
+buildCacheDir.lock

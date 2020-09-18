@@ -6,7 +6,7 @@
     app:startDestination="@id/setupScore">
     <fragment
         android:id="@+id/setupScore"
-        android:name="com.madrat.abiturhelper.fragments.select_specialties.SetupScoreView"
+        android:name="com.madrat.abiturhelper.ui.fragments.select_specialties.SetupScoreView"
         tools:layout="@layout/fragment_setup_score">
         <action
             android:id="@+id/action_setupScore_to_workWithSpecialtiesView"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultView"
-        android:name="com.madrat.abiturhelper.fragments.select_specialties.ShowResultView"
+        android:name="com.madrat.abiturhelper.ui.fragments.select_specialties.ShowResultView"
         tools:layout="@layout/fragment_show_result" >
         <action
             android:id="@+id/action_resultView_to_showFittingSpecialties"
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.madrat.abiturhelper.fragments.profile.ShowProfileView"
+        android:name="com.madrat.abiturhelper.ui.fragments.profile.ShowProfileView"
         tools:layout="@layout/fragment_show_profile" >
         <action
             android:id="@+id/action_profile_to_showFittingSpecialties"
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/workWithSpecialtiesView"
-        android:name="com.madrat.abiturhelper.fragments.select_specialties.WorkWithSpecialtiesView"
+        android:name="com.madrat.abiturhelper.ui.fragments.select_specialties.WorkWithSpecialtiesView"
         tools:layout="@layout/fragment_work_with_specialties" >
         <action
             android:id="@+id/action_workWithSpecialtiesView_to_resultView"
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/showSpecialtiesView"
-        android:name="com.madrat.abiturhelper.fragments.ShowSpecialtiesView"
+        android:name="com.madrat.abiturhelper.ui.fragments.ShowSpecialtiesView"
         tools:layout="@layout/fragment_specialties" >
         <action
             android:id="@+id/action_showSpecialtiesView_to_showBachelors"
@@ -64,11 +64,11 @@
     </fragment>
     <fragment
         android:id="@+id/showBachelors"
-        android:name="com.madrat.abiturhelper.fragments.ShowStudentsView"
+        android:name="com.madrat.abiturhelper.ui.fragments.ShowStudentsView"
         tools:layout="@layout/fragment_show_students" />
     <fragment
         android:id="@+id/currentList"
-        android:name="com.madrat.abiturhelper.fragments.select_specialties.CurrentListView" >
+        android:name="com.madrat.abiturhelper.ui.fragments.select_specialties.CurrentListView" >
         <action
             android:id="@+id/action_currentList_to_showSpecialtiesView"
             app:destination="@id/showSpecialtiesView" />
@@ -78,17 +78,17 @@
     </fragment>
     <fragment
         android:id="@+id/showFittingSpecialties"
-        android:name="com.madrat.abiturhelper.fragments.ShowFittingSpecialtiesView" />
+        android:name="com.madrat.abiturhelper.ui.fragments.ShowFittingSpecialtiesView" />
     <fragment
         android:id="@+id/select_specialties"
-        android:name="com.madrat.abiturhelper.fragments.profile.GraduationSelectSpecialties" >
+        android:name="com.madrat.abiturhelper.ui.fragments.profile.GraduationSelectSpecialties" >
         <action
             android:id="@+id/action_select_specialties_to_confirm_choice"
             app:destination="@id/confirm_choice" />
     </fragment>
     <fragment
         android:id="@+id/show_current_list"
-        android:name="com.madrat.abiturhelper.fragments.profile.GraduationShowCurrentList" >
+        android:name="com.madrat.abiturhelper.ui.fragments.profile.GraduationShowCurrentList" >
         <action
             android:id="@+id/action_show_current_list_to_profile"
             app:destination="@id/profile" />
@@ -98,28 +98,28 @@
     </fragment>
     <fragment
         android:id="@+id/confirm_choice"
-        android:name="com.madrat.abiturhelper.fragments.profile.GraduationConfirmChoice">
+        android:name="com.madrat.abiturhelper.ui.fragments.profile.GraduationConfirmChoice">
         <action
             android:id="@+id/action_confirm_choice_to_show_current_list"
             app:destination="@id/show_current_list" />
     </fragment>
     <fragment
         android:id="@+id/chooseSpecialties"
-        android:name="com.madrat.abiturhelper.fragments.calculate_chance.ChanceChooseSpecialties">
+        android:name="com.madrat.abiturhelper.ui.fragments.calculate_chance.ChanceChooseSpecialties">
         <action
             android:id="@+id/action_chooseSpecialties_to_confirmChoice"
             app:destination="@id/confirmChoice" />
     </fragment>
     <fragment
         android:id="@+id/confirmChoice"
-        android:name="com.madrat.abiturhelper.fragments.calculate_chance.ChanceConfirmChoice">
+        android:name="com.madrat.abiturhelper.ui.fragments.calculate_chance.ChanceConfirmChoice">
         <action
             android:id="@+id/action_confirmChoice_to_showResults"
             app:destination="@id/showResults" />
     </fragment>
     <fragment
         android:id="@+id/showResults"
-        android:name="com.madrat.abiturhelper.fragments.calculate_chance.ChanceShowResults" >
+        android:name="com.madrat.abiturhelper.ui.fragments.calculate_chance.ChanceShowResults" >
         <action
             android:id="@+id/action_showResults_to_profile"
             app:destination="@id/profile" />

@@ -2,7 +2,7 @@ package com.madrat.abiturhelper.util
 
 import android.app.Application
 import android.util.SparseBooleanArray
-import com.madrat.abiturhelper.model.*
+import com.madrat.abiturhelper.data.model.*
 
 class MyApplication: Application() {
     companion object { val instance = MyApplication() }

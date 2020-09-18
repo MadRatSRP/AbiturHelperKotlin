@@ -4,14 +4,14 @@
     package="com.madrat.abiturhelper">
 
     <application
-        android:name=".util.App"
+        android:name="com.madrat.abiturhelper.util.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.AppActivity"
+        <activity android:name="com.madrat.abiturhelper.ui.activities.AppActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.select_specialties.WorkWithSpecialtiesView">
+    tools:context=".ui.fragments.select_specialties.WorkWithSpecialtiesView">
     <LinearLayout
         android:id="@+id/workLinearLayout"
         android:orientation="vertical"

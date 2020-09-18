@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.AppActivity">
+    tools:context=".ui.activities.AppActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
