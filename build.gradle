@@ -1,23 +1,28 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    // Navigation Architecture Component
-    ext.navigationVersion = '2.3.0-alpha05'
-    // Gradle
-    ext.gradleVersion = '4.0.0'
-    // Kotlin
-    ext.kotlinVersion = '1.3.72'
+    ext {
+        // Android Gradle plugin
+        gradleVersion = '4.0.1'
 
+        // Kotlin for Android / Kotlin Gradle plugin
+        kotlinVersion = '1.4.10'
+
+        // Jetpack Navigation / Navigation Safe-Args
+        navigationVersion = '2.3.0'
+    }
     repositories {
         google()
         jcenter()
-        mavenCentral()
     }
     dependencies {
+        // Android Gradle plugin
         classpath "com.android.tools.build:gradle:${gradleVersion}"
+
+        // Kotlin Gradle plugin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
 
-        // Navigation Architecture Component Safe-Args
+        // Jetpack Navigation Safe-args
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${navigationVersion}"
     }
 }

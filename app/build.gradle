@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
 androidExtensions {
     experimental = true
 }
 
-// Navigation Architecture Component Safe-Args
-apply plugin: "androidx.navigation.safeargs.kotlin"
-
+// Kotlin Annotation Processor
 apply plugin: 'kotlin-kapt'
+// Jetpack Navigation Safe-args
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 29
@@ -26,11 +27,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    // For targeting Java 8 in Java and Kotlin
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     // ViewBinding support
     viewBinding {
         enabled = true
@@ -41,97 +45,89 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+ext {
+    // Others
     // Apache Common CSV
-    def apacheCommonCSVVersion = "1.8"
-
-    // AppCompat
-    def appCompatVersion = "1.1.0"
-
-    // MaterialDesign
-    def materialDesignVersion = '1.2.0-alpha06'
-
+    apacheCommonCSVVersion = "1.8"
     // Retrofit
-    def retrofitVersion = '2.8.1'
-
-    // Kotlin Coroutines
-    def kotlinCoroutinesVersion = "1.3.5"
-
+    retrofitVersion = '2.8.1'
     // Dagger 2
-    def dagger2Version = '2.27'
-
-    // Room
-    def roomVersion = "2.2.5"
+    dagger2Version = '2.27'
 
     // Jetpack
     // ConstraintLayout
-    def constraintLayoutVersion = "1.1.3"
+    constraintLayoutVersion = "1.1.3"
     // Fragment
-    def fragmentVersion = "1.3.0-alpha03"
+    fragmentVersion = "1.3.0-alpha03"
     // SwipeRefreshLayout
-    def swipeRefreshLayoutVersion = "1.0.0"
+    swipeRefreshLayoutVersion = "1.0.0"
+    // Room / Room KTX
+    roomVersion = "2.2.5"
+    // Material Design Components
+    materialDesignComponentsVersion = '1.2.0-alpha06'
+    // AppCompat
+    appCompatVersion = "1.1.0"
+
+    // Kotlin
+    // Kotlin Coroutines
+    kotlinCoroutinesVersion = "1.3.5"
 
     // Testing
     // Junit
-    def junitVersion = '4.13'
+    junitVersion = '4.13'
     // Junit Runner
-    def junitRunnerVersion = "1.1.1"
+    junitRunnerVersion = "1.1.1"
     // Espresso
-    def espressoVersion = "3.2.0"
+    espressoVersion = "3.2.0"
+}
 
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-
+    // Others
     // Apache Common CSV
     implementation "org.apache.commons:commons-csv:$apacheCommonCSVVersion"
-
-    // AppCompat
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
-
-    // MaterialDesign
-    implementation "com.google.android.material:material:$materialDesignVersion"
-
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-
-    // Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
-
     // Dagger 2
     implementation "com.google.dagger:dagger-android:$dagger2Version"
     implementation "com.google.dagger:dagger-android-support:$dagger2Version"
     kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
     kapt "com.google.dagger:dagger-compiler:$dagger2Version"
 
-    // Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$roomVersion"
-
     // Jetpack
     // ConstraintLayout
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    // Kotlin
+    // Fragment
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    // Testing Fragments in Isolation
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     // SwipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
     // Navigation
-    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    // Room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    // Room KTX
+    implementation "androidx.room:room-ktx:$roomVersion"
+    // Material Design Components
+    implementation "com.google.android.material:material:$materialDesignComponentsVersion"
+    // AppCompat
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+
+    // Kotlin
+    // JDK
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    // Kotlin Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinCoroutinesVersion"
 
     // Testing
     // Junit
     testImplementation "junit:junit:$junitVersion"
     // Junit Runner
     androidTestImplementation "androidx.test.ext:junit:$junitRunnerVersion"
-
     // Espresso
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
 }
