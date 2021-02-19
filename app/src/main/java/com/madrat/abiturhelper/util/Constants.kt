@@ -13,4 +13,7 @@ object Constants {
         const val LESS_THAN_PASSING_COMPUTER_SCIENCE = 800
         const val LESS_THAN_PASSING_SOCIAL_SCIENCE = 900
         const val LESS_THAN_THREE = 1000
+        
+        // Fields
+        const val FULL_NAME = "FULL_NAME"
 }

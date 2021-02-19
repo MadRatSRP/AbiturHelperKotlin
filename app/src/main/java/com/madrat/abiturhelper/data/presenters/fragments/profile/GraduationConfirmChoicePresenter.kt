@@ -2,11 +2,14 @@ package com.madrat.abiturhelper.data.presenters.fragments.profile
 
 import com.madrat.abiturhelper.data.`object`.FacultiesObject
 import com.madrat.abiturhelper.data.interfaces.fragments.profile.GraduationConfirmChoiceMVP
+import com.madrat.abiturhelper.data.model.FullName
 import com.madrat.abiturhelper.data.model.Graduation
 import com.madrat.abiturhelper.data.model.Specialty
 import com.madrat.abiturhelper.data.model.Student
+import com.madrat.abiturhelper.util.Constants
 import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.showLog
+import io.paperdb.Paper
 
 class GraduationConfirmChoicePresenter
     : GraduationConfirmChoiceMVP.Presenter {
@@ -91,7 +94,8 @@ class GraduationConfirmChoicePresenter
         val graduationList = ArrayList<Graduation>()
 
         // Получаем ФИО пользователя и его баллы
-        val fullName = myApplication.returnFullName()
+        val fullName: FullName = Paper.book().read(Constants.FULL_NAME)
+        
         val score = myApplication.returnScore()
 
         selectedSpecialties.forEach {

@@ -4,7 +4,7 @@
     package="com.madrat.abiturhelper">
 
     <application
-        android:name="com.madrat.abiturhelper.util.App"
+        android:name="com.madrat.abiturhelper.util.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

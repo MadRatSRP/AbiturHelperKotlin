@@ -5,6 +5,7 @@ import com.madrat.abiturhelper.data.interfaces.fragments.pick_up_specialties.Set
 import com.madrat.abiturhelper.data.model.FullName
 import com.madrat.abiturhelper.data.model.Score
 import com.madrat.abiturhelper.util.MyApplication
+import io.paperdb.Paper
 
 class SetupScorePresenter(private var view: SetupScoreMVP.View)
     : SetupScoreMVP.Presenter {
@@ -16,8 +17,13 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
         const val PASSING_SCORE_COMPUTER_SCIENCE = 40
         const val PASSING_SCORE_SOCIAL_SCIENCE = 42
     }
-
-    var myApplication: MyApplication = MyApplication.instance
+    
+    private var myApplication: MyApplication? = null
+    
+    // Initialization
+    fun initializeApplication(myApplication: MyApplication) {
+        this.myApplication = myApplication
+    }
 
     override fun checkIsFullNameAndScoreValid(lastName: String, firstName: String, patronymic: String,
                                               maths: Int?, russian: Int?, physics: Int?,
@@ -42,10 +48,11 @@ class SetupScorePresenter(private var view: SetupScoreMVP.View)
                 checkScoreForBeingEmpty(computerScience),
                 checkScoreForBeingEmpty(socialScience), additionalScore
         )
-
-        myApplication.saveFullName(fullName)
-        myApplication.saveScore(score)
-
+    
+        myApplication?.writeToPaper(Constants.FULL_NAME, fullName)
+    
+        myApplication?.saveScore(score)
+    
         view.moveToWorkWithSpecialtiesView()
     }
     override fun checkIsFullNameValid(lastName: String, firstName: String, patronymic: String)

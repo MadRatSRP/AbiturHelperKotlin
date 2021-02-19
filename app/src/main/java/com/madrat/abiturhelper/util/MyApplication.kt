@@ -1,14 +1,22 @@
 package com.madrat.abiturhelper.util
 
 import android.app.Application
+import android.content.Context
 import android.util.SparseBooleanArray
 import com.madrat.abiturhelper.data.model.*
+import io.paperdb.Book
+import io.paperdb.Paper
 
-class MyApplication: Application() {
+class MyApplication(): Application() {
     companion object { val instance = MyApplication() }
+    
+    private var context: Context? = null
+    
+    constructor(context: Context) : this() {
+        this.context = context
+    }
+    
     // Score
-    private var fullName: FullName? = null
-
     private var scores: Score? = null
 
     private var scoreTypes: ScoreTypes? = null
@@ -44,13 +52,18 @@ class MyApplication: Application() {
 
     // Список с шансами
     private var listOfChances: ArrayList<Chance>? = null
-
-    //Score
-    fun saveFullName(fullName: FullName) {
-        this.fullName = fullName
+    
+    override fun onCreate() {
+        super.onCreate()
+        // Paper initialization
+        Paper.init(applicationContext)
     }
-    fun returnFullName() = fullName
-
+    
+    fun <T> writeToPaper(key: String, value: T): Book {
+        return Paper.book().write(key, value)
+    }
+    
+    //Score
     fun saveScore(scores: Score) {
         this.scores = scores
         this.scores?.let {
@@ -61,7 +74,7 @@ class MyApplication: Application() {
             val socialScience = it.socialScience
 
             showLog("Сохранён Score: математика - $maths, русский язык - $russian,\n физика - $physics," +
-                    "информатика - $computerScience, обществознание - $socialScience")
+                "информатика - $computerScience, обществознание - $socialScience")
         }
     }
     fun returnScore(): Score? {
@@ -73,7 +86,7 @@ class MyApplication: Application() {
             val socialScience = it.socialScience
 
             showLog("Возвращён Score: математика - $maths, русский язык - $russian,\n физика - $physics," +
-                    "информатика - $computerScience, обществознание - $socialScience")
+                "информатика - $computerScience, обществознание - $socialScience")
         }
         return scores
     }
@@ -87,7 +100,7 @@ class MyApplication: Application() {
             val partAndAllData = it.partAndAllDataStudents.size
 
             showLog("Сохранён ScoreTypes: физика - $physics, информатика - $computerScience, " +
-                    "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData")
+                "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData")
         }
     }
     fun returnScoreTypes(): ScoreTypes? {
@@ -98,7 +111,7 @@ class MyApplication: Application() {
             val partAndAllData = it.partAndAllDataStudents?.size
 
             showLog("Возвращён ScoreTypes: физика - $physics, информатика - $computerScience, " +
-                    "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData")
+                "обществознание - $socialScience,\n баллы по двум или трём специальностям - $partAndAllData")
         }
         return scoreTypes
     }

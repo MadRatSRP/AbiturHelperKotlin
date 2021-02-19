@@ -1,5 +1,8 @@
 package com.madrat.abiturhelper.data.interfaces.fragments.pick_up_specialties
 
+import com.madrat.abiturhelper.data.model.FullName
+import com.madrat.abiturhelper.data.model.Score
+
 
 interface SetupScoreMVP {
     interface View {

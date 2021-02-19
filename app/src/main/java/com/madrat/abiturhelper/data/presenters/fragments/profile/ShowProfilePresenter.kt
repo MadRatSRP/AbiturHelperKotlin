@@ -5,8 +5,11 @@ import android.widget.EditText
 import android.widget.ImageButton
 import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.data.interfaces.fragments.profile.ShowProfileMVP
+import com.madrat.abiturhelper.data.model.FullName
 import com.madrat.abiturhelper.data.model.Score
+import com.madrat.abiturhelper.util.Constants
 import com.madrat.abiturhelper.util.MyApplication
+import io.paperdb.Paper
 
 class ShowProfilePresenter(private var view: ShowProfileMVP.View) : ShowProfileMVP.Presenter {
     var myApplication = MyApplication.instance
@@ -71,7 +74,9 @@ class ShowProfilePresenter(private var view: ShowProfileMVP.View) : ShowProfileM
         return specialties?.size
     }
 
-    override fun returnFullName() = myApplication.returnFullName()
+    override fun returnFullName(): FullName
+        = Paper.book().read(Constants.FULL_NAME)
+    
     override fun returnScore() = myApplication.returnScore()
     override fun returnCheckedScore(): Score {
         val score = returnScore()

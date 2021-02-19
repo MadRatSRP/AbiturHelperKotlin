@@ -53,6 +53,8 @@ ext {
     retrofitVersion = '2.9.0'
     // Dagger 2
     dagger2Version = '2.29.1'
+    // Paper
+    paperVersion = "2.7.1"
 
     // Jetpack
     // ConstraintLayout
@@ -96,6 +98,8 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger2Version"
     kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
     kapt "com.google.dagger:dagger-compiler:$dagger2Version"
+    // Paper
+    implementation "io.paperdb:paperdb:$paperVersion"
 
     // Jetpack
     // ConstraintLayout

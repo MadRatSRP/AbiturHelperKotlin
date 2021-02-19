@@ -12,15 +12,16 @@ import com.madrat.abiturhelper.R
 import com.madrat.abiturhelper.databinding.FragmentSetupScoreBinding
 import com.madrat.abiturhelper.data.interfaces.fragments.pick_up_specialties.SetupScoreMVP
 import com.madrat.abiturhelper.data.presenters.fragments.SetupScorePresenter
+import com.madrat.abiturhelper.util.MyApplication
 import com.madrat.abiturhelper.util.moveToSelectedFragment
 import com.madrat.abiturhelper.util.toast
 
 class SetupScoreView : Fragment(), SetupScoreMVP.View {
-    private var presenter: SetupScorePresenter? = null
-
-    // ViewBinding variables
+    // ViewBinding
     private var mBinding: FragmentSetupScoreBinding? = null
     private val binding get() = mBinding!!
+    // MVP Presenter
+    private var presenter: SetupScorePresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,6 +30,9 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
         // ViewBinding initialization
         mBinding = FragmentSetupScoreBinding.inflate(inflater, container, false)
         val view = binding.root
+        // Presenter initialization
+        presenter = SetupScorePresenter(this)
+        presenter?.initializeApplication(MyApplication.instance)
 
         val spinnerItems = resources.getStringArray(R.array.additionalScoreSpinnerEntries)
         val adapter = context?.let { ArrayAdapter(it, R.layout.custom_spinner, spinnerItems) }
@@ -40,8 +44,6 @@ class SetupScoreView : Fragment(), SetupScoreMVP.View {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Инициализируем презентер
-        presenter = SetupScorePresenter(this)
 
         binding.moveToSpecialtiesScreen.setOnClickListener {
             onShowSpecialtiesScreenClicked()
