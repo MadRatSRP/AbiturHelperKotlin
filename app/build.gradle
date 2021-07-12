@@ -1,22 +1,19 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 androidExtensions {
     experimental = true
 }
 
-// Kotlin Annotation Processor
-apply plugin: 'kotlin-kapt'
-// Jetpack Navigation Safe-args
+//safe-args
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.madrat.abiturhelper"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,117 +24,55 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    // For targeting Java 8 in Java and Kotlin
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-    // ViewBinding support
-    viewBinding {
-        enabled = true
-    }
-    // Excluding atomic functions module from Kotlin and preventing warnings
-    packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
-    }
 }
 
 ext {
-    // Others
-    // Apache Common CSV
-    apacheCommonCSVVersion = "1.8"
-    // Retrofit
-    retrofitVersion = '2.9.0'
-    // Dagger 2
-    dagger2Version = '2.29.1'
-    // Paper
-    paperVersion = "2.7.1"
-
-    // Jetpack
-    // ConstraintLayout
-    constraintLayoutVersion = '2.0.1'
-    // Fragment
-    fragmentVersion = '1.3.0-alpha08'
-    // SwipeRefreshLayout
-    swipeRefreshLayoutVersion = '1.1.0'
-    // Room / Room KTX
-    roomVersion = "2.2.5"
-    // Material Design Components
-    materialDesignComponentsVersion = '1.3.0-alpha02'
-    // AppCompat
-    appCompatVersion = '1.2.0'
-
     // Kotlin
-    // Kotlin Coroutines
-    kotlinCoroutinesVersion = '1.3.9'
-
-    // Testing
-    // Junit
-    junitVersion = '4.13'
-    // Junit Runner
-    junitRunnerVersion = '1.1.2'
-    // Espresso
-    espressoVersion = '3.3.0'
+    coroutinesVersion = "1.1.1"
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    // Others
-    // Apache Common CSV
-    implementation "org.apache.commons:commons-csv:$apacheCommonCSVVersion"
-    // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
-    // Dagger 2
-    implementation "com.google.dagger:dagger-android:$dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$dagger2Version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger2Version"
-    kapt "com.google.dagger:dagger-compiler:$dagger2Version"
-    // Paper
-    implementation "io.paperdb:paperdb:$paperVersion"
+    //Junit
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-beta01'
+    testImplementation 'junit:junit:4.12'
+    
+    //Espresso
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    // Jetpack
-    // ConstraintLayout
-    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    // Fragment
-    implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
-    // SwipeRefreshLayout
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
-    // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    // Room
-    implementation "androidx.room:room-runtime:$roomVersion"
-    kapt "androidx.room:room-compiler:$roomVersion"
-    // Room KTX
-    implementation "androidx.room:room-ktx:$roomVersion"
-    // Material Design Components
-    implementation "com.google.android.material:material:$materialDesignComponentsVersion"
-    // AppCompat
-    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    //Navigation Drawer
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0-rc01'
+
+    //ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+
+    //Apache Common CSV
+    implementation group: 'org.apache.commons', name: 'commons-csv', version: '1.6'
+
+    //OpenCSV
+    implementation group: 'com.opencsv', name: 'opencsv', version: '4.5'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.5.0"
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
 
     // Kotlin
-    // JDK
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
-    // Kotlin Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinCoroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
-    // Testing
-    // Junit
-    testImplementation "junit:junit:$junitVersion"
-    // Junit Runner
-    androidTestImplementation "androidx.test.ext:junit:$junitRunnerVersion"
-    // Espresso
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    // Jetpack
+    implementation "androidx.navigation:navigation-fragment:$navigationVersion"
+    implementation "androidx.navigation:navigation-ui:$navigationVersion"
 }
 repositories {
-    // Kotlin Coroutines
     jcenter()
-
     mavenCentral()
 }
